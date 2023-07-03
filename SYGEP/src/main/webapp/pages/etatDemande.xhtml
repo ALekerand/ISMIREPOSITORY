@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<!-- 
+		Replace path to template, title, header and body
+		with actual data.
+	 -->
+	<ui:composition template="/templates/template.xhtml">
+			<ui:define name="body">
+				<h:form id="form">
+				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+				
+	<p:panel header="Enregistrement des droits"> 		
+	
+	<h:panelGrid columns="6" cellpadding="10">
+	<p:outputLabel for="input_code" value="Code:"></p:outputLabel>
+	<p:inputText id="input_code" value="#{etatDemandeController.etatDemande.codeEtatDemande}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
+
+	<p:outputLabel for="input_qte" value="libéllé:"></p:outputLabel>
+	<p:inputTextarea id="input_qte" value="#{etatDemandeController.etatDemande.libEtatDemande}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputTextarea>
+
+	</h:panelGrid>
+</p:panel>
+<br/>
+<p:toolbar >
+			<f:facet name="left">
+				<p:commandButton value="Enregistrer" action="#{etatDemandeController.enregistrer}" update="form" binding="#{etatDemandeController.btnEnregistrer}"><p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
+				<p:commandButton value="Annuler"  action="#{etatDemandeController.annuler}" process="@this" update="form" binding="#{etatDemandeController.btnAnnuler}"><p:confirm header="confirmation" message="voulez-vous annuler?"></p:confirm></p:commandButton>
+				<p:commandButton value="Modifier"  action="#{etatDemandeController.modifier}" update="form" binding="#{etatDemandeController.btnModifier}"><p:confirm header="confirmation" message="confirmez-vous la modification?"></p:confirm></p:commandButton>
+			</f:facet>
+		</p:toolbar>
+		<br/>
+		
+	<p:dataTable  var="var" value="#{etatDemandeController.listTable}"  selectionMode="single" selection="#{etatDemandeController.selectedObject}" rowKey="#{var.idEtatDemande}">
+ 
+ <f:facet name="header">LISTE DES ETATS DE DEMANDE</f:facet>
+     <p:ajax event="rowSelect" process="@this"  update="form" listener="#{etatDemandeController.selectionnerLigne}"></p:ajax>
+   		
+   		<p:column headerText="Code" style="width:30%">
+        <h:outputText value="#{var.codeEtatDemande}"/>
+        </p:column>
+        
+        <p:column headerText="Libellé">
+        <h:outputText value="#{var.libEtatDemande}"/>
+        </p:column>
+
+        </p:dataTable>
+								
+	   <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+	   <p:commandButton value="Oui" type="button"
+	   styleClass="ui-confirmdialog-yes" icon="ui-icon-check" >
+	   </p:commandButton>
+	   <p:commandButton value="Non" type="button"
+	   styleClass="ui-confirmdialog-no" icon="ui-icon-close" >
+	   </p:commandButton>
+	   </p:confirmDialog>
+	   
+				</h:form>
+			</ui:define>
+	</ui:composition>
+
+</html>

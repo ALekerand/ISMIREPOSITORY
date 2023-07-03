@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+       xmlns:p="http://primefaces.org/ui"> 
+
+
+<body> 
+
+    <ui:composition template="/templates/template.xhtml">
+			<ui:define name="body">
+			<h:form id="form">
+			
+			<div style="font-size: 15px ;  padding-left: 20px; padding-right: 20px">
+			<fieldset>
+			<h:panelGrid columns="4" cellpadding="20" >
+			<p:outputLabel value="Numero_Bon_Commande "></p:outputLabel>
+			<p:inputText value="#{consulterBonCommandeController.codeBonCommande}" ></p:inputText>
+			
+			<p:commandButton value="Rechercher" actionListener="#{consulterBonCommandeController.ChargerLigneCommane}" update="form"></p:commandButton>
+			</h:panelGrid>
+			</fieldset>
+			</div>
+			<div style="font-size: 15px ; padding-top: 15px; padding-left: 35px; padding-right: 35px">
+			<p:dataTable id="table" var="variable" value="#{consulterBonCommandeController.listLigneCommande}" >
+			
+			<p:column headerText="Materiel">
+			<h:outputText value="#{variable.materiel.nomMateriel}"  />
+			</p:column>
+			
+				<p:column headerText="Code LigneCommande">
+			<h:outputText value="#{variable.codeLigneCommande}"  />
+			</p:column>
+			
+			<p:column headerText="Code BonCommande">
+			<h:outputText value="#{variable.boncommande.codeBonCommande}"  />
+			</p:column>
+			
+			<p:column headerText="Quantite">
+			<h:outputText value="#{variable.qteLigneCommande}" />
+			</p:column>
+			
+			<p:column headerText="Date BonCommande">
+			<h:outputText value="#{variable.boncommande.date}" >
+			<f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+			</h:outputText>
+			</p:column>
+			</p:dataTable>
+			</div>
+			
+				<br/>
+	<p:toolbar >
+		<f:facet name="left">
+			<p:commandButton value="Annuler"  action="#{consulterBonCommandeController.annuler}" update="form" ></p:commandButton>
+			<p:commandButton value="Imprimer" >
+			<p:printer target="table"></p:printer>
+			</p:commandButton>
+		</f:facet>
+	</p:toolbar>
+			</h:form>
+			</ui:define>
+		</ui:composition>
+			
+</body> 
+</html>

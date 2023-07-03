@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+<title>SYGEP</title>
+</h:head>
+<h:body>
+	<div style="background-color:#800080">
+	<table> 
+		<tr>
+		<td> <img src="resource/images/logo_artm.jpg" style="margin-right: 50px; margin-left: 25px"/></td>
+		<td><h1 align="center" style="color: #FFF;" >GESTION DES STOCKS</h1></td> 
+		</tr>
+	</table>
+	</div>
+	
+    <h:form id="frm" onsubmit="return initialize();">
+     <div style="position: absolute; width: 400px; height: 300px; top:0; bottom:0; left:0; right: 0; margin: auto;" align="center">
+      <img src="resource/images/logo_ismi.png" style="margin:0px;" alt="lolo" align="center"/>
+     	
+      <h:panelGrid columns="3" cellspacing="10" style="top:50px; position:relative;" align="center">
+      <h:link style="color:red" value="DEMARRER"  outcome="/templates/template.xhtml"/>
+
+     </h:panelGrid>
+     </div>
+    
+  </h:form>
+</h:body>
+</html>

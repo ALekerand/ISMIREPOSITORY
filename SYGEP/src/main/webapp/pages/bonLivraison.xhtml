@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head></h:head> 
+<body> 
+
+		 
+	<ui:composition template="/templates/template.xhtml">
+			<ui:define name="body">
+			<div style="font-size: 15px ;  padding-left: 20px; padding-right: 20px">
+			<h:form id="form"  enctype="multipart/form-data">
+				<fieldset>
+ 			<legend>Enregistrement du bon de livraison</legend>
+ 			<table >
+	<tr >
+ 	
+		<td style="width:50%">
+			
+					
+		<div style="font-size: 15px ; padding-top: 15px; padding-left: 35px; padding-right: 35px">
+<p:dataTable id="table" widgetVar="dtbonCommande" var="var" value="#{bonLivraisonController.listeBonCommande}" selectionMode="single" selection="#{bonLivraisonController.selectedObjectBC}" rowKey="#{var.idBonCommande}">
+            <f:facet name="header">
+                <div class="bonCommande-table-header">
+                    <span style="font-weight: bold">Bon commande</span>
+                    <span class="filter-container ui-input-icon-left"> <i class="pi pi-search"></i>
+                        <p:inputText id="globalFilter" onkeyup="PF('dtbonCommande').filter()" placeholder="Rechercher" />
+                    </span>
+                </div>
+            </f:facet>
+ <p:ajax event="rowSelect" process="@this"  update="form" listener="#{bonLivraisonController.selectionnerLigne}"></p:ajax>
+
+  
+ 	
+ 		<p:column headerText="Demandeur" >
+        <h:outputText value="#{var.personne.nomPersonne}"/>
+        </p:column>
+        
+   		<p:column headerText="Code bon Commande" >
+        <h:outputText value="#{var.codeBonCommande}"/>
+        </p:column>
+
+        </p:dataTable>
+				</div>
+			
+		</td>
+	 			
+ 					
+		<td>
+				
+			<h:panelGrid columns="3" cellpadding="5">
+			<p:outputLabel  value="Fichier:"></p:outputLabel>
+					<p:fileUpload id="fichier" value="#{bonLivraisonController.fichier}" mode="simple" skinSimple="true"> </p:fileUpload>
+					 <p:commandButton value="Valider" ajax="false"
+                                            actionListener="#{bonLivraisonController.upload}"  />
+            
+               </h:panelGrid>
+				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+				
+	<h:panelGrid columns="2" cellpadding="5">
+					<p:outputLabel  value="Code:" ></p:outputLabel>
+						<p:inputText  value="#{bonLivraisonController.bonlivraison.codeBonLivraison}"  ></p:inputText>	
+
+					<p:outputLabel  value="Date livraison:"></p:outputLabel>
+						<p:datePicker  value="#{bonLivraisonController.dateLivraison}" ></p:datePicker>	
+	
+				
+
+			</h:panelGrid>
+		
+	   </td>
+	</tr>
+</table>	
+	</fieldset>
+	<br/>
+	<p:toolbar >
+		<f:facet name="left">
+			<p:commandButton value="Enregistrer"  actionListener="#{bonLivraisonController.Enregistrer}" update="form" binding="#{bonLivraisonController.btnEnregistrer}"><p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
+			<p:commandButton value="Annuler"  action="#{bonLivraisonController.annuler}" update="form" binding="#{bonLivraisonController.btnAnnuler}"><p:confirm header="confirmation" message="voulez-vous annuler?"></p:confirm></p:commandButton>
+			<p:commandButton value="Modifier"  action="#{bonLivraisonController.modifier}" update="form" binding="#{bonLivraisonController.btnModifier}"><p:confirm header="confirmation" message="confirmez-vous la modification?"></p:confirm></p:commandButton>
+		</f:facet>
+	</p:toolbar>
+	<br/>
+				
+		<div style="font-size: 15px ; padding-top: 15px; padding-left: 35px; padding-right: 35px">
+<p:dataTable  var="var" value="#{bonLivraisonController.listObject}" selectionMode="single"  rowKey="#{var.idBonLivraison}">
+ 
+ <f:facet name="header">Liste des bons de livraison</f:facet>
+ 	
+ 		<p:column headerText="Personne" >
+        <h:outputText value="#{var.personne.nomPersonne}"/>
+        </p:column>
+        
+   		<p:column headerText="Code" >
+        <h:outputText value="#{var.codeBonLivraison}"/>
+        </p:column>
+        
+        <p:column headerText="Date livraison">
+        <h:outputText value="#{var.dateLivraison}"/>
+        </p:column>
+        
+        </p:dataTable>
+				</div>
+				
+		  <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+	   <p:commandButton value="Oui" type="button"
+	   styleClass="ui-confirmdialog-yes" icon="ui-icon-check" >
+	   </p:commandButton>
+	   <p:commandButton value="Non" type="button"
+	   styleClass="ui-confirmdialog-no" icon="ui-icon-close" >
+	   </p:commandButton>
+	   </p:confirmDialog>
+				
+				
+				</h:form>
+			</div>
+			</ui:define>
+	</ui:composition>
+
+</body> 
+</html>

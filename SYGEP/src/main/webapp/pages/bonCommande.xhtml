@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+
+<body> 
+
+		<ui:composition template="/templates/template.xhtml">
+			<ui:define name="body">
+			<h:form id="form">
+			<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+			<table >
+			<tr>
+			<td style="width: 50%">
+		
+			<p:dataTable id="materiel" var="variable" value="#{bonCommandeController.listMateriel}"  selectionMode="single"  selection="#{bonCommandeController.selectedObject}" rowKey="#{variable.idMateriel}" paginator="true" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+			<f:facet name="header">LISTES DES MATERIELS</f:facet>
+			<p:ajax event="rowSelect" listener="#{bonCommandeController.choisirLigne}" update="form"></p:ajax>
+			
+			<p:column headerText="Materiel">
+			<h:outputText value="#{variable.nomMateriel}"  style="width:10%"/>
+			</p:column>
+			
+			<p:column headerText="Code">
+			<h:outputText value="#{variable.codeMateriel}" style="width:10%"/>
+			</p:column>
+			
+			</p:dataTable >
+			
+			</td>
+			<td>
+					
+			<h:panelGrid columns="4" cellpadding="20" >
+			<p:outputLabel value="Code "></p:outputLabel>
+			<p:inputText value="#{bonCommandeController.materiel.codeMateriel}" readonly="true"></p:inputText>
+			
+			<p:outputLabel value="Designation "></p:outputLabel>
+			<p:inputText value="#{bonCommandeController.materiel.nomMateriel}" readonly="true"></p:inputText>
+	
+			<p:outputLabel value="Quantite "></p:outputLabel>
+			<p:inputText value="#{bonCommandeController.qteLigneCommande}"  placeholder="Entrer la quantité svp"></p:inputText>
+	
+			
+			</h:panelGrid>
+			</td>
+			</tr>
+		</table>
+			<p:toolbar >
+				<f:facet name="left">
+					<p:commandButton  binding="#{bonCommandeController.btnAjouter}" value="Ajouter" action="#{bonCommandeController.ajouter}" update="form" ><p:confirm header="confirmation" message="voulez-vous l'ajout?"></p:confirm></p:commandButton>
+				</f:facet>
+			</p:toolbar>
+				
+			
+			<br/>
+			<table >
+			<tr>
+			<td >
+			
+				
+			<h:panelGrid columns="4" cellpadding="15" >
+		
+			<p:outputLabel value="Commantaire"></p:outputLabel>
+			<p:inputTextarea value="#{bonCommandeController.bonCommande.commentaireBonCommande}"  ></p:inputTextarea>
+			
+			</h:panelGrid>
+			
+			
+			</td>
+			<td>
+		<p:dataTable var="variable" value="#{bonCommandeController.listObject}" >
+			
+			<p:column headerText="Materiel">
+			<h:outputText value="#{variable.materiel.nomMateriel}"  />
+			</p:column>
+			
+			<p:column headerText="Code Materiel">
+			<h:outputText value="#{variable.materiel.codeMateriel}" />
+			</p:column>
+			
+			<p:column headerText="Quantite">
+			<h:outputText value="#{variable.qteLigneCommande}" />
+			</p:column>
+			
+			</p:dataTable>
+		
+			</td>
+			</tr>
+			</table>
+				<p:toolbar >
+				<f:facet name="left">
+					<p:commandButton  binding="#{bonCommandeController.btnEnregistrer}" value="Enregistrer" action="#{bonCommandeController.enregistrer}" update="form" ><p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
+					<p:commandButton  binding="#{bonCommandeController.btnAnnuler}" value="Annuler" action="#{bonCommandeController.annuler}" update="form"><p:confirm header="confirmation" message="voulez-vous annuler?"></p:confirm></p:commandButton>
+					<p:commandButton  binding="#{bonCommandeController.btnModifier}" value="Modifier" action="#{bonCommandeController.modifier}" update="form"><p:confirm header="confirmation" message="confirmez-vous la modification?"></p:confirm></p:commandButton>
+				</f:facet>
+			</p:toolbar>
+			
+			
+	   <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+	   <p:commandButton value="Oui" type="button"
+	   styleClass="ui-confirmdialog-yes" icon="ui-icon-check" >
+	   </p:commandButton>
+	   <p:commandButton value="Non" type="button"
+	   styleClass="ui-confirmdialog-no" icon="ui-icon-close" >
+	   </p:commandButton>
+	   
+	   </p:confirmDialog>
+	  
+	   </h:form>
+	   </ui:define>
+	</ui:composition>
+
+</body> 
+</html>

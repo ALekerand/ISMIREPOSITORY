@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head></h:head> 
+<body> 
+
+<!-- 
+		Replace path to template, title, header and body
+		with actual data.
+	 -->
+	<ui:composition template="/templates/template.xhtml">
+			<ui:define name="body">
+	
+				<h:form id="form">
+				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+				
+	<div style="font-size: 15px ; padding-top: 15px; padding-left: 35px; padding-right: 35px">
+	<p:dataTable  var="var" value="#{traitementDemandeController_Admin.listTable}"  selectionMode="single" selection="#{traitementDemandeController_Admin.selectedObject}" rowKey="#{var.idDemande}">
+ <f:facet name="header">LISTE DES DEMANDES EN ATTENTE</f:facet>
+     <p:ajax event="rowSelect" process="@this"  update="form" listener="#{traitementDemandeController_Admin.selectionnerLigne}"></p:ajax>
+   		
+   		<p:column headerText="Demandeur">
+        <h:outputText value="#{var.entite.personne.nomPersonne} "/>
+        </p:column>
+   		
+   		<p:column headerText="Code" >
+        <h:outputText value="#{var.codeDemande}"/>
+        </p:column>
+        
+        <p:column headerText="Materiel">
+        <h:outputText value="#{var.materiel.nomMateriel}"/>
+        </p:column>
+        
+        <p:column headerText="Quantité">
+        <h:outputText value="#{var.qteDemande}"/>
+        </p:column>
+        
+        <p:column headerText="Motif" >
+        <h:outputText value="#{var.motifDemande}"/>
+        </p:column>
+          <p:column headerText="Etat" style="width:22%">
+            <h:panelGrid columns="2"  >
+                <h:commandButton value="Valider" actionListener="#{traitementDemandeController_Admin.validerDemande}" update="form" >
+                  <f:setPropertyActionListener value="#{variable}" target="#{traitementDemandeController_Admin.selectedObject}"/>
+                </h:commandButton>
+                
+                <h:commandButton  value="Rejetter" actionListener="#{traitementDemandeController_Admin.rejeterDemande}" update="form" >
+   		         <f:setPropertyActionListener value="#{variable}" target="#{traitementDemandeController_Admin.selectedObject}"/>
+   		         </h:commandButton> 
+                    </h:panelGrid>
+            </p:column>
+            
+   		
+        </p:dataTable>
+         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+	   <p:commandButton value="Oui" type="button"
+	   styleClass="ui-confirmdialog-yes" icon="ui-icon-check" >
+	   </p:commandButton>
+	   <p:commandButton value="Non" type="button"
+	   styleClass="ui-confirmdialog-no" icon="ui-icon-close" >
+	   </p:commandButton>
+	   
+	   </p:confirmDialog>
+				</div>
+				</h:form>
+				</ui:define>
+				</ui:composition>
+</body> 
+</html>

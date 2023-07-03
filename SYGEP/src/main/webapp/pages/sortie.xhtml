@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+
+<body> 
+<!-- 
+		Replace path to template, title, header and body
+		with actual data.
+	 -->
+	<ui:composition template="/templates/template.xhtml">
+			<ui:define name="body">
+				<h:form id="form">
+				
+				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+		<fieldset>
+ 	<legend>ENREGISTREMENT DES SORTIES </legend>		
+<h:panelGrid columns="6" cellpadding="10">
+	<p:outputLabel for="input_code" value="Code"></p:outputLabel>
+	<p:inputText id="input_code" value="#{sortieController.sortie.codeSortie}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
+
+<p:outputLabel for="cb_Demande" value="Demande:"/>
+		<p:selectOneMenu id="cb_Demande"  value="#{sortieController.idDemande}">
+		<f:selectItem itemLabel="Selectionnez" itemValue=""/>
+		<f:selectItems value="#{sortieController.listDemande}" var="tata" itemLabel="#{tata.codeDemande}" itemValue="#{tata.idDemande}"></f:selectItems>
+	</p:selectOneMenu>
+</h:panelGrid>
+
+</fieldset>
+<br/>
+<p:toolbar >
+			<f:facet name="left">
+				<p:commandButton value="Enregistrer" action="#{sortieController.Enregistrer}" update="form" binding="#{fonctionController.btnEnregistrer}"><p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
+			    <p:commandButton value="Annuler"  action="#{fonctionController.annuler}" process="@this" update="form" binding="#{fonctionController.btnAnnuler}"><p:confirm header="confirmation" message="voulez-vous annuler?"></p:confirm></p:commandButton>
+				<p:commandButton value="Modifier"  action="#{fonctionController.modifier}" update="form" binding="#{fonctionController.btnModifier}"><p:confirm header="confirmation" message="confirmez-vous la modification?"></p:confirm></p:commandButton> 
+			</f:facet>
+		</p:toolbar>
+		<br/>
+		
+	<p:dataTable  var="var" value="#{sortieController.listeSortie}"  selectionMode="single" selection="#{sortieController.selectedObject}" rowKey="#{var.idSortie}">
+ 
+ <f:facet name="header"> LISTE DES SORTIES </f:facet>
+     <p:ajax event="rowSelect" process="@this"  update="form" listener="#{sortieController.selectionnerLigne}"></p:ajax>
+   		
+   		<p:column headerText="Code" style="width:30%">
+        <h:outputText value="#{var.codeSortie}"/>
+        </p:column>
+        
+        <p:column headerText="Date">
+        <h:outputText value="#{var.dateSortie}"/>
+        </p:column>
+        
+           <p:column headerText="Date Enregistrement sortie">
+        <h:outputText value="#{var.dateEnregSortie}"/>
+        </p:column>
+        
+         <p:column headerText="Demande">
+        <h:outputText value="#{var.demande.codeDemande}"/>
+        </p:column>
+        </p:dataTable>
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+	   <p:commandButton value="Oui" type="button"
+	   styleClass="ui-confirmdialog-yes" icon="ui-icon-check" >
+	   </p:commandButton>
+	   <p:commandButton value="Non" type="button"
+	   styleClass="ui-confirmdialog-no" icon="ui-icon-close" >
+	   </p:commandButton>
+	   </p:confirmDialog>
+	   
+				</h:form>
+			</ui:define>
+	</ui:composition>
+
+</body> 
+</html>

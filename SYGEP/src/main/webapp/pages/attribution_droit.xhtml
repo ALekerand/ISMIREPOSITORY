@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<!-- 
+		Replace path to template, title, header and body
+		with actual data.
+	 -->
+	<ui:composition template="/templates/template.xhtml">
+			<ui:define name="body">
+				<h:form id="form">
+				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+		<fieldset>
+ 	<legend>ENREGISTREMENT DES ETATS DE MATERIEL</legend>		
+<h:panelGrid columns="6" cellpadding="10">
+	<p:outputLabel for="input_code" value="Code:"></p:outputLabel>
+	<p:inputText id="input_code" value="#{etatController.etat.codeEtat}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
+
+	<p:outputLabel for="input_lib" value="Libéllé:"></p:outputLabel>
+	<p:inputText id="input_lib" value="#{etatController.etat.libEtat}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
+</h:panelGrid>
+
+</fieldset>
+<br/>
+<p:toolbar >
+			<f:facet name="left">
+				<p:commandButton value="Enregistrer" action="#{etatController.enregistrer}" update="form" binding="#{etatController.btnEnregistrer}"></p:commandButton>
+				<p:commandButton value="Annuler"  action="#{etatController.annuler}" process="@this" update="form" binding="#{etatController.btnAnnuler}"></p:commandButton>
+				<p:commandButton value="Modifier"  action="#{etatController.modifier}" update="form" binding="#{etatController.btnModifier}"></p:commandButton>
+			</f:facet>
+		</p:toolbar>
+		<br/>
+		
+	<p:dataTable  var="var" value="#{etatController.listFamille}"  selectionMode="single" selection="#{etatController.selectedObject}" rowKey="#{var.idEtat}">
+ 
+ <f:facet name="header"> LISTE DES ETATS DE MATERIEL </f:facet>
+     <p:ajax event="rowSelect" process="@this"  update="form" listener="#{etatController.selectionnerLigne}"></p:ajax>
+   		
+   		<p:column headerText="Code" style="width:30%">
+        <h:outputText value="#{var.codeEtat}"/>
+        </p:column>
+        
+        <p:column headerText="Libellé">
+        <h:outputText value="#{var.libEtat}"/>
+        </p:column>
+        
+        </p:dataTable>
+				
+				</h:form>
+			</ui:define>
+	</ui:composition>
+
+</html>

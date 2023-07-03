@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<!-- 
+		Replace path to template, title, header and body
+		with actual data.
+	 -->
+	<ui:composition template="/templates/template.xhtml">
+			<ui:define name="body">
+			<div style="font-size: 15px ;  padding-left: 20px; padding-right: 20px">
+				<h:form id="form">
+				
+				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+		<fieldset>
+ 	<legend>Choix du materiel</legend>
+ 	<p:outputLabel for="cb_mat" value="Materiel"/>
+		<p:selectOneMenu id="cb_mat" required="true" value="#{entreeController.idMateriel}">
+		<p:ajax listener="#{entreeController.chargerMateriel}" event="change" update=":form" process="@this"/>
+		<f:selectItem itemLabel="Selectionnez" itemValue="" />
+		<f:selectItems value="#{entreeController.listMateriel}" var="tata" itemLabel="#{tata.nomMateriel}" itemValue="#{tata.idMateriel}"></f:selectItems>
+	</p:selectOneMenu>	
+ 			
+<h:panelGrid columns="6" cellpadding="10">
+	<p:outputLabel for="input_code" value="Code:"></p:outputLabel>
+	<p:inputText id="input_code" value="#{entreeController.materiel.codeMateriel}" readonly="true" style="width:60px"></p:inputText>	
+
+<p:outputLabel for="input_desig" value="Désignation:"></p:outputLabel>
+	<p:inputText id="input_desig" value="#{entreeController.materiel.nomMateriel}" readonly="true"></p:inputText>	
+
+<p:outputLabel for="input_fam" value="Famille :"></p:outputLabel>
+	<p:inputText id="input_fam" value="#{entreeController.materiel.famille.libFamille}" readonly="true"></p:inputText>	
+
+<p:outputLabel for="input_nature" value="Nature:"></p:outputLabel>
+<p:inputText id="input_nature" value="#{entreeController.materiel.nature.libNature}" readonly="true" ></p:inputText>
+
+<p:outputLabel for="input_stock" value="Stock actuel:"></p:outputLabel>
+<p:inputText id="input_stock" value="#{entreeController.materiel.stockActuel}" readonly="true" style="width:60px"></p:inputText>
+
+</h:panelGrid>
+</fieldset>
+
+
+<fieldset>
+ 	<legend>Enregistrement de stock</legend>
+ 	
+ 	<h:panelGrid columns="6" cellpadding="10" >
+	<p:outputLabel for="cb_sfinance" value="Source Financement: "/>
+		<p:selectOneMenu id="cb_sfinance" required="true" value="#{entreeController.idSource}">
+		<f:selectItem itemLabel="Selectionnez" itemValue=""/>
+		<f:selectItems value="#{entreeController.listSourceFinance}" var="tata" itemLabel="#{tata.libSource}" itemValue="#{tata.idSource}"></f:selectItems>
+	</p:selectOneMenu>
+	
+	<p:outputLabel for="cb_fournis" value="Fournisseur:"/>
+		<p:selectOneMenu id="cb_fournis"  value="#{entreeController.idFournisseur}">
+		<f:selectItem itemLabel="Selectionnez" itemValue=""/>
+		<f:selectItems value="#{entreeController.listFournisseur}" var="tata" itemLabel="#{tata.nomFournisseur}" itemValue="#{tata.idFournisseur}"></f:selectItems>
+	</p:selectOneMenu>
+	
+	<p:outputLabel for="input_qte" value="Quantité: "></p:outputLabel>
+	<p:inputText id="input_qte" value="#{entreeController.entree.qteEntree}" required="true" 
+	requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>
+ 	</h:panelGrid>
+ 	</fieldset>
+ 	
+
+	<br/>
+	<p:toolbar >
+		<f:facet name="left">
+			<p:commandButton value="Enregistrer" action="#{entreeController.enregistrer}" update="form" binding="#{entreeController.btnEnregistrer}"><p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
+			<p:commandButton value="Annuler"  action="#{entreeController.annuler}" update="form" binding="#{entreeController.btnAnnuler}"><p:confirm header="confirmation" message="voulez-vous annuler?"></p:confirm></p:commandButton>
+			<p:commandButton value="Modifier"  action="#{entreeController.modifier}" update="form" binding="#{entreeController.btnModifier}"><p:confirm header="confirmation" message="confirmez-vous la modification?"></p:confirm></p:commandButton>
+		</f:facet>
+	</p:toolbar>
+	<br/>
+	<div style="font-size: 15px ; padding-top: 15px; padding-left: 35px; padding-right: 35px">
+<p:dataTable  var="var" value="#{entreeController.listEntree}"  rowKey="#{var.idProduit}">
+ 
+ <f:facet name="header">List des entrées</f:facet>
+ 	
+   		<p:column headerText="Code" style="width:10%">
+        <h:outputText value="#{var.codeEntre}"/>
+        </p:column>
+        
+        <p:column headerText="Materiel">
+        <h:outputText value="#{var.materiel.nomMateriel}"/>
+        </p:column>
+        
+        <p:column headerText="Fournisseur">
+        <h:outputText value="#{var.fournisseur.nomFournisseur}"/>
+        </p:column>
+        
+        <p:column headerText="Quantité">
+        <h:outputText value="#{var.qteEntree}"/>
+        </p:column>
+        
+        <p:column headerText="Financement">
+        <h:outputText value="#{var.sourceFinancement.libSource}"/>
+        </p:column>
+        
+        <p:column headerText="Date entrée">
+        <h:outputText value="#{var.dateEntree}"/>
+        </p:column>
+        
+        <p:column headerText="Date enregistrement">
+        <h:outputText value="#{var.dateEnregistrement}"/>
+        </p:column>
+        </p:dataTable>
+				</div>
+		  <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+	   <p:commandButton value="Oui" type="button"
+	   styleClass="ui-confirmdialog-yes" icon="ui-icon-check" >
+	   </p:commandButton>
+	   <p:commandButton value="Non" type="button"
+	   styleClass="ui-confirmdialog-no" icon="ui-icon-close" >
+	   </p:commandButton>
+	   </p:confirmDialog>
+				</h:form>
+				</div>
+			</ui:define>
+	</ui:composition>
+
+</html>

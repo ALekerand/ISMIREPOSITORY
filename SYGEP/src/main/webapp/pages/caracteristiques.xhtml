@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<!-- 
+		Replace path to template, title, header and body
+		with actual data.
+	 -->
+	<ui:composition template="/templates/template.xhtml">
+			<ui:define name="body">
+				<h:form id="form">
+				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+				
+	<p:panel header="Enregistrement des caractéristiques"> 		
+		<h:panelGrid columns="6" cellpadding="10">
+	<p:outputLabel for="input_code" value="Code:"></p:outputLabel>
+	<p:inputText id="input_code" value="#{caracteristiqueController.caracteristique.codeCaracteristique}" readonly="true"></p:inputText>	
+
+<p:outputLabel for="input_lib" value="Libéllé:"></p:outputLabel>
+	<p:inputText id="input_lib" value="#{caracteristiqueController.caracteristique.libCaracteristique}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
+
+<p:outputLabel for="input_descrip" value="Description :"></p:outputLabel>
+	<p:inputTextarea id="input_descrip" value="#{caracteristiqueController.caracteristique.descriptionCaracteristique}" rows="5" cols="55" ></p:inputTextarea>
+</h:panelGrid>
+</p:panel>
+<br/>
+<p:toolbar >
+			<f:facet name="left">
+				<p:commandButton value="Enregistrer" action="#{caracteristiqueController.enregistrer}" update="form" binding="#{caracteristiqueController.btnEnregistrer}"><p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
+				<p:commandButton value="Annuler"  action="#{caracteristiqueController.annuler}" process="@this" update="form" binding="#{caracteristiqueController.btnAnnuler}"><p:confirm header="confirmation" message="voulez-vous annuler?"></p:confirm></p:commandButton>
+				<p:commandButton value="Modifier"  action="#{caracteristiqueController.modifier}" update="form" binding="#{caracteristiqueController.btnModifier}"><p:confirm header="confirmation" message="confirmez-vous la modification?"></p:confirm></p:commandButton>
+			</f:facet>
+		</p:toolbar>
+		<br/>
+		
+	<p:dataTable  var="var" value="#{caracteristiqueController.listTable}"  selectionMode="single" selection="#{caracteristiqueController.selectedObject}" rowKey="#{var.idCaracteristique}">
+ 
+ <f:facet name="header"> LISTE DES CARACTERISTIQUES </f:facet>
+     <p:ajax event="rowSelect" process="@this"  update="form" listener="#{caracteristiqueController.selectionnerLigne}"></p:ajax>
+   		
+   		<p:column headerText="Code" style="width:30%">
+        <h:outputText value="#{var.codeCaracteristique}"/>
+        </p:column>
+        
+        <p:column headerText="Libellé">
+        <h:outputText value="#{var.libCaracteristique}"/>
+        </p:column>
+        
+        <p:column headerText="Description">
+        <h:outputText value="#{var.descriptionCaracteristique}"/>
+        </p:column>
+        
+        </p:dataTable>
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+	   <p:commandButton value="Oui" type="button"
+	   styleClass="ui-confirmdialog-yes" icon="ui-icon-check" >
+	   </p:commandButton>
+	   <p:commandButton value="Non" type="button"
+	   styleClass="ui-confirmdialog-no" icon="ui-icon-close" >
+	   </p:commandButton>
+	   </p:confirmDialog>
+				</h:form>
+			</ui:define>
+	</ui:composition>
+
+</html>

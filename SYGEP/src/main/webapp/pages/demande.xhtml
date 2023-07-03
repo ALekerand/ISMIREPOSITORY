@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<!-- 
+		Replace path to template, title, header and body
+		with actual data.
+	 -->
+	<ui:composition template="/templates/template.xhtml">
+			<ui:define name="body">
+				<h:form id="form">
+			<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+			
+	<p:panel header="Enregistrement des demandes"> 
+	
+	<table >
+	<tr>
+	<td >
+	
+	<p:dataTable  var="var" value="#{demandeController.listMateriel}"  selectionMode="single" selection="#{demandeController.selecteMareriel}" rowKey="#{var.idMateriel}">
+ 
+ 	<f:facet name="header"> LISTE DES MATERIELS </f:facet>
+     <p:ajax event="rowSelect" process="@this"  update="form" listener="#{demandeController.choisirLigneMateriel}"></p:ajax>
+   		
+   		<p:column headerText="Référence" style="width:30%">
+        <h:outputText value="#{var.codeMateriel}"/>
+        </p:column>
+        
+        <p:column headerText="Désignation">
+        <h:outputText value="#{var.nomMateriel}"/>
+        </p:column>
+        
+        </p:dataTable>	
+			
+		</td>
+		<td>	
+	
+	<h:panelGrid columns="4" cellpadding="5">
+	<p:outputLabel for="input_code" value="Code:"></p:outputLabel>
+	<p:inputText id="input_code" value="#{demandeController.demande.codeDemande}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
+
+	<p:outputLabel for="input_qte" value="Quantité:"></p:outputLabel>
+	<p:inputText id="input_qte" value="#{demandeController.demande.qteDemande}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>
+
+	<p:outputLabel for="input_motif" value="Motif:"></p:outputLabel>
+	<p:inputTextarea id="input_motif" value="#{demandeController.demande.motifDemande}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputTextarea>
+
+	</h:panelGrid>
+	
+	</td>
+	</tr>
+	</table>
+</p:panel>
+<br/>
+<p:toolbar >
+			<f:facet name="left">
+				<p:commandButton value="Enregistrer" action="#{demandeController.enregistrer}" update="form" binding="#{demandeController.btnEnregistrer}"><p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
+				<p:commandButton value="Annuler"  action="#{demandeController.annuler}" process="@this" update="form" binding="#{demandeController.btnAnnuler}"><p:confirm header="confirmation" message="voulez-vous annuler?"></p:confirm></p:commandButton>
+				<p:commandButton value="Modifier"  action="#{demandeController.modifier}" update="form" binding="#{demandeController.btnModifier}"><p:confirm header="confirmation" message="confirmez-vous la modification?"></p:confirm></p:commandButton>
+			</f:facet>
+		</p:toolbar>
+		<br/>
+		
+	<p:dataTable  var="var" value="#{demandeController.listTable}"  selectionMode="single" selection="#{demandeController.selectedObject}" rowKey="#{var.idDemande}">
+ 
+ <f:facet name="header">LISTE DES DEMANDES</f:facet>
+     <p:ajax event="rowSelect" process="@this"  update="form" listener="#{demandeController.selectionnerLigne}"></p:ajax>
+   		
+   		<p:column headerText="Demandeur">
+        <h:outputText value="#{var.entite.personne.nomPersonne} "/>
+        </p:column>
+   		
+   		<p:column headerText="Code" style="width:30%">
+        <h:outputText value="#{var.codeDemande}"/>
+        </p:column>
+        
+        <p:column headerText="Materiel">
+        <h:outputText value="#{var.materiel.nomMateriel}"/>
+        </p:column>
+        
+        <p:column headerText="Quantité">
+        <h:outputText value="#{var.qteDemande}"/>
+        </p:column>
+        
+        <p:column headerText="Motif">
+        <h:outputText value="#{var.motifDemande}"/>
+        </p:column>
+        
+        <p:column headerText="Etat">
+        <h:outputText value="#{var.etatDemande.libEtatDemande}"/>
+        </p:column>
+        
+
+        
+        </p:dataTable>
+				
+					
+	   <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+	   <p:commandButton value="Oui" type="button"
+	   styleClass="ui-confirmdialog-yes" icon="ui-icon-check" >
+	   </p:commandButton>
+	   <p:commandButton value="Non" type="button"
+	   styleClass="ui-confirmdialog-no" icon="ui-icon-close" >
+	   </p:commandButton>
+	   </p:confirmDialog>
+	   
+				</h:form>
+			</ui:define>
+	</ui:composition>
+
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<!-- 
+		Replace path to template, title, header and body
+		with actual data.
+	 -->
+	<ui:composition template="/templates/template.xhtml">
+		<ui:define name="body">
+			<h:form id="form">
+				<div class="ui-fluid">
+				
+				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+				
+		<fieldset><legend>INFORMATION SUR L'UTILISATEUR</legend>		
+<h:panelGrid columns="6" cellpadding="10">
+	<p:outputLabel for="input_code" value="Code:"></p:outputLabel>
+	<p:inputText id="input_code" value="#{personneController.codeEntite}" readonly="true"></p:inputText>	
+
+	<p:outputLabel for="input_nom" value="Nom:"></p:outputLabel>
+	<p:inputText id="input_nom" value="#{personneController.personne.nomPersonne}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>
+
+	<p:outputLabel for="input_prenom" value="Prenoms:"></p:outputLabel>
+	<p:inputText id="input_prenom" value="#{personneController.personne.prenomsPersonne}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>
+
+
+	<p:outputLabel for="input_lib" value="Téléphone:"></p:outputLabel>
+	<p:inputText id="input_lib" value="#{personneController.entite.telephone}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
+
+	<p:outputLabel for="input_email" value="Email:"></p:outputLabel>
+	<p:inputText id="input_email" value="#{personneController.entite.email}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>
+
+	<p:outputLabel for="cb_fonction" value="Fonction:"></p:outputLabel>
+	<p:selectOneMenu id="cb_fonction" value="#{personneController.idFonction}">
+	<f:selectItem itemLabel="Selectionner" itemValue=""></f:selectItem>	
+	<f:selectItems value="#{personneController.listFonction}" var="var" itemLabel="#{var.libFonction}" itemValue="#{var.idFonction}"></f:selectItems>	
+	</p:selectOneMenu>
+</h:panelGrid>
+</fieldset>
+
+		<fieldset>
+ 	<legend>DETAILS DES DROITS</legend>		
+<p:panelGrid columns="6" cellpadding="10" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-4,ui-g-12 ui-md-2,ui-g-12 ui-md-4" layout="grid" styleClass="ui-panelgrid-blank ui-fluid">
+
+	<p:outputLabel for="input_login" value="Login:"></p:outputLabel>
+	<p:inputText id="input_login" value="#{personneController.userAuthentication.username}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>
+	
+	
+	<p:outputLabel for="input_mdp" value="Password:"></p:outputLabel>
+	<p:inputText id="input_mdp" value="#{personneController.userAuthentication.password}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>
+	
+	
+	<p:outputLabel value="Profile utilisateur:"/>					
+	<p:selectOneRadio 
+		id="rd1" value="#{personneController.userRole}" layout="grid" columns="4" unselectable="false" >
+		<f:selectItem itemLabel="Adminitrateur" itemValue="ROLE_ADMIN"></f:selectItem>
+		<f:selectItem itemLabel="Utilistaeur standard" itemValue="ROLE_UTILISATAEUR"></f:selectItem>
+	</p:selectOneRadio>
+</p:panelGrid>
+</fieldset>
+<br/>
+<p:toolbar >
+			<f:facet name="left">
+				<p:commandButton value="Enregistrer" action="#{personneController.enregistrer}" update="form" binding="#{personneController.btnEnregistrer}"><p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
+				<p:commandButton value="Annuler"  action="#{personneController.annuler}" process="@this" update="form" binding="#{personneController.btnAnnuler}"><p:confirm header="confirmation" message="voulez-vous annuler?"></p:confirm></p:commandButton>
+				<p:commandButton value="Modifier"  action="#{personneController.modifier}" update="form" binding="#{personneController.btnModifier}"><p:confirm header="confirmation" message="confirmez-vous la modification?"></p:confirm></p:commandButton>
+			</f:facet>
+		</p:toolbar>
+		<br/>
+		
+	<p:dataTable  var="var" value="#{personneController.listTable}"  selectionMode="single" selection="#{personneController.selectedObject}" rowKey="#{var.idEntite}">
+ 
+ <f:facet name="header"> LISTE DES UTILISATEURS </f:facet>
+     <p:ajax event="rowSelect" process="@this"  update="form" listener="#{personneController.selectionnerLigne}"></p:ajax>
+   		
+   		<p:column headerText="Code" style="width:30%">
+        <h:outputText value="#{var.codeEntite}"/>
+        </p:column>
+        
+        <p:column headerText="Nom">
+        <h:outputText value="#{var.nomPersonne}"/>
+        </p:column>
+        
+        <p:column headerText="Prenoms">
+        <h:outputText value="#{var.prenomsPersonne}"/>
+        </p:column>
+        
+        <p:column headerText="Téléphone">
+        <h:outputText value="#{var.telephone}"/>
+        </p:column>
+        
+        <p:column headerText="Email">
+        <h:outputText value="#{var.email}"/>
+        </p:column>
+        
+        <p:column headerText="Profil">
+        <h:outputText value="Role ICI"/>
+        </p:column>
+        
+        </p:dataTable>
+				
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+	   <p:commandButton value="Oui" type="button"
+	   styleClass="ui-confirmdialog-yes" icon="ui-icon-check" >
+	   </p:commandButton>
+	   <p:commandButton value="Non" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" >
+	   </p:commandButton>
+	   </p:confirmDialog>
+	   		</div>
+		</h:form>
+		</ui:define>
+	</ui:composition>
+
+</html>

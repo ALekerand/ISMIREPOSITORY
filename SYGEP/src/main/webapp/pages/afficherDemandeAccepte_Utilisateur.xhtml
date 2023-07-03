@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head></h:head> 
+<body> 
+
+
+	<ui:composition template="/templates/template.xhtml">
+			<ui:define name="body">
+				<h:form id="form">
+<div style="font-size: 15px ; padding-top: 15px; padding-left: 35px; padding-right: 35px">
+						<p:dataTable id="table" var="var" value="#{afficherDemandeAccepterController.listDemandeAccepter }"  selectionMode="single" selection="#{afficherDemandeAccepterController.selectedObject}" rowKey="{#{var.idDemande}">
+ 							<f:facet name="header">LISTE DES DEMANDES ACCEPTEES</f:facet>
+  								   <p:ajax event="rowSelect" process="@this"  update="form" listener="#{afficherDemandeAccepterController.selectionnerLigne}"></p:ajax>
+   		
+   										<p:column headerText="Demandeur">
+     								    <h:outputText value="#{var.entite.personne.nomPersonne} "/>
+    								    </p:column>
+   		
+   										<p:column headerText="Code" >
+      								    <h:outputText value="#{var.codeDemande}"/>
+     								    </p:column>
+        
+      								    <p:column headerText="Materiel">
+      								    <h:outputText value="#{var.materiel.nomMateriel}"/>
+     								    </p:column>
+        
+       								   <p:column headerText="Quantité">
+                                       <h:outputText value="#{var.qteDemande}"/>
+                                       </p:column>
+                                       
+                                         <p:column headerText="Etat Demande">
+                                       <h:outputText value="#{var.etatDemande.libEtatDemande}"/>
+                                       </p:column>
+                                       
+                                        <p:column headerText="Date Demande">
+                                       <h:outputText value="#{var.dateDemande}"/>
+                                       </p:column>
+                                      
+                                       <p:column headerText="Etat reception">
+                                             <h:panelGrid columns="2"  >
+                <h:commandButton value="Receptionner" actionListener="#{afficherDemandeAccepterController.receptionner}" update="form" >
+                  <f:setPropertyActionListener value="#{variable}" target="#{afficherDemandeAccepterController.selectedObject}"/>
+                </h:commandButton>
+                </h:panelGrid>
+                                       </p:column>
+                       </p:dataTable>
+                    </div>
+           </h:form>
+         </ui:define>
+       </ui:composition>
+</body> 
+</html>

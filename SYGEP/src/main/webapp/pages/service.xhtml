@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<!-- 
+		Replace path to template, title, header and body
+		with actual data.
+	 -->
+	<ui:composition template="/templates/template.xhtml">
+			<ui:define name="body">
+				<h:form id="form">
+				
+				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+		<fieldset>
+ 	<legend>ENREGISTREMENT DES SERVICES</legend>		
+<h:panelGrid columns="8" cellpadding="10">
+	<p:outputLabel for="input_code" value="Code:"></p:outputLabel>
+	<p:inputText id="input_code" value="#{serviceController.codeEntite}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
+
+<p:outputLabel for="input_nom" value="Nom:"></p:outputLabel>
+	<p:inputText id="input_nom" value="#{serviceController.serviceObj.nomService}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
+
+<p:outputLabel for="input_tel" value="Téléphone:"></p:outputLabel>
+	<p:inputText id="input_tel" value="#{serviceController.serviceObj.telephone}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
+
+<p:outputLabel for="input_email" value="Email:"></p:outputLabel>
+	<p:inputText id="input_email" value="#{serviceController.serviceObj.email}" ></p:inputText>	
+
+</h:panelGrid>
+
+</fieldset>
+<br/>
+<p:toolbar >
+			<f:facet name="left">
+				<p:commandButton value="Enregistrer" action="#{serviceController.enregistrer}" update="form" binding="#{serviceController.btnEnregistrer}"><p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
+				<p:commandButton value="Annuler"  action="#{serviceController.annuler}" update="form" binding="#{serviceController.btnAnnuler}"><p:confirm header="confirmation" message="voulez-vous annuler?"></p:confirm></p:commandButton>
+				<p:commandButton value="Modifier"  action="#{serviceController.modifier}" update="form" binding="#{serviceController.btnModifier}"><p:confirm header="confirmation" message="confirmez-vous la modification?"></p:confirm></p:commandButton>
+			</f:facet>
+		</p:toolbar>
+		<br/>
+		
+	<p:dataTable  var="var" value="#{serviceController.listTable}"  selectionMode="single" selection="#{serviceController.selectedObject}" rowKey="#{var.idEntite}">
+ 
+ <f:facet name="header">LISTE DES SERVICES</f:facet>
+     <p:ajax event="rowSelect" process="@this"  update="form" listener="#{serviceController.selectionnerLigne}"></p:ajax>
+   		
+   		<p:column headerText="Code" style="width:30%">
+        <h:outputText value="#{var.codeEntite}"/>
+        </p:column>
+        
+        <p:column headerText="Nom">
+        <h:outputText value="#{var.nomService}"/>
+         </p:column>
+         
+        <p:column headerText="Téléphone">
+        <h:outputText value="#{var.telephone}"/>
+        </p:column>
+        
+        <p:column headerText="Email">
+        <h:outputText value="#{var.email}"/>
+        </p:column>
+        
+        </p:dataTable>
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+	   <p:commandButton value="Oui" type="button"
+	   styleClass="ui-confirmdialog-yes" icon="ui-icon-check" >
+	   </p:commandButton>
+	   <p:commandButton value="Non" type="button"
+	   styleClass="ui-confirmdialog-no" icon="ui-icon-close" >
+	   </p:commandButton>
+	   </p:confirmDialog>
+				</h:form>
+			</ui:define>
+	</ui:composition>
+
+</html>
