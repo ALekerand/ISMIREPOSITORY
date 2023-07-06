@@ -1,5 +1,7 @@
 package com.sati.controllers;
 
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,11 +10,17 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.component.commandbutton.CommandButton;
+import org.primefaces.component.radiobutton.RadioButton;
 import org.primefaces.event.RowEditEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
 import com.sati.dto.CaracteristiqueValeur;
 import com.sati.model.Caracteristique;
 import com.sati.model.Famille;
@@ -20,6 +28,7 @@ import com.sati.model.Fongible;
 import com.sati.model.Magasin;
 import com.sati.model.Materiel;
 import com.sati.model.Nature;
+import com.sati.model.NonFongible;
 import com.sati.model.Valeur;
 import com.sati.service.Iservice;
 
@@ -30,6 +39,7 @@ public class MaterielController {
 	Iservice service;
 	private Materiel materiel = new Materiel();
 	private Fongible fongible= new Fongible();
+	private NonFongible Nonfongible= new NonFongible();
 	@SuppressWarnings("unused")
 	private List<Materiel> listTable = new ArrayList<Materiel>();
 	private Materiel selectedObject = new Materiel();
@@ -44,11 +54,15 @@ public class MaterielController {
 	private List<Magasin> listMagasin = new ArrayList<Magasin>();
 	private List<CaracteristiqueValeur> listCaracteristiqueValeur = new ArrayList<CaracteristiqueValeur>();
 	
+	//Pour le QR code
+	private String data;
+	String path = "C:\\SYGEP\\QR_CODE";
 	
 //	private Famille choosedFamille = new Famille();
 	private CommandButton btnEnregistrer = new CommandButton();
 	private CommandButton btnAnnuler = new CommandButton();
 	private CommandButton btnModifier = new CommandButton();
+	private RadioButton rdbFondible = new  RadioButton();
 
 	@PostConstruct
 	public void initialiser() {
@@ -90,8 +104,21 @@ public class MaterielController {
 		}
 	}
 	
+	
+	public void genererQRCode() throws WriterException, IOException {
+		path += "_"+materiel.getCodeMateriel();
+		data = "Code: "+materiel.getCodeMateriel()+"\n"+
+				"Désignation: " +materiel.getNomMateriel()+"\n"+
+				"Magasin d'origine: " +materiel.getMagasin().getNomMagasin()+"\n"+
+				"Localisation:";
+		System.out.println("Chemin ======================="+path);
+		BitMatrix matrix = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, 500, 500);
+		MatrixToImageWriter.writeToPath(matrix, "jpg", Paths.get(path));
+		
+	}
+	
 
-	public void enregistrer() {
+	public void enregistrer() throws WriterException, IOException {
 		//Enregistrement dans la table Caracteristique
 		Famille familleProduit = (Famille) service.getObjectById(idFamille, "Famille");
 		Nature natureProduit = (Nature) service.getObjectById(idNature, "Nature");
@@ -101,17 +128,40 @@ public class MaterielController {
 		this.materiel.setMagasin(magasin);
 		this.service.addObject(this.materiel);
 		
-		
-		this.fongible.setIdFamille(idFamille);
-		this.fongible.setIdNature(idNature);
-		this.fongible.setIdMagasin(idMagasin);
-		this.fongible.setStockActuel(stockActuel);
-		this.fongible.setStockAlerte(stockAlerte);
-		this.fongible.setNomMateriel(materiel.getNomMateriel());
-		this.fongible.setCodeMateriel(materiel.getCodeMateriel());
-		this.fongible.setDescriptionMateriel(materiel.getDescriptionMateriel());
-		this.fongible.setMateriel(materiel);
-		this.service.addObject(this.fongible);
+		//Enregistrement dans fongible et non fongible
+		switch (etatFongible){
+		case "FONGIBLE": {
+			//Enregistrer dans fongible
+			this.fongible.setIdFamille(idFamille);
+			this.fongible.setIdNature(idNature);
+			this.fongible.setIdMagasin(idMagasin);
+			this.fongible.setStockActuel(stockActuel);
+			this.fongible.setStockAlerte(stockAlerte);
+			this.fongible.setNomMateriel(materiel.getNomMateriel());
+			this.fongible.setCodeMateriel(materiel.getCodeMateriel());
+			this.fongible.setDescriptionMateriel(materiel.getDescriptionMateriel());
+			this.fongible.setMateriel(materiel);
+			this.service.addObject(this.fongible);
+			
+			break;
+			
+		}
+		case "NONFONGIBLE": {
+			//Enregistrer dans non fongible
+			this.Nonfongible.setIdFamille(idFamille);
+			this.Nonfongible.setIdNature(idNature);
+			this.Nonfongible.setIdMagasin(idMagasin);
+			this.Nonfongible.setNomMateriel(materiel.getNomMateriel());
+			this.Nonfongible.setCodeMateriel(materiel.getCodeMateriel());
+			this.Nonfongible.setDescriptionMateriel(materiel.getDescriptionMateriel());
+			this.Nonfongible.setMateriel(materiel);
+			this.service.addObject(this.Nonfongible);
+			
+			//Générer le QR code
+			genererQRCode();
+			break;
+		}
+				}
 		
 		//Enregistrement dans la table Valeur 
 		for (CaracteristiqueValeur caracteristiqueValeur : listCaracteristiqueValeur) {
@@ -153,7 +203,8 @@ public class MaterielController {
 		this.setIdFamille(0);
 		this.setIdMagasin(0);
 		this.setIdNature(0);
-		info("Annulation effectuée avec succès!");
+		this.rdbFondible.setItemIndex(2);
+		//info("Annulation effectuée avec succès!"); 
 		
 		
 		// vider la liste des valeurs des ^caracteristiques
@@ -161,7 +212,7 @@ public class MaterielController {
 			caracteristiqueValeur.setValeurCaracteristique("");
 			
 		}
-		info("Annulation effectuée avec succès!");
+		//info("Annulation effectuée avec succès!");
 	}
 
 	public void modifier() {
@@ -329,6 +380,22 @@ public class MaterielController {
 
 	public void setEtatFongible(String etatFongible) {
 		this.etatFongible = etatFongible;
+	}
+
+	public NonFongible getNonfongible() {
+		return Nonfongible;
+	}
+
+	public void setNonfongible(NonFongible nonfongible) {
+		Nonfongible = nonfongible;
+	}
+
+	public RadioButton getRdbFondible() {
+		return rdbFondible;
+	}
+
+	public void setRdbFondible(RadioButton rdbFondible) {
+		this.rdbFondible = rdbFondible;
 	}
 
 	

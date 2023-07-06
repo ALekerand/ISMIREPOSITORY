@@ -30,7 +30,7 @@
 					</p:selectOneMenu>
 					
 					<p:outputLabel for="fong" value="Fongible:"></p:outputLabel>
-					<p:selectOneRadio id="fong" value="#{materielController.etatFongible}">
+					<p:selectOneRadio id="fong" value="#{materielController.etatFongible}" action="#{materielController.rdbFondible}">
 			            <f:selectItem itemLabel="Oui" itemValue="FONGIBLE"/>
 			            <f:selectItem itemLabel="Non" itemValue="NONFONGIBLE"/>
 			        </p:selectOneRadio>
