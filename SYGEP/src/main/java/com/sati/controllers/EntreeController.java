@@ -41,6 +41,8 @@ public class EntreeController {
 	private int idMateriel;
 	//private int stockMateriel;
 	private int idSource;
+	private int stockActuel;
+	private String typeMateriel="";
 	
 //	Gestion des bouttons de commande
 	private CommandButton btnEnregistrer = new CommandButton();
@@ -96,12 +98,22 @@ public class EntreeController {
 	public void chargerMateriel() {
 		materiel = new Materiel();
 		materiel = (Materiel) service.getObjectById(idMateriel, "Materiel");
+		//Rechercher dans les fongible
+		Fongible fongible = new Fongible();
+		if ((fongible = (Fongible) service.getObjectById(materiel.getIdMateriel(), "Fongible"))==null){
+			setStockActuel(1);
+			setTypeMateriel("MATERIEL NON FONGIBLE");
+		}else {
+			setStockActuel(fongible.getStockActuel());
+			setTypeMateriel("MATERIEL FONGIBLE");
+		}
 	}
 	
 	public void info(String monMessage) {
 		FacesContext.getCurrentInstance().addMessage((String) null,
 				new FacesMessage(FacesMessage.SEVERITY_INFO, monMessage, null));
 	}
+	
 
 	public void error() {
 		FacesContext.getCurrentInstance().addMessage((String) null,
@@ -113,11 +125,12 @@ public class EntreeController {
 		setMateriel(null);
 		setIdSource(0);
 		setIdFournisseur(0);
+		setStockActuel(0);
+		setTypeMateriel("");
 		this.entree.setQteEntree(null);
 		this.btnModifier.setDisabled(true);
 		this.btnEnregistrer.setDisabled(false);
 		info("Annulation effectuée avec succès!");
-		
 	}
 
 	public CommandButton getBtnEnregistrer() {
@@ -240,6 +253,22 @@ public class EntreeController {
 
 	public void setFongible(Fongible fongible) {
 		this.fongible = fongible;
+	}
+
+	public int getStockActuel() {
+		return stockActuel;
+	}
+
+	public void setStockActuel(int stockActuel) {
+		this.stockActuel = stockActuel;
+	}
+
+	public String getTypeMateriel() {
+		return typeMateriel;
+	}
+
+	public void setTypeMateriel(String typeMateriel) {
+		this.typeMateriel = typeMateriel;
 	}
 
 	

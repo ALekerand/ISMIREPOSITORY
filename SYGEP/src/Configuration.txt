@@ -1,0 +1,6 @@
+===================== CONFIGURATION ====================
+
+Table ETATDEMANDE
+ 1 : EN ATTENTE
+ 2 : REJETE
+ 3 : LIVRE

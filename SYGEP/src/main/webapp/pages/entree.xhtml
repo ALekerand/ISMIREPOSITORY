@@ -17,12 +17,16 @@
 				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
 		<fieldset>
  	<legend>Choix du materiel</legend>
+ 	<h:panelGrid columns="3" cellpadding="10">
  	<p:outputLabel for="cb_mat" value="Materiel"/>
 		<p:selectOneMenu id="cb_mat" required="true" value="#{entreeController.idMateriel}">
 		<p:ajax listener="#{entreeController.chargerMateriel}" event="change" update=":form" process="@this"/>
 		<f:selectItem itemLabel="Selectionnez" itemValue="" />
 		<f:selectItems value="#{entreeController.listMateriel}" var="tata" itemLabel="#{tata.nomMateriel}" itemValue="#{tata.idMateriel}"></f:selectItems>
 	</p:selectOneMenu>	
+	
+	<p:outputLabel value="#{entreeController.typeMateriel}" />
+ 	</h:panelGrid>
  			
 <h:panelGrid columns="6" cellpadding="10">
 	<p:outputLabel for="input_code" value="Code:"></p:outputLabel>
@@ -38,7 +42,7 @@
 <p:inputText id="input_nature" value="#{entreeController.materiel.nature.libNature}" readonly="true" ></p:inputText>
 
 <p:outputLabel for="input_stock" value="Stock actuel:"></p:outputLabel>
-<p:inputText id="input_stock" value="#{entreeController.materiel.stockActuel}" readonly="true" style="width:60px"></p:inputText>
+<p:inputText id="input_stock" value="#{entreeController.stockActuel}" readonly="true" style="width:60px"></p:inputText>
 
 </h:panelGrid>
 </fieldset>

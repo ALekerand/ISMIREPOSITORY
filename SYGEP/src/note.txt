@@ -1,0 +1,21 @@
+=====	lazy Loading==========
+	Materiel ======> Famille
+	Materiel ======> Nature
+	
+	
+	Entree ======> Materiel
+	Entree ======> Fournisseur
+	Entree ======> Source Financement
+	Entree ======> Personne
+	
+	
+	userAuthentication ======> Personne
+	
+	Demande ======> Materiel
+	Demande ======> EtatDemande
+	Demande ======> Entite
+	
+	
+	
+
+	

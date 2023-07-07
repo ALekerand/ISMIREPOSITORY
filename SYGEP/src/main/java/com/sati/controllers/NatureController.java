@@ -39,7 +39,19 @@ public class NatureController {
 		this.service.addObject(nature);
 		this.info("Eneregistrement effectué avec succès!");
 		this.annuler();
-		
+	}
+	
+	
+	public void genererCode() {
+		String prefix="";
+		int nbEnregistrement = this.service.getObjects("Famille").size();
+		if(nbEnregistrement < 10)
+			prefix = "NA00" ;
+		if ((nbEnregistrement >= 10) && (nbEnregistrement < 100)) 
+			prefix = "NA0" ;
+		if (nbEnregistrement > 100) 
+			prefix = "NA" ;
+		this.nature.setCodeNature(prefix+(nbEnregistrement+1));
 	}
 
 	public void selectionnerLigne() {
@@ -98,6 +110,7 @@ public class NatureController {
 	}
 
 	public Nature getNature() {
+		genererCode();
 		return nature;
 	}
 

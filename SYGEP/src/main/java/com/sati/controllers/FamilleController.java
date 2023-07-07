@@ -32,6 +32,18 @@ public class FamilleController {
 	public void initialiser() {
 		this.btnModifier.setDisabled(true);
 	}
+	
+	public void genererCode() {
+		String prefix="";
+		int nbEnregistrement = this.service.getObjects("Famille").size();
+		if(nbEnregistrement < 10)
+			prefix = "FA00" ;
+		if ((nbEnregistrement >= 10) && (nbEnregistrement < 100)) 
+			prefix = "FA0" ;
+		if (nbEnregistrement > 100) 
+			prefix = "FA" ;
+		this.famille.setCodeFamille(prefix+(nbEnregistrement+1));
+	}
 
 	public void enregistrer() {
 		this.service.addObject(this.famille);
@@ -97,6 +109,7 @@ public class FamilleController {
 	}
 
 	public Famille getFamille() {
+		genererCode();
 		return famille;
 	}
 

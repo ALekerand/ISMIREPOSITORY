@@ -80,7 +80,7 @@ public class Demande implements java.io.Serializable {
 		this.idDemande = idDemande;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_ENTITE", nullable = false)
 	public Entite getEntite() {
 		return this.entite;
@@ -90,7 +90,7 @@ public class Demande implements java.io.Serializable {
 		this.entite = entite;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_ETAT_DEMANDE", nullable = false)
 	public EtatDemande getEtatDemande() {
 		return this.etatDemande;
@@ -100,7 +100,7 @@ public class Demande implements java.io.Serializable {
 		this.etatDemande = etatDemande;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_MATERIEL", nullable = false)
 	public Materiel getMateriel() {
 		return this.materiel;
