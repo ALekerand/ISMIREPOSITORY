@@ -36,7 +36,7 @@ import com.sati.service.Iservice;
 
 @Component
 @Scope("session")
-public class MaterielController {
+public class MaterielWithQRController {
 	@Autowired
 	Iservice service;
 	private Materiel materiel = new Materiel();
@@ -64,7 +64,7 @@ public class MaterielController {
 	private CommandButton btnEnregistrer = new CommandButton();
 	private CommandButton btnAnnuler = new CommandButton();
 	private CommandButton btnModifier = new CommandButton();
-	private RadioButton rdbFondible = new  RadioButton();
+//	private RadioButton rdbFondible = new  RadioButton();
 	private SelectOneMenu cbNature = new SelectOneMenu();
 	
 	//Injection de controle
@@ -82,11 +82,11 @@ public class MaterielController {
 		String prefix="";
 		int nbEnregistrement = this.service.getObjects("Materiel").size();
 		if(nbEnregistrement < 10)
-			prefix = "MT00" ;
+			prefix = "MTQR00" ;
 		if ((nbEnregistrement >= 10) && (nbEnregistrement < 100)) 
-			prefix = "MT0" ;
+			prefix = "MTQR0" ;
 		if (nbEnregistrement > 100) 
-			prefix = "MT" ;
+			prefix = "MTQR" ;
 		this.materiel.setCodeMateriel(prefix+(nbEnregistrement+1));
 	}
 	
@@ -133,32 +133,14 @@ public class MaterielController {
 		Famille familleProduit = (Famille) service.getObjectById(idFamille, "Famille");
 		Nature natureProduit = (Nature) service.getObjectById(idNature, "Nature");
 		Magasin magasin = (Magasin)service.getObjectById(idMagasin,"Magasin");
-	//	this.materiel.setFamille(familleProduit);
 		this.materiel.setNature(natureProduit);
 		this.materiel.setMagasin(magasin);
 		this.service.addObject(this.materiel);
 		
 		//Enregistrement dans fongible et non fongible
-		switch (etatFongible){
-		case "FONGIBLE": {
-			//Enregistrer dans fongible
-			//this.fongible.setIdFamille(idFamille);
-			this.fongible.setIdNature(idNature);
-			this.fongible.setIdMagasin(idMagasin);
-			this.fongible.setStockActuel(stockActuel);
-			this.fongible.setStockAlerte(stockAlerte);
-			this.fongible.setNomMateriel(materiel.getNomMateriel());
-			this.fongible.setCodeMateriel(materiel.getCodeMateriel());
-			this.fongible.setDescriptionMateriel(materiel.getDescriptionMateriel());
-			this.fongible.setMateriel(materiel);
-			this.service.addObject(this.fongible);
-			
-			break;
-			
-		}
-		case "NONFONGIBLE": {
+		
+		
 			//Enregistrer dans non fongible
-	//		this.Nonfongible.setIdFamille(idFamille);
 			this.Nonfongible.setIdNature(idNature);
 			this.Nonfongible.setIdMagasin(idMagasin);
 			this.Nonfongible.setNomMateriel(materiel.getNomMateriel());
@@ -169,9 +151,6 @@ public class MaterielController {
 			
 			//Générer le QR code
 			genererQRCode();
-			break;
-		}
-				}
 		
 		//Enregistrement dans la table Valeur 
 		for (CaracteristiqueValeur caracteristiqueValeur : listCaracteristiqueValeur) {
@@ -213,7 +192,7 @@ public class MaterielController {
 		this.setIdFamille(0);
 		this.setIdMagasin(0);
 		this.setIdNature(0);
-		this.rdbFondible.setItemIndex(2);
+		//this.rdbFondible.setItemIndex(2);
 		//info("Annulation effectuée avec succès!"); 
 		
 		
@@ -399,13 +378,12 @@ public class MaterielController {
 		Nonfongible = nonfongible;
 	}
 
-	public RadioButton getRdbFondible() {
-		return rdbFondible;
-	}
-
-	public void setRdbFondible(RadioButton rdbFondible) {
-		this.rdbFondible = rdbFondible;
-	}
+	/*
+	 * public RadioButton getRdbFondible() { return rdbFondible; }
+	 * 
+	 * public void setRdbFondible(RadioButton rdbFondible) { this.rdbFondible =
+	 * rdbFondible; }
+	 */
 
 	public SelectOneMenu getCbNature() {
 		return cbNature;
@@ -414,5 +392,4 @@ public class MaterielController {
 	public void setCbNature(SelectOneMenu cbNature) {
 		this.cbNature = cbNature;
 	}
-
 }

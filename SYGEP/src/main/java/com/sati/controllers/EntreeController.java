@@ -86,11 +86,11 @@ public class EntreeController {
 		
 		this.service.addObject(this.entree);
 		
+		if (typeMateriel.equals("MATERIEL FONGIBLE")) {
+			fongible.setStockActuel(this.fongible.getStockActuel()+ this.entree.getQteEntree());
+			service.updateObject(materiel);
+		}
 		
-		fongible.setStockActuel(this.fongible.getStockActuel()+ this.entree.getQteEntree());
-		service.updateObject(materiel);
-		
-	
 		this.info("Eneregistrement effectué avec succès!");
 		this.annuler();
 	}
@@ -99,7 +99,7 @@ public class EntreeController {
 		materiel = new Materiel();
 		materiel = (Materiel) service.getObjectById(idMateriel, "Materiel");
 		//Rechercher dans les fongible
-		Fongible fongible = new Fongible();
+		//Fongible fongible = new Fongible();
 		if ((fongible = (Fongible) service.getObjectById(materiel.getIdMateriel(), "Fongible"))==null){
 			setStockActuel(1);
 			setTypeMateriel("MATERIEL NON FONGIBLE");
@@ -130,7 +130,6 @@ public class EntreeController {
 		this.entree.setQteEntree(null);
 		this.btnModifier.setDisabled(true);
 		this.btnEnregistrer.setDisabled(false);
-		info("Annulation effectuée avec succès!");
 	}
 
 	public CommandButton getBtnEnregistrer() {
@@ -176,7 +175,6 @@ public class EntreeController {
 	@SuppressWarnings("unchecked")
 	public List<Fournisseur> getListFournisseur() {
 		 listFournisseur = service.getObjects("Fournisseur");
-		 System.out.println("========Taille de la liste:"+listFournisseur.size());
 		 return listFournisseur;
 	}
 
@@ -187,7 +185,6 @@ public class EntreeController {
 	@SuppressWarnings("unchecked")
 	public List<Materiel> getListMateriel() {
 		 listMateriel = service.getObjects("Materiel");
-		 System.out.println("=========Taille de la liste:"+listMateriel);
 		 return listMateriel;
 	}
 
@@ -195,12 +192,7 @@ public class EntreeController {
 		this.listMateriel = listMateriel;
 	}
 
-	/*
-	 * public int getStockMateriel() { return stockMateriel; }
-	 * 
-	 * public void setStockMateriel(int stockMateriel) { this.stockMateriel =
-	 * stockMateriel; }
-	 */
+
 	public int getIdSource() {
 		return idSource;
 	}
@@ -212,7 +204,6 @@ public class EntreeController {
 	@SuppressWarnings("unchecked")
 	public List<SourceFinancement> getListSourceFinance() {
 		 listSourceFinance = service.getObjects("SourceFinancement");
-		 System.out.println("========Taille de la liste:"+listSourceFinance.size());
 		 return listSourceFinance;
 	}
 
@@ -239,7 +230,6 @@ public class EntreeController {
 	@SuppressWarnings("unchecked")
 	public List<Entree> getListEntree() {
 		 listEntree = service.getObjects("Entree");
-		 System.out.println("========Taille de la liste:"+listEntree.size());
 		 return listEntree;
 	}
 

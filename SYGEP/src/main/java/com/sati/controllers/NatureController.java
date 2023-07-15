@@ -24,7 +24,10 @@ public class NatureController {
 	
 	private Nature nature = new Nature();
 	private List<Nature> listTable = new ArrayList<Nature>();
+	private List<Famille> listFamille = new ArrayList<Famille>();
 	private Nature selectedObject = new Nature();
+	private Famille famille = new Famille();
+	private int idFamille;
 	
 	private CommandButton btnEnregistrer = new CommandButton();
 	private CommandButton btnAnnuler = new CommandButton();
@@ -36,9 +39,15 @@ public class NatureController {
 	}
 
 	public void enregistrer() {
+		nature.setFamille(famille);
 		this.service.addObject(nature);
 		this.info("Eneregistrement effectué avec succès!");
 		this.annuler();
+	}
+
+	public void chargerFamille() {
+		System.out.println("=====ID FAMILLE ======="+idFamille);
+		famille = (Famille) service.getObjectById(idFamille, "Famille");//A terminer
 	}
 	
 	
@@ -136,5 +145,20 @@ public class NatureController {
 		this.selectedObject = selectedObject;
 	}
 
-	
+	public List<Famille> getListFamille() {
+		listFamille = service.getObjects("Famille");
+		return listFamille;
+	}
+
+	public void setListFamille(List<Famille> listFamille) {
+		this.listFamille = listFamille;
+	}
+
+	public int getIdFamille() {
+		return idFamille;
+	}
+
+	public void setIdFamille(int idFamille) {
+		this.idFamille = idFamille;
+	}
 }

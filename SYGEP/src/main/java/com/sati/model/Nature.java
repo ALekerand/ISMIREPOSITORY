@@ -1,5 +1,5 @@
-	&package main.com.sati.model;
-// Generated 7 juil. 2023, 13:21:20 by Hibernate Tools 4.3.6.Final
+package com.sati.model;
+// Generated 10 juil. 2023, 20:53:28 by Hibernate Tools 4.3.6.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -56,7 +56,7 @@ public class Nature implements java.io.Serializable {
 		this.idNature = idNature;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_FAMILLE", nullable = false)
 	public Famille getFamille() {
 		return this.famille;

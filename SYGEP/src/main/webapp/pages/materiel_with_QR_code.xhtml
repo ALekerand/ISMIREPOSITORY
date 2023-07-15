@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/templates/template.xhtml">
+			<ui:define name="body">
+				<h:form id="form">
+				
+				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+	<p:panel header="ENREGISTREMENT DE MATERIELS AVEC QR CODE">
+ 	<table>
+ 		<tr>
+ 			<td>
+ 				<h:panelGrid columns="4" cellpadding="10">
+					<p:outputLabel for="input_code" value="Code:"></p:outputLabel>
+					<p:inputText id="input_code" value="#{materielWithQRController.materiel.codeMateriel}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
+				
+					<p:outputLabel for="input_lib" value="Désignation:"></p:outputLabel>
+					<p:inputText id="input_lib" value="#{materielWithQRController.materiel.nomMateriel}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
+					
+					<p:outputLabel for="cb_famille" value="Famille:"/>
+						<p:selectOneMenu id="cb_famille" required="true" value="#{materielWithQRController.idFamille}">
+						<p:ajax listener="#{materielWithQRController.chargerNature}" event="change" update="cb_nature" process="@this"> </p:ajax>
+						<f:selectItem itemLabel="Selectionnez" itemValue="" />
+						<f:selectItems value="#{materielWithQRController.listFamille}" var="tata" itemLabel="#{tata.libFamille}" itemValue="#{tata.idFamille}"></f:selectItems>
+					</p:selectOneMenu>
+					
+					<p:outputLabel for="cb_nature" value="Nature:"/>
+						<p:selectOneMenu id="cb_nature" required="true" value="#{materielWithQRController.idNature}" binding="#{materielWithQRController.cbNature}">
+						<f:selectItem itemLabel="Selectionnez" itemValue="" />
+						<f:selectItems value="#{materielWithQRController.listNature}" var="tata" itemLabel="#{tata.libNature}" itemValue="#{tata.idNature}"></f:selectItems>
+					</p:selectOneMenu>
+					
+					<p:outputLabel for="cb_magasin" value="Magasin:"/>
+						<p:selectOneMenu id="cb_magasin" required="true" value="#{materielWithQRController.idMagasin}">
+						<f:selectItem itemLabel="Selectionnez" itemValue="" />
+						<f:selectItems value="#{materielWithQRController.listMagasin}" var="tata" itemLabel="#{tata.nomMagasin}" itemValue="#{tata.idMagasin}"></f:selectItems>
+					</p:selectOneMenu>
+					
+					<p:outputLabel for="input_descrip" value="Description:"></p:outputLabel>
+					<p:inputTextarea id="input_descrip" value="#{materielWithQRController.materiel.descriptionMateriel}" cols="30"></p:inputTextarea>
+					
+			</h:panelGrid>
+ 			</td>
+ 			<td>
+<p:dataTable  var="var" value="#{materielWithQRController.listCaracteristiqueValeur}" editable="true" scrollable="true" scrollHeight="200">
+ 
+ <f:facet name="header">EDITION DES CARACTERISTIQUES</f:facet>
+    	<p:ajax event="rowEdit" listener="#{materielWithQRController.onRowEdit}"/>
+     	<p:ajax event="rowEditCancel" listener="#{materielWithQRController.onRowCancel}"/>
+   		
+   		<p:column headerText="Caractéristique" style="width:50%">
+        <h:outputText value="#{var.caracteristique.libCaracteristique}"/>
+        </p:column>
+        
+        <p:column headerText="Valeur" style="width:50%">
+        <p:cellEditor>
+        	<f:facet name="output"><h:outputText value="#{var.valeurCaracteristique}" /></f:facet>
+        	<f:facet name="input"><p:inputText id="modelInput" value="#{var.valeurCaracteristique}" style="width:100%"/></f:facet>
+        </p:cellEditor>
+        </p:column>
+        
+        <p:column style="width:32px">
+           <p:rowEditor />
+       </p:column>
+       
+</p:dataTable>
+ 			</td>
+
+ 		</tr>
+ 	</table>
+</p:panel>
+<br/>
+<p:toolbar>
+	<f:facet name="left">
+		<p:commandButton value="Enregistrer" action="#{materielWithQRController.enregistrer}" update="form" binding="#{materielWithQRController.btnEnregistrer}"><p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
+		<p:commandButton value="Annuler"  action="#{materielWithQRController.annuler}" process="@this" update="form" binding="#{materielWithQRController.btnAnnuler}"><p:confirm header="confirmation" message="voulez-vous annuler?"></p:confirm></p:commandButton>
+		<p:commandButton value="Modifier"  action="#{materielWithQRController.modifier}" update="form" binding="#{materielWithQRController.btnModifier}"><p:confirm header="confirmation" message="confirmez-vous la modification?"></p:confirm></p:commandButton>
+	</f:facet>
+</p:toolbar>
+		<br/>
+		
+<p:dataTable  var="var" value="#{materielWithQRController.listTable}"  selectionMode="single" selection="#{materielWithQRController.selectedObject}" rowKey="#{var.idMateriel}" scrollable="true" scrollHeight="250">
+ 
+ <f:facet name="header">LISTE DES MATERIELS</f:facet>
+     <p:ajax event="rowSelect" process="@this"  update="form" listener="#{materielWithQRController.selectionnerLigne}"></p:ajax>
+   		
+   		<p:column headerText="Référence" style="width:30%">
+        <h:outputText value="#{var.codeMateriel}"/>
+        </p:column>
+        
+        <p:column headerText="Désignation">
+        <h:outputText value="#{var.nomMateriel}"/>
+        </p:column>
+        
+        <p:column headerText="Description">
+        <h:outputText value="#{var.descriptionMateriel}"/>
+        </p:column>
+        
+      
+</p:dataTable>
+							
+	   <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+	   <p:commandButton value="Oui" type="button"
+	   styleClass="ui-confirmdialog-yes" icon="ui-icon-check" >
+	   </p:commandButton>
+	   <p:commandButton value="Non" type="button"
+	   styleClass="ui-confirmdialog-no" icon="ui-icon-close" >
+	   </p:commandButton>
+	   </p:confirmDialog>
+				</h:form>
+			</ui:define>
+	</ui:composition>
+
+</html>

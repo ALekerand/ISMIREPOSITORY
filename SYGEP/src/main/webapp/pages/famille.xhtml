@@ -16,16 +16,18 @@
 				
 		<fieldset>
  	<legend>ENREGISTREMENT DES FAMILLES DE PRODUITS</legend>		
-<h:panelGrid columns="6" cellpadding="10">
-	<p:outputLabel for="input_code" value="Code"></p:outputLabel>
-	<p:inputText id="input_code" value="#{familleController.famille.codeFamille}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
+	<h:panelGrid columns="4" cellpadding="10">
+		<p:outputLabel for="input_code" value="Code"></p:outputLabel>
+		<p:inputText id="input_code" value="#{familleController.famille.codeFamille}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
+	
+	<p:outputLabel for="input_lib" value="Désignation"></p:outputLabel>
+		<p:inputText id="input_lib" value="#{familleController.famille.libFamille}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
+	</h:panelGrid>
 
-<p:outputLabel for="input_lib" value="Libéllé"></p:outputLabel>
-	<p:inputText id="input_lib" value="#{familleController.famille.libFamille}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
-
+	<h:panelGrid columns="4" cellpadding="10">
 	<p:outputLabel for="input_descrip" value="Description"></p:outputLabel>
 	<p:inputTextarea id="input_descrip" value="#{familleController.famille.descriptionFamille}" rows="5" cols="55"></p:inputTextarea>	
-</h:panelGrid>
+	</h:panelGrid>
 
 </fieldset>
 <br/>

@@ -51,14 +51,14 @@ public class DemandeController {
 	public void initialiser() {
 		this.btnModifier.setDisabled(true);
 		chagerUtilisateur();
-		this.demande.setCodeDemande(genererCodeDemande());
+		this.demande.setCodeDemande(genererCode());
 	}
 	
 	public UserAuthentication chagerUtilisateur() {
 		return userAuthentication = requeteUtilisateur.recuperUser();
 	}
 	
-	public String genererCodeDemande() {
+	public String genererCode() {
 		String prefix="";
 		int nbEnregistrement = this.service.getObjects("Demande").size();
 		if(nbEnregistrement < 10)
@@ -112,6 +112,7 @@ public class DemandeController {
 	
 	
 	public void choisirLigneMateriel() {
+		genererCode();
 		materiel = selecteMareriel;
 		}
 	

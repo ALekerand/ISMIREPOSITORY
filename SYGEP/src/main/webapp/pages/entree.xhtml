@@ -32,14 +32,11 @@
 	<p:outputLabel for="input_code" value="Code:"></p:outputLabel>
 	<p:inputText id="input_code" value="#{entreeController.materiel.codeMateriel}" readonly="true" style="width:60px"></p:inputText>	
 
-<p:outputLabel for="input_desig" value="Désignation:"></p:outputLabel>
-	<p:inputText id="input_desig" value="#{entreeController.materiel.nomMateriel}" readonly="true"></p:inputText>	
-
-<p:outputLabel for="input_fam" value="Famille :"></p:outputLabel>
-	<p:inputText id="input_fam" value="#{entreeController.materiel.famille.libFamille}" readonly="true"></p:inputText>	
-
 <p:outputLabel for="input_nature" value="Nature:"></p:outputLabel>
 <p:inputText id="input_nature" value="#{entreeController.materiel.nature.libNature}" readonly="true" ></p:inputText>
+
+<p:outputLabel for="input_fam" value="Famille :"></p:outputLabel>
+	<p:inputText id="input_fam" value="#{entreeController.materiel.nature.famille.libFamille}" readonly="true"></p:inputText>	
 
 <p:outputLabel for="input_stock" value="Stock actuel:"></p:outputLabel>
 <p:inputText id="input_stock" value="#{entreeController.stockActuel}" readonly="true" style="width:60px"></p:inputText>

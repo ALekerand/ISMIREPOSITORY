@@ -20,20 +20,28 @@
 			<p:outputLabel for="input_code" value="Code"></p:outputLabel>
 			<p:inputText id="input_code" value="#{natureController.nature.codeNature}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
 
-<p:outputLabel for="input_lib" value="Libéllé"></p:outputLabel>
+<p:outputLabel for="input_lib" value="Désignation"></p:outputLabel>
 	<p:inputText id="input_lib" value="#{natureController.nature.libNature}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
-
-<p:outputLabel for="input_descrip" value="Description"></p:outputLabel>
-	<p:inputTextarea id="input_descrip" value="#{natureController.nature.descriptionNature}" rows="5" cols="55" ></p:inputTextarea>
+		<p:outputLabel for="cb_famille" value="Famille:"/>
+		<p:selectOneMenu id="cb_famille" value="#{natureController.idFamille}">
+		<p:ajax listener="#{natureController.chargerFamille}" event="change" process="@this"></p:ajax>
+		<f:selectItem itemLabel="Selectionnez" itemValue="" />
+		<f:selectItems value="#{natureController.listFamille}" var="tata" itemLabel="#{tata.libFamille}" itemValue="#{tata.idFamille}"></f:selectItems>
+		</p:selectOneMenu>
 </h:panelGrid>
+
+	<h:panelGrid columns="2" cellpadding="10">
+		<p:outputLabel for="input_descrip" value="Description"></p:outputLabel>
+		<p:inputTextarea id="input_descrip" value="#{natureController.nature.descriptionNature}" rows="5" cols="56" ></p:inputTextarea>
+	</h:panelGrid>	
 </p:panel>
 <br/>
 <p:toolbar >
-			<f:facet name="left">
-				<p:commandButton value="Enregistrer" action="#{natureController.enregistrer}" update="form" binding="#{natureController.btnEnregistrer}"><p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
-				<p:commandButton value="Annuler"  action="#{natureController.annuler}" process="@this" update="form" binding="#{natureController.btnAnnuler}"><p:confirm header="confirmation" message="voulez-vous annuler?"></p:confirm></p:commandButton>
-				<p:commandButton value="Modifier"  action="#{natureController.modifier}" update="form" binding="#{natureController.btnModifier}"><p:confirm header="confirmation" message="confirmez-vous la modification?"></p:confirm></p:commandButton>
-			</f:facet>
+	<f:facet name="left">
+		<p:commandButton value="Enregistrer" action="#{natureController.enregistrer}" update="form" binding="#{natureController.btnEnregistrer}"><p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
+		<p:commandButton value="Annuler"  action="#{natureController.annuler}" process="@this" update="form" binding="#{natureController.btnAnnuler}"><p:confirm header="confirmation" message="voulez-vous annuler?"></p:confirm></p:commandButton>
+		<p:commandButton value="Modifier"  action="#{natureController.modifier}" update="form" binding="#{natureController.btnModifier}"><p:confirm header="confirmation" message="confirmez-vous la modification?"></p:confirm></p:commandButton>
+	</f:facet>
 		</p:toolbar>
 		<br/>
 		
@@ -48,6 +56,10 @@
         
         <p:column headerText="Libellé">
         <h:outputText value="#{var.libNature}"/>
+        </p:column>
+        
+        <p:column headerText="Famille">
+        <h:outputText value="#{var.famille.libFamille}"/>
         </p:column>
         
         <p:column headerText="Description">

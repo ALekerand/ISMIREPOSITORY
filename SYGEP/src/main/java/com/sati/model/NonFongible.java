@@ -1,5 +1,5 @@
 package com.sati.model;
-// Generated 22 juin 2023, 16:17:05 by Hibernate Tools 4.3.6.Final
+// Generated 10 juil. 2023, 20:53:28 by Hibernate Tools 4.3.6.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -26,7 +26,7 @@ public class NonFongible implements java.io.Serializable {
 	private Materiel materiel;
 	private Integer idNature;
 	private Integer idMagasin;
-	private Integer idFamille;
+	private Integer idMarque;
 	private String codeMateriel;
 	private String nomMateriel;
 	private String descriptionMateriel;
@@ -41,12 +41,12 @@ public class NonFongible implements java.io.Serializable {
 		this.materiel = materiel;
 	}
 
-	public NonFongible(Materiel materiel, Integer idNature, Integer idMagasin, Integer idFamille, String codeMateriel,
+	public NonFongible(Materiel materiel, Integer idNature, Integer idMagasin, Integer idMarque, String codeMateriel,
 			String nomMateriel, String descriptionMateriel, String qrCode, Boolean retraitMateriel, Date dateRetrait) {
 		this.materiel = materiel;
 		this.idNature = idNature;
 		this.idMagasin = idMagasin;
-		this.idFamille = idFamille;
+		this.idMarque = idMarque;
 		this.codeMateriel = codeMateriel;
 		this.nomMateriel = nomMateriel;
 		this.descriptionMateriel = descriptionMateriel;
@@ -96,13 +96,13 @@ public class NonFongible implements java.io.Serializable {
 		this.idMagasin = idMagasin;
 	}
 
-	@Column(name = "ID_FAMILLE")
-	public Integer getIdFamille() {
-		return this.idFamille;
+	@Column(name = "ID_MARQUE")
+	public Integer getIdMarque() {
+		return this.idMarque;
 	}
 
-	public void setIdFamille(Integer idFamille) {
-		this.idFamille = idFamille;
+	public void setIdMarque(Integer idMarque) {
+		this.idMarque = idMarque;
 	}
 
 	@Column(name = "CODE_MATERIEL", length = 10)
