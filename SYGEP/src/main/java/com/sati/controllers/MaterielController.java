@@ -31,6 +31,7 @@ import com.sati.model.Materiel;
 import com.sati.model.Nature;
 import com.sati.model.NonFongible;
 import com.sati.model.Valeur;
+import com.sati.requetes.RequeteMateriel;
 import com.sati.requetes.RequeteNature;
 import com.sati.service.Iservice;
 
@@ -70,7 +71,8 @@ public class MaterielController {
 	//Injection de controle
 	@Autowired
 	private RequeteNature requeteNature;
-
+	private RequeteMateriel requeteMateriel;
+	
 	@PostConstruct
 	public void initialiser() {
 		this.btnModifier.setDisabled(true);

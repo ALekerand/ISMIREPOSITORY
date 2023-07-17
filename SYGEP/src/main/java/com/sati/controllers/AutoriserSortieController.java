@@ -48,46 +48,40 @@ public class AutoriserSortieController {
 	@PostConstruct
 	public void initialiser() {
 		chagerUtilisateur();
-		genererCodeSortie();
+		genererCode();
 	}
 	
 	public UserAuthentication chagerUtilisateur() {
 		return userAuthentication = requeteUtilisateur.recuperUser();
 	}
 	
-	public String genererCodeSortie() {
+	public void genererCode() {
 		String prefix="";
 		int nbEnregistrement = this.service.getObjects("Sortie").size();
 		if(nbEnregistrement < 10)
-			prefix = "CS00" ;
+			prefix = "ST00" ;
 		if ((nbEnregistrement >= 10) && (nbEnregistrement < 100)) 
-			prefix = "CS0" ;
+			prefix = "ST0" ;
 		if (nbEnregistrement > 100) 
-			prefix = "CS" ;
-		return new String(prefix+(nbEnregistrement+1));
+			prefix = "ST" ;
+		this.sortie.setCodeSortie(prefix+(nbEnregistrement+1));
 	}
 
 	
-	
 	public void enregistrer() {
-		System.out.println("lancement");
-		sortie.setCodeSortie(genererCodeSortie());
 		sortie.setDateSortie(new Date());
 		SimpleDateFormat formateurDate = new SimpleDateFormat("yyyy-MM-dd");
 		String date = formateurDate.format(dateEnregSortie);
 		sortie.setDateEnregSortie(dateEnregSortie);
 		sortie.setPersonne(userAuthentication.getPersonne());
 		sortie.setDemande(demande);
-		System.out.println("lancement");
 		this.service.addObject(this.sortie);
 		demande.setSortie(sortie);
 		service.updateObject(demande);
 		sortie.setDemande(demande);
 		service.updateObject(sortie);
 		info("Enregistrement effectué avec succès!");
-	
 	}
-	
 	
 	
 	public void info(String monMessage) {
@@ -115,6 +109,7 @@ public class AutoriserSortieController {
 		this.listObject = listObject;
 	}
 	public Sortie getSortie() {
+		genererCode();
 		return sortie;
 	}
 	public void setSortie(Sortie sortie) {
@@ -123,7 +118,6 @@ public class AutoriserSortieController {
 	@SuppressWarnings("unchecked")
 	public List<Sortie> getListSortie() {
 		listSortie = service.getObjects("Sortie");
-		System.out.println("===========Taille de la liste:"+listSortie.size());
 		return listSortie;
 	}
 
@@ -132,11 +126,9 @@ public class AutoriserSortieController {
 	}
 
 
-
 	public UserAuthentication getUserAuthentication() {
 		return userAuthentication;
 	}
-
 
 
 	public void setUserAuthentication(UserAuthentication userAuthentication) {
@@ -183,8 +175,4 @@ public class AutoriserSortieController {
 	public void setBtnEnregistrer(CommandButton btnEnregistrer) {
 		this.btnEnregistrer = btnEnregistrer;
 	}
-
-
-
-
 }

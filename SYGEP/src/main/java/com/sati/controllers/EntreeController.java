@@ -19,6 +19,7 @@ import com.sati.model.Fournisseur;
 import com.sati.model.Materiel;
 import com.sati.model.SourceFinancement;
 import com.sati.model.UserAuthentication;
+import com.sati.requetes.RequeteMateriel;
 import com.sati.requetes.RequeteUtilisateur;
 import com.sati.service.Iservice;
 
@@ -43,6 +44,9 @@ public class EntreeController {
 	private int idSource;
 	private int stockActuel;
 	private String typeMateriel="";
+	
+	@Autowired
+	private RequeteMateriel requeteMateriel;
 	
 //	Gestion des bouttons de commande
 	private CommandButton btnEnregistrer = new CommandButton();
@@ -184,7 +188,8 @@ public class EntreeController {
 
 	@SuppressWarnings("unchecked")
 	public List<Materiel> getListMateriel() {
-		 listMateriel = service.getObjects("Materiel");
+		listMateriel = requeteMateriel.listerMaterielSansQRCODE();
+		// listMateriel = service.getObjects("Materiel");
 		 return listMateriel;
 	}
 

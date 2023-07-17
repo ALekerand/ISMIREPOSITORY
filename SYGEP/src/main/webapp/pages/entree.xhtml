@@ -23,7 +23,7 @@
 		<p:ajax listener="#{entreeController.chargerMateriel}" event="change" update=":form" process="@this"/>
 		<f:selectItem itemLabel="Selectionnez" itemValue="" />
 		<f:selectItems value="#{entreeController.listMateriel}" var="tata" itemLabel="#{tata.nomMateriel}" itemValue="#{tata.idMateriel}"></f:selectItems>
-	</p:selectOneMenu>	
+		</p:selectOneMenu>
 	
 	<p:outputLabel value="#{entreeController.typeMateriel}" />
  	</h:panelGrid>

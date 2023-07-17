@@ -61,12 +61,12 @@
             responsive="true">
             <h:panelGrid columns="4" cellpadding="10">
                 
-                        <p:outputLabel value="code sortie"></p:outputLabel>
-                        <p:inputText value="#{autoriserSortieController.sortie.codeSortie}" ></p:inputText>
-          
-                       <p:outputLabel value="date enregistrement sortie"></p:outputLabel>
-                        <p:datePicker id="date" value="#{autoriserSortieController.dateEnregSortie}" pattern="dd/MM/yyyy" locale="fr" navigator="true"></p:datePicker>
-                      
+               <p:outputLabel value="code sortie"></p:outputLabel>
+               <p:inputText value="#{autoriserSortieController.sortie.codeSortie}" readonly="true"></p:inputText>
+ 
+              <p:outputLabel value="date enregistrement"></p:outputLabel>
+               <p:datePicker id="date" value="#{autoriserSortieController.dateEnregSortie}" pattern="dd/MM/yyyy" locale="fr" navigator="true"></p:datePicker>
+             
             <f:facet name="footer">
                 <p:commandButton value="Enregistrer"  action="#{autoriserSortieController.enregistrer}" binding="#{autoriserSortieController.btnEnregistrer}" update="form">
                 <p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm>
@@ -74,7 +74,6 @@
             </f:facet>
               </h:panelGrid>
           
-         
         </p:dialog>
 
 	   <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
