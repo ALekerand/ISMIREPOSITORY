@@ -27,6 +27,7 @@ import com.sati.model.Caracteristique;
 import com.sati.model.Famille;
 import com.sati.model.Fongible;
 import com.sati.model.Magasin;
+import com.sati.model.Marque;
 import com.sati.model.Materiel;
 import com.sati.model.Nature;
 import com.sati.model.NonFongible;
@@ -49,12 +50,14 @@ public class MaterielController {
 	private int idFamille;
 	private int idNature;
 	private int idMagasin;
+	private int idMarque;
 	private int stockActuel;
 	private int stockAlerte;
 	private String etatFongible;
 	private List<Famille> listFamille = new ArrayList<Famille>();
 	private List<Nature> listNature = new ArrayList<Nature>();
 	private List<Magasin> listMagasin = new ArrayList<Magasin>();
+	private List<Marque> listMarque = new ArrayList<Marque>();
 	private List<CaracteristiqueValeur> listCaracteristiqueValeur = new ArrayList<CaracteristiqueValeur>();
 	
 	//Pour le QR code
@@ -135,9 +138,11 @@ public class MaterielController {
 		Famille familleProduit = (Famille) service.getObjectById(idFamille, "Famille");
 		Nature natureProduit = (Nature) service.getObjectById(idNature, "Nature");
 		Magasin magasin = (Magasin)service.getObjectById(idMagasin,"Magasin");
+		Marque marque = (Marque) service.getObjectById(idMarque, "Marque");
 	//	this.materiel.setFamille(familleProduit);
 		this.materiel.setNature(natureProduit);
 		this.materiel.setMagasin(magasin);
+		this.materiel.setMarque(marque);
 		this.service.addObject(this.materiel);
 		
 		//Enregistrement dans fongible et non fongible
@@ -147,6 +152,7 @@ public class MaterielController {
 			//this.fongible.setIdFamille(idFamille);
 			this.fongible.setIdNature(idNature);
 			this.fongible.setIdMagasin(idMagasin);
+			this.fongible.setIdMarque(idMarque);
 			this.fongible.setStockActuel(stockActuel);
 			this.fongible.setStockAlerte(stockAlerte);
 			this.fongible.setNomMateriel(materiel.getNomMateriel());
@@ -163,6 +169,7 @@ public class MaterielController {
 	//		this.Nonfongible.setIdFamille(idFamille);
 			this.Nonfongible.setIdNature(idNature);
 			this.Nonfongible.setIdMagasin(idMagasin);
+			this.Nonfongible.setIdMarque(idMarque);
 			this.Nonfongible.setNomMateriel(materiel.getNomMateriel());
 			this.Nonfongible.setCodeMateriel(materiel.getCodeMateriel());
 			this.Nonfongible.setDescriptionMateriel(materiel.getDescriptionMateriel());
@@ -415,6 +422,25 @@ public class MaterielController {
 
 	public void setCbNature(SelectOneMenu cbNature) {
 		this.cbNature = cbNature;
+	}
+
+	public int getIdMarque() {
+		return idMarque;
+	}
+
+	public void setIdMarque(int idMarque) {
+		this.idMarque = idMarque;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Marque> getListMarque() {
+		listMarque = service.getObjects("Marque");
+		System.out.println("========Taille de la liste:"+listMarque.size());
+		return listMarque;
+	}
+
+	public void setListMarque(List<Marque> listMarque) {
+		this.listMarque = listMarque;
 	}
 
 }

@@ -48,6 +48,13 @@
 						<f:selectItems value="#{materielController.listMagasin}" var="tata" itemLabel="#{tata.nomMagasin}" itemValue="#{tata.idMagasin}"></f:selectItems>
 					</p:selectOneMenu>
 					
+					
+					<p:outputLabel for="cb_marque" value="Marque:"/>
+						<p:selectOneMenu id="cb_marque" required="true" value="#{materielController.idMarque}">
+						<f:selectItem itemLabel="Selectionnez" itemValue="" />
+						<f:selectItems value="#{materielController.listMarque}" var="tata" itemLabel="#{tata.libelleMarque}" itemValue="#{tata.idMarque}"></f:selectItems>
+					</p:selectOneMenu>
+					
 					<p:outputLabel for="input_stockArl" value="Stock arlerte:"></p:outputLabel>
 					<p:inputText id="input_stockArl" value="#{materielController.stockAlerte}" style="width:60px" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
 					

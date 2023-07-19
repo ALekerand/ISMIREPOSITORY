@@ -1,5 +1,5 @@
 package com.sati.model;
-// Generated 10 juil. 2023, 20:53:28 by Hibernate Tools 4.3.6.Final
+// Generated 19 juil. 2023, 00:48:45 by Hibernate Tools 4.3.6.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -36,10 +36,9 @@ public class Bonlivraison implements java.io.Serializable {
 	public Bonlivraison() {
 	}
 
-	public Bonlivraison(Boncommande boncommande, Personne personne, Date dateEnregistrementLivraison) {
+	public Bonlivraison(Boncommande boncommande, Personne personne) {
 		this.boncommande = boncommande;
 		this.personne = personne;
-		this.dateEnregistrementLivraison = dateEnregistrementLivraison;
 	}
 
 	public Bonlivraison(Boncommande boncommande, Personne personne, String codeBonLivraison, Date dateLivraison,
@@ -65,7 +64,7 @@ public class Bonlivraison implements java.io.Serializable {
 		this.idBonLivraison = idBonLivraison;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_BON_COMMANDE", nullable = false)
 	public Boncommande getBoncommande() {
 		return this.boncommande;
@@ -75,7 +74,7 @@ public class Bonlivraison implements java.io.Serializable {
 		this.boncommande = boncommande;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_ENTITE", nullable = false)
 	public Personne getPersonne() {
 		return this.personne;
@@ -105,7 +104,7 @@ public class Bonlivraison implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "DATE_ENREGISTREMENT_LIVRAISON", nullable = false, length = 19)
+	@Column(name = "DATE_ENREGISTREMENT_LIVRAISON", length = 19)
 	public Date getDateEnregistrementLivraison() {
 		return this.dateEnregistrementLivraison;
 	}

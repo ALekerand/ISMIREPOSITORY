@@ -1,5 +1,5 @@
 package com.sati.model;
-// Generated 10 juil. 2023, 20:53:28 by Hibernate Tools 4.3.6.Final
+// Generated 19 juil. 2023, 00:48:45 by Hibernate Tools 4.3.6.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -78,7 +78,7 @@ public class Personne implements java.io.Serializable {
 		this.idEntite = idEntite;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@PrimaryKeyJoinColumn
 	public Entite getEntite() {
 		return this.entite;
@@ -88,7 +88,7 @@ public class Personne implements java.io.Serializable {
 		this.entite = entite;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_FONCTION")
 	public Fonction getFonction() {
 		return this.fonction;
@@ -98,7 +98,7 @@ public class Personne implements java.io.Serializable {
 		this.fonction = fonction;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "USER_ID")
 	public UserAuthentication getUserAuthentication() {
 		return this.userAuthentication;

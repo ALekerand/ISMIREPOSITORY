@@ -37,6 +37,7 @@ import com.sati.service.Iservice;
 @Component
 @Scope("session")
 public class MaterielWithQRController {
+	
 	@Autowired
 	Iservice service;
 	private Materiel materiel = new Materiel();

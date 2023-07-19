@@ -40,6 +40,12 @@
 						<f:selectItems value="#{materielWithQRController.listMagasin}" var="tata" itemLabel="#{tata.nomMagasin}" itemValue="#{tata.idMagasin}"></f:selectItems>
 					</p:selectOneMenu>
 					
+					<p:outputLabel for="cb_marque" value="Marque:"/>
+						<p:selectOneMenu id="cb_marque" required="true" value="#{materielController.idMarque}">
+						<f:selectItem itemLabel="Selectionnez" itemValue="" />
+						<f:selectItems value="#{materielController.listMarque}" var="tata" itemLabel="#{tata.libelleMarque}" itemValue="#{tata.idMarque}"></f:selectItems>
+					</p:selectOneMenu>
+					
 					<p:outputLabel for="input_descrip" value="Description:"></p:outputLabel>
 					<p:inputTextarea id="input_descrip" value="#{materielWithQRController.materiel.descriptionMateriel}" cols="30"></p:inputTextarea>
 					

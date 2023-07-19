@@ -34,12 +34,26 @@ public class FonctionController {
 	@PostConstruct
 	public void initialiser() {
 		this.btnModifier.setDisabled(true);
+		this.fonction.setCodeFonction(genererCodeFonction());
+	}
+	
+	public String genererCodeFonction() {
+		String prefix="";
+		int nbEnregistrement = this.service.getObjects("Fonction").size();
+		if(nbEnregistrement < 10)
+			prefix = "FO00" ;
+		if ((nbEnregistrement >= 10) && (nbEnregistrement < 100)) 
+			prefix = "FO0" ;
+		if (nbEnregistrement > 100) 
+			prefix = "FO" ;
+		return new String(prefix+(nbEnregistrement+1));
 	}
 
 	public void enregistrer() {
 		this.service.addObject(this.fonction);
 		this.info("Eneregistrement effectué avec succès!");
 		this.annuler();
+		fonction.setCodeFonction(genererCodeFonction());
 		
 		
 	}
