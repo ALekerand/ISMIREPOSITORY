@@ -25,6 +25,13 @@ public class RequeteMateriel {
 		List list = getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Materiel.class).list();
 	return list;
 		}
+	
+	
+	public List listerMaterielAvecQRCODE() {
+		String query = "SELECT `materiel`.* FROM `materiel` WHERE `materiel`.`CODE_MATERIEL` LIKE 'MTQR%'";
+		List list = getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Materiel.class).list();
+	return list;
+		}
 
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;

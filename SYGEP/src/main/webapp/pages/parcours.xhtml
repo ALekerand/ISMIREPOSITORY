@@ -1,11 +1,99 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
-<h:head></h:head> 
-<body> 
+	<!-- 
+		Replace path to template, title, header and body
+		with actual data.
+	 -->
+	<ui:composition template="/templates/template.xhtml">
+			<ui:define name="body">
+				<h:form id="form">
+				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+				
+		<fieldset>
+ 	<legend>Information sur le MATERIELS</legend>		
 
-</body> 
+	   <table >
+			<tr>
+			<td style="width: 50%">
+		
+			<p:dataTable id="materiel" var="variable" value="#{parcoursController.listMateriel}"  selectionMode="single"  selection="#{parcoursController.selectedObject}" rowKey="#{variable.idMateriel}" paginator="true"  paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+			<f:facet name="header">LISTES DES MATERIELS</f:facet>
+			<p:ajax event="rowSelect" listener="#{parcoursController.selectionnerLigne}" update="form"></p:ajax>
+			
+			<p:column headerText="Code">
+			<h:outputText value="#{variable.codeMateriel}" style="width:10%"/>
+			</p:column>
+			
+			<p:column headerText="Materiel">
+			<h:outputText value="#{variable.nomMateriel}"  style="width:10%"/>
+			</p:column>
+			</p:dataTable >
+			
+			</td>
+			<td>
+			<h:panelGrid columns="4" cellpadding="10">
+			<p:outputLabel for="input_code" value="Code"></p:outputLabel>
+			<p:inputText id="input_code" value="#{parcoursController.materiel.codeMateriel}" readonly="true" ></p:inputText>	
+		
+			<p:outputLabel for="input_nom" value="Désignation"></p:outputLabel>
+			<p:inputText id="input_nom" value="#{parcoursController.materiel.nomMateriel}" readonly="true" ></p:inputText>	
+			
+			<p:outputLabel for="input_service" value="Posiion actuel:"></p:outputLabel>
+			<p:inputText id="input_service" value="#{parcoursController.parcours.service.nomService}" readonly="true" ></p:inputText>	
+		</h:panelGrid>
+		<hr/>
+		<h:panelGrid columns="4" cellpadding="10">
+			<h3>Nouvelle affectation</h3>
+		</h:panelGrid>
+		
+		<p:outputLabel for="cb_service" value="Service affcetation: "/>
+		<p:selectOneMenu id="cb_service" required="true" value="#{parcoursController.idEntite}">
+		<f:selectItem itemLabel="Selectionnez" itemValue=""/>
+		<f:selectItems value="#{parcoursController.listService}" var="tata" itemLabel="#{tata.nomService}" itemValue="#{tata.idEntite}"></f:selectItems>
+	</p:selectOneMenu>
+			</td>
+			</tr>
+		</table>
+	</fieldset>  
+	   <br/>
+	<p:toolbar >
+	<f:facet name="left">
+		<p:commandButton value="Enregistrer" action="#{parcoursController.affecterMareriel}" update="form" binding="#{parcoursController.btnEnregistrer}"><p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
+		<p:commandButton value="Annuler"  action="#{parcoursController.annuler}" process="@this" update="form" binding="#{parcoursController.btnAnnuler}"><p:confirm header="confirmation" message="voulez-vous annuler?"></p:confirm></p:commandButton>
+		<p:commandButton value="Modifier"  action="#{parcoursController.modifier}" update="form" binding="#{parcoursController.btnModifier}"><p:confirm header="confirmation" message="confirmez-vous la modification?"></p:confirm></p:commandButton>
+	</f:facet>
+		</p:toolbar>
+		<br/>
+		
+		
+		<p:dataTable  var="var" value="#{parcoursController.listMateriel}"  selectionMode="single" selection="#{parcoursController.selectedObject}" rowKey="#{var.idMateriel}">
+ 		<f:facet name="header"> LISTE DES PARCOURS DE MATERIEL </f:facet>
+     <p:ajax event="rowSelect" process="@this"  update="form" listener="#{parcoursController.selectionnerLigne}"></p:ajax>
+   		
+   		<p:column headerText="Code" style="width:30%">
+        <h:outputText value="#{var.codeMateriel}"/>
+        </p:column>
+        
+        <p:column headerText="Libellé">
+        <h:outputText value="#{var.nomMateriel}"/>
+        </p:column>
+        
+        </p:dataTable>
+        
+	   <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+	   <p:commandButton value="Oui" type="button"
+	   styleClass="ui-confirmdialog-yes" icon="ui-icon-check" >
+	   </p:commandButton>
+	   <p:commandButton value="Non" type="button"
+	   styleClass="ui-confirmdialog-no" icon="ui-icon-close" >
+	   </p:commandButton>
+	   </p:confirmDialog>
+				</h:form>
+			</ui:define>
+	</ui:composition>
 </html>
