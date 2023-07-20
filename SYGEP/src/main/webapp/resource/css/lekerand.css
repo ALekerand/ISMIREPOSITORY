@@ -26,3 +26,10 @@ panel{
     font-family: sans-serif;
 
 }
+
+
+.arrondie {
+-moz-border-radius:7px;
+-webkit-border-radius:7px;
+border-radius:7px;
+}
