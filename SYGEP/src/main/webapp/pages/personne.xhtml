@@ -72,7 +72,7 @@
 		</p:toolbar>
 		<br/>
 		
-	<p:dataTable  var="var" value="#{personneController.listTable}"  selectionMode="single" selection="#{personneController.selectedObject}" rowKey="#{var.idEntite}">
+	<p:dataTable  var="var" value="#{personneController.listTable}"  selectionMode="single" selection="#{personneController.selectedObject}" rowKey="#{var.idEntite}" paginator="true" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  
  <f:facet name="header"> LISTE DES UTILISATEURS </f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{personneController.selectionnerLigne}"></p:ajax>

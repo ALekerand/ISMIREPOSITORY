@@ -11,8 +11,7 @@
     <ui:composition template="/templates/template.xhtml">
 			<ui:define name="body">
 			<h:form id="form">
-			
-			<div style="font-size: 15px ;  padding-left: 20px; padding-right: 20px">
+
 			<fieldset>
 			<h:panelGrid columns="4" cellpadding="20" >
 			<p:outputLabel value="Numero_Bon_Commande "></p:outputLabel>
@@ -21,9 +20,8 @@
 			<p:commandButton value="Rechercher" actionListener="#{consulterBonCommandeController.ChargerLigneCommane}" update="form"></p:commandButton>
 			</h:panelGrid>
 			</fieldset>
-			</div>
-			<div style="font-size: 15px ; padding-top: 15px; padding-left: 35px; padding-right: 35px">
-			<p:dataTable id="table" var="variable" value="#{consulterBonCommandeController.listLigneCommande}" >
+
+			<p:dataTable id="table" var="variable" value="#{consulterBonCommandeController.listLigneCommande}"  paginator="true" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
 			
 			<p:column headerText="Materiel">
 			<h:outputText value="#{variable.materiel.nomMateriel}"  />
@@ -47,8 +45,6 @@
 			</h:outputText>
 			</p:column>
 			</p:dataTable>
-			</div>
-			
 				<br/>
 	<p:toolbar >
 		<f:facet name="left">

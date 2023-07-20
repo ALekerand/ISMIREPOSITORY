@@ -11,7 +11,6 @@
 		 
 	<ui:composition template="/templates/template.xhtml">
 			<ui:define name="body">
-			<div style="font-size: 15px ;  padding-left: 20px; padding-right: 20px">
 			<h:form id="form"  enctype="multipart/form-data">
 				<fieldset>
  			<legend>Enregistrement du bon de livraison</legend>
@@ -85,8 +84,7 @@
 	</p:toolbar>
 	<br/>
 				
-		<div style="font-size: 15px ; padding-top: 15px; padding-left: 35px; padding-right: 35px">
-<p:dataTable  var="var" value="#{bonLivraisonController.listObject}" selectionMode="single"  rowKey="#{var.idBonLivraison}">
+<p:dataTable  var="var" value="#{bonLivraisonController.listObject}" selectionMode="single"  rowKey="#{var.idBonLivraison}" paginator="true" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  
  <f:facet name="header">Liste des bons de livraison</f:facet>
  	
@@ -103,7 +101,7 @@
         </p:column>
         
         </p:dataTable>
-				</div>
+				
 				
 		  <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 	   <p:commandButton value="Oui" type="button"
@@ -116,7 +114,7 @@
 				
 				
 				</h:form>
-			</div>
+
 			</ui:define>
 	</ui:composition>
 

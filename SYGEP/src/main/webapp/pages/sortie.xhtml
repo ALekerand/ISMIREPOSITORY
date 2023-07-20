@@ -40,7 +40,7 @@
 		</p:toolbar>
 		<br/>
 		
-	<p:dataTable  var="var" value="#{sortieController.listeSortie}"  selectionMode="single" selection="#{sortieController.selectedObject}" rowKey="#{var.idSortie}">
+	<p:dataTable  var="var" value="#{sortieController.listeSortie}"  selectionMode="single" selection="#{sortieController.selectedObject}" rowKey="#{var.idSortie}" paginator="true" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  
  <f:facet name="header"> LISTE DES SORTIES </f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{sortieController.selectionnerLigne}"></p:ajax>

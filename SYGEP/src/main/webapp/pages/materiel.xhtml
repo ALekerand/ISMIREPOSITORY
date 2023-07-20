@@ -106,7 +106,7 @@
 </p:toolbar>
 		<br/>
 		
-<p:dataTable  var="var" value="#{materielController.listTable}"  selectionMode="single" selection="#{materielController.selectedObject}" rowKey="#{var.idMateriel}" scrollable="true" scrollHeight="250">
+<p:dataTable  var="var" value="#{materielController.listTable}"  selectionMode="single" selection="#{materielController.selectedObject}" rowKey="#{var.idMateriel}" paginator="true" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  
  <f:facet name="header">LISTE DES MATERIELS</f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{materielController.selectionnerLigne}"></p:ajax>

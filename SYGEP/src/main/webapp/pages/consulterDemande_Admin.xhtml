@@ -13,7 +13,6 @@
 				<h:form id="form">
 				
 				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
-				<div style="font-size: 15px ;  padding-left: 20px; padding-right: 20px">
 				<fieldset>
 				 <h:panelGrid columns="4" cellpadding="15"  style="margin: 15px;" >
 					<p:outputLabel for="cb_etat_demande" value="Etat Demande:"/>
@@ -24,9 +23,8 @@
 				<p:commandButton value="Rechercher" actionListener="#{consulterDemandeController_Admin.traiterDemande}" update="form"></p:commandButton>
 				</h:panelGrid>
 				</fieldset>
-				</div>
-					<div style="font-size: 15px ; padding-top: 15px; padding-left: 35px; padding-right: 35px">
-						<p:dataTable id="table" var="var" value="#{consulterDemandeController_Admin.listeDemande }"  >
+
+						<p:dataTable id="table" var="var" value="#{consulterDemandeController_Admin.listeDemande }"  paginator="true" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  							<f:facet name="header">LISTE DES DEMANDES</f:facet>
   								  <!--   <p:ajax event="rowSelect" process="@this"  update="form" listener="#{traitementDemandeController.selectionnerLigne}"></p:ajax>-->
    		
@@ -61,7 +59,6 @@
 											</p:commandButton>
 											</f:facet>
 										</p:toolbar>
-					 </div>
 				</h:form>
 			</ui:define>
 	</ui:composition>

@@ -11,7 +11,6 @@
 	 -->
 	<ui:composition template="/templates/template.xhtml">
 			<ui:define name="body">
-			<div style="font-size: 15px ;  padding-left: 20px; padding-right: 20px">
 				<h:form id="form">
 				
 				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
@@ -77,8 +76,8 @@
 		</f:facet>
 	</p:toolbar>
 	<br/>
-	<div style="font-size: 15px ; padding-top: 15px; padding-left: 35px; padding-right: 35px">
-<p:dataTable  var="var" value="#{entreeController.listEntree}"  rowKey="#{var.idProduit}">
+
+<p:dataTable  var="var" value="#{entreeController.listEntree}"  rowKey="#{var.idProduit}" paginator="true" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  
  <f:facet name="header">List des entrées</f:facet>
  	
@@ -110,7 +109,7 @@
         <h:outputText value="#{var.dateEnregistrement}"/>
         </p:column>
         </p:dataTable>
-				</div>
+			
 		  <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 	   <p:commandButton value="Oui" type="button"
 	   styleClass="ui-confirmdialog-yes" icon="ui-icon-check" >
@@ -120,7 +119,7 @@
 	   </p:commandButton>
 	   </p:confirmDialog>
 				</h:form>
-				</div>
+		
 			</ui:define>
 	</ui:composition>
 

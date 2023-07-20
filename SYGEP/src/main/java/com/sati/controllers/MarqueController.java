@@ -27,7 +27,7 @@ public class MarqueController {
 	
 	private CommandButton btnEnregistrer = new CommandButton();
 	private CommandButton btnModifier = new CommandButton();
-	private CommandButton btnSupprimer = new CommandButton();
+	private CommandButton btnAnnuler = new CommandButton();
 	
 	@PostConstruct
 	public void initialiser() {
@@ -102,14 +102,6 @@ public class MarqueController {
 		this.selectedMarque = selectedMarque;
 	}
 
-	public CommandButton getBtnSupprimer() {
-		return btnSupprimer;
-	}
-
-	public void setBtnSupprimer(CommandButton btnSupprimer) {
-		this.btnSupprimer = btnSupprimer;
-	}
-
 	public CommandButton getBtnEnregistrer() {
 		return btnEnregistrer;
 	}
@@ -124,6 +116,14 @@ public class MarqueController {
 
 	public void setBtnModifier(CommandButton btnModifier) {
 		this.btnModifier = btnModifier;
+	}
+
+	public CommandButton getBtnAnnuler() {
+		return btnAnnuler;
+	}
+
+	public void setBtnAnnuler(CommandButton btnAnnuler) {
+		this.btnAnnuler = btnAnnuler;
 	}
 
 }

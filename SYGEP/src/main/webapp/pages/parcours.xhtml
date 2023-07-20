@@ -71,7 +71,7 @@
 		<br/>
 		
 		
-		<p:dataTable  var="var" value="#{parcoursController.listMateriel}"  selectionMode="single" selection="#{parcoursController.selectedObject}" rowKey="#{var.idMateriel}">
+		<p:dataTable  var="var" value="#{parcoursController.listMateriel}"  selectionMode="single" selection="#{parcoursController.selectedObject}" rowKey="#{var.idMateriel}" paginator="true" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  		<f:facet name="header"> LISTE DES PARCOURS DE MATERIEL </f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{parcoursController.selectionnerLigne}"></p:ajax>
    		

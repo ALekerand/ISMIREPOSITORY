@@ -5,8 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"> 
 
-<h:head></h:head> 
-<body> 
+
 
 <!-- 
 		Replace path to template, title, header and body
@@ -18,8 +17,7 @@
 				<h:form id="form">
 				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
 				
-	<div style="font-size: 15px ; padding-top: 15px; padding-left: 35px; padding-right: 35px">
-	<p:dataTable  var="var" value="#{traitementDemandeController_Admin.listTable}"  selectionMode="single" selection="#{traitementDemandeController_Admin.selectedObject}" rowKey="#{var.idDemande}">
+	<p:dataTable  var="var" value="#{traitementDemandeController_Admin.listTable}"  selectionMode="single" selection="#{traitementDemandeController_Admin.selectedObject}" rowKey="#{var.idDemande}" paginator="true" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  <f:facet name="header">LISTE DES DEMANDES EN ATTENTE</f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{traitementDemandeController_Admin.selectionnerLigne}"></p:ajax>
    		
@@ -65,9 +63,9 @@
 	   </p:commandButton>
 	   
 	   </p:confirmDialog>
-				</div>
+				
 				</h:form>
 				</ui:define>
 				</ui:composition>
-</body> 
+
 </html>
