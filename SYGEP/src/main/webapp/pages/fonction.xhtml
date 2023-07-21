@@ -35,7 +35,7 @@
 		</p:toolbar>
 		<br/>
 		
-	<p:dataTable  var="var" value="#{fonctionController.listTable}"  selectionMode="single" selection="#{fonctionController.selectedObject}" rowKey="#{var.idFonction}" paginator="true" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+	<p:dataTable  var="var" value="#{fonctionController.listTable}"  selectionMode="single" selection="#{fonctionController.selectedObject}" rowKey="#{var.idFonction}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  <f:facet name="header"> LISTE DES FONCTIONS </f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{fonctionController.selectionnerLigne}"></p:ajax>
    		

@@ -21,7 +21,7 @@
 			</h:panelGrid>
 			</fieldset>
 
-			<p:dataTable id="table" var="variable" value="#{consulterBonCommandeController.listLigneCommande}"  paginator="true" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+			<p:dataTable id="table" var="variable" value="#{consulterBonCommandeController.listLigneCommande}"  paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
 			
 			<p:column headerText="Materiel">
 			<h:outputText value="#{variable.materiel.nomMateriel}"  />

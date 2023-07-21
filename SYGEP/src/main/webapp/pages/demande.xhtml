@@ -20,7 +20,7 @@
 	<tr>
 	<td >
 	
-	<p:dataTable  var="var" value="#{demandeController.listMateriel}"  selectionMode="single" selection="#{demandeController.selecteMareriel}" rowKey="#{var.idMateriel}" paginator="true" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+	<p:dataTable  var="var" value="#{demandeController.listMateriel}"  selectionMode="single" selection="#{demandeController.selecteMareriel}" rowKey="#{var.idMateriel}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  
  	<f:facet name="header"> LISTE DES MATERIELS </f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{demandeController.choisirLigneMateriel}"></p:ajax>

@@ -77,7 +77,7 @@
 	</p:toolbar>
 	<br/>
 
-<p:dataTable  var="var" value="#{entreeController.listEntree}"  rowKey="#{var.idProduit}" paginator="true" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+<p:dataTable  var="var" value="#{entreeController.listEntree}"  rowKey="#{var.idProduit}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  
  <f:facet name="header">List des entrées</f:facet>
  	

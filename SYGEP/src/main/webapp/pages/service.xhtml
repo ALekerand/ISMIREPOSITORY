@@ -42,7 +42,7 @@
 		</p:toolbar>
 		<br/>
 		
-	<p:dataTable  var="var" value="#{serviceController.listTable}"  selectionMode="single" selection="#{serviceController.selectedObject}" rowKey="#{var.idEntite}" paginator="true" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+	<p:dataTable  var="var" value="#{serviceController.listTable}"  selectionMode="single" selection="#{serviceController.selectedObject}" rowKey="#{var.idEntite}" paginator="true" paginatorPosition="bottom"  rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  
  <f:facet name="header">LISTE DES SERVICES</f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{serviceController.selectionnerLigne}"></p:ajax>

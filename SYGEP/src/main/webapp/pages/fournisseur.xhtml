@@ -45,7 +45,7 @@
 		</p:toolbar>
 		<br/>
 		
-	<p:dataTable  var="var" value="#{fournisseurController.listTable}"  selectionMode="single" selection="#{fournisseurController.selectedObject}" rowKey="#{var.idFournisseur}" paginator="true" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+	<p:dataTable  var="var" value="#{fournisseurController.listTable}"  selectionMode="single" selection="#{fournisseurController.selectedObject}" rowKey="#{var.idFournisseur}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  
  <f:facet name="header"> LISTE DES FOURNISSEURS </f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{fournisseurController.selectionnerLigne}"></p:ajax>

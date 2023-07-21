@@ -36,7 +36,7 @@
 		</p:toolbar>
 		<br/>
 		
-	<p:dataTable  var="var" value="#{caracteristiqueController.listTable}"  selectionMode="single" selection="#{caracteristiqueController.selectedObject}" rowKey="#{var.idCaracteristique}" paginator="true" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+	<p:dataTable  var="var" value="#{caracteristiqueController.listTable}"  selectionMode="single" selection="#{caracteristiqueController.selectedObject}" rowKey="#{var.idCaracteristique}" paginatorPosition="bottom" rows="5" paginator="true" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  
  <f:facet name="header"> LISTE DES CARACTERISTIQUES </f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{caracteristiqueController.selectionnerLigne}"></p:ajax>

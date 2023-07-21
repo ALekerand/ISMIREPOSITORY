@@ -19,9 +19,7 @@
  	
 		<td style="width:50%">
 			
-					
-		<div style="font-size: 15px ; padding-top: 15px; padding-left: 35px; padding-right: 35px">
-<p:dataTable id="table" widgetVar="dtbonCommande" var="var" value="#{bonLivraisonController.listeBonCommande}" selectionMode="single" selection="#{bonLivraisonController.selectedObjectBC}" rowKey="#{var.idBonCommande}">
+<p:dataTable id="table" widgetVar="dtbonCommande" var="var" value="#{bonLivraisonController.listeBonCommande}" selectionMode="single" selection="#{bonLivraisonController.selectedObjectBC}" rowKey="#{var.idBonCommande}" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
             <f:facet name="header">
                 <div class="bonCommande-table-header">
                     <span style="font-weight: bold">Bon commande</span>
@@ -43,7 +41,6 @@
         </p:column>
 
         </p:dataTable>
-				</div>
 			
 		</td>
 	 			

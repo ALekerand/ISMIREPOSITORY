@@ -24,7 +24,7 @@
 				</h:panelGrid>
 				</fieldset>
 
-						<p:dataTable id="table" var="var" value="#{consulterDemandeController_Admin.listeDemande }"  paginator="true" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+						<p:dataTable id="table" var="var" value="#{consulterDemandeController_Admin.listeDemande }"  paginator="true" paginatorPosition="bottom" rows="5"  rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  							<f:facet name="header">LISTE DES DEMANDES</f:facet>
   								  <!--   <p:ajax event="rowSelect" process="@this"  update="form" listener="#{traitementDemandeController.selectionnerLigne}"></p:ajax>-->
    		
