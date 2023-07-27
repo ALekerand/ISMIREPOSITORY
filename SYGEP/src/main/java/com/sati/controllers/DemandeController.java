@@ -51,14 +51,14 @@ public class DemandeController {
 	public void initialiser() {
 		this.btnModifier.setDisabled(true);
 		chagerUtilisateur();
-		this.demande.setCodeDemande(genererCode());
+		genererCode();
 	}
 	
 	public UserAuthentication chagerUtilisateur() {
 		return userAuthentication = requeteUtilisateur.recuperUser();
 	}
 	
-	public String genererCode() {
+	public void genererCode() {
 		String prefix="";
 		int nbEnregistrement = this.service.getObjects("Demande").size();
 		if(nbEnregistrement < 10)
@@ -67,7 +67,7 @@ public class DemandeController {
 			prefix = "CD0" ;
 		if (nbEnregistrement > 100) 
 			prefix = "CD" ;
-		return new String(prefix+(nbEnregistrement+1));
+		demande.setCodeDemande(prefix+(nbEnregistrement+1));
 	}
 
 	public void enregistrer() {
@@ -108,6 +108,7 @@ public class DemandeController {
 		demande.setDateDemande(null);
 		this.btnModifier.setDisabled(true);
 		this.btnEnregistrer.setDisabled(false);
+		genererCode();
 	}
 	
 	

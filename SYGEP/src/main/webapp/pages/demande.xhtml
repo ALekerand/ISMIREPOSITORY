@@ -24,7 +24,7 @@
  
  	<f:facet name="header"> LISTE DES MATERIELS </f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{demandeController.choisirLigneMateriel}"></p:ajax>
-   		
+   		<p:column selectionMode="single" style="width:16px;text-align:center"/>
    		<p:column headerText="Référence" style="width:30%">
         <h:outputText value="#{var.codeMateriel}"/>
         </p:column>

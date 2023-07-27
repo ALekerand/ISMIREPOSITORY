@@ -25,7 +25,7 @@
 			<f:facet name="header">LISTES DES MATERIELS</f:facet>
 			<p:ajax event="rowSelect" listener="#{parcoursController.selectionnerLigne}" update="form"></p:ajax>
 			
-			<p:column headerText="Code">
+			<p:column headerText="Code" style="width:10%">
 			<h:outputText value="#{variable.codeMateriel}" style="width:10%"/>
 			</p:column>
 			
@@ -34,28 +34,48 @@
 			</p:column>
 			</p:dataTable >
 			
-			</td>
-			<td>
-			<h:panelGrid columns="4" cellpadding="10">
+			</td >
+			<td style="width: 50%">
+			<h:panelGrid columns="4" cellpadding="8">
 			<p:outputLabel for="input_code" value="Code"></p:outputLabel>
 			<p:inputText id="input_code" value="#{parcoursController.materiel.codeMateriel}" readonly="true" ></p:inputText>	
 		
 			<p:outputLabel for="input_nom" value="Désignation"></p:outputLabel>
 			<p:inputText id="input_nom" value="#{parcoursController.materiel.nomMateriel}" readonly="true" ></p:inputText>	
 			
-			<p:outputLabel for="input_service" value="Posiion actuel:"></p:outputLabel>
+			<p:outputLabel for="input_service" value="Position actuel:"></p:outputLabel>
 			<p:inputText id="input_service" value="#{parcoursController.parcours.service.nomService}" readonly="true" ></p:inputText>	
+		
+			<p:outputLabel for="input_etat" value="Etat précédent"></p:outputLabel>
+			<p:inputText id="input_etat" value="#{parcoursController.etat.libEtat}" readonly="true" ></p:inputText>	
+			
 		</h:panelGrid>
 		<hr/>
-		<h:panelGrid columns="4" cellpadding="10">
 			<h3>Nouvelle affectation</h3>
-		</h:panelGrid>
 		
+		<h:panelGrid columns="4" cellpadding="5">
 		<p:outputLabel for="cb_service" value="Service affcetation: "/>
-		<p:selectOneMenu id="cb_service" required="true" value="#{parcoursController.idEntite}">
-		<f:selectItem itemLabel="Selectionnez" itemValue=""/>
-		<f:selectItems value="#{parcoursController.listService}" var="tata" itemLabel="#{tata.nomService}" itemValue="#{tata.idEntite}"></f:selectItems>
-	</p:selectOneMenu>
+			<p:selectOneMenu id="cb_service" required="true" value="#{parcoursController.idEntite}">
+			<f:selectItem itemLabel="Selectionnez" itemValue=""/>
+			<f:selectItems value="#{parcoursController.listService}" var="tata" itemLabel="#{tata.nomService}" itemValue="#{tata.idEntite}"></f:selectItems>
+		</p:selectOneMenu>
+		
+		<p:outputLabel for="cb_etat" value="Etat materiel: "/>
+			<p:selectOneMenu id="cb_etat" required="true" value="#{parcoursController.idEtat}">
+			<f:selectItem itemLabel="Selectionnez" itemValue=""/>
+			<f:selectItems value="#{parcoursController.listEtat}" var="tata" itemLabel="#{tata.libEtat}" itemValue="#{tata.idEtat}"></f:selectItems>
+		</p:selectOneMenu>
+		
+		<h:outputLabel for="date_affect" value="Date affectation"/>
+       	<p:calendar id="date_affect" value="#{parcoursController.dateAffectation}" 
+       	locale="fr" navigator="true" pattern="dd/MM/yyyy" required="true"/>
+       	
+       	<p:outputLabel></p:outputLabel>
+       	<p:outputLabel></p:outputLabel>
+       	
+       	<p:outputLabel for="input_com" value="Commentaire"></p:outputLabel>
+		<p:inputTextarea id="input_com" value="#{parcoursController.diagnostique.commentaire}" rows="5" cols="25" ></p:inputTextarea>
+		</h:panelGrid>
 			</td>
 			</tr>
 		</table>
@@ -63,7 +83,7 @@
 	   <br/>
 	<p:toolbar >
 	<f:facet name="left">
-		<p:commandButton value="Enregistrer" action="#{parcoursController.affecterMareriel}" update="form" binding="#{parcoursController.btnEnregistrer}"><p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
+		<p:commandButton value="Enregistrer" action="#{parcoursController.affecterMateriel}" update="form" binding="#{parcoursController.btnEnregistrer}"><p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
 		<p:commandButton value="Annuler"  action="#{parcoursController.annuler}" process="@this" update="form" binding="#{parcoursController.btnAnnuler}"><p:confirm header="confirmation" message="voulez-vous annuler?"></p:confirm></p:commandButton>
 		<p:commandButton value="Modifier"  action="#{parcoursController.modifier}" update="form" binding="#{parcoursController.btnModifier}"><p:confirm header="confirmation" message="confirmez-vous la modification?"></p:confirm></p:commandButton>
 	</f:facet>
@@ -71,19 +91,7 @@
 		<br/>
 		
 		
-		<p:dataTable  var="var" value="#{parcoursController.listMateriel}"  selectionMode="single" selection="#{parcoursController.selectedObject}" rowKey="#{var.idMateriel}" paginator="true" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
- 		<f:facet name="header"> LISTE DES PARCOURS DE MATERIEL </f:facet>
-     <p:ajax event="rowSelect" process="@this"  update="form" listener="#{parcoursController.selectionnerLigne}"></p:ajax>
-   		
-   		<p:column headerText="Code" style="width:30%">
-        <h:outputText value="#{var.codeMateriel}"/>
-        </p:column>
-        
-        <p:column headerText="Libellé">
-        <h:outputText value="#{var.nomMateriel}"/>
-        </p:column>
-        
-        </p:dataTable>
+		
         
 	   <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 	   <p:commandButton value="Oui" type="button"

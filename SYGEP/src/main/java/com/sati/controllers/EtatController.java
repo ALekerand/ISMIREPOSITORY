@@ -33,6 +33,19 @@ public class EtatController {
 	public void initialiser() {
 		this.btnModifier.setDisabled(true);
 	}
+	
+	
+	public void genererCode() {
+		String prefix="";
+		int nbEnregistrement = this.service.getObjects("Etat").size();
+		if(nbEnregistrement < 10)
+			prefix = "ET00" ;
+		if ((nbEnregistrement >= 10) && (nbEnregistrement < 100)) 
+			prefix = "ET0" ;
+		if (nbEnregistrement > 100) 
+			prefix = "ET" ;
+		this.etat.setCodeEtat(prefix+(nbEnregistrement+1));
+	}
 
 	public void enregistrer() {
 		this.service.addObject(this.etat);
@@ -62,7 +75,6 @@ public class EtatController {
 		this.etat.setLibEtat(null);
 		this.btnModifier.setDisabled(true);
 		this.btnEnregistrer.setDisabled(false);
-		info("Annulation effectuée avec succès!");
 	}
 
 	public void modifier() {
@@ -96,6 +108,7 @@ public class EtatController {
 	}
 
 	public Etat getEtat() {
+		genererCode();
 		return etat;
 	}
 
@@ -106,7 +119,6 @@ public class EtatController {
 	@SuppressWarnings("unchecked")
 	public List<Etat> getListEtat() {
 		 listEtat = service.getObjects("Etat");
-		 System.out.println("========Taille de la liste:"+listEtat.size());
 		return listEtat;
 	}
 

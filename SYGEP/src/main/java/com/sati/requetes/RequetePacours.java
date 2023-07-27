@@ -21,19 +21,12 @@ public class RequetePacours {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	public List listerParcoursParMateriel(int id_materiel) {
-		String query = "SELECT `parcours`.* FROM `parcours` WHERE `parcours`.`ID_MATERIEL` = '"+id_materiel+"' ORDER BY `parcours`.`DATE_PARCOURS` DESC";
-		List list = getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Parcours.class).list();
-	return list;
+	public Parcours recupererLastParcoursParMateriel(int id_materiel) {
+		String query = "SELECT `parcours`.* FROM `parcours` WHERE `parcours`.`ID_MATERIEL` = '"+id_materiel+"' ORDER BY `parcours`.`ID_PACOURS` DESC";
+		Parcours parcours = (Parcours) getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Parcours.class).list().get(0);
+	return parcours;
 		}
 	
-	
-	public List listerMaterielAvecQRCODE() {
-		String query = "SELECT `materiel`.* FROM `materiel` WHERE `materiel`.`CODE_MATERIEL` LIKE 'MTQR%'";
-		List list = getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Materiel.class).list();
-	return list;
-		}
-
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}

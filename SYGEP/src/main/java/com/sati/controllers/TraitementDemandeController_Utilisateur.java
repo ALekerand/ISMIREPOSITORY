@@ -110,6 +110,7 @@ public class TraitementDemandeController_Utilisateur {
 	@SuppressWarnings("unchecked")
 	public List<EtatDemande> getListEtatDemande() {
 		listEtatDemande = service.getObjects("EtatDemande");
+		System.out.println("Taille liste etat demande: "+listeDemande.size());
 		return listEtatDemande;
 	}
 
