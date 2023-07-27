@@ -17,10 +17,11 @@
 				<h:form id="form">
 				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
 				
-	<p:dataTable  var="var" value="#{traitementDemandeController_Admin.listTable}"  selectionMode="single" selection="#{traitementDemandeController_Admin.selectedObject}" rowKey="#{var.idDemande}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+	<p:dataTable  var="var" value="#{traitementDemandeController_Admin.listTable}"  selection="#{traitementDemandeController_Admin.selectedObject}" rowKey="#{var.idDemande}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  <f:facet name="header">LISTE DES DEMANDES EN ATTENTE</f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{traitementDemandeController_Admin.selectionnerLigne}"></p:ajax>
    		
+   		<p:column selectionMode="single" style="width:16px;text-align:center"/>
    		<p:column headerText="Demandeur">
         <h:outputText value="#{var.entite.personne.nomPersonne} "/>
         </p:column>
