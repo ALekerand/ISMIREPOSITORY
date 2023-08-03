@@ -23,6 +23,7 @@ public class TraitementDemandeController_Admin {
 	Iservice service;
 	@Autowired
 	RequeteDemande requeteDemande;
+	
 	private Demande demande = new Demande();
 	private List<Demande> listTable = new ArrayList<Demande>();
 	private List<Demande> listeDemande = new ArrayList<Demande>();

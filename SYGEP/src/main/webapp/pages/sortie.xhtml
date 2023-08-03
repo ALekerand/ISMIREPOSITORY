@@ -23,10 +23,10 @@
 	<p:inputText id="input_code" value="#{sortieController.sortie.codeSortie}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
 
 <p:outputLabel for="cb_Demande" value="Demande:"/>
-		<p:selectOneMenu id="cb_Demande"  value="#{sortieController.idDemande}">
+<p:selectOneMenu id="cb_Demande"  value="#{sortieController.idDemande}">
 		<f:selectItem itemLabel="Selectionnez" itemValue=""/>
 		<f:selectItems value="#{sortieController.listDemande}" var="tata" itemLabel="#{tata.codeDemande}" itemValue="#{tata.idDemande}"></f:selectItems>
-	</p:selectOneMenu>
+</p:selectOneMenu>
 </h:panelGrid>
 
 </fieldset>
