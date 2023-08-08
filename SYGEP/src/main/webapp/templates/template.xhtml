@@ -23,7 +23,6 @@
 <p:layoutUnit position="west" size="250" header="Menu" collapsible="true">
 
 	<h:form>
-	
 		<p:panelMenu style="width:300px">
             <p:submenu label="Paramétrage">
               <p:menuitem value="Enregistrer les familles" outcome="/pages/famille.xhtml" icon="pi pi-upload"/>
@@ -43,28 +42,29 @@
             
             <p:submenu label="Demande">
             	<p:menuitem value="Emmettre demande" outcome="/pages/demande.xhtml" icon="pi pi-upload"/>
-            	<p:menuitem value="Consulter demande" outcome="/pages/consulterDemande_Utilisateur.xhtml" icon="pi pi-upload"></p:menuitem>
+            	<p:menuitem value="Mes demandes" outcome="/pages/cunsulteur_demande_user.xhtml" icon="pi pi-upload"/>
+            	<p:menuitem value="Reception de materiel" outcome="/pages/afficherDemande_validees_Utilisateur.xhtml" icon="pi pi-upload"/>
+            	
             </p:submenu>
             
             <p:submenu label="ACTIVITES">
                 <p:menuitem value="Approvisionnent" outcome="/pages/entree.xhtml" icon="pi pi-upload"/>
+                <p:menuitem value="Affecter matériel" outcome="/pages/parcours.xhtml" icon="pi pi-upload"/>
                 <p:menuitem value="Sortie" outcome="/pages/sortie.xhtml" icon="pi pi-upload"/>
                	<p:menuitem value="Autoriser sortie" outcome="/pages/autoriserSortie.xhtml" icon="pi pi-upload"/>
-               	<p:menuitem value="Affecter matériel" outcome="/pages/parcours.xhtml" icon="pi pi-upload"/>
+               	<p:menuitem value="Traiter demande" outcome="/pages/traiterDemande.xhtml" icon="pi pi-upload"/>
             </p:submenu>
             
             <p:submenu label="Editions">
-            <p:menuitem value="Créer bon de commande" outcome="/pages/bonCommande.xhtml" icon="pi pi-upload"/>
-            <p:menuitem value="Créer bon de livraison" outcome="/pages/bonLivraison.xhtml" icon="pi pi-upload"/>
+            	<p:menuitem value="Créer bon de commande" outcome="/pages/bonCommande.xhtml" icon="pi pi-upload"/>
+            	<p:menuitem value="Créer bon de livraison" outcome="/pages/bonLivraison.xhtml" icon="pi pi-upload"/>
             </p:submenu>
             
             <p:submenu label="Consulter">
    			<p:menuitem value="Bon Commande" outcome="/pages/consulterBonCommande.xhtml" icon="pi pi-upload"/>
-   			<p:menuitem value="Traiter demande" outcome="/pages/traiterDemande.xhtml" icon="pi pi-upload"/>
-   			<p:menuitem value="Demandes utilisateur" outcome="/pages/cunsulteur_demande_user.xhtml" icon="pi pi-upload"/>
-   			<p:menuitem value="Demande_Admin" outcome="/pages/consulterDemande_Admin.xhtml" icon="pi pi-upload"></p:menuitem>
+   			<p:menuitem value="Demande_Admin" outcome="/pages/consulterDemande_Admin.xhtml" icon="pi pi-upload"/>
    			</p:submenu>
-            
+   			
             <p:submenu label="Gestion des Utilisateurs">
    				<p:menuitem value="Création d'utilisateur" outcome="/pages/personne.xhtml" icon="pi pi-upload"/>
             </p:submenu>

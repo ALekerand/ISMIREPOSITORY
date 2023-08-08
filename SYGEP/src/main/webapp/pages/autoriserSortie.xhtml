@@ -11,48 +11,49 @@
 			<ui:define name="body">
 		<h:form id="form">
 		<p:messages autoUpdate="true" closable="true" showDetail="false"/>
-						<p:dataTable  var="var" value="#{autoriserSortieController.listObject}" selectionMode="single" selection="#{autoriserSortieController.selectedDemande}" rowKey="#{var.idDemande}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
- 							<f:facet name="header">LISTE DES DEMANDES</f:facet>
-  							 <p:ajax event="rowSelect" process="@this"   listener="#{autoriserSortieController.selectionnerLigne}"></p:ajax>
-   		
-   										<p:column headerText="Demandeur">
-     								    <h:outputText value="#{var.entite.personne.nomPersonne} "/>
-    								    </p:column>
-   		
-   										<p:column headerText="Code" >
-      								    <h:outputText value="#{var.codeDemande}"/>
-     								    </p:column>
-        
-      								    <p:column headerText="Materiel">
-      								    <h:outputText value="#{var.materiel.nomMateriel}"/>
-     								    </p:column>
-        
-       								   <p:column headerText="Quantité">
-                                       <h:outputText value="#{var.qteDemande}"/>
-                                       </p:column>
-                                       
-                                         <p:column headerText="Etat Demande">
-                                       <h:outputText value="#{var.etatDemande.libEtatDemande}"/>
-                                       </p:column>
-                                       
-                                        <p:column headerText="Date Demande">
-                                       <h:outputText value="#{var.dateDemande}"/>
-                                       </p:column>
-                                       
-                                        <p:column headerText="Etat Reception">
-                                       <h:outputText value="#{var.etatReception}"/>
-                                       </p:column>
-                                         
-                                        <p:column headerText="Date Etat Reception">
-                                       <h:outputText value="#{var.dateEtatReception}"/>
-                                       </p:column>
-                                         <p:column headerText="Autoriser sortie">
-                                     <p:commandButton value="Autoriser sortie" actionListener="#{autoriserSortieController.selectionnerLigne}"
-                              			 oncomplete="PF('sortieDemandeDialog').show()">
-                                    <!--  <p:resetInput target=":dialogs"></p:resetInput> -->
-                                     </p:commandButton>	
-                                       </p:column>
-                       </p:dataTable>
+<p:dataTable  var="var" value="#{autoriserSortieController.listObject}" selectionMode="single" selection="#{autoriserSortieController.selectedDemande}" rowKey="#{var.idDemande}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+		<f:facet name="header">LISTE DES DEMANDES</f:facet>
+			 <p:ajax event="rowSelect" process="@this"   listener="#{autoriserSortieController.selectionnerLigne}"></p:ajax>
+
+	<p:column selectionMode="single" style="width:16px;text-align:center"/>
+	<p:column headerText="Demandeur">
+   		 <h:outputText value="#{var.entite.personne.nomPersonne} "/>
+  	 </p:column>
+
+ 	<p:column headerText="Code" >
+		    <h:outputText value="#{var.codeDemande}"/>
+	    	</p:column>
+
+		    <p:column headerText="Materiel">
+		    <h:outputText value="#{var.materiel.nomMateriel}"/>
+	    	</p:column>
+
+			   <p:column headerText="Quantité">
+	            <h:outputText value="#{var.qteDemande}"/>
+	            </p:column>
+               
+                <p:column headerText="Etat Demande">
+               <h:outputText value="#{var.etatDemande.libEtatDemande}"/>
+               </p:column>
+               
+                <p:column headerText="Date Demande">
+               <h:outputText value="#{var.dateDemande}"/>
+               </p:column>
+               
+                <p:column headerText="Etat Reception">
+               <h:outputText value="#{var.etatReception}"/>
+               </p:column>
+                 
+                <p:column headerText="Date Etat Reception">
+               <h:outputText value="#{var.dateEtatReception}"/>
+               </p:column>
+                 <p:column headerText="Autoriser sortie">
+             <p:commandButton value="Autoriser sortie" actionListener="#{autoriserSortieController.selectionnerLigne}"
+      			 oncomplete="PF('sortieDemandeDialog').show()">
+            <!--  <p:resetInput target=":dialogs"></p:resetInput> -->
+           </p:commandButton>	
+             </p:column>
+          </p:dataTable>
 
 			
         <p:dialog header="validation de sortie" showEffect="fade"  widgetVar="sortieDemandeDialog"

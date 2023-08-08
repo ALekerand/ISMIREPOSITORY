@@ -9,12 +9,13 @@
 			<ui:define name="body">
 				<h:form id="form">
 						<p:dataTable id="table" var="var" value="#{afficherDemandeAccepterController.listDemandeAccepter }"  selectionMode="single" selection="#{afficherDemandeAccepterController.selectedObject}" rowKey="{#{var.idDemande}"  paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
- 							<f:facet name="header">LISTE DES DEMANDES ACCEPTEES</f:facet>
+ 							<f:facet name="header">DEMANDES EN ENTENTE DE RECEPTION</f:facet>
   								   <p:ajax event="rowSelect" process="@this"  update="form" listener="#{afficherDemandeAccepterController.selectionnerLigne}"></p:ajax>
-   		
-   										<p:column headerText="Demandeur">
-     								    <h:outputText value="#{var.entite.personne.nomPersonne} "/>
-    								    </p:column>
+   							
+   							<p:column selectionMode="single" style="width:16px;text-align:center"/>
+							<p:column headerText="Demandeur">
+  							<h:outputText value="#{var.entite.personne.nomPersonne} "/>
+ 							</p:column>
    		
    										<p:column headerText="Code" >
       								    <h:outputText value="#{var.codeDemande}"/>
