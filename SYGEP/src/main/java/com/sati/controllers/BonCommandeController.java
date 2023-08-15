@@ -117,9 +117,8 @@ public class BonCommandeController {
 	}
 
 	public void annuler() {
-		setListObject(null);
+		listObject.clear();
 		bonCommande.setCommentaireBonCommande(null);	
-		
 	}
 	
 
