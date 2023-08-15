@@ -51,7 +51,7 @@ public class BonLivraisonController {
 	private List<Boncommande> listBonCommande = new ArrayList<Boncommande>();
 	private Boncommande selectedObjectBC = new Boncommande();
 	private int idBonCommande;
-	private String chemin = "C:\\Users\\HP\\Desktop\\fichierJSF\\";
+	private String chemin = "C:\\SYGEP\\BON_LIVRAISON";
 	private UploadedFile fichier;
 	
 	

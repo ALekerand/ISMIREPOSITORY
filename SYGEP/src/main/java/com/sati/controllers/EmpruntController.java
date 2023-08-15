@@ -9,8 +9,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.component.commandbutton.CommandButton;
-import org.primefaces.component.inputtext.InputText;
-import org.primefaces.component.radiobutton.RadioButton;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -29,7 +27,7 @@ import com.sati.service.Iservice;
 
 @Component
 @Scope("session")
-public class DemandeController {
+public class EmpruntController {
 	@Autowired
 	Iservice service;
 	@Autowired
@@ -43,21 +41,15 @@ public class DemandeController {
 	private Demande selectedObject = new Demande();
 	private Materiel selecteMareriel = new Materiel();
 	private int idMatereiel;
-	private String value_emprunt;
-	//private Date input_date_retour;
 	
 //	Gestion des bouttons de commande
 	private CommandButton btnEnregistrer = new CommandButton();
 	private CommandButton btnAnnuler = new CommandButton();
 	private CommandButton btnModifier = new CommandButton();
-	private InputText input_date_retour = new InputText();
-	private RadioButton radio_emptunt = new RadioButton();
 
 	@PostConstruct
 	public void initialiser() {
 		this.btnModifier.setDisabled(true);
-		this.input_date_retour.setDisabled(true);
-		this.radio_emptunt.setItemIndex(0);
 		chagerUtilisateur();
 		genererCode();
 	}
@@ -76,15 +68,6 @@ public class DemandeController {
 		if (nbEnregistrement > 100) 
 			prefix = "CD" ;
 		demande.setCodeDemande(prefix+(nbEnregistrement+1));
-	}
-	
-	
-	public void gererDateRetour() {
-		if (this.radio_emptunt.getItemIndex()== 0){
-			this.input_date_retour.setDisabled(true);
-		}else {
-			this.input_date_retour.setDisabled(false);
-		}
 	}
 
 	public void enregistrer() {
@@ -231,27 +214,8 @@ public class DemandeController {
 		this.selecteMareriel = selecteMareriel;
 	}
 
-	public String getValue_emprunt() {
-		return value_emprunt;
-	}
 
-	public void setValue_emprunt(String value_emprunt) {
-		this.value_emprunt = value_emprunt;
-	}
+	
 
-	public InputText getInput_date_retour() {
-		return input_date_retour;
-	}
-
-	public void setInput_date_retour(InputText input_date_retour) {
-		this.input_date_retour = input_date_retour;
-	}
-
-	public RadioButton getRadio_emptunt() {
-		return radio_emptunt;
-	}
-
-	public void setRadio_emptunt(RadioButton radio_emptunt) {
-		this.radio_emptunt = radio_emptunt;
-	}
+	
 }

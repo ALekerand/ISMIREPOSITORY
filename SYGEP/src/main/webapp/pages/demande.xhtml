@@ -22,10 +22,10 @@
 	
 	<p:dataTable  var="var" value="#{demandeController.listMateriel}"  selectionMode="single" selection="#{demandeController.selecteMareriel}" rowKey="#{var.idMateriel}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  
- 	<f:facet name="header"> LISTE DES MATERIELS </f:facet>
+ 	<f:facet name="header"> MATERIELS </f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{demandeController.choisirLigneMateriel}"></p:ajax>
    		<p:column selectionMode="single" style="width:16px;text-align:center"/>
-   		<p:column headerText="Référence" style="width:30%">
+   		<p:column headerText="Réf" style="width:30%">
         <h:outputText value="#{var.codeMateriel}"/>
         </p:column>
         
@@ -38,16 +38,25 @@
 		</td>
 		<td>	
 	
-	<h:panelGrid columns="4" cellpadding="5">
+	<h:panelGrid columns="4" cellpadding="8">
 	<p:outputLabel for="input_code" value="Code:"></p:outputLabel>
 	<p:inputText id="input_code" value="#{demandeController.demande.codeDemande}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
 
 	<p:outputLabel for="input_qte" value="Quantité:"></p:outputLabel>
 	<p:inputText id="input_qte" value="#{demandeController.demande.qteDemande}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>
 
+	<p:outputLabel for="radio_emprunt" value="Emprunt:"></p:outputLabel>
+	<p:selectOneRadio id="radio_emprunt" value="#{demandeController.value_emprunt}" binding="#{demandeController.radio_emptunt}">
+		     
+	     <f:selectItem itemLabel="Non" itemValue="non"/>
+	     <f:selectItem itemLabel="Oui" itemValue="oui"/>
+     </p:selectOneRadio>
+	
+	<p:outputLabel value="Date retour"></p:outputLabel>
+	<p:calendar id="date_affect" value="#{demandeController.input_date_retour}" binding="#{demandeController.input_date_retour}" locale="fr" navigator="true" pattern="dd/MM/yyyy"/>
+     
 	<p:outputLabel for="input_motif" value="Motif:"></p:outputLabel>
 	<p:inputTextarea id="input_motif" value="#{demandeController.demande.motifDemande}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputTextarea>
-
 	</h:panelGrid>
 	
 	</td>

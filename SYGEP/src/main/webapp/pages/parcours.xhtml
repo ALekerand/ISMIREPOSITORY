@@ -21,7 +21,7 @@
 			<tr>
 			<td style="width: 50%">
 		
-			<p:dataTable id="materiel" var="variable" value="#{parcoursController.listMateriel}"   selection="#{parcoursController.selectedObject}" rowKey="#{variable.idMateriel}" paginator="true"  paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+			<p:dataTable id="materiel" var="variable" value="#{parcoursController.listMateriel}" selectionMode="single"  selection="#{parcoursController.selectedObject}" rowKey="#{variable.idMateriel}" paginator="true"  paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
 			<f:facet name="header">LISTES DES MATERIELS</f:facet>
 			<p:ajax event="rowSelect" listener="#{parcoursController.selectionnerLigne}" update="form"></p:ajax>
 			

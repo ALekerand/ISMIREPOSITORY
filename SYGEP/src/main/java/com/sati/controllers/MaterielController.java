@@ -128,6 +128,7 @@ public class MaterielController {
 		MatrixToImageWriter.writeToPath(matrix, "jpg", Paths.get(path));
 	}
 	
+	
 	public void chargerNature() {
 		listNature = requeteNature.listerNatureParFamille(idFamille);
 		this.cbNature.setDisabled(false);

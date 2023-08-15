@@ -64,7 +64,7 @@
                <p:inputText value="#{autoriserSortieController.sortie.codeSortie}" readonly="true"></p:inputText>
  
               <p:outputLabel value="date enregistrement"></p:outputLabel>
-               <p:datePicker id="date" value="#{autoriserSortieController.dateEnregSortie}" pattern="dd/MM/yyyy" locale="fr" navigator="true"></p:datePicker>
+              <p:datePicker id="date" value="#{autoriserSortieController.dateEnregSortie}" pattern="dd/MM/yyyy" locale="fr" navigator="true"></p:datePicker>
              
             <f:facet name="footer">
                 <p:commandButton value="Enregistrer"  action="#{autoriserSortieController.enregistrer}" binding="#{autoriserSortieController.btnEnregistrer}" update="form">
