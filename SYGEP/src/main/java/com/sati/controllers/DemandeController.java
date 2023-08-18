@@ -1,6 +1,7 @@
 package com.sati.controllers;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -9,8 +10,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.component.commandbutton.CommandButton;
-import org.primefaces.component.inputtext.InputText;
 import org.primefaces.component.radiobutton.RadioButton;
+import org.primefaces.component.selectoneradio.SelectOneRadio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -50,14 +51,14 @@ public class DemandeController {
 	private CommandButton btnEnregistrer = new CommandButton();
 	private CommandButton btnAnnuler = new CommandButton();
 	private CommandButton btnModifier = new CommandButton();
-	private InputText input_date_retour = new InputText();
-	private RadioButton radio_emptunt = new RadioButton();
+	private org.primefaces.component.calendar.Calendar input_date_retour = new org.primefaces.component.calendar.Calendar();
+	private SelectOneRadio radio_emptunt = new SelectOneRadio();
 
 	@PostConstruct
 	public void initialiser() {
 		this.btnModifier.setDisabled(true);
 		this.input_date_retour.setDisabled(true);
-		this.radio_emptunt.setItemIndex(0);
+		this.radio_emptunt.setValue("non");
 		chagerUtilisateur();
 		genererCode();
 	}
@@ -80,7 +81,8 @@ public class DemandeController {
 	
 	
 	public void gererDateRetour() {
-		if (this.radio_emptunt.getItemIndex()== 0){
+		System.out.println("===================  Méthode appelée");
+		if (this.radio_emptunt.getValue()=="oui"){
 			this.input_date_retour.setDisabled(true);
 		}else {
 			this.input_date_retour.setDisabled(false);
@@ -239,19 +241,22 @@ public class DemandeController {
 		this.value_emprunt = value_emprunt;
 	}
 
-	public InputText getInput_date_retour() {
-		return input_date_retour;
-	}
+	
 
-	public void setInput_date_retour(InputText input_date_retour) {
-		this.input_date_retour = input_date_retour;
-	}
-
-	public RadioButton getRadio_emptunt() {
+	public SelectOneRadio getRadio_emptunt() {
 		return radio_emptunt;
 	}
 
-	public void setRadio_emptunt(RadioButton radio_emptunt) {
+	public void setRadio_emptunt(SelectOneRadio radio_emptunt) {
 		this.radio_emptunt = radio_emptunt;
 	}
+
+	public org.primefaces.component.calendar.Calendar getInput_date_retour() {
+		return input_date_retour;
+	}
+
+	public void setInput_date_retour(org.primefaces.component.calendar.Calendar input_date_retour) {
+		this.input_date_retour = input_date_retour;
+	}
+
 }
