@@ -5,28 +5,21 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"> 
 
-<h:head></h:head> 
-<body> 
-
 		 
 	<ui:composition template="/templates/template.xhtml">
 			<ui:define name="body">
 			<h:form id="form"  enctype="multipart/form-data">
+			<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+				
 				<fieldset>
  			<legend>Enregistrement du bon de livraison</legend>
  			<table >
 	<tr >
  	
-		<td style="width:50%">
+		<td >
 			
-<p:dataTable id="table" widgetVar="dtbonCommande" var="var" value="#{bonLivraisonController.listeBonCommande}" selectionMode="single" selection="#{bonLivraisonController.selectedObjectBC}" rowKey="#{var.idBonCommande}" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
-            <f:facet name="header">
-                <div class="bonCommande-table-header">
-                    <span style="font-weight: bold">Bon commande</span>
-                    <span class="filter-container ui-input-icon-left"> <i class="pi pi-search"></i>
-                        <p:inputText id="globalFilter" onkeyup="PF('dtbonCommande').filter()" placeholder="Rechercher" />
-                    </span>
-                </div>
+<p:dataTable  var="var" value="#{bonLivraisonController.listeBonCommande}" selectionMode="single" selection="#{bonLivraisonController.selectedObjectBC}" rowKey="#{var.idBonCommande}" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+            <f:facet name="header">Bon de commande
             </f:facet>
  <p:ajax event="rowSelect" process="@this"  update="form" listener="#{bonLivraisonController.selectionnerLigne}"></p:ajax>
 
@@ -54,7 +47,6 @@
                                             actionListener="#{bonLivraisonController.upload}"  />
             
                </h:panelGrid>
-				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
 				
 	<h:panelGrid columns="2" cellpadding="5">
 					<p:outputLabel  value="Code:" ></p:outputLabel>
@@ -74,27 +66,27 @@
 	<br/>
 	<p:toolbar >
 		<f:facet name="left">
-			<p:commandButton value="Enregistrer"  actionListener="#{bonLivraisonController.Enregistrer}" update="form" binding="#{bonLivraisonController.btnEnregistrer}"><p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
+			<p:commandButton value="Enregistrer"  action="#{bonLivraisonController.Enregistrer}" update="form" binding="#{bonLivraisonController.btnEnregistrer}"><p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
 			<p:commandButton value="Annuler"  action="#{bonLivraisonController.annuler}" update="form" binding="#{bonLivraisonController.btnAnnuler}"><p:confirm header="confirmation" message="voulez-vous annuler?"></p:confirm></p:commandButton>
 			<p:commandButton value="Modifier"  action="#{bonLivraisonController.modifier}" update="form" binding="#{bonLivraisonController.btnModifier}"><p:confirm header="confirmation" message="confirmez-vous la modification?"></p:confirm></p:commandButton>
 		</f:facet>
 	</p:toolbar>
 	<br/>
 				
-<p:dataTable  var="var" value="#{bonLivraisonController.listObject}" selectionMode="single"  rowKey="#{var.idBonLivraison}" paginator="true" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+<p:dataTable  var="variable" value="#{bonLivraisonController.listObject}" selectionMode="single" paginatorPosition="bottom" rowKey="#{variable.idBonLivraison}" paginator="true" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  
  <f:facet name="header">Liste des bons de livraison</f:facet>
  	
  		<p:column headerText="Personne" >
-        <h:outputText value="#{var.personne.nomPersonne}"/>
+        <h:outputText value="#{variable.personne.nomPersonne}"/>
         </p:column>
         
    		<p:column headerText="Code" >
-        <h:outputText value="#{var.codeBonLivraison}"/>
+        <h:outputText value="#{variable.codeBonLivraison}"/>
         </p:column>
         
         <p:column headerText="Date livraison">
-        <h:outputText value="#{var.dateLivraison}"/>
+        <h:outputText value="#{variable.dateLivraison}"/>
         </p:column>
         
         </p:dataTable>
@@ -115,5 +107,4 @@
 			</ui:define>
 	</ui:composition>
 
-</body> 
 </html>

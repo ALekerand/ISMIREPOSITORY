@@ -32,6 +32,7 @@ public class EtatController {
 	@PostConstruct
 	public void initialiser() {
 		this.btnModifier.setDisabled(true);
+		genererCode();
 	}
 	
 	

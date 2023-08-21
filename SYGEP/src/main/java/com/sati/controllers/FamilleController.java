@@ -74,7 +74,7 @@ public class FamilleController {
 		this.famille.setLibFamille(null);
 		this.btnModifier.setDisabled(true);
 		this.btnEnregistrer.setDisabled(false);
-		info("Annulation effectuée avec succès!");
+		
 	}
 
 	public void modifier() {

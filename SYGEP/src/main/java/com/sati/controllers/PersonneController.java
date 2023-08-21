@@ -128,7 +128,7 @@ public class PersonneController {
 		this.userAuthentication.setPassword(null);
 		
 		setIdFonction(0);
-		info("Annulation effectuée avec succès!");
+		
 	}
 
 	public void modifier() {

@@ -81,7 +81,6 @@ public class FournisseurController {
 		this.fournisseur.setTelephoneFournisseur(null);
 		this.btnModifier.setDisabled(true);
 		this.btnEnregistrer.setDisabled(false);
-		info("Annulation effectuée avec succès!");
 	}
 
 	public void modifier() {

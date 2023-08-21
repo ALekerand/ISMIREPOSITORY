@@ -194,7 +194,6 @@ public class MaterielWithQRController {
 		this.setIdMagasin(0);
 		this.setIdNature(0);
 		//this.rdbFondible.setItemIndex(2);
-		//info("Annulation effectuée avec succès!"); 
 		
 		
 		// vider la liste des valeurs des ^caracteristiques

@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.System.Logger;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,10 +13,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.Part;
 
 import org.primefaces.component.commandbutton.CommandButton;
-import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -65,11 +62,7 @@ public class BonLivraisonController {
 	public void initialiser() {
 		this.btnModifier.setDisabled(true);
 		chagerUtilisateur();
-		genererCodeBonlivraison();
-	}
-	
-	public UserAuthentication chagerUtilisateur() {
-		return userAuthentication = requeteUtilisateur.recuperUser();
+		bonlivraison.setCodeBonLivraison(genererCodeBonlivraison());
 	}
 	
 	public String genererCodeBonlivraison() {
@@ -84,6 +77,10 @@ public class BonLivraisonController {
 		return new String(prefix+(nbEnregistrement+1));
 	}
 	
+
+	public UserAuthentication chagerUtilisateur() {
+		return userAuthentication = requeteUtilisateur.recuperUser();
+	}
 	public void upload() {
 		String extValidate;
 		if(getFichier() != null) {
@@ -120,7 +117,7 @@ public class BonLivraisonController {
 	
 	public void Enregistrer() {
 		System.out.println("Lancement de la méthode!");
-		bonlivraison.setCodeBonLivraison(genererCodeBonlivraison());
+		
 		bonlivraison.setDateEnregistrementLivraison(new Date());
 		SimpleDateFormat formateurDate = new SimpleDateFormat("yyyy-MM-dd");
 		String date = formateurDate.format(dateLivraison);
@@ -129,8 +126,13 @@ public class BonLivraisonController {
 		bonlivraison.setPersonne(userAuthentication.getPersonne());
 		bonlivraison.setBoncommande(bonCommande);
 		this.service.addObject(bonlivraison);
+		
 		bonCommande.setBonlivraison(bonlivraison);
 		this.service.updateObject(bonCommande);
+		this.info("Enregistrement effectué avec succès!");
+		annuler();
+		bonlivraison.setCodeBonLivraison(genererCodeBonlivraison());
+		
 	}
 	
 	public void selectionnerLigne() {
@@ -141,6 +143,15 @@ public class BonLivraisonController {
 				new FacesMessage(FacesMessage.SEVERITY_INFO, monMessage ,null ));
 	}
 	
+	public void annuler() {
+		setDateLivraison(null);
+		setSelectedObjectBC(null);
+	}
+	
+	public void modifier() {
+		this.service.updateObject(bonlivraison);
+		this.info("Modification effectuée avec succès!");
+	}
 	@SuppressWarnings("unchecked")
 	public List<Bonlivraison> getListObject() {
 		listObject = service.getObjects("Bonlivraison");

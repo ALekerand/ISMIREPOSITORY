@@ -36,8 +36,21 @@ public class NatureController {
 	@PostConstruct
 	public void initialiser() {
 		this.btnModifier.setDisabled(true);
+		genererCode();
 	}
 
+	public void genererCode() {
+		String prefix="";
+		int nbEnregistrement = this.service.getObjects("Nature").size();
+		if(nbEnregistrement < 10)
+			prefix = "NA00" ;
+		if ((nbEnregistrement >= 10) && (nbEnregistrement < 100)) 
+			prefix = "NA0" ;
+		if (nbEnregistrement > 100) 
+			prefix = "NA" ;
+		this.nature.setCodeNature(prefix+(nbEnregistrement+1));
+	}
+	
 	public void enregistrer() {
 		nature.setFamille(famille);
 		this.service.addObject(nature);
@@ -50,19 +63,6 @@ public class NatureController {
 		famille = (Famille) service.getObjectById(idFamille, "Famille");//A terminer
 	}
 	
-	
-	public void genererCode() {
-		String prefix="";
-		int nbEnregistrement = this.service.getObjects("Famille").size();
-		if(nbEnregistrement < 10)
-			prefix = "NA00" ;
-		if ((nbEnregistrement >= 10) && (nbEnregistrement < 100)) 
-			prefix = "NA0" ;
-		if (nbEnregistrement > 100) 
-			prefix = "NA" ;
-		this.nature.setCodeNature(prefix+(nbEnregistrement+1));
-	}
-
 	public void selectionnerLigne() {
 		this.nature = this.selectedObject;
 		this.btnEnregistrer.setDisabled(true);
@@ -85,7 +85,7 @@ public class NatureController {
 		this.nature.setDescriptionNature(null);
 		this.btnModifier.setDisabled(true);
 		this.btnEnregistrer.setDisabled(false);
-		info("Annulation effectuée avec succès!");
+		
 	}
 
 	public void modifier() {

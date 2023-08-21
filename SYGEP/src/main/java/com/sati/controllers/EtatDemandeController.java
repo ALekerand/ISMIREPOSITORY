@@ -67,7 +67,7 @@ public class EtatDemandeController {
 		this.etatDemande.setLibEtatDemande(null);
 		this.btnModifier.setDisabled(true);
 		this.btnEnregistrer.setDisabled(false);
-		info("Annulation effectuée avec succès!");
+
 	}
 	
 	

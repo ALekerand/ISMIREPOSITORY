@@ -60,6 +60,8 @@ public class ParcoursController {
 	@PostConstruct
 	public void initialiser() {
 		this.btnModifier.setDisabled(true);
+		genererCodeDiagnostique();
+		genererCodeParcours();
 	}
 	
 	
@@ -130,7 +132,8 @@ public class ParcoursController {
 	}
 	
 	public void info(String monMessage) {
-		FacesContext.getCurrentInstance().addMessage((String) null, new FacesMessage(FacesMessage.SEVERITY_INFO, monMessage, null));
+		FacesContext.getCurrentInstance().addMessage((String) null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, monMessage, null));
 	}
 	
 

@@ -92,7 +92,7 @@ public class ServiceController {
 		this.serviceObj.setTelephone(null);
 		this.serviceObj.setEmail(null);
 		this.serviceObj.setNomService(null);
-		info("Annulation effectuée avec succès!");
+		
 	}
 
 	public void modifier() {

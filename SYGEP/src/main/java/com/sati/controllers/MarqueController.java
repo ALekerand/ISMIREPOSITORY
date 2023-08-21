@@ -39,11 +39,11 @@ public class MarqueController {
 		String prefix="";
 		int nbEnregistrement = this.service.getObjects("Marque").size();
 		if(nbEnregistrement < 10)
-			prefix = "MA00" ;
+			prefix = "MQ00" ;
 		if ((nbEnregistrement >= 10) && (nbEnregistrement < 100)) 
-			prefix = "MA0" ;
+			prefix = "MQ0" ;
 		if (nbEnregistrement > 100) 
-			prefix = "MA" ;
+			prefix = "MQ" ;
 		return new String(prefix+(nbEnregistrement+1));
 	}
 	
@@ -60,11 +60,6 @@ public class MarqueController {
 		this.info("Modification effectuée avec succès!");
 	}
 	
-	public void supprimer() {
-		this.service.deleteObject(marque);
-		annuler();
-		this.info("Suppression effectuée avec succès!");
-	}
 	public void annuler() {
 		marque.setCodeMarque(null);
 		marque.setLibelleMarque(null);
