@@ -16,7 +16,7 @@
  			<td>
  				<h:panelGrid columns="4" cellpadding="10">
 					<p:outputLabel for="input_code" value="Code:"></p:outputLabel>
-					<p:inputText id="input_code" value="#{materielWithQRController.materiel.codeMateriel}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
+					<p:inputText id="input_code" value="#{materielWithQRController.materiel.codeMateriel}" required="true" requiredMessage="Veuillez resseigner ce champ SVP" readonly="true"></p:inputText>	
 				
 					<p:outputLabel for="input_lib" value="Désignation:"></p:outputLabel>
 					<p:inputText id="input_lib" value="#{materielWithQRController.materiel.nomMateriel}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
@@ -50,6 +50,21 @@
 					<p:inputTextarea id="input_descrip" value="#{materielWithQRController.materiel.descriptionMateriel}" cols="30"></p:inputTextarea>
 					
 			</h:panelGrid>
+			<Hr/>
+			
+			<h:panelGrid columns="4" cellpadding="10" >
+			<p:outputLabel for="cb_sfinance" value="Source Financement: "/>
+				<p:selectOneMenu id="cb_sfinance" required="true" value="#{materielWithQRController.idSource}">
+				<f:selectItem itemLabel="Selectionnez" itemValue=""/>
+				<f:selectItems value="#{materielWithQRController.listSourceFinance}" var="tata" itemLabel="#{tata.libSource}" itemValue="#{tata.idSource}"></f:selectItems>
+			</p:selectOneMenu>
+	
+			<p:outputLabel for="cb_fournis" value="Fournisseur:"/>
+				<p:selectOneMenu id="cb_fournis"  value="#{materielWithQRController.idFournisseur}">
+				<f:selectItem itemLabel="Selectionnez" itemValue=""/>
+				<f:selectItems value="#{materielWithQRController.listFournisseur}" var="tata" itemLabel="#{tata.nomFournisseur}" itemValue="#{tata.idFournisseur}"></f:selectItems>
+			</p:selectOneMenu>
+ 	       </h:panelGrid>
  			</td>
  			<td>
 <p:dataTable  var="var" value="#{materielWithQRController.listCaracteristiqueValeur}" editable="true" scrollable="true" scrollHeight="200">

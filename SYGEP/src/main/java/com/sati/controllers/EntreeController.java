@@ -189,7 +189,6 @@ public class EntreeController {
 	@SuppressWarnings("unchecked")
 	public List<Materiel> getListMateriel() {
 		listMateriel = requeteMateriel.listerMaterielSansQRCODE();
-		// listMateriel = service.getObjects("Materiel");
 		 return listMateriel;
 	}
 
@@ -265,8 +264,4 @@ public class EntreeController {
 	public void setTypeMateriel(String typeMateriel) {
 		this.typeMateriel = typeMateriel;
 	}
-
-	
-
-	
 }

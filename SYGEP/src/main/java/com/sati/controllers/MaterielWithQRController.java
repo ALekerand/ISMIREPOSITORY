@@ -3,6 +3,7 @@ package com.sati.controllers;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -24,14 +25,19 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.sati.dto.CaracteristiqueValeur;
 import com.sati.model.Caracteristique;
+import com.sati.model.Entree;
 import com.sati.model.Famille;
 import com.sati.model.Fongible;
+import com.sati.model.Fournisseur;
 import com.sati.model.Magasin;
 import com.sati.model.Materiel;
 import com.sati.model.Nature;
 import com.sati.model.NonFongible;
+import com.sati.model.SourceFinancement;
+import com.sati.model.UserAuthentication;
 import com.sati.model.Valeur;
 import com.sati.requetes.RequeteNature;
+import com.sati.requetes.RequeteUtilisateur;
 import com.sati.service.Iservice;
 
 @Component
@@ -43,19 +49,26 @@ public class MaterielWithQRController {
 	private Materiel materiel = new Materiel();
 	private Fongible fongible= new Fongible();
 	private NonFongible Nonfongible= new NonFongible();
+	private Entree entree = new Entree();
+	private UserAuthentication userAuthentication = new UserAuthentication();
 	@SuppressWarnings("unused")
 	private List<Materiel> listTable = new ArrayList<Materiel>();
 	private Materiel selectedObject = new Materiel();
 	private int idFamille;
 	private int idNature;
 	private int idMagasin;
+	private int idFournisseur;
+	private int idSource;
 	private int stockActuel;
 	private int stockAlerte;
 	private String etatFongible;
 	private List<Famille> listFamille = new ArrayList<Famille>();
 	private List<Nature> listNature = new ArrayList<Nature>();
 	private List<Magasin> listMagasin = new ArrayList<Magasin>();
+	private List<SourceFinancement> listSourceFinance = new ArrayList<SourceFinancement>();
 	private List<CaracteristiqueValeur> listCaracteristiqueValeur = new ArrayList<CaracteristiqueValeur>();
+	private List<Fournisseur> listFournisseur = new ArrayList<Fournisseur>();
+	private String typeMateriel="";
 	
 	//Pour le QR code
 	private String data;
@@ -71,12 +84,20 @@ public class MaterielWithQRController {
 	//Injection de controle
 	@Autowired
 	private RequeteNature requeteNature;
+	@Autowired
+	RequeteUtilisateur requeteUtilisateur;
 
 	@PostConstruct
 	public void initialiser() {
 		this.btnModifier.setDisabled(true);
 		this.cbNature.setDisabled(true);
 		chargerListeCaracteristiqueValeur();
+		genererCodeEntree();
+		chagerUtilisateur();
+	}
+	
+	public UserAuthentication chagerUtilisateur() {
+		return userAuthentication = requeteUtilisateur.recuperUser();
 	}
 	
 	public void genererCode() {
@@ -89,6 +110,18 @@ public class MaterielWithQRController {
 		if (nbEnregistrement > 100) 
 			prefix = "MTQR" ;
 		this.materiel.setCodeMateriel(prefix+(nbEnregistrement+1));
+	}
+	
+	public String genererCodeEntree() {
+		String prefix="";
+		int nbEnregistrement = this.service.getObjects("Entree").size();
+		if(nbEnregistrement < 10)
+			prefix = "CE00" ;
+		if ((nbEnregistrement >= 10) && (nbEnregistrement < 100)) 
+			prefix = "CE0" ;
+		if (nbEnregistrement > 100) 
+			prefix = "CE" ;
+		return new String(prefix+(nbEnregistrement+1));
 	}
 	
 	
@@ -119,9 +152,12 @@ public class MaterielWithQRController {
 		data = "Code: "+materiel.getCodeMateriel()+"\n"+
 				"Désignation: " +materiel.getNomMateriel()+"\n"+
 				"Magasin d'origine: " +materiel.getMagasin().getNomMagasin()+"\n"+
-				"Localisation:";
+				"Position actuelle:";
 		BitMatrix matrix = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, 500, 500);
 		MatrixToImageWriter.writeToPath(matrix, "jpg", Paths.get(path));
+		
+		//Reactualiser le chemin
+		path = "C:\\SYGEP\\QR_CODE";
 	}
 	
 	public void chargerNature() {
@@ -165,7 +201,32 @@ public class MaterielWithQRController {
 			}
 		}
 		this.info("Eneregistrement effectué avec succès!");
+		
+		this.enregistrerEtree();
+		
 		this.annuler();
+	}
+	
+	
+	public void enregistrerEtree() {
+		this.entree.setMateriel(materiel);
+		this.entree.setQteEntree(1);
+		this.entree.setCodeEntre(genererCodeEntree());
+		this.entree.setDateEntree(new Date());
+		this.entree.setDateEnregistrement(new Date());
+		this.entree.setSourceFinancement((SourceFinancement)service.getObjectById(idSource, "SourceFinancement"));
+		this.entree.setPersonne(userAuthentication.getPersonne());
+		
+		if(idFournisseur !=0) {
+		this.entree.setFournisseur((Fournisseur)service.getObjectById(idFournisseur, "Fournisseur"));
+		}
+		
+		this.service.addObject(this.entree);
+		
+		if (typeMateriel.equals("MATERIEL FONGIBLE")) {
+			fongible.setStockActuel(this.fongible.getStockActuel()+ this.entree.getQteEntree());
+			service.updateObject(materiel);
+		}
 	}
 
 	public void selectionnerLigne() {
@@ -391,5 +452,55 @@ public class MaterielWithQRController {
 
 	public void setCbNature(SelectOneMenu cbNature) {
 		this.cbNature = cbNature;
+	}
+
+	public int getIdFournisseur() {
+		return idFournisseur;
+	}
+
+	public void setIdFournisseur(int idFournisseur) {
+		this.idFournisseur = idFournisseur;
+	}
+
+	public int getIdSource() {
+		return idSource;
+	}
+
+	public void setIdSource(int idSource) {
+		this.idSource = idSource;
+	}
+
+	public List<SourceFinancement> getListSourceFinance() {
+		listSourceFinance = service.getObjects("SourceFinancement");
+		return listSourceFinance;
+	}
+
+	public void setListSourceFinance(List<SourceFinancement> listSourceFinance) {
+		this.listSourceFinance = listSourceFinance;
+	}
+
+	public List<Fournisseur> getListFournisseur() {
+		listFournisseur = service.getObjects("Fournisseur");
+		return listFournisseur;
+	}
+
+	public void setListFournisseur(List<Fournisseur> listFournisseur) {
+		this.listFournisseur = listFournisseur;
+	}
+
+	public Entree getEntree() {
+		return entree;
+	}
+
+	public void setEntree(Entree entree) {
+		this.entree = entree;
+	}
+
+	public String getTypeMateriel() {
+		return typeMateriel;
+	}
+
+	public void setTypeMateriel(String typeMateriel) {
+		this.typeMateriel = typeMateriel;
 	}
 }
