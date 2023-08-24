@@ -81,11 +81,10 @@ public class DemandeController {
 	
 	
 	public void gererDateRetour() {
-		System.out.println("===================  Méthode appelée");
-		if (this.radio_emptunt.getValue()=="oui"){
-			this.input_date_retour.setDisabled(true);
-		}else {
+		if (this.value_emprunt.equals("oui")){
 			this.input_date_retour.setDisabled(false);
+		}else {
+			this.input_date_retour.setDisabled(true);
 		}
 	}
 
@@ -94,7 +93,6 @@ public class DemandeController {
 		Entite entite = new Entite();
 		personne = userAuthentication.getPersonne();
 		entite = (Entite) service.getObjectById(personne.getIdEntite(), "Entite");
-		
 		
 		//Charger les elements de la demande
 		this.demande.setEntite(entite);

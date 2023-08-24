@@ -47,13 +47,13 @@
 
 	<p:outputLabel for="radio_emprunt" value="Emprunt:"></p:outputLabel>
 	<p:selectOneRadio id="radio_emprunt" value="#{demandeController.value_emprunt}" binding="#{demandeController.radio_emptunt}">
-		 <p:ajax event="select" process="@this"  update="input_date_retour" listener="#{demandeController.gererDateRetour}"/> 
+		 <p:ajax process="@this"  update="form" listener="#{demandeController.gererDateRetour}"/> 
 	     <f:selectItem itemLabel="Non" itemValue="non"/>
 	     <f:selectItem itemLabel="Oui" itemValue="oui"/>
      </p:selectOneRadio>
 	
-	<p:outputLabel value="Date retour"></p:outputLabel>
-	<p:calendar id="date_affect"  binding="#{demandeController.input_date_retour}" locale="fr" navigator="true" pattern="dd/MM/yyyy"/>
+	<p:outputLabel for="date_affect" value="Date retour"></p:outputLabel>
+	<p:calendar id="date_affect"  binding="#{demandeController.input_date_retour}" locale="fr" navigator="true" pattern="dd/MM/yyyy" required="true"/>
      
 	<p:outputLabel for="input_motif" value="Motif:"></p:outputLabel>
 	<p:inputTextarea id="input_motif" value="#{demandeController.demande.motifDemande}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputTextarea>
