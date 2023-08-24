@@ -160,6 +160,7 @@ public class MaterielWithQRController {
 		path = "C:\\SYGEP\\QR_CODE";
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void chargerNature() {
 		listNature = requeteNature.listerNatureParFamille(idFamille);
 		this.cbNature.setDisabled(false);
