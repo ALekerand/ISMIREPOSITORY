@@ -159,6 +159,7 @@ public class ParcoursController {
 		this.materiel = materiel;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Materiel> getListMateriel() {
 		listMateriel = requeteMateriel.listerMaterielAvecQRCODE();
 		return listMateriel;

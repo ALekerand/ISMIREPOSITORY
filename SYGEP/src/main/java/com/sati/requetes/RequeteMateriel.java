@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sati.model.Demande;
 import com.sati.model.Materiel;
 import com.sati.model.Nature;
+import com.sati.model.Parcours;
 
 @Transactional
 @Component

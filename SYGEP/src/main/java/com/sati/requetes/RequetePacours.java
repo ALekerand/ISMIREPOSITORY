@@ -27,6 +27,12 @@ public class RequetePacours {
 	return parcours;
 		}
 	
+	public List historiqueMateriel(String code_materiel) {
+		String query = "SELECT * FROM `parcours`,`materiel` WHERE parcours.ID_MATERIEL = materiel.ID_MATERIEL AND materiel.CODE_MATERIEL = '"+code_materiel+"' ORDER BY parcours.DATE_PARCOURS DESC";
+		List list = getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Parcours.class).list();
+		return list;
+	}
+	
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}

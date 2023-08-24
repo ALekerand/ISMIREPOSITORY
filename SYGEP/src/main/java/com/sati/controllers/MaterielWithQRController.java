@@ -124,6 +124,7 @@ public class MaterielWithQRController {
 		MatrixToImageWriter.writeToPath(matrix, "jpg", Paths.get(path));
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void chargerNature() {
 		listNature = requeteNature.listerNatureParFamille(idFamille);
 		this.cbNature.setDisabled(false);
