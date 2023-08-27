@@ -30,6 +30,7 @@ import com.sati.model.Famille;
 import com.sati.model.Fongible;
 import com.sati.model.Fournisseur;
 import com.sati.model.Magasin;
+import com.sati.model.Marque;
 import com.sati.model.Materiel;
 import com.sati.model.Nature;
 import com.sati.model.NonFongible;
@@ -59,12 +60,14 @@ public class MaterielWithQRController {
 	private int idMagasin;
 	private int idFournisseur;
 	private int idSource;
+	private int idMarque;
 	private int stockActuel;
 	private int stockAlerte;
 	private String etatFongible;
 	private List<Famille> listFamille = new ArrayList<Famille>();
 	private List<Nature> listNature = new ArrayList<Nature>();
 	private List<Magasin> listMagasin = new ArrayList<Magasin>();
+	private List<Marque> listMarque = new ArrayList<Marque>();
 	private List<SourceFinancement> listSourceFinance = new ArrayList<SourceFinancement>();
 	private List<CaracteristiqueValeur> listCaracteristiqueValeur = new ArrayList<CaracteristiqueValeur>();
 	private List<Fournisseur> listFournisseur = new ArrayList<Fournisseur>();
@@ -170,8 +173,10 @@ public class MaterielWithQRController {
 		Famille familleProduit = (Famille) service.getObjectById(idFamille, "Famille");
 		Nature natureProduit = (Nature) service.getObjectById(idNature, "Nature");
 		Magasin magasin = (Magasin)service.getObjectById(idMagasin,"Magasin");
+		Marque marque = (Marque) service.getObjectById(idMarque, "Marque");
 		this.materiel.setNature(natureProduit);
 		this.materiel.setMagasin(magasin);
+		this.materiel.setMarque(marque);
 		this.service.addObject(this.materiel);
 		
 		//Enregistrement dans fongible et non fongible
@@ -180,6 +185,7 @@ public class MaterielWithQRController {
 			//Enregistrer dans non fongible
 			this.Nonfongible.setIdNature(idNature);
 			this.Nonfongible.setIdMagasin(idMagasin);
+			this.Nonfongible.setIdMarque(null);
 			this.Nonfongible.setNomMateriel(materiel.getNomMateriel());
 			this.Nonfongible.setCodeMateriel(materiel.getCodeMateriel());
 			this.Nonfongible.setDescriptionMateriel(materiel.getDescriptionMateriel());
@@ -502,5 +508,21 @@ public class MaterielWithQRController {
 
 	public void setTypeMateriel(String typeMateriel) {
 		this.typeMateriel = typeMateriel;
+	}
+
+	public List<Marque> getListMarque() {
+		return listMarque;
+	}
+
+	public void setListMarque(List<Marque> listMarque) {
+		this.listMarque = listMarque;
+	}
+
+	public int getIdMarque() {
+		return idMarque;
+	}
+
+	public void setIdMarque(int idMarque) {
+		this.idMarque = idMarque;
 	}
 }

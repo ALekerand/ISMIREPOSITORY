@@ -1,5 +1,5 @@
 package com.sati.model;
-// Generated 19 juil. 2023, 00:48:45 by Hibernate Tools 4.3.6.Final
+// Generated 26 ao�t 2023, 22:26:06 by Hibernate Tools 4.3.6.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -31,7 +31,6 @@ public class Sortie implements java.io.Serializable {
 	private Date dateSortie;
 	private Date dateEnregSortie;
 	private Boolean materielRetour;
-	private Date dateRetourPrevue;
 	private Date dateRetourEffectif;
 	private Set<Demande> demandes = new HashSet<Demande>(0);
 
@@ -44,14 +43,13 @@ public class Sortie implements java.io.Serializable {
 	}
 
 	public Sortie(Demande demande, Personne personne, String codeSortie, Date dateSortie, Date dateEnregSortie,
-			Boolean materielRetour, Date dateRetourPrevue, Date dateRetourEffectif, Set<Demande> demandes) {
+			Boolean materielRetour, Date dateRetourEffectif, Set<Demande> demandes) {
 		this.demande = demande;
 		this.personne = personne;
 		this.codeSortie = codeSortie;
 		this.dateSortie = dateSortie;
 		this.dateEnregSortie = dateEnregSortie;
 		this.materielRetour = materielRetour;
-		this.dateRetourPrevue = dateRetourPrevue;
 		this.dateRetourEffectif = dateRetourEffectif;
 		this.demandes = demandes;
 	}
@@ -124,16 +122,6 @@ public class Sortie implements java.io.Serializable {
 
 	public void setMaterielRetour(Boolean materielRetour) {
 		this.materielRetour = materielRetour;
-	}
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "DATE_RETOUR_PREVUE", length = 10)
-	public Date getDateRetourPrevue() {
-		return this.dateRetourPrevue;
-	}
-
-	public void setDateRetourPrevue(Date dateRetourPrevue) {
-		this.dateRetourPrevue = dateRetourPrevue;
 	}
 
 	@Temporal(TemporalType.DATE)

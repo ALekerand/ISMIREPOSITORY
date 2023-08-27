@@ -129,6 +129,7 @@ public class MaterielController {
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	public void chargerNature() {
 		listNature = requeteNature.listerNatureParFamille(idFamille);
 		this.cbNature.setDisabled(false);
@@ -136,15 +137,15 @@ public class MaterielController {
 
 	public void enregistrer() throws WriterException, IOException {
 		//Enregistrement dans la table Caracteristique
-		Famille familleProduit = (Famille) service.getObjectById(idFamille, "Famille");
+		//Famille familleProduit = (Famille) service.getObjectById(idFamille, "Famille");
 		Nature natureProduit = (Nature) service.getObjectById(idNature, "Nature");
 		Magasin magasin = (Magasin)service.getObjectById(idMagasin,"Magasin");
 		Marque marque = (Marque) service.getObjectById(idMarque, "Marque");
-	//	this.materiel.setFamille(familleProduit);
+		//this.materiel.setFamille(familleProduit);
 		this.materiel.setNature(natureProduit);
 		this.materiel.setMagasin(magasin);
 		this.materiel.setMarque(marque);
-		this.service.addObject(this.materiel);
+		service.addObject(materiel);
 		
 		//Enregistrement dans fongible et non fongible
 		switch (etatFongible){
@@ -160,7 +161,7 @@ public class MaterielController {
 			this.fongible.setCodeMateriel(materiel.getCodeMateriel());
 			this.fongible.setDescriptionMateriel(materiel.getDescriptionMateriel());
 			this.fongible.setMateriel(materiel);
-			this.service.addObject(this.fongible);
+			service.addObject(fongible);
 			
 			break;
 			
@@ -175,7 +176,7 @@ public class MaterielController {
 			this.Nonfongible.setCodeMateriel(materiel.getCodeMateriel());
 			this.Nonfongible.setDescriptionMateriel(materiel.getDescriptionMateriel());
 			this.Nonfongible.setMateriel(materiel);
-			this.service.addObject(this.Nonfongible);
+			service.addObject(Nonfongible);
 			
 			//Générer le QR code
 			genererQRCode();
@@ -205,11 +206,13 @@ public class MaterielController {
 	}
 
 	public void info(String monMessage) {
-		FacesContext.getCurrentInstance().addMessage((String) null, new FacesMessage(FacesMessage.SEVERITY_INFO, monMessage,null ));
+		FacesContext.getCurrentInstance().addMessage((String) null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, monMessage,null ));
 	}
 
 	public void error() {
-		FacesContext.getCurrentInstance().addMessage((String) null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Contact admin."));
+		FacesContext.getCurrentInstance().addMessage((String) null,
+				new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Contact admin."));
 	}
 
 	public void annuler() {
@@ -334,7 +337,7 @@ public class MaterielController {
 		this.idNature = idNature;
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	public List<Nature> getListNature() {
 		return listNature;
 	}

@@ -1,5 +1,5 @@
 package com.sati.model;
-// Generated 19 juil. 2023, 00:48:45 by Hibernate Tools 4.3.6.Final
+// Generated 26 ao�t 2023, 22:26:06 by Hibernate Tools 4.3.6.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -29,6 +29,7 @@ public class Materiel implements java.io.Serializable {
 	private String codeMateriel;
 	private String nomMateriel;
 	private String descriptionMateriel;
+	private String referenceMateriel;
 	private Set<Valeur> valeurs = new HashSet<Valeur>(0);
 	private NonFongible nonFongible;
 	private Fongible fongible;
@@ -47,15 +48,16 @@ public class Materiel implements java.io.Serializable {
 	}
 
 	public Materiel(Magasin magasin, Marque marque, Nature nature, String codeMateriel, String nomMateriel,
-			String descriptionMateriel, Set<Valeur> valeurs, NonFongible nonFongible, Fongible fongible,
-			Set<LigneCommande> ligneCommandes, Set<Demande> demandes, Set<Entree> entrees, Set<Parcours> parcourses,
-			Set<Diagnostique> diagnostiques) {
+			String descriptionMateriel, String referenceMateriel, Set<Valeur> valeurs, NonFongible nonFongible,
+			Fongible fongible, Set<LigneCommande> ligneCommandes, Set<Demande> demandes, Set<Entree> entrees,
+			Set<Parcours> parcourses, Set<Diagnostique> diagnostiques) {
 		this.magasin = magasin;
 		this.marque = marque;
 		this.nature = nature;
 		this.codeMateriel = codeMateriel;
 		this.nomMateriel = nomMateriel;
 		this.descriptionMateriel = descriptionMateriel;
+		this.referenceMateriel = referenceMateriel;
 		this.valeurs = valeurs;
 		this.nonFongible = nonFongible;
 		this.fongible = fongible;
@@ -133,6 +135,15 @@ public class Materiel implements java.io.Serializable {
 
 	public void setDescriptionMateriel(String descriptionMateriel) {
 		this.descriptionMateriel = descriptionMateriel;
+	}
+
+	@Column(name = "REFERENCE_MATERIEL", length = 50)
+	public String getReferenceMateriel() {
+		return this.referenceMateriel;
+	}
+
+	public void setReferenceMateriel(String referenceMateriel) {
+		this.referenceMateriel = referenceMateriel;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "materiel")

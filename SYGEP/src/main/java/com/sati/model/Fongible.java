@@ -1,5 +1,5 @@
 package com.sati.model;
-// Generated 19 juil. 2023, 00:48:45 by Hibernate Tools 4.3.6.Final
+// Generated 26 ao�t 2023, 22:26:06 by Hibernate Tools 4.3.6.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,6 +27,7 @@ public class Fongible implements java.io.Serializable {
 	private String codeMateriel;
 	private String nomMateriel;
 	private String descriptionMateriel;
+	private String referenceMateriel;
 	private Integer stockActuel;
 	private Integer stockAlerte;
 
@@ -38,7 +39,8 @@ public class Fongible implements java.io.Serializable {
 	}
 
 	public Fongible(Materiel materiel, Integer idNature, Integer idMagasin, Integer idMarque, String codeMateriel,
-			String nomMateriel, String descriptionMateriel, Integer stockActuel, Integer stockAlerte) {
+			String nomMateriel, String descriptionMateriel, String referenceMateriel, Integer stockActuel,
+			Integer stockAlerte) {
 		this.materiel = materiel;
 		this.idNature = idNature;
 		this.idMagasin = idMagasin;
@@ -46,6 +48,7 @@ public class Fongible implements java.io.Serializable {
 		this.codeMateriel = codeMateriel;
 		this.nomMateriel = nomMateriel;
 		this.descriptionMateriel = descriptionMateriel;
+		this.referenceMateriel = referenceMateriel;
 		this.stockActuel = stockActuel;
 		this.stockAlerte = stockAlerte;
 	}
@@ -63,7 +66,7 @@ public class Fongible implements java.io.Serializable {
 		this.idMateriel = idMateriel;
 	}
 
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn
 	public Materiel getMateriel() {
 		return this.materiel;
@@ -125,6 +128,15 @@ public class Fongible implements java.io.Serializable {
 
 	public void setDescriptionMateriel(String descriptionMateriel) {
 		this.descriptionMateriel = descriptionMateriel;
+	}
+
+	@Column(name = "REFERENCE_MATERIEL", length = 50)
+	public String getReferenceMateriel() {
+		return this.referenceMateriel;
+	}
+
+	public void setReferenceMateriel(String referenceMateriel) {
+		this.referenceMateriel = referenceMateriel;
 	}
 
 	@Column(name = "STOCK_ACTUEL")

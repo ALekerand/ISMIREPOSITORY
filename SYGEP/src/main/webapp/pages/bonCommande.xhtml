@@ -16,15 +16,22 @@
 			<tr>
 			<td style="width: 50%">
 		
-			<p:dataTable id="materiel" var="variable" value="#{bonCommandeController.listMateriel}"  selectionMode="single"  selection="#{bonCommandeController.selectedObject}" rowKey="#{variable.idMateriel}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
-			<f:facet name="header">LISTES DES MATERIELS</f:facet>
+			<p:dataTable id="materiel" widgetVar="dtMateriel" var="variable" value="#{bonCommandeController.listMateriel}"  selectionMode="single"  selection="#{bonCommandeController.selectedObject}" rowKey="#{variable.idMateriel}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+			 <f:facet name="header">
+                <div class="materiel-table-header">
+                    <span style="font-weight: bold">Liste des materiels</span>
+                    <span class="filter-container ui-input-icon-left"> <i class="pi pi-search"></i>
+                        <p:inputText id="globalFilter" onkeyup="PF('dtMateriel').filter()" placeholder="Search" />
+                    </span>
+                </div>
+            </f:facet>
 			<p:ajax event="rowSelect" listener="#{bonCommandeController.choisirLigne}" update="form"></p:ajax>
 			
-			<p:column headerText="Materiel">
+			<p:column headerText="Materiel" filterable="false" filterBy="#{variable.nomMateriel}">
 			<h:outputText value="#{variable.nomMateriel}"  style="width:10%"/>
 			</p:column>
 			
-			<p:column headerText="Code">
+			<p:column headerText="Code" filterable="false" filterBy="#{variable.codeMateriel}">
 			<h:outputText value="#{variable.codeMateriel}" style="width:10%"/>
 			</p:column>
 			

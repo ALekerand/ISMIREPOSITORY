@@ -1,5 +1,5 @@
 package com.sati.model;
-// Generated 19 juil. 2023, 00:48:45 by Hibernate Tools 4.3.6.Final
+// Generated 26 ao�t 2023, 22:26:06 by Hibernate Tools 4.3.6.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -84,7 +84,7 @@ public class Entree implements java.io.Serializable {
 		this.materiel = materiel;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_ENTITE", nullable = false)
 	public Personne getPersonne() {
 		return this.personne;

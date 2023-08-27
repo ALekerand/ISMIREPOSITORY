@@ -18,18 +18,24 @@
  	
 		<td >
 			
-<p:dataTable  var="var" value="#{bonLivraisonController.listeBonCommande}" selectionMode="single" selection="#{bonLivraisonController.selectedObjectBC}" rowKey="#{var.idBonCommande}" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
-            <f:facet name="header">Bon de commande
+<p:dataTable  var="var" widgetVar="dtbonLivraison" value="#{bonLivraisonController.listeBonCommande}" selectionMode="single" selection="#{bonLivraisonController.selectedObjectBC}" rowKey="#{var.idBonCommande}" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+             <f:facet name="header">
+                <div class="materiel-table-header">
+                    <span style="font-weight: bold">Liste bon livraison</span>
+                    <span class="filter-container ui-input-icon-left"> <i class="pi pi-search"></i>
+                        <p:inputText id="globalFilter" onkeyup="PF('dtbonLivraison').filter()" placeholder="Search" />
+                    </span>
+                </div>
             </f:facet>
  <p:ajax event="rowSelect" process="@this"  update="form" listener="#{bonLivraisonController.selectionnerLigne}"></p:ajax>
 
   
  	
- 		<p:column headerText="Demandeur" >
+ 		<p:column headerText="Demandeur" filterable="false" filterBy="#{var.personne.nomPersonne}">
         <h:outputText value="#{var.personne.nomPersonne}"/>
         </p:column>
         
-   		<p:column headerText="Code bon Commande" >
+   		<p:column headerText="Code bon Commande" filterable="false" filterBy="#{var.codeBonCommande}" >
         <h:outputText value="#{var.codeBonCommande}"/>
         </p:column>
 

@@ -32,10 +32,10 @@ public class MagasinController {
 	@PostConstruct
 	public void initialiser() {
 		this.btnModifier.setDisabled(true);
-		genererCode();
+		this.magasin.setCodeMagasin(genererCodeMagasin());
 	}
 
-	public void genererCode() {
+	public String genererCodeMagasin() {
 		String prefix="";
 		int nbEnregistrement = this.service.getObjects("Magasin").size();
 		if(nbEnregistrement < 10)
@@ -44,10 +44,11 @@ public class MagasinController {
 			prefix = "MA0" ;
 		if (nbEnregistrement > 100) 
 			prefix = "MA" ;
-		this.magasin.setCodeMagasin(prefix+(nbEnregistrement+1));
+		return new String(prefix+(nbEnregistrement+1));
 	}
 	public void enregistrer() {
 		this.service.addObject(this.magasin);
+		magasin.setCodeMagasin(genererCodeMagasin());
 		this.info("Eneregistrement effectué avec succès!");
 		this.annuler();
 	}

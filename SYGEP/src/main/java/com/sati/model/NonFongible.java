@@ -1,5 +1,5 @@
 package com.sati.model;
-// Generated 19 juil. 2023, 00:48:45 by Hibernate Tools 4.3.6.Final
+// Generated 26 ao�t 2023, 22:26:06 by Hibernate Tools 4.3.6.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -30,6 +30,7 @@ public class NonFongible implements java.io.Serializable {
 	private String codeMateriel;
 	private String nomMateriel;
 	private String descriptionMateriel;
+	private String referenceMateriel;
 	private String qrCode;
 	private Boolean retraitMateriel;
 	private Date dateRetrait;
@@ -42,7 +43,8 @@ public class NonFongible implements java.io.Serializable {
 	}
 
 	public NonFongible(Materiel materiel, Integer idNature, Integer idMagasin, Integer idMarque, String codeMateriel,
-			String nomMateriel, String descriptionMateriel, String qrCode, Boolean retraitMateriel, Date dateRetrait) {
+			String nomMateriel, String descriptionMateriel, String referenceMateriel, String qrCode,
+			Boolean retraitMateriel, Date dateRetrait) {
 		this.materiel = materiel;
 		this.idNature = idNature;
 		this.idMagasin = idMagasin;
@@ -50,6 +52,7 @@ public class NonFongible implements java.io.Serializable {
 		this.codeMateriel = codeMateriel;
 		this.nomMateriel = nomMateriel;
 		this.descriptionMateriel = descriptionMateriel;
+		this.referenceMateriel = referenceMateriel;
 		this.qrCode = qrCode;
 		this.retraitMateriel = retraitMateriel;
 		this.dateRetrait = dateRetrait;
@@ -68,7 +71,7 @@ public class NonFongible implements java.io.Serializable {
 		this.idMateriel = idMateriel;
 	}
 
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn
 	public Materiel getMateriel() {
 		return this.materiel;
@@ -130,6 +133,15 @@ public class NonFongible implements java.io.Serializable {
 
 	public void setDescriptionMateriel(String descriptionMateriel) {
 		this.descriptionMateriel = descriptionMateriel;
+	}
+
+	@Column(name = "REFERENCE_MATERIEL", length = 50)
+	public String getReferenceMateriel() {
+		return this.referenceMateriel;
+	}
+
+	public void setReferenceMateriel(String referenceMateriel) {
+		this.referenceMateriel = referenceMateriel;
 	}
 
 	@Column(name = "QR_CODE", length = 200)

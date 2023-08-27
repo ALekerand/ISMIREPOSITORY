@@ -20,16 +20,23 @@
 	<tr>
 	<td >
 	
-	<p:dataTable  var="var" value="#{empruntController.listMateriel}"  selectionMode="single" selection="#{empruntController.selecteMareriel}" rowKey="#{var.idMateriel}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+	<p:dataTable  var="var" widgetVar="dtMateriel" value="#{empruntController.listMateriel}"  selectionMode="single" selection="#{empruntController.selecteMareriel}" rowKey="#{var.idMateriel}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  
- 	<f:facet name="header"> LISTE DES MATERIELS </f:facet>
+ 	 <f:facet name="header">
+                <div class="materiel-table-header">
+                    <span style="font-weight: bold">Liste des materiels</span>
+                    <span class="filter-container ui-input-icon-left"> <i class="pi pi-search"></i>
+                        <p:inputText id="globalFilter" onkeyup="PF('dtMateriel').filter()" placeholder="Search" />
+                    </span>
+                </div>
+            </f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{empruntController.choisirLigneMateriel}"></p:ajax>
    		<p:column selectionMode="single" style="width:16px;text-align:center"/>
-   		<p:column headerText="Référence" style="width:30%">
+   		<p:column headerText="Référence" style="width:30%" filterBy="#{var.codeMateriel}" filterable="false">
         <h:outputText value="#{var.codeMateriel}"/>
         </p:column>
         
-        <p:column headerText="Désignation">
+        <p:column headerText="Désignation" filterBy="#{var.nomMateriel}" filterable="false">
         <h:outputText value="#{var.nomMateriel}"/>
         </p:column>
         
