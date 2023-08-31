@@ -45,13 +45,26 @@ public class ConsulterMaterielController {
 		this.materiel.setReferenceMateriel(null);
 		this.materiel.setNature(null);
 		this.listeHistoriqueParcours.clear();
-		
-		
+		listeHistoriqueParcours.clear();
 	}
 
 	
+
+	@SuppressWarnings("unchecked")
+	public List<Materiel> getListMateriel() {
+		listMateriel = requeteMateriel.listerMaterielAvecQRCODE();
+		return listMateriel;
+	}
+
+	public void setListMateriel(List<Materiel> listMateriel) {
+		this.listMateriel = listMateriel;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<Parcours> getListeHistoriqueParcours() {
+			listeHistoriqueParcours = requetePacours.historiqueMateriel(selectedObject.getIdMateriel());
 		return listeHistoriqueParcours;
+		
 	}
 
 	public void setListeHistoriqueParcours(List<Parcours> listeHistoriqueParcours) {
@@ -79,22 +92,13 @@ public class ConsulterMaterielController {
 		this.materiel = materiel;
 	}
 
+
 	public Materiel getSelectedObject() {
 		return selectedObject;
 	}
 
 	public void setSelectedObject(Materiel selectedObject) {
 		this.selectedObject = selectedObject;
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<Materiel> getListMateriel() {
-		listMateriel = requeteMateriel.listerMaterielAvecQRCODE();
-		return listMateriel;
-	}
-
-	public void setListMateriel(List<Materiel> listMateriel) {
-		this.listMateriel = listMateriel;
 	}
 
 
