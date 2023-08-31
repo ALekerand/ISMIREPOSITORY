@@ -27,11 +27,22 @@ public class RequetePacours {
 	return parcours;
 		}
 	
+	
+	public List historiqueParcours(int id_materiel) {
+		String query = "SELECT * FROM `parcours`,`materiel` WHERE parcours.ID_MATERIEL = '"+id_materiel+"' ORDER BY parcours.DATE_PARCOURS DESC";
+		List list = getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Parcours.class).list();
+		return list;
+	}
+	
 	public List historiqueMateriel() {
 		String query = "SELECT * FROM `parcours`,`materiel` WHERE parcours.ID_MATERIEL = materiel.ID_MATERIEL ORDER BY parcours.DATE_PARCOURS DESC";
 		List list = getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Parcours.class).list();
 		return list;
 	}
+	
+	
+	
+	
 	
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;

@@ -23,6 +23,7 @@ public class ConsulterMaterielController {
 	
 	@Autowired
 	RequetePacours requetePacours;
+	
 	@Autowired
 	RequeteMateriel requeteMateriel;
 	private Materiel materiel = new Materiel();
@@ -30,27 +31,26 @@ public class ConsulterMaterielController {
 	private Materiel selectedObject;
 	private List<Materiel> listMateriel = new ArrayList<Materiel>();
 	private List<Parcours> listeHistoriqueParcours = new ArrayList<Parcours>();
-	private String code_materiel;
+	//private String code_materiel;
+	
 	
 	public void selectionnerLigne() {
 		materiel = selectedObject;
-	}
+		listeHistoriqueParcours = requetePacours.historiqueParcours(materiel.getIdMateriel());
+			}
 	
 	public void annuler() {
-		setCode_materiel(null);
-	}
-
-	public String getCode_materiel() {
-		return code_materiel;
-	}
-	public void setCode_materiel(String code_materiel) {
-		this.code_materiel = code_materiel;
+		this.materiel.setCodeMateriel(null);
+		this.materiel.setNomMateriel(null);
+		this.materiel.setReferenceMateriel(null);
+		this.materiel.setNature(null);
+		this.listeHistoriqueParcours.clear();
+		
+		
 	}
 
 	
 	public List<Parcours> getListeHistoriqueParcours() {
-		parcours.setMateriel(selectedObject);
-		listeHistoriqueParcours.add(parcours);
 		return listeHistoriqueParcours;
 	}
 

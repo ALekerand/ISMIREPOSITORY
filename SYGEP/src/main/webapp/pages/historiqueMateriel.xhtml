@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+
+<ui:composition template="/templates/template.xhtml">
+			<ui:define name="body">
+				<h:form id="form">
+			<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+			
+			<table >
+	<tr>
+	<td style="width:50%">
+	
+ 	<p:dataTable widgetVar="dtMateriel"  var="var" value="#{consulterMaterielController.listMateriel}"  selectionMode="single" selection="#{consulterMaterielController.selectedObject}" rowKey="#{var.idMateriel}" paginator="true" paginatorPosition="bottom" rows="10" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+  <f:facet name="header">
+                <div class="materiel-table-header">
+                    <span style="font-weight: bold">Matériels</span>
+                    <span class="filter-container ui-input-icon-left"> <i class="pi pi-search"></i>
+                        <p:inputText id="globalFilter" onkeyup="PF('dtMateriel').filter()" placeholder="Search" />
+                    </span>
+                </div>
+            </f:facet>
+     <p:ajax event="rowSelect" process="@this"  update="form" listener="#{consulterMaterielController.selectionnerLigne}"></p:ajax>
+   		<p:column selectionMode="single" style="width:16px;text-align:center"/>
+   		
+   		<p:column headerText="Réf" style="width:30%" filterBy="#{var.codeMateriel}" filterable="false">
+        <h:outputText value="#{var.codeMateriel}"/>
+        </p:column>
+        
+        <p:column headerText="Désignation" filterBy="#{var.nomMateriel}" filterable="false">
+        <h:outputText value="#{var.nomMateriel}"/>
+        </p:column>
+        
+        </p:dataTable>
+			
+		</td>
+		<td>	
+	<div>
+	<h:panelGrid columns="4" cellpadding="8">
+	<p:outputLabel for="input_code" value="Code:"></p:outputLabel>
+	<p:inputText id="input_code" value="#{consulterMaterielController.materiel.codeMateriel}" readonly="true"></p:inputText>	
+
+	<p:outputLabel for="input_qte" value="Désignation:"></p:outputLabel>
+	<p:inputText id="input_qte" value="#{consulterMaterielController.materiel.nomMateriel}" readonly="true"></p:inputText>
+
+	<p:outputLabel for="input_ref" value="Reférence:"></p:outputLabel>
+	<p:inputText id="input_ref" value="#{consulterMaterielController.materiel.referenceMateriel}" readonly="true"></p:inputText>
+	
+	<p:outputLabel for="input_nature" value="Nature:"></p:outputLabel>
+	<p:inputText id="input_nature" value="#{consulterMaterielController.materiel.nature.libNature}" readonly="true"></p:inputText>
+	</h:panelGrid>
+	</div>
+	
+	<h3>Parcours du matériel</h3>
+	<p:dataTable var="var" value="#{consulterMaterielController.listeHistoriqueParcours}" rowKey="#{var.idParcours}" paginator="true" paginatorPosition="bottom" rows="10" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+			
+			<p:column headerText="Service">
+				<h:outputText value="#{var.service.nomService}" />
+			</p:column>
+			
+			<p:column headerText="Date" style="width:25%">
+				<h:outputText value="#{var.dateEnregParcours}">
+				<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
+			</p:column>
+			
+			 </p:dataTable>
+			 
+			<br></br>
+				<p:commandButton value="Vider"  action="#{consulterMaterielController.annuler}" update="form"></p:commandButton>
+		
+	
+	</td>
+	</tr>
+	</table>
+			
+			</h:form>
+			</ui:define>
+			</ui:composition>
+
+
+</html>
