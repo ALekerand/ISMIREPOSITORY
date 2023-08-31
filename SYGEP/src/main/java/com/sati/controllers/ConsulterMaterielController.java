@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.sati.model.Materiel;
 import com.sati.model.Parcours;
+import com.sati.requetes.RequeteMateriel;
 import com.sati.requetes.RequetePacours;
 import com.sati.service.Iservice;
 
@@ -22,32 +23,40 @@ public class ConsulterMaterielController {
 	
 	@Autowired
 	RequetePacours requetePacours;
-	
-	private Parcours parcours = new Parcours();
+	@Autowired
+	RequeteMateriel requeteMateriel;
 	private Materiel materiel = new Materiel();
+	private Parcours parcours = new Parcours();
+	private Materiel selectedObject;
 	private List<Materiel> listMateriel = new ArrayList<Materiel>();
+	private List<Parcours> listeHistoriqueParcours = new ArrayList<Parcours>();
 	private String code_materiel;
 	
-	
-	@SuppressWarnings("unchecked")
-	public void ListhistoriqueMateriel() {
-		listMateriel = requetePacours.historiqueMateriel(code_materiel);
-		annuler();
+	public void selectionnerLigne() {
+		materiel = selectedObject;
 	}
 	
 	public void annuler() {
 		setCode_materiel(null);
 	}
 
-	public List<Materiel> getListMateriel() {
-		return listMateriel;
+	public String getCode_materiel() {
+		return code_materiel;
+	}
+	public void setCode_materiel(String code_materiel) {
+		this.code_materiel = code_materiel;
 	}
 
-	public void setListMateriel(List<Materiel> listMateriel) {
-		this.listMateriel = listMateriel;
+	
+	public List<Parcours> getListeHistoriqueParcours() {
+		parcours.setMateriel(selectedObject);
+		listeHistoriqueParcours.add(parcours);
+		return listeHistoriqueParcours;
 	}
 
-
+	public void setListeHistoriqueParcours(List<Parcours> listeHistoriqueParcours) {
+		this.listeHistoriqueParcours = listeHistoriqueParcours;
+	}
 
 
 	public Parcours getParcours() {
@@ -66,21 +75,28 @@ public class ConsulterMaterielController {
 		return materiel;
 	}
 
-
-
 	public void setMateriel(Materiel materiel) {
 		this.materiel = materiel;
 	}
 
+	public Materiel getSelectedObject() {
+		return selectedObject;
+	}
 
+	public void setSelectedObject(Materiel selectedObject) {
+		this.selectedObject = selectedObject;
+	}
 
-	public String getCode_materiel() {
-		return code_materiel;
+	@SuppressWarnings("unchecked")
+	public List<Materiel> getListMateriel() {
+		listMateriel = requeteMateriel.listerMaterielAvecQRCODE();
+		return listMateriel;
+	}
+
+	public void setListMateriel(List<Materiel> listMateriel) {
+		this.listMateriel = listMateriel;
 	}
 
 
-
-	public void setCode_materiel(String code_materiel) {
-		this.code_materiel = code_materiel;
-	}
+	
 }

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import com.sati.model.Diagnostique;
 import com.sati.model.Materiel;
-import com.sati.model.NonFongible;
 import com.sati.requetes.RequeteDiagnostique;
 import com.sati.requetes.RequeteMateriel;
 import com.sati.service.Iservice;
@@ -25,37 +24,52 @@ public class ConsulterListDiagnosticController {
 	RequeteDiagnostique requeteDiagnostique;
 	@Autowired
 	RequeteMateriel requeteMateriel;
-	private List<NonFongible> listMateriel = new ArrayList<NonFongible>();
-	private Diagnostique diagnostique;
-	private List<Diagnostique> listDiagnostique = new ArrayList<Diagnostique>();
-	private int idMateriel;
-	
-	
+	private List<Materiel> listeMateriels = new ArrayList<Materiel>();
+	private	List<Diagnostique> listeDiagnostique = new ArrayList<Diagnostique>();
+	private	Diagnostique diagnostique = new  Diagnostique();
+
+	public List<Materiel> getListeMateriels() {
+		return listeMateriels;
+	}
+
+	public void setListeMateriels(List<Materiel> listeMateriels) {
+		this.listeMateriels = listeMateriels;
+	}
+
 	@SuppressWarnings("unchecked")
-	public void listMateriel() {
-		listMateriel = requeteMateriel.listerMaterielAvecQRCODE();
-		
-		
-		diagnostique = requeteDiagnostique.recupererLastDiagnostiqueDuMateriel(idMateriel);
-		
-		for(NonFongible materiel : listMateriel) {
-			diagnostique = requeteDiagnostique.recupererLastDiagnostiqueDuMateriel(materiel.getIdMateriel());
-			listDiagnostique.add(diagnostique);
-		}
+	public List<Diagnostique> getListeDiagnostique() {
+		   System.out.println(" \n\n ######################################### \n\n");
+		    System.out.println("  LISTE DES MATÉRIELS AVEC LEURS ÉTATS ");
+		    System.out.println(" \n\n ######################################### \n\n");
+
+		    System.out.println(" === AFFICHAGE DE LA LISTE DES MATERIELS AVEC QRCODE  ===");
+		    
+		    listeMateriels = requeteMateriel.listerMaterielAvecQRCODE();
+		    
+		    System.out.println(listeMateriels);
+		    
+		    
+		    for (Materiel materiel : listeMateriels ) {
+		       diagnostique = requeteDiagnostique.recupererLastDiagnostiqueDuMateriel(materiel.getIdMateriel());
+		       listeDiagnostique.add(diagnostique);
+		    }
+
+		    System.out.println(" === AFFICHAGE DE LA LISTE DU DIAGNOSTIQUE  === \n\n");
+		    
+		    System.out.println(listeDiagnostique);
+		return listeDiagnostique;
 	}
-	
-	
-	public List<NonFongible> getListMateriel() {
-		return listMateriel;
+
+	public void setListeDiagnostique(List<Diagnostique> listeDiagnostique) {
+		this.listeDiagnostique = listeDiagnostique;
 	}
-	public void setListMateriel(List<NonFongible> listMateriel) {
-		this.listMateriel = listMateriel;
+
+	public Diagnostique getDiagnostique() {
+		return diagnostique;
 	}
-	public List<Diagnostique> getListDiagnostique() {
-		return listDiagnostique;
-	}
-	public void setListDiagnostique(List<Diagnostique> listDiagnostique) {
-		this.listDiagnostique = listDiagnostique;
+
+	public void setDiagnostique(Diagnostique diagnostique) {
+		this.diagnostique = diagnostique;
 	}
 
 	

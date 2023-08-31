@@ -11,31 +11,45 @@
 				<h:form id="form">
 			<p:messages autoUpdate="true" closable="true" showDetail="false"/>
 			
-			<fieldset>
-			<legend></legend>
-	   			 <h:panelGrid columns="4" cellpadding="15" style="margin: 15px;" >
-	    
-	       		 <h:outputLabel value=" Code materiel:" ></h:outputLabel>
-					<p:inputText value="#{consulterMaterielController.code_materiel}"></p:inputText>
-			<p:commandButton value="Rechercher" actionListener="#{consulterMaterielController.ListhistoriqueMateriel}" update="form"></p:commandButton>
-			</h:panelGrid>
-			</fieldset>
-			 <br />
-			<p:dataTable var="variable" value="#{consulterMaterielController.listMateriel}">
+			<p:dataTable var="variable" value="#{consulterMaterielController.listMateriel}" selectionMode="single" selection="#{consulterMaterielController.selectedObject}" rowKey="#{variable.idMateriel}">
+				<f:facet name="header">Liste materiel</f:facet>
+			<p:ajax event="rowSelect" process="@this" update="form" listener="#{consulterMaterielController.selectionnerLigne}"></p:ajax>
+			
+			<p:column headerText="Code materiel">
+				<h:outputText value="#{variable.codeMateriel}" />
+			</p:column>
+			
+			<p:column headerText="Nom materiel">
+				<h:outputText value="#{variable.nomMateriel}" />
+			</p:column>
+			
+			 </p:dataTable>
+					<br></br>
+					<p:dataTable var="var" value="#{consulterMaterielController.listeHistoriqueParcours}" rowKey="#{var.idParcours}">
 				<f:facet name="header">Liste materiel</f:facet>
 			
 			<p:column headerText="Nom materiel">
-				<h:outputText value="#{variable.materiel.nomMateriel}" />
+				<h:outputText value="#{var.materiel.nomMateriel}" />
 			</p:column>
 			
-			<p:column headerText="Code parcours">
-				<h:outputText value="#{variable.codeParcours}" />
+			<p:column headerText="Service">
+				<h:outputText value="#{var.service.nomService}" />
 			</p:column>
 			
 			<p:column headerText="Date parcours">
-				<h:outputText value="#{variable.dateParcours}" />
+				<h:outputText value="#{var.dateEnregParcours}" />
+			</p:column>
+			
+			<p:column headerText="nature">
+				<h:outputText value="#{var.materiel.nature.libNature}" />
+			</p:column>
+			
+			<p:column headerText="marque">
+				<h:outputText value="#{var.materiel.marque.libelleMarque}" />
 			</p:column>
 			 </p:dataTable>
+				
+			
 			 
 			</h:form>
 			</ui:define>

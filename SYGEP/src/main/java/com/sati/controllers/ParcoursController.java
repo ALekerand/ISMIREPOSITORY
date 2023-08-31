@@ -102,6 +102,8 @@ public class ParcoursController {
 		//Enregistrer dans parcours
 		leService = (Service) service.getObjectById(idEntite, "Service");
 		parcours.setService(leService);
+		parcours.setMateriel(materiel);
+		genererCodeParcours();
 		parcours.setDateEnregParcours(new Date());
 		service.addObject(parcours);
 		
