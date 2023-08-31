@@ -12,7 +12,7 @@
 			<p:messages autoUpdate="true" closable="true" showDetail="false"/>
 			
 			<p:dataTable var="variable" value="#{consulterMaterielController.listMateriel}" selectionMode="single" selection="#{consulterMaterielController.selectedObject}" rowKey="#{variable.idMateriel}">
-				<f:facet name="header">Liste materiel</f:facet>
+				<f:facet name="header">LISTE MATERIEL</f:facet>
 			<p:ajax event="rowSelect" process="@this" update="form" listener="#{consulterMaterielController.selectionnerLigne}"></p:ajax>
 			
 			<p:column headerText="Code materiel">
@@ -26,7 +26,7 @@
 			 </p:dataTable>
 					<br></br>
 					<p:dataTable var="var" value="#{consulterMaterielController.listeHistoriqueParcours}" rowKey="#{var.idParcours}">
-				<f:facet name="header">Liste materiel</f:facet>
+				<f:facet name="header">LISTE PARCOURS MATERIEL</f:facet>
 			
 			<p:column headerText="Nom materiel">
 				<h:outputText value="#{var.materiel.nomMateriel}" />
@@ -43,14 +43,7 @@
 			<p:column headerText="nature">
 				<h:outputText value="#{var.materiel.nature.libNature}" />
 			</p:column>
-			
-			<p:column headerText="marque">
-				<h:outputText value="#{var.materiel.marque.libelleMarque}" />
-			</p:column>
 			 </p:dataTable>
-				
-			
-			 
 			</h:form>
 			</ui:define>
 			</ui:composition>

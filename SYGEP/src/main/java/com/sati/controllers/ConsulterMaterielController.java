@@ -37,7 +37,8 @@ public class ConsulterMaterielController {
 	}
 	
 	public void annuler() {
-		setCode_materiel(null);
+		
+		listeHistoriqueParcours.clear();
 	}
 
 	public String getCode_materiel() {
@@ -47,11 +48,23 @@ public class ConsulterMaterielController {
 		this.code_materiel = code_materiel;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Materiel> getListMateriel() {
+		listMateriel = requeteMateriel.listerMaterielAvecQRCODE();
+		return listMateriel;
+	}
+
+	public void setListMateriel(List<Materiel> listMateriel) {
+		this.listMateriel = listMateriel;
+	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Parcours> getListeHistoriqueParcours() {
-		parcours.setMateriel(selectedObject);
-		listeHistoriqueParcours.add(parcours);
+		if(selectedObject != null) {
+			listeHistoriqueParcours = requetePacours.historiqueMateriel(selectedObject.getIdMateriel());
+		}
 		return listeHistoriqueParcours;
+		
 	}
 
 	public void setListeHistoriqueParcours(List<Parcours> listeHistoriqueParcours) {
@@ -79,22 +92,13 @@ public class ConsulterMaterielController {
 		this.materiel = materiel;
 	}
 
+
 	public Materiel getSelectedObject() {
 		return selectedObject;
 	}
 
 	public void setSelectedObject(Materiel selectedObject) {
 		this.selectedObject = selectedObject;
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<Materiel> getListMateriel() {
-		listMateriel = requeteMateriel.listerMaterielAvecQRCODE();
-		return listMateriel;
-	}
-
-	public void setListMateriel(List<Materiel> listMateriel) {
-		this.listMateriel = listMateriel;
 	}
 
 
