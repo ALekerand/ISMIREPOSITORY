@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.5.final using JasperReports Library version 6.20.5-3efcf2e67f959db3888d79f73dde2dbd7acb4f8e  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="model_rapport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="59eda369-8c22-4a42-ae3f-ac11b8b10067">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="71" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="1" width="550" height="63" uuid="b3c83283-77e3-4d33-a0e9-8c4e26d789f9"/>
+				<image>
+					<reportElement x="0" y="0" width="59" height="50" uuid="cd5fc013-03cc-4283-a578-7218b89a60b3"/>
+					<imageExpression><![CDATA["/src/main/webapp/resource/images/ismi_logo_small.png"]]></imageExpression>
+				</image>
+				<staticText>
+					<reportElement x="232" y="7" width="100" height="18" uuid="17450130-b522-4497-a4b7-9e3244d3934c"/>
+					<text><![CDATA[TITRE RAPPORT]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="60" y="3" width="120" height="14" uuid="46a315f0-8a8d-4ad2-9ed6-8fe6413f01da"/>
+					<text><![CDATA[14 BP: 154 Abidjan 14]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="60" y="18" width="120" height="14" uuid="86892dc2-ccd9-4b5d-8452-4db9769a069c"/>
+					<text><![CDATA[Tel:+2250909099808]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="60" y="34" width="120" height="14" uuid="3eef67cc-0e7a-4a23-8eef-6df26c08c0fb"/>
+					<text><![CDATA[www.ismi.org]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
