@@ -54,6 +54,7 @@ public class MaterielController {
 	private int stockActuel;
 	private int stockAlerte;
 	private String etatFongible;
+	private List<Fongible> listFongible = new ArrayList<Fongible>();
 	private List<Famille> listFamille = new ArrayList<Famille>();
 	private List<Nature> listNature = new ArrayList<Nature>();
 	private List<Magasin> listMagasin = new ArrayList<Magasin>();
@@ -445,6 +446,17 @@ public class MaterielController {
 
 	public void setListMarque(List<Marque> listMarque) {
 		this.listMarque = listMarque;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Fongible> getListFongible() {
+		listFongible = service.getObjects("Fongible");
+		System.out.println("========Taille de la liste:"+listFongible.size());
+		return listFongible;
+	}
+
+	public void setListFongible(List<Fongible> listFongible) {
+		this.listFongible = listFongible;
 	}
 
 }
