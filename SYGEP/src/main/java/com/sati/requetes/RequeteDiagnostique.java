@@ -28,6 +28,13 @@ public class RequeteDiagnostique {
 	return diagnostique;
 		}
 	
+	public List recupererMaterielMauvaisEtat() {
+		
+		String query = "SELECT `diagnostique`.* FROM `diagnostique` WHERE `diagnostique`.`ID_ETAT` = 2";
+		List list = getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Diagnostique.class).list();
+		return list;
+		
+	}
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}

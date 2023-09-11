@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+       >
+      
+     
+      <ui:composition template="/templates/template.xhtml">
+			<ui:define name="body">
+			
+			<style type="text/css">
+			
+			
+        	</style>
+        
+		<div class="container" style="height:500px">
+
+		    <h:form>
+		        <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true" />
+		 		<!--  
+		        <p:dashboard id="board" model="#{dashboardView.model}">
+		            <p:ajax event="reorder" listener="#{dashboardView.handleReorder}" update="msgs" />
+		            
+		 		  -->
+		 		  
+		 		  <p:panelGrid columns="4" cellpadding="8" layout="grid" style="border:none;">
+		            <p:panel id="demande_attente" header="Demande en attente " styleClass="mystyleclass">
+		                <h:outputText value="#{tableauDeBordController.nbreDemandeAttente}" />
+		            </p:panel>
+		 
+		            <p:panel id="demande_valide" header="Demande validé">
+		                <h:outputText  value="#{tableauDeBordController.nbreDemandeValider}" />
+		            </p:panel>
+		 
+		            <p:panel id="materiel_mauvais_etat" header="Materiel mauvais etat">
+		                <h:outputText value="#{tableauDeBordController.nbreMaterielMauvaisEtat}" />
+		            </p:panel>
+		 
+		            <p:panel id="stock_alerte" header="Stock alerte atteint">
+		                <h:outputText value="#{tableauDeBordController.nbreMaterielStockAlertAtteint}" />
+		            </p:panel>
+		 
+		         
+		            </p:panelGrid>
+		       <!-- </p:dashboard> -->
+		 
+		        <div style="clear:both" />
+		    </h:form>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

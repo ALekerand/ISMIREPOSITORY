@@ -34,6 +34,11 @@ public class RequeteMateriel {
 	return list;
 		}
 
+	public List stockAlertMateriel() {
+		String query = "SELECT * FROM fongible WHERE STOCK_ACTUEL <= STOCK_ALERTE";
+		List list = getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Materiel.class).list();
+		return list;
+	}
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}

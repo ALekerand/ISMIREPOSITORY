@@ -66,6 +66,7 @@
    			<p:menuitem value="Historique de Parcours" outcome="/pages/historiqueMateriel.xhtml" icon="pi pi-upload"/>
    			<p:menuitem value="Etat Materiel" outcome="/pages/afficherEtatMateriel.xhtml" icon="pi pi-upload"/>
    			<p:menuitem value="Materiel et Stock_Actuel" outcome="/pages/afficherMateriel_StockActuel.xhtml" icon="pi pi-upload"/>
+   			<p:menuitem value="Materiel dont stock alert atteint" outcome="/pages/materielStockAlert_Atteint.xhtml" icon="pi pi-upload"/>
    			</p:submenu>
    			
             <p:submenu label="Gestion des Utilisateurs">
@@ -78,7 +79,8 @@
 
 <p:layoutUnit position="center">
 <div id="content">
-  <ui:insert name="body">    	
+  <ui:insert name="body">  
+  <ui:include  src="/pages/tableauDeBord.xhtml"></ui:include>  	
   </ui:insert>
 </div>
 </p:layoutUnit>
