@@ -10,45 +10,67 @@
       <ui:composition template="/templates/template.xhtml">
 			<ui:define name="body">
 			
-			<style type="text/css">
-			
-			
-        	</style>
-        
-		<div class="container" style="height:500px">
 
-		    <h:form>
-		        <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true" />
-		 		<!--  
-		        <p:dashboard id="board" model="#{dashboardView.model}">
-		            <p:ajax event="reorder" listener="#{dashboardView.handleReorder}" update="msgs" />
-		            
-		 		  -->
-		 		  
-		 		  <p:panelGrid columns="4" cellpadding="8" layout="grid" style="border:none;">
-		            <p:panel id="demande_attente" header="Demande en attente " styleClass="mystyleclass">
-		                <h:outputText value="#{tableauDeBordController.nbreDemandeAttente}" />
-		            </p:panel>
-		 
-		            <p:panel id="demande_valide" header="Demande validé">
-		                <h:outputText  value="#{tableauDeBordController.nbreDemandeValider}" />
-		            </p:panel>
-		 
-		            <p:panel id="materiel_mauvais_etat" header="Materiel mauvais etat">
-		                <h:outputText value="#{tableauDeBordController.nbreMaterielMauvaisEtat}" />
-		            </p:panel>
-		 
-		            <p:panel id="stock_alerte" header="Stock alerte atteint">
-		                <h:outputText value="#{tableauDeBordController.nbreMaterielStockAlertAtteint}" />
-		            </p:panel>
-		 
-		         
-		            </p:panelGrid>
-		       <!-- </p:dashboard> -->
-		 
-		        <div style="clear:both" />
-		    </h:form>
-		</div>
+        	<style>
+        	 
+        	 *{
+	        	 margin: 0;
+	        	 padding: 0;
+	        	 font-family: cursive;
+	        	 box-sizing: border-box;
+        	 }	
+        	 .flex-container{
+	        	 width: 100%;
+	        	 height: auto;
+	        	 display: flex;
+	        	 flex-direction: row;
+	        	 flex-wrap: wrap;
+	        	 justify-content: space-between;
+	        	 
+        	 }
+        	 .flex-box{
+        	 	width: 200px;
+        	 	height: 200px;
+        	 	color: white;
+        	 	font-size: 25px;
+        	 	text-align: center;
+        	 	border-radius: 20px;
+        	 	margin: 10px;
+        	 	
+        	 }
+        	 .nombre {
+        	 
+        		margin: 30px;
+        	 }
+        	
+			</style>
+			<h:form>
+			
+			<div class="flex-container"> 
+				<div class="flex-box" style="background: linear-gradient(45deg,#4099ff,#73b4ff);">
+					<h5>Demande en attente</h5>
+					<h3 class="nombre"> <h:outputText value="#{tableauDeBordController.nbreDemandeAttente}"  /></h3>
+				</div>
+				
+				<div class="flex-box" style="background: linear-gradient(45deg,#2ed8b6,#59e0c5);">
+					 <h5 >Demande traité et validé</h5>
+            		 <h3 class="nombre"><h:outputText  value="#{tableauDeBordController.nbreDemandeValider}" /></h3>
+				</div>
+			
+				<div class="flex-box" style=" background: linear-gradient(45deg,#FFB64D,#ffcb80);">
+					<h5>Materiel mauvais etat</h5>
+                 	<h3 class="nombre"> <h:outputText value="#{tableauDeBordController.nbreMaterielMauvaisEtat}" /></h3>
+				</div>
+				
+				<div class="flex-box" style="background: linear-gradient(45deg,#FF5370,#ff869a);">
+					 <h5>Stock alerte atteint</h5>
+                     <h3 class="nombre"> <h:outputText value="#{tableauDeBordController.nbreMaterielStockAlertAtteint}" /></h3>
+				</div>
+				
+				
+			</div>
+			
+		   </h:form>
 	</ui:define>
 </ui:composition>
 </html>
