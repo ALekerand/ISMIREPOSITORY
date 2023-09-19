@@ -50,17 +50,22 @@
         </p:column>
         
         <p:column headerText="Date">
-        <h:outputText value="#{var.dateSortie}"/>
+        <h:outputText value="#{var.dateSortie}">
+        <f:convertDateTime pattern="dd/MM/YYYY" type="date"/>
+        </h:outputText>
         </p:column>
         
            <p:column headerText="Date Enregistrement sortie">
-        <h:outputText value="#{var.dateEnregSortie}"/>
+        <h:outputText value="#{var.dateEnregSortie}">
+        <f:convertDateTime pattern="dd/MM/YYYY" type="date"/>
+        </h:outputText>
         </p:column>
         
          <p:column headerText="Demande">
         <h:outputText value="#{var.demande.codeDemande}"/>
         </p:column>
         </p:dataTable>
+        
 		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 	   <p:commandButton value="Oui" type="button"
 	   styleClass="ui-confirmdialog-yes" icon="ui-icon-check" >

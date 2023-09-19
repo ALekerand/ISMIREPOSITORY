@@ -34,7 +34,9 @@
                                        </p:column>
                                        
                                         <p:column headerText="Date Demande">
-                                       <h:outputText value="#{var.dateDemande}"/>
+                                       <h:outputText value="#{var.dateDemande}">
+                                       <f:convertDateTime pattern="dd/MM/YYYY" type="date"/>
+                                       </h:outputText>
                                        </p:column>
                                       
                                        <p:column headerText="Etat reception">

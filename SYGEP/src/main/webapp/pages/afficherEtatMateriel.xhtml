@@ -21,7 +21,9 @@
 				</p:column>
 				
 				<p:column headerText="Date diagnostique">
-					<h:outputText value="#{variable.dateDiagnostique}" />
+					<h:outputText value="#{variable.dateDiagnostique}">
+					<f:convertDateTime pattern="dd/MM/YYYY" type="date"/>
+					</h:outputText>
 				</p:column>
                        </p:dataTable>
            </h:form>

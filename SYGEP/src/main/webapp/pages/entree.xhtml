@@ -102,11 +102,15 @@
         </p:column>
         
         <p:column headerText="Date entrée">
-        <h:outputText value="#{var.dateEntree}"/>
+        <h:outputText value="#{var.dateEntree}">
+        <f:convertDateTime pattern="dd/MM/YYYY" type="date"/>
+        </h:outputText>
         </p:column>
         
         <p:column headerText="Date enregistrement">
-        <h:outputText value="#{var.dateEnregistrement}"/>
+        <h:outputText value="#{var.dateEnregistrement}">
+        <f:convertDateTime pattern="dd/MM/YYYY" type="date"/>
+        </h:outputText>
         </p:column>
         </p:dataTable>
 			

@@ -92,7 +92,9 @@
         </p:column>
         
         <p:column headerText="Date livraison">
-        <h:outputText value="#{variable.dateLivraison}"/>
+        <h:outputText value="#{variable.dateLivraison}">
+        <f:convertDateTime pattern="dd/MM/YYYY" type="date"/>
+        </h:outputText>
         </p:column>
         
         </p:dataTable>

@@ -37,7 +37,9 @@
                </p:column>
                
                 <p:column headerText="Date Demande">
-               <h:outputText value="#{var.dateDemande}"/>
+               <h:outputText value="#{var.dateDemande}">
+               <f:convertDateTime pattern="dd/MM/YYYY" type="date"/>
+               </h:outputText>
                </p:column>
                
                 <p:column headerText="Etat Reception">
@@ -45,7 +47,10 @@
                </p:column>
                  
                 <p:column headerText="Date Etat Reception">
-               <h:outputText value="#{var.dateEtatReception}"/>
+               <h:outputText value="#{var.dateEtatReception}">
+               <f:convertDateTime pattern="dd/MM/YYYY" type="date"/>
+               </h:outputText>
+               
                </p:column>
                  <p:column headerText="Autoriser sortie">
              <p:commandButton value="Autoriser sortie" actionListener="#{autoriserSortieController.selectionnerLigne}"
