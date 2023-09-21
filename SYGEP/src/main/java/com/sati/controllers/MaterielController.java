@@ -146,6 +146,7 @@ public class MaterielController {
 		this.materiel.setNature(natureProduit);
 		this.materiel.setMagasin(magasin);
 		this.materiel.setMarque(marque);
+		this.materiel.setRetrait(false);
 		service.addObject(materiel);
 		
 		//Enregistrement dans fongible et non fongible
@@ -160,6 +161,7 @@ public class MaterielController {
 			this.fongible.setStockAlerte(stockAlerte);
 			this.fongible.setNomMateriel(materiel.getNomMateriel());
 			this.fongible.setCodeMateriel(materiel.getCodeMateriel());
+			this.fongible.setRetrait(materiel.getRetrait());
 			this.fongible.setDescriptionMateriel(materiel.getDescriptionMateriel());
 			this.fongible.setMateriel(materiel);
 			service.addObject(fongible);
@@ -175,6 +177,7 @@ public class MaterielController {
 			this.Nonfongible.setIdMarque(idMarque);
 			this.Nonfongible.setNomMateriel(materiel.getNomMateriel());
 			this.Nonfongible.setCodeMateriel(materiel.getCodeMateriel());
+			this.Nonfongible.setRetrait(materiel.getRetrait());
 			this.Nonfongible.setDescriptionMateriel(materiel.getDescriptionMateriel());
 			this.Nonfongible.setMateriel(materiel);
 			service.addObject(Nonfongible);

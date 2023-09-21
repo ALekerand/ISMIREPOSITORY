@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+
+
+<ui:composition template="/templates/template.xhtml">
+			<ui:define name="body">
+				<h:form id="form">
+			<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+<p:dataTable widgetVar="dtMateriel"  var="var" value="#{retraitMaterielController.listMateriel}"  selectionMode="single" selection="#{retraitMaterielController.selectedMateriel}" rowKey="#{var.idMateriel}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+  <f:facet name="header">
+                <div class="materiel-table-header">
+                    <span style="font-weight: bold">LISTE DES MATERIELS NON RETIRE</span>
+                    <span class="filter-container ui-input-icon-left"> <i class="pi pi-search"></i>
+                        <p:inputText id="globalFilter" onkeyup="PF('dtMateriel').filter()" placeholder="Search" />
+                    </span>
+                </div>
+            </f:facet>
+     <p:ajax event="rowSelect" process="@this"  update="form" listener="#{retraitMaterielController.choisirLigne}"></p:ajax>
+   		<p:column selectionMode="single" style="width:16px;text-align:center"/>
+   		
+   		<p:column headerText="Réf" style="width:30%" filterBy="#{var.codeMateriel}" filterable="false">
+        <h:outputText value="#{var.codeMateriel}"/>
+        </p:column>
+        
+        <p:column headerText="Désignation" filterBy="#{var.nomMateriel}" filterable="false">
+        <h:outputText value="#{var.nomMateriel}"/>
+        </p:column>
+        
+        <p:column headerText="Description" filterBy="#{var.descriptionMateriel}" filterable="false">
+        <h:outputText value="#{var.descriptionMateriel}"/>
+        </p:column>
+        
+        </p:dataTable>	
+        <br/>
+		<p:toolbar >
+			<f:facet name="left">
+        <p:commandButton value="Retirer" actionListener="#{retraitMaterielController.retirer}" update="form">
+        	<f:setPropertyActionListener value="#{variable}" target="#{retraitMaterielController.selectedMateriel}"/>
+        	<p:confirm header="confirmation" message="voulez-vous retirer ce materiel?"></p:confirm>
+        </p:commandButton>
+        </f:facet>
+       </p:toolbar>
+       <br/>
+       <br/>
+       <p:dataTable widgetVar="dtMateriel"  var="var" value="#{retraitMaterielController.listRetraitMateriel}"  selectionMode="single" selection="#{retraitMaterielController.selectedMateriel}" rowKey="#{var.idMateriel}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+  <f:facet name="header">LISTES DES MATERIELS RETIRE </f:facet>
+     <p:ajax event="rowSelect" process="@this"  update="form" ></p:ajax>
+   		
+   		<p:column headerText="Réf" filterBy="#{var.codeMateriel}" filterable="false">
+        <h:outputText value="#{var.codeMateriel}"/>
+        </p:column>
+        
+        <p:column headerText="Désignation" filterBy="#{var.nomMateriel}" filterable="false">
+        <h:outputText value="#{var.nomMateriel}"/>
+        </p:column>
+        
+        <p:column headerText="Description" filterBy="#{var.descriptionMateriel}" filterable="false">
+        <h:outputText value="#{var.descriptionMateriel}"/>
+        </p:column>
+        
+        </p:dataTable>
+        
+         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+	   <p:commandButton value="Oui" type="button"
+	   styleClass="ui-confirmdialog-yes" icon="ui-icon-check" >
+	   </p:commandButton>
+	   <p:commandButton value="Non" type="button"
+	   styleClass="ui-confirmdialog-no" icon="ui-icon-close" >
+	   </p:commandButton>
+	   </p:confirmDialog>
+       </h:form>
+      </ui:define>
+     </ui:composition>
+     
+     
+</html>

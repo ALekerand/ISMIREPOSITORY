@@ -1,5 +1,5 @@
 package com.sati.model;
-// Generated 26 ao�t 2023, 22:26:06 by Hibernate Tools 4.3.6.Final
+// Generated 21 sept. 2023, 13:04:21 by Hibernate Tools 4.3.6.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,6 +28,7 @@ public class Fongible implements java.io.Serializable {
 	private String nomMateriel;
 	private String descriptionMateriel;
 	private String referenceMateriel;
+	private Boolean retrait;
 	private Integer stockActuel;
 	private Integer stockAlerte;
 
@@ -39,8 +40,8 @@ public class Fongible implements java.io.Serializable {
 	}
 
 	public Fongible(Materiel materiel, Integer idNature, Integer idMagasin, Integer idMarque, String codeMateriel,
-			String nomMateriel, String descriptionMateriel, String referenceMateriel, Integer stockActuel,
-			Integer stockAlerte) {
+			String nomMateriel, String descriptionMateriel, String referenceMateriel, Boolean retrait,
+			Integer stockActuel, Integer stockAlerte) {
 		this.materiel = materiel;
 		this.idNature = idNature;
 		this.idMagasin = idMagasin;
@@ -49,6 +50,7 @@ public class Fongible implements java.io.Serializable {
 		this.nomMateriel = nomMateriel;
 		this.descriptionMateriel = descriptionMateriel;
 		this.referenceMateriel = referenceMateriel;
+		this.retrait = retrait;
 		this.stockActuel = stockActuel;
 		this.stockAlerte = stockAlerte;
 	}
@@ -66,7 +68,7 @@ public class Fongible implements java.io.Serializable {
 		this.idMateriel = idMateriel;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@PrimaryKeyJoinColumn
 	public Materiel getMateriel() {
 		return this.materiel;
@@ -137,6 +139,15 @@ public class Fongible implements java.io.Serializable {
 
 	public void setReferenceMateriel(String referenceMateriel) {
 		this.referenceMateriel = referenceMateriel;
+	}
+
+	@Column(name = "RETRAIT")
+	public Boolean getRetrait() {
+		return this.retrait;
+	}
+
+	public void setRetrait(Boolean retrait) {
+		this.retrait = retrait;
 	}
 
 	@Column(name = "STOCK_ACTUEL")

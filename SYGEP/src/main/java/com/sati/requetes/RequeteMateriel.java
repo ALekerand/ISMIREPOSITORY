@@ -22,14 +22,14 @@ public class RequeteMateriel {
 	private SessionFactory sessionFactory;
 	
 	public List listerMaterielSansQRCODE() {
-		String query = "SELECT `materiel`.* FROM `materiel` WHERE `materiel`.`CODE_MATERIEL` NOT LIKE 'MTQR%'";
+		String query = "SELECT `materiel`.* FROM `materiel` WHERE `materiel`.`CODE_MATERIEL` NOT LIKE 'MTQR%' AND `materiel`.RETRAIT =0 ";
 		List list = getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Materiel.class).list();
 	return list;
 		}
 	
 	
 	public List listerMaterielAvecQRCODE() {
-		String query = "SELECT `materiel`.* FROM `materiel` WHERE `materiel`.`CODE_MATERIEL` LIKE 'MTQR%'";
+		String query = "SELECT `materiel`.* FROM `materiel` WHERE `materiel`.RETRAIT = 0  AND `materiel`.`CODE_MATERIEL` LIKE 'MTQR%'";
 		List list = getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Materiel.class).list();
 	return list;
 		}
@@ -39,6 +39,18 @@ public class RequeteMateriel {
 		List list = getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Materiel.class).list();
 		return list;
 	}
+	
+	public List listerMateriel() {
+		String query = "SELECT `materiel`.* FROM `materiel` WHERE  `materiel`.RETRAIT =0 ";
+		List list = getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Materiel.class).list();
+	return list;
+		}
+	public List listeRetraitMateriel() {
+		String query = "SELECT `materiel`.* FROM `materiel` WHERE  `materiel`.RETRAIT =1 ";
+		List list = getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Materiel.class).list();
+	return list;
+		}
+	
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
