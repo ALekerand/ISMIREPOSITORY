@@ -1,5 +1,5 @@
 package com.sati.model;
-// Generated 26 ao�t 2023, 22:26:06 by Hibernate Tools 4.3.6.Final
+// Generated 21 sept. 2023, 13:04:21 by Hibernate Tools 4.3.6.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -31,6 +31,7 @@ public class NonFongible implements java.io.Serializable {
 	private String nomMateriel;
 	private String descriptionMateriel;
 	private String referenceMateriel;
+	private Boolean retrait;
 	private String qrCode;
 	private Boolean retraitMateriel;
 	private Date dateRetrait;
@@ -43,7 +44,7 @@ public class NonFongible implements java.io.Serializable {
 	}
 
 	public NonFongible(Materiel materiel, Integer idNature, Integer idMagasin, Integer idMarque, String codeMateriel,
-			String nomMateriel, String descriptionMateriel, String referenceMateriel, String qrCode,
+			String nomMateriel, String descriptionMateriel, String referenceMateriel, Boolean retrait, String qrCode,
 			Boolean retraitMateriel, Date dateRetrait) {
 		this.materiel = materiel;
 		this.idNature = idNature;
@@ -53,6 +54,7 @@ public class NonFongible implements java.io.Serializable {
 		this.nomMateriel = nomMateriel;
 		this.descriptionMateriel = descriptionMateriel;
 		this.referenceMateriel = referenceMateriel;
+		this.retrait = retrait;
 		this.qrCode = qrCode;
 		this.retraitMateriel = retraitMateriel;
 		this.dateRetrait = dateRetrait;
@@ -71,7 +73,7 @@ public class NonFongible implements java.io.Serializable {
 		this.idMateriel = idMateriel;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@PrimaryKeyJoinColumn
 	public Materiel getMateriel() {
 		return this.materiel;
@@ -142,6 +144,15 @@ public class NonFongible implements java.io.Serializable {
 
 	public void setReferenceMateriel(String referenceMateriel) {
 		this.referenceMateriel = referenceMateriel;
+	}
+
+	@Column(name = "RETRAIT")
+	public Boolean getRetrait() {
+		return this.retrait;
+	}
+
+	public void setRetrait(Boolean retrait) {
+		this.retrait = retrait;
 	}
 
 	@Column(name = "QR_CODE", length = 200)

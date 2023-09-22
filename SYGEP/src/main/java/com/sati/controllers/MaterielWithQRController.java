@@ -177,6 +177,7 @@ public class MaterielWithQRController {
 		this.materiel.setNature(natureProduit);
 		this.materiel.setMagasin(magasin);
 		this.materiel.setMarque(marque);
+		this.materiel.setRetrait(false);
 		this.service.addObject(this.materiel);
 		
 		//Enregistrement dans fongible et non fongible
@@ -188,6 +189,7 @@ public class MaterielWithQRController {
 			this.Nonfongible.setIdMarque(null);
 			this.Nonfongible.setNomMateriel(materiel.getNomMateriel());
 			this.Nonfongible.setCodeMateriel(materiel.getCodeMateriel());
+			this.Nonfongible.setRetrait(materiel.getRetrait());
 			this.Nonfongible.setDescriptionMateriel(materiel.getDescriptionMateriel());
 			this.Nonfongible.setMateriel(materiel);
 			this.service.addObject(this.Nonfongible);

@@ -1,5 +1,5 @@
 package com.sati.model;
-// Generated 26 ao�t 2023, 22:26:06 by Hibernate Tools 4.3.6.Final
+// Generated 21 sept. 2023, 13:04:21 by Hibernate Tools 4.3.6.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -30,6 +30,7 @@ public class Materiel implements java.io.Serializable {
 	private String nomMateriel;
 	private String descriptionMateriel;
 	private String referenceMateriel;
+	private Boolean retrait;
 	private Set<Valeur> valeurs = new HashSet<Valeur>(0);
 	private NonFongible nonFongible;
 	private Fongible fongible;
@@ -48,9 +49,9 @@ public class Materiel implements java.io.Serializable {
 	}
 
 	public Materiel(Magasin magasin, Marque marque, Nature nature, String codeMateriel, String nomMateriel,
-			String descriptionMateriel, String referenceMateriel, Set<Valeur> valeurs, NonFongible nonFongible,
-			Fongible fongible, Set<LigneCommande> ligneCommandes, Set<Demande> demandes, Set<Entree> entrees,
-			Set<Parcours> parcourses, Set<Diagnostique> diagnostiques) {
+			String descriptionMateriel, String referenceMateriel, Boolean retrait, Set<Valeur> valeurs,
+			NonFongible nonFongible, Fongible fongible, Set<LigneCommande> ligneCommandes, Set<Demande> demandes,
+			Set<Entree> entrees, Set<Parcours> parcourses, Set<Diagnostique> diagnostiques) {
 		this.magasin = magasin;
 		this.marque = marque;
 		this.nature = nature;
@@ -58,6 +59,7 @@ public class Materiel implements java.io.Serializable {
 		this.nomMateriel = nomMateriel;
 		this.descriptionMateriel = descriptionMateriel;
 		this.referenceMateriel = referenceMateriel;
+		this.retrait = retrait;
 		this.valeurs = valeurs;
 		this.nonFongible = nonFongible;
 		this.fongible = fongible;
@@ -144,6 +146,15 @@ public class Materiel implements java.io.Serializable {
 
 	public void setReferenceMateriel(String referenceMateriel) {
 		this.referenceMateriel = referenceMateriel;
+	}
+
+	@Column(name = "RETRAIT")
+	public Boolean getRetrait() {
+		return this.retrait;
+	}
+
+	public void setRetrait(Boolean retrait) {
+		this.retrait = retrait;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "materiel")
