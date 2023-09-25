@@ -29,7 +29,7 @@ public class RequeteMateriel {
 	
 	
 	public List listerMaterielAvecQRCODE() {
-		String query = "SELECT `materiel`.* FROM `materiel` WHERE `materiel`.RETRAIT = 0  AND `materiel`.`CODE_MATERIEL` LIKE 'MTQR%'";
+		String query = "SELECT `materiel`.* FROM `materiel` WHERE `materiel`.`RETRAIT` = 0  AND `materiel`.`CODE_MATERIEL` LIKE 'MTQR%'";
 		List list = getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Materiel.class).list();
 	return list;
 		}
@@ -41,10 +41,12 @@ public class RequeteMateriel {
 	}
 	
 	public List listerMateriel() {
-		String query = "SELECT `materiel`.* FROM `materiel` WHERE  `materiel`.RETRAIT =0 ";
+		String query = "SELECT `materiel`.* FROM `materiel` WHERE  `materiel`.RETRAIT =0";
 		List list = getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Materiel.class).list();
 	return list;
 		}
+	
+	
 	public List listeRetraitMateriel() {
 		String query = "SELECT `materiel`.* FROM `materiel` WHERE  `materiel`.RETRAIT =1 ";
 		List list = getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Materiel.class).list();

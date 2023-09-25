@@ -30,7 +30,7 @@
                     </span>
                 </div>
             </f:facet>
-			<p:ajax event="rowSelect" listener="#{parcoursController.selectionnerLigne}" update="form"></p:ajax>
+			<p:ajax event="rowSelect" process="@this" listener="#{parcoursController.selectionnerLigne}" update=":form"></p:ajax>
 			
 			<p:column selectionMode="single" style="width:16px;text-align:center"/>
 			<p:column headerText="Code" filterBy="#{variable.codeMateriel}" filterable="false">

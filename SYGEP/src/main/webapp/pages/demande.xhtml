@@ -49,18 +49,18 @@
 	<p:outputLabel for="input_code" value="Code:"></p:outputLabel>
 	<p:inputText id="input_code" value="#{demandeController.demande.codeDemande}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
 
-	<p:outputLabel for="input_qte" value="Quantité:"></p:outputLabel>
-	<p:inputText id="input_qte" value="#{demandeController.demande.qteDemande}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>
-
 	<p:outputLabel for="radio_emprunt" value="Emprunt:"></p:outputLabel>
 	<p:selectOneRadio id="radio_emprunt" value="#{demandeController.value_emprunt}" binding="#{demandeController.radio_emptunt}">
 		 <p:ajax process="@this"  update="form" listener="#{demandeController.gererDateRetour}"/> 
 	     <f:selectItem itemLabel="Non" itemValue="non"/>
 	     <f:selectItem itemLabel="Oui" itemValue="oui"/>
      </p:selectOneRadio>
-	
-	<p:outputLabel for="date_affect" value="Date retour"></p:outputLabel>
-	<p:calendar id="date_affect"  binding="#{demandeController.input_date_retour}" locale="fr" navigator="true" pattern="dd/MM/yyyy" required="true"/>
+
+	<p:outputLabel for="input_qte" value="Quantité:"></p:outputLabel>
+	<p:inputText id="input_qte" value="#{demandeController.demande.qteDemande}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>
+
+	<p:outputLabel for="date_retour" value="Date retour:"></p:outputLabel>
+	<p:calendar id="date_retour" value="#{demandeController.demande.dateRetourPrevue}"  binding="#{demandeController.input_date_retour}" locale="fr" navigator="true" pattern="dd/MM/yyyy" required="true"/>
      
 	<p:outputLabel for="input_motif" value="Motif:"></p:outputLabel>
 	<p:inputTextarea id="input_motif" value="#{demandeController.demande.motifDemande}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputTextarea>
@@ -72,7 +72,7 @@
 </p:panel>
 <br/>
 <p:toolbar >
-			<f:facet name="left">
+			<f:facet name="right">
 				<p:commandButton value="Enregistrer" action="#{demandeController.enregistrer}" update="form" binding="#{demandeController.btnEnregistrer}"><p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
 				<p:commandButton value="Annuler"  action="#{demandeController.annuler}" process="@this" update="form" binding="#{demandeController.btnAnnuler}"><p:confirm header="confirmation" message="voulez-vous annuler?"></p:confirm></p:commandButton>
 				<p:commandButton value="Modifier"  action="#{demandeController.modifier}" update="form" binding="#{demandeController.btnModifier}"><p:confirm header="confirmation" message="confirmez-vous la modification?"></p:confirm></p:commandButton>

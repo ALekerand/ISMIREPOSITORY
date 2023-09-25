@@ -41,6 +41,11 @@
         <p:column headerText="Motif" >
         <h:outputText value="#{var.motifDemande}"/>
         </p:column>
+        
+        <p:column headerText="Motif" >
+        <p:commandButton value="Consulter stock" />
+        </p:column>
+        
           <p:column headerText="Etat" style="width:22%">
             <h:panelGrid columns="2"  >
                 <h:commandButton value="Valider" actionListener="#{traitementDemandeController_Admin.validerDemande}" update="form" >

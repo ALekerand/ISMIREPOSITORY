@@ -46,11 +46,18 @@ public class ConsulterListDiagnosticController {
 		    
 		    listeMateriels = requeteMateriel.listerMaterielAvecQRCODE();
 		    
-		    System.out.println(listeMateriels);
+		    System.out.println("==================="+listeMateriels.size());
 		    
+		    listeDiagnostique.clear();
 		    
 		    for (Materiel materiel : listeMateriels ) {
-		       diagnostique = requeteDiagnostique.recupererLastDiagnostiqueDuMateriel(materiel.getIdMateriel());
+		       try {
+				diagnostique = requeteDiagnostique.recupererLastDiagnostiqueDuMateriel(materiel.getIdMateriel());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+				continue;
+			}
 		       listeDiagnostique.add(diagnostique);
 		    }
 

@@ -123,6 +123,7 @@ public class DemandeController {
 		demande.setMotifDemande(null);
 		demande.setQteDemande(null);
 		demande.setDateDemande(null);
+		demande.setDateRetourPrevue(null);
 		this.btnModifier.setDisabled(true);
 		this.btnEnregistrer.setDisabled(false);
 		genererCode();

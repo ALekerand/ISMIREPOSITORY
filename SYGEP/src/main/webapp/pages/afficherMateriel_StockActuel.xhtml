@@ -12,10 +12,11 @@
       	
       		<h:form id="form">
       		
-      			<p:dataTable  var="var" value="#{materielController.listFongible}" selectionMode="single" selection="#{materielController.selectedObject}" rowKey="#{var.idMateriel}" paginator="true" paginatorPosition="bottom"  rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+      <p:dataTable  var="var" value="#{materielController.listFongible}" selectionMode="single" selection="#{materielController.selectedObject}" rowKey="#{var.idMateriel}" 
+      				paginator="true" paginatorPosition="bottom"  rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  
- <f:facet name="header">LISTE DES MATERIELS</f:facet>
-     <p:ajax event="rowSelect" process="@this"  update="form" listener="#{materielController.selectionnerLigne}"></p:ajax>
+ 		<f:facet name="header">LISTE DES MATERIELS</f:facet>
+     	<p:ajax event="rowSelect" process="@this"  update="form" listener="#{materielController.selectionnerLigne}"></p:ajax>
    		
    		<p:column headerText="Référence" style="width:30%">
         <h:outputText value="#{var.codeMateriel}"/>
