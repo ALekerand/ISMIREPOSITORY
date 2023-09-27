@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+
+		<ui:composition template="/templates/template.xhtml">
+			<ui:define name="body">
+				<h:form id="form">
+						<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+						
+						
+									<fieldset>
+				 	<legend>ENREGISTREMENT DES INVENTAIRES</legend>		
+						<h:panelGrid columns="4" cellpadding="10">
+						
+					<p:outputLabel for="input_code" value="Code:"></p:outputLabel>
+					<p:inputText id="input_code" value="#{inventaireController.inventaire.codeInventaire}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
+						
+					<p:outputLabel for="radio_etat" value="Etat cloture:"></p:outputLabel>
+					<p:selectOneRadio id="radio_etat" value="#{inventaireController.etat}" binding="#{inventaireController.radio_etat}">
+						 <p:ajax process="@this"  update="form" listener="#{inventaireController.gererDateFin}"/> 
+					     <f:selectItem itemLabel="Non" itemValue="non"/>
+					     <f:selectItem itemLabel="Oui" itemValue="oui"/>
+				     </p:selectOneRadio>
+				     
+					<p:outputLabel for="input_lib" value="Libelle etat inventaire"></p:outputLabel>
+					<p:inputText id="input_lib" value="#{inventaireController.inventaire.libInventaire}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
+				     
+				     <p:outputLabel for="date_debut" value="Date debut:"></p:outputLabel>
+					<p:calendar id="date_debut" value="#{inventaireController.dateDebut}"  locale="fr" navigator="true" pattern="dd/MM/yyyy" required="true"/>
+				    
+				     <p:outputLabel for="date_fin" value="Date fin:"></p:outputLabel>
+					<p:calendar id="date_fin" value="#{inventaireController.inventaire.dateFinInventaire}"  binding="#{inventaireController.input_date_fin}" locale="fr" navigator="true" pattern="dd/MM/yyyy" required="true"/>
+				     
+				</h:panelGrid>
+				</fieldset>
+				
+				<br />
+				
+				<p:toolbar >
+							<f:facet name="left">
+								<p:commandButton value="Enregistrer" action="#{inventaireController.enregistrer}" update="form" binding="#{inventaireController.btnEnregistrer}"><p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
+								<p:commandButton value="Modifier"  action="#{inventaireController.modifier}" update="form" binding="#{inventaireController.btnModifier}"><p:confirm header="confirmation" message="confirmez-vous la modification?"></p:confirm></p:commandButton>
+								<p:commandButton value="Annuler" action="#{inventaireController.annuler}" update="form" binding="#{inventaireController.btnAnnuler}"><p:confirm header="confirmation" message="confirmez-vous l'annulation?"></p:confirm></p:commandButton>
+							</f:facet>
+						</p:toolbar>
+						<br/>
+						
+						<p:dataTable  var="var" value="#{inventaireController.listInventaire}"  selectionMode="single" selection="#{inventaireController.selectedInventaire}" rowKey="#{var.idInventaire}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+				 
+						 <f:facet name="header"> LISTE DES INVENTAIRES </f:facet>
+				     <p:ajax event="rowSelect" process="@this"  update="form" listener="#{inventaireController.selectionnerLigne}"></p:ajax>
+				   		
+				   		<p:column headerText="Code inventaire">
+				        <h:outputText value="#{var.codeInventaire}"/>
+				        </p:column>
+				        
+				        <p:column headerText="Libelle inventaire" >
+				        <h:outputText value="#{var.libInventaire}"/>
+				        </p:column>
+				        
+				        <p:column headerText="Date debut" >
+				        <h:outputText value="#{var.dateDebutInventaire}">
+				         <f:convertDateTime pattern="dd/MM/YYYY" type="date"/>
+				         </h:outputText>
+				        </p:column>
+				        
+				   		<p:column headerText="Date fin" >
+				        <h:outputText value="#{var.dateFinInventaire}">
+				        <f:convertDateTime pattern="dd/MM/YYYY" type="date"/>
+				        </h:outputText>
+				        </p:column>
+				        
+				        
+				        </p:dataTable>
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+					   <p:commandButton value="Oui" type="button"
+					   styleClass="ui-confirmdialog-yes" icon="ui-icon-check" >
+					   </p:commandButton>
+					   <p:commandButton value="Non" type="button"
+					   styleClass="ui-confirmdialog-no" icon="ui-icon-close" >
+					   </p:commandButton>
+					   </p:confirmDialog>
+			   
+			   </h:form>
+			</ui:define>
+		</ui:composition> 
+</html>

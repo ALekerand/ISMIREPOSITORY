@@ -1,5 +1,5 @@
 package com.sati.model;
-// Generated 21 sept. 2023, 13:04:21 by Hibernate Tools 4.3.6.Final
+// Generated 25 sept. 2023, 20:35:19 by Hibernate Tools 4.3.6.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

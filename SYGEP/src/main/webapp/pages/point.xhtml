@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+
+	<ui:composition template="/templates/template.xhtml">
+			<ui:define name="body">
+				<h:form id="form">
+						<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+						
+					<p:panel header="Enregistrement des points d'inventaire">
+					<table>
+						<tr>
+							<td>
+									<p:dataTable widgetVar="dtMateriel"  var="var" value="#{pointController.listMateriel}"  selectionMode="single" selection="#{pointController.selectedMateriel}" rowKey="#{var.idMateriel}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+								  		<f:facet name="header">
+								                <div class="materiel-table-header">
+								                    <span style="font-weight: bold">Liste des materiels</span>
+								                    <span class="filter-container ui-input-icon-left"> <i class="pi pi-search"></i>
+								                        <p:inputText id="globalFilter" onkeyup="PF('dtMateriel').filter()" placeholder="Search" />
+								                    </span>
+								                </div>
+								            </f:facet>
+								     		<p:ajax event="rowSelect" process="@this"  update="form" listener="#{pointController.choisirLigneMateriel}"></p:ajax>
+								   		<p:column selectionMode="single" style="width:16px;text-align:center"/>
+								   		
+								   		<p:column headerText="Réf" style="width:30%" filterBy="#{var.codeMateriel}" filterable="false">
+								        <h:outputText value="#{var.codeMateriel}"/>
+								        </p:column>
+								        
+								        <p:column headerText="Désignation" filterBy="#{var.nomMateriel}" filterable="false">
+								        <h:outputText value="#{var.nomMateriel}"/>
+								        </p:column>
+								        
+								        </p:dataTable>
+							</td>
+							
+							<td>
+									<h:panelGrid columns="4" cellpadding="10">
+										
+										<p:outputLabel for="input_lib" value="Observation point:"></p:outputLabel>
+										<p:inputText id="input_lib" value="#{pointController.point.observationPoint}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
+									     
+									     <p:outputLabel for="input_nbStock" value="Nombre de stock manquant:"></p:outputLabel>
+										 <p:inputText id="input_nbStock" value="#{pointController.point.manquantStock}"></p:inputText>
+									    
+									     <p:outputLabel for="cb_etatInventaire" value="Etat inventaire:"/>
+										 <p:selectOneMenu id="cb_etatInventaire" required="true" value="#{pointController.idEtatInventaire}">
+										 <f:selectItem itemLabel="Selectionnez" itemValue="" />
+										 <f:selectItems value="#{pointController.listEtatInventaire}" var="tata" itemLabel="#{tata.libEtatInventaire}" itemValue="#{tata.idEtatInventaire}"></f:selectItems>
+										</p:selectOneMenu>
+									     
+									      <p:outputLabel for="cb_Inventaire" value="Inventaire:"/>
+										 <p:selectOneMenu id="cb_Inventaire" required="true" value="#{pointController.idInventaire}">
+										 <f:selectItems value="#{pointController.listInventaire}" var="tata" itemLabel="#{tata.libInventaire}" itemValue="#{tata.idInventaire}"></f:selectItems>
+										</p:selectOneMenu>
+										
+									</h:panelGrid>
+									
+	</td>
+						</tr>
+					
+					</table>
+						
+				</p:panel>	
+				<br />
+				
+				<p:toolbar >
+							<f:facet name="left">
+								<p:commandButton value="Enregistrer" action="#{pointController.enregistrer}" update="form" binding="#{pointController.btnEnregistrer}"><p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
+								<p:commandButton value="Modifier"  action="#{pointController.modifier}" update="form" binding="#{pointController.btnModifier}"><p:confirm header="confirmation" message="confirmez-vous la modification?"></p:confirm></p:commandButton>
+								<p:commandButton value="Annuler" action="#{pointController.annuler}" update="form" binding="#{pointController.btnAnnuler}"><p:confirm header="confirmation" message="confirmez-vous l'annulation?"></p:confirm></p:commandButton>
+							</f:facet>
+						</p:toolbar>
+						<br/>
+						
+						<p:dataTable  var="var" value="#{pointController.listPoint}"  selectionMode="single" selection="#{pointController.selectedPoint}" rowKey="#{var.idPoint}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+				 
+						 <f:facet name="header"> LISTE DES INVENTAIRES </f:facet>
+				     <p:ajax event="rowSelect" process="@this"  update="form" listener="#{pointController.selectionnerLigne}"></p:ajax>
+				   		
+				   		<p:column headerText="Materiel">
+				        <h:outputText value="#{var.materiel.nomMateriel}"/>
+				        </p:column>
+				        
+				   		<p:column headerText="Observation point">
+				        <h:outputText value="#{var.observationPoint}"/>
+				        </p:column>
+				        
+				        <p:column headerText="Stock manquant" >
+				        <h:outputText value="#{var.manquantStock}"/>
+				        </p:column>
+				        
+				        <p:column headerText="Etat inventaire" >
+				        <h:outputText value="#{var.etatInventaire.libEtatInventaire}"/>
+				        </p:column>
+				        
+				   		<p:column headerText="Inventaire" >
+				        <h:outputText value="#{var.inventaire.libInventaire}"/>
+				        </p:column>
+				        
+				        
+				        </p:dataTable>
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+					   <p:commandButton value="Oui" type="button"
+					   styleClass="ui-confirmdialog-yes" icon="ui-icon-check" >
+					   </p:commandButton>
+					   <p:commandButton value="Non" type="button"
+					   styleClass="ui-confirmdialog-no" icon="ui-icon-close" >
+					   </p:commandButton>
+					   </p:confirmDialog>
+			   
+			   </h:form>
+			</ui:define>
+		</ui:composition> 
+</html>

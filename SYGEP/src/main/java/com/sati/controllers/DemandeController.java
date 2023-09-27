@@ -101,7 +101,7 @@ public class DemandeController {
 		this.demande.setDateDemande(new Date());
 		
 		//Enregister en base
-		this.service.addObject(this.demande);
+		service.addObject(demande);
 		
 		info("Enregistrement effectué avec succès!");
 		annuler();

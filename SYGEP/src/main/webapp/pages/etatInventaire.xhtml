@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+
+
+<ui:composition template="/templates/template.xhtml">
+	<ui:define name="body">
+		<h:form id="form">
+		<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+		
+		
+					<fieldset>
+ 	<legend>ENREGISTREMENT DES ETATS D'INVENTAIRE</legend>		
+		<h:panelGrid columns="6" cellpadding="10">
+	<p:outputLabel for="input_lib" value="Libelle etat inventaire"></p:outputLabel>
+	<p:inputText id="input_lib" value="#{etatInventaireController.etatInventaire.libEtatInventaire}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
+
+</h:panelGrid>
+</fieldset>
+
+<br />
+
+<p:toolbar >
+			<f:facet name="left">
+				<p:commandButton value="Enregistrer" action="#{etatInventaireController.enregistrer}" update="form" binding="#{etatInventaireController.btnEnregistrer}"><p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
+				<p:commandButton value="Modifier"  action="#{etatInventaireController.modifier}" update="form" binding="#{etatInventaireController.btnModifier}"><p:confirm header="confirmation" message="confirmez-vous la modification?"></p:confirm></p:commandButton>
+				<p:commandButton value="Annuler" action="#{etatInventaireController.annuler}" update="form" binding="#{etatInventaireController.btnAnnuler}"><p:confirm header="confirmation" message="confirmez-vous l'annulation?"></p:confirm></p:commandButton>
+			</f:facet>
+		</p:toolbar>
+		<br/>
+		
+		<p:dataTable  var="var" value="#{etatInventaireController.listEtatInventaire}"  selectionMode="single" selection="#{etatInventaireController.selectedEtatInventaire}" rowKey="#{var.idEtatInventaire}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+ 
+ <f:facet name="header"> LISTE DES ETATS D'INVENTAIRE </f:facet>
+     <p:ajax event="rowSelect" process="@this"  update="form" listener="#{etatInventaireController.selectionnerLigne}"></p:ajax>
+   		
+   		<p:column headerText="Libelle etat inventaire" style="width:30%">
+        <h:outputText value="#{var.libEtatInventaire}"/>
+        </p:column>
+        
+        
+        </p:dataTable>
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+	   <p:commandButton value="Oui" type="button"
+	   styleClass="ui-confirmdialog-yes" icon="ui-icon-check" >
+	   </p:commandButton>
+	   <p:commandButton value="Non" type="button"
+	   styleClass="ui-confirmdialog-no" icon="ui-icon-close" >
+	   </p:commandButton>
+	   </p:confirmDialog>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

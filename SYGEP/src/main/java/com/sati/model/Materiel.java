@@ -1,5 +1,5 @@
 package com.sati.model;
-// Generated 21 sept. 2023, 13:04:21 by Hibernate Tools 4.3.6.Final
+// Generated 25 sept. 2023, 20:35:19 by Hibernate Tools 4.3.6.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -35,6 +35,7 @@ public class Materiel implements java.io.Serializable {
 	private NonFongible nonFongible;
 	private Fongible fongible;
 	private Set<LigneCommande> ligneCommandes = new HashSet<LigneCommande>(0);
+	private Set<Point> points = new HashSet<Point>(0);
 	private Set<Demande> demandes = new HashSet<Demande>(0);
 	private Set<Entree> entrees = new HashSet<Entree>(0);
 	private Set<Parcours> parcourses = new HashSet<Parcours>(0);
@@ -50,8 +51,8 @@ public class Materiel implements java.io.Serializable {
 
 	public Materiel(Magasin magasin, Marque marque, Nature nature, String codeMateriel, String nomMateriel,
 			String descriptionMateriel, String referenceMateriel, Boolean retrait, Set<Valeur> valeurs,
-			NonFongible nonFongible, Fongible fongible, Set<LigneCommande> ligneCommandes, Set<Demande> demandes,
-			Set<Entree> entrees, Set<Parcours> parcourses, Set<Diagnostique> diagnostiques) {
+			NonFongible nonFongible, Fongible fongible, Set<LigneCommande> ligneCommandes, Set<Point> points,
+			Set<Demande> demandes, Set<Entree> entrees, Set<Parcours> parcourses, Set<Diagnostique> diagnostiques) {
 		this.magasin = magasin;
 		this.marque = marque;
 		this.nature = nature;
@@ -64,6 +65,7 @@ public class Materiel implements java.io.Serializable {
 		this.nonFongible = nonFongible;
 		this.fongible = fongible;
 		this.ligneCommandes = ligneCommandes;
+		this.points = points;
 		this.demandes = demandes;
 		this.entrees = entrees;
 		this.parcourses = parcourses;
@@ -191,6 +193,15 @@ public class Materiel implements java.io.Serializable {
 
 	public void setLigneCommandes(Set<LigneCommande> ligneCommandes) {
 		this.ligneCommandes = ligneCommandes;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "materiel")
+	public Set<Point> getPoints() {
+		return this.points;
+	}
+
+	public void setPoints(Set<Point> points) {
+		this.points = points;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "materiel")
