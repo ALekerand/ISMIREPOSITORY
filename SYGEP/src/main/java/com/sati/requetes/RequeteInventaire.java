@@ -24,6 +24,12 @@ public class RequeteInventaire {
 		List list = getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Inventaire.class).list();
 		return list;
 	}
+	
+	public Inventaire lastInventaire() {
+		String query = "SELECT * FROM inventaire ORDER BY inventaire.CODE_INVENTAIRE DESC LIMIT 1";
+		Inventaire inventaire = (Inventaire) getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Inventaire.class).list().get(0);
+		return inventaire;
+	}
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}

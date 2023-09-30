@@ -16,24 +16,17 @@
 				 	<legend>ENREGISTREMENT DES INVENTAIRES</legend>		
 						<h:panelGrid columns="4" cellpadding="10">
 						
-					<p:outputLabel for="input_code" value="Code:"></p:outputLabel>
-					<p:inputText id="input_code" value="#{inventaireController.inventaire.codeInventaire}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
-						
-					<p:outputLabel for="radio_etat" value="Etat cloture:"></p:outputLabel>
-					<p:selectOneRadio id="radio_etat" value="#{inventaireController.etat}" binding="#{inventaireController.radio_etat}">
-						 <p:ajax process="@this"  update="form" listener="#{inventaireController.gererDateFin}"/> 
-					     <f:selectItem itemLabel="Non" itemValue="non"/>
-					     <f:selectItem itemLabel="Oui" itemValue="oui"/>
-				     </p:selectOneRadio>
+					<p:outputLabel for="input_code"  value="Code:"></p:outputLabel>
+					<p:inputText id="input_code" value="#{inventaireController.inventaire.codeInventaire}" binding="#{inventaireController.input_code}"></p:inputText>	
 				     
 					<p:outputLabel for="input_lib" value="Libelle etat inventaire"></p:outputLabel>
-					<p:inputText id="input_lib" value="#{inventaireController.inventaire.libInventaire}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
+					<p:inputText id="input_lib" value="#{inventaireController.inventaire.libInventaire}" binding="#{inventaireController.input_lib}" ></p:inputText>	
 				     
 				     <p:outputLabel for="date_debut" value="Date debut:"></p:outputLabel>
-					<p:calendar id="date_debut" value="#{inventaireController.dateDebut}"  locale="fr" navigator="true" pattern="dd/MM/yyyy" required="true"/>
+					<p:calendar id="date_debut" value="#{inventaireController.inventaire.dateDebutInventaire}" binding="#{inventaireController.date_debut}" locale="fr" navigator="true" pattern="dd/MM/yyyy" />
 				    
-				     <p:outputLabel for="date_fin" value="Date fin:"></p:outputLabel>
-					<p:calendar id="date_fin" value="#{inventaireController.inventaire.dateFinInventaire}"  binding="#{inventaireController.input_date_fin}" locale="fr" navigator="true" pattern="dd/MM/yyyy" required="true"/>
+				     <p:outputLabel  value="Date fin:"></p:outputLabel>
+					<p:calendar  value="#{inventaireController.inventaire.dateFinInventaire}"   locale="fr" navigator="true" pattern="dd/MM/yyyy" />
 				     
 				</h:panelGrid>
 				</fieldset>
@@ -45,6 +38,7 @@
 								<p:commandButton value="Enregistrer" action="#{inventaireController.enregistrer}" update="form" binding="#{inventaireController.btnEnregistrer}"><p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
 								<p:commandButton value="Modifier"  action="#{inventaireController.modifier}" update="form" binding="#{inventaireController.btnModifier}"><p:confirm header="confirmation" message="confirmez-vous la modification?"></p:confirm></p:commandButton>
 								<p:commandButton value="Annuler" action="#{inventaireController.annuler}" update="form" binding="#{inventaireController.btnAnnuler}"><p:confirm header="confirmation" message="confirmez-vous l'annulation?"></p:confirm></p:commandButton>
+								<p:commandButton value="Cloturer" action="#{inventaireController.cloturerInventaire}" update="form" binding="#{inventaireController.btnCloturer}"><p:confirm header="confirmation" message="confirmez-vous la cloture"></p:confirm></p:commandButton>
 							</f:facet>
 						</p:toolbar>
 						<br/>

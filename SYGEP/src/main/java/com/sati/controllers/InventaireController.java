@@ -11,12 +11,14 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.component.commandbutton.CommandButton;
+import org.primefaces.component.inputtext.InputText;
 import org.primefaces.component.selectoneradio.SelectOneRadio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.sati.model.Inventaire;
+import com.sati.requetes.RequeteInventaire;
 import com.sati.service.Iservice;
 
 @Component
@@ -26,24 +28,40 @@ public class InventaireController {
 	
 	@Autowired
 	Iservice service;
+	@Autowired
+	RequeteInventaire requeteInventaire;
 	private Inventaire inventaire = new Inventaire();
+	private Inventaire lastInventaire = new Inventaire();
 	private List<Inventaire> listInventaire = new ArrayList<Inventaire>();
 	private Inventaire selectedInventaire;
-	private Date dateDebut;
-	private Date dateFin;
+	private String codeInventaire;
+	private String libInventaire;
+	private Date dateDebutInventaire;
 	private String etat;
 	
 	private CommandButton btnEnregistrer = new CommandButton();
 	private CommandButton btnModifier = new CommandButton();
 	private CommandButton btnAnnuler = new CommandButton();
-	private org.primefaces.component.calendar.Calendar input_date_fin = new org.primefaces.component.calendar.Calendar();
-	private SelectOneRadio radio_etat = new SelectOneRadio();
+	private CommandButton btnCloturer = new CommandButton();
+	private InputText input_code = new InputText();
+	private InputText input_lib = new InputText();
+	private org.primefaces.component.calendar.Calendar date_debut = new org.primefaces.component.calendar.Calendar();
+	
 	@PostConstruct
 	public void initialiser() {
 		this.btnModifier.setDisabled(true);
-		this.input_date_fin.setDisabled(true);
-		this.radio_etat.setValue("non");
-		inventaire.setCodeInventaire(genererCodeInventaire());
+		setCodeInventaire(genererCodeInventaire());
+		inventaire = requeteInventaire.lastInventaire();
+		if (inventaire.getEtatCloture() != null) {
+			inventaire = new Inventaire();
+			inventaire.setCodeInventaire(genererCodeInventaire());
+			// Desactiver les champs à désactiver
+		}else {
+			input_code.setDisabled(true);
+			input_lib.setDisabled(true);
+			date_debut.setDisabled(true);
+		}
+
 	}
 	
 	public String genererCodeInventaire() {
@@ -58,29 +76,23 @@ public class InventaireController {
 		return new String(prefix+(nbEnregistrement+1));
 	}
 	
-	public void gererDateFin() {
-		if (etat.equals("oui")) {
-			this.input_date_fin.setDisabled(false);
-		}else {
-			this.input_date_fin.setDisabled(true);
-		}
-	}
 	public void enregistrer() {
-		
-		SimpleDateFormat formateurDate1 = new SimpleDateFormat("yyyy-MM-dd");
-		String dateD = formateurDate1.format(dateDebut);
-		inventaire.setDateDebutInventaire(dateDebut);
-		if (etat.equals("non")) {
-			inventaire.setEtatCloture(false);
-		}else {
-			inventaire.setEtatCloture(true);
-		}
+		/*inventaire.setCodeInventaire(codeInventaire);
+		inventaire.setLibInventaire(libInventaire);
+		inventaire.setDateDebutInventaire(dateDebutInventaire);*/
 		service.addObject(inventaire);
-		inventaire.setCodeInventaire(genererCodeInventaire());
 		this.info("Enregistrement efectué avec succès!");
-		annuler();
+		
 		
 	}
+	
+	public void cloturerInventaire() {
+		inventaire.setEtatCloture(true);
+		service.updateObject(inventaire);
+		this.info("Cloture efectuée avec succès!");
+		annuler();
+	}
+	
 	public void info(String monMessage) {
 		FacesContext.getCurrentInstance().addMessage((String) null,
 				new FacesMessage(FacesMessage.SEVERITY_INFO, monMessage, null));
@@ -94,9 +106,11 @@ public class InventaireController {
 		
 		service.updateObject(inventaire);
 		this.info("Modification effectuée avec succès!");
+		
 	}
 	
 	public void annuler() {
+		inventaire.setCodeInventaire(genererCodeInventaire());
 		inventaire.setLibInventaire(null);
 		inventaire.setDateDebutInventaire(null);
 		inventaire.setDateFinInventaire(null);
@@ -143,43 +157,68 @@ public class InventaireController {
 		this.btnAnnuler = btnAnnuler;
 	}
 
-	public Date getDateDebut() {
-		return dateDebut;
+	public String getLibInventaire() {
+		return libInventaire;
 	}
 
-	public void setDateDebut(Date dateDebut) {
-		this.dateDebut = dateDebut;
+	public void setLibInventaire(String libInventaire) {
+		this.libInventaire = libInventaire;
 	}
 
-	public Date getDateFin() {
-		return dateFin;
+	public Date getDateDebutInventaire() {
+		return dateDebutInventaire;
 	}
 
-	public void setDateFin(Date dateFin) {
-		this.dateFin = dateFin;
+	public void setDateDebutInventaire(Date dateDebutInventaire) {
+		this.dateDebutInventaire = dateDebutInventaire;
 	}
 
-	public SelectOneRadio getRadio_etat() {
-		return radio_etat;
+	public String getCodeInventaire() {
+		return codeInventaire;
 	}
 
-	public void setRadio_etat(SelectOneRadio radio_etat) {
-		this.radio_etat = radio_etat;
+	public void setCodeInventaire(String codeInventaire) {
+		this.codeInventaire = codeInventaire;
 	}
 
-	public String getEtat() {
-		return etat;
+	public Inventaire getLastInventaire() {
+		return lastInventaire;
 	}
 
-	public void setEtat(String etat) {
-		this.etat = etat;
+	public void setLastInventaire(Inventaire lastInventaire) {
+		this.lastInventaire = lastInventaire;
 	}
 
-	public org.primefaces.component.calendar.Calendar getInput_date_fin() {
-		return input_date_fin;
+	public CommandButton getBtnCloturer() {
+		return btnCloturer;
 	}
 
-	public void setInput_date_fin(org.primefaces.component.calendar.Calendar input_date_fin) {
-		this.input_date_fin = input_date_fin;
+	public void setBtnCloturer(CommandButton btnCloturer) {
+		this.btnCloturer = btnCloturer;
 	}
+
+	public InputText getInput_code() {
+		return input_code;
+	}
+
+	public void setInput_code(InputText input_code) {
+		this.input_code = input_code;
+	}
+
+	public InputText getInput_lib() {
+		return input_lib;
+	}
+
+	public void setInput_lib(InputText input_lib) {
+		this.input_lib = input_lib;
+	}
+
+	public org.primefaces.component.calendar.Calendar getDate_debut() {
+		return date_debut;
+	}
+
+	public void setDate_debut(org.primefaces.component.calendar.Calendar date_debut) {
+		this.date_debut = date_debut;
+	}
+
 }
