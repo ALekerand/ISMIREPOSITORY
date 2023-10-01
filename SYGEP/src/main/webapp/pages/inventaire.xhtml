@@ -17,13 +17,13 @@
 						<h:panelGrid columns="4" cellpadding="10">
 						
 					<p:outputLabel for="input_code"  value="Code:"></p:outputLabel>
-					<p:inputText id="input_code" value="#{inventaireController.inventaire.codeInventaire}" binding="#{inventaireController.input_code}"></p:inputText>	
+					<p:inputText id="input_code" value="#{inventaireController.inventaire.codeInventaire}"  readonly="true" binding="#{inventaireController.input_code}" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
 				     
 					<p:outputLabel for="input_lib" value="Libelle etat inventaire"></p:outputLabel>
-					<p:inputText id="input_lib" value="#{inventaireController.inventaire.libInventaire}" binding="#{inventaireController.input_lib}" ></p:inputText>	
+					<p:inputText id="input_lib" value="#{inventaireController.inventaire.libInventaire}" binding="#{inventaireController.input_lib}" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
 				     
 				     <p:outputLabel for="date_debut" value="Date debut:"></p:outputLabel>
-					<p:calendar id="date_debut" value="#{inventaireController.inventaire.dateDebutInventaire}" binding="#{inventaireController.date_debut}" locale="fr" navigator="true" pattern="dd/MM/yyyy" />
+					<p:calendar id="date_debut" value="#{inventaireController.inventaire.dateDebutInventaire}" binding="#{inventaireController.date_debut}" locale="fr" navigator="true" pattern="dd/MM/yyyy" requiredMessage="Veuillez resseigner ce champ SVP"/>
 				    
 				     <p:outputLabel  value="Date fin:"></p:outputLabel>
 					<p:calendar  value="#{inventaireController.inventaire.dateFinInventaire}"   locale="fr" navigator="true" pattern="dd/MM/yyyy" />

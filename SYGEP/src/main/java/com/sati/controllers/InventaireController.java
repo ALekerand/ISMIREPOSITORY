@@ -55,8 +55,9 @@ public class InventaireController {
 		if (inventaire.getEtatCloture() != null) {
 			inventaire = new Inventaire();
 			inventaire.setCodeInventaire(genererCodeInventaire());
-			// Desactiver les champs à désactiver
+			
 		}else {
+			// Desactiver les champs
 			input_code.setDisabled(true);
 			input_lib.setDisabled(true);
 			date_debut.setDisabled(true);
@@ -77,11 +78,8 @@ public class InventaireController {
 	}
 	
 	public void enregistrer() {
-		/*inventaire.setCodeInventaire(codeInventaire);
-		inventaire.setLibInventaire(libInventaire);
-		inventaire.setDateDebutInventaire(dateDebutInventaire);*/
 		service.addObject(inventaire);
-		this.info("Enregistrement efectué avec succès!");
+		this.info("Enregistrement effectué avec succès!");
 		
 		
 	}
@@ -89,8 +87,11 @@ public class InventaireController {
 	public void cloturerInventaire() {
 		inventaire.setEtatCloture(true);
 		service.updateObject(inventaire);
-		this.info("Cloture efectuée avec succès!");
+		this.info("Cloture effectuée avec succès!");
 		annuler();
+		input_code.setDisabled(false);
+		input_lib.setDisabled(false);
+		date_debut.setDisabled(false);
 	}
 	
 	public void info(String monMessage) {
