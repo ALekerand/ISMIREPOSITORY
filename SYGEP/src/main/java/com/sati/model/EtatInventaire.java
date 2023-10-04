@@ -21,13 +21,15 @@ public class EtatInventaire implements java.io.Serializable {
 
 	private Integer idEtatInventaire;
 	private String libEtatInventaire;
+	private String codeTypeInventaitre;
 	private Set<Point> points = new HashSet<Point>(0);
 
 	public EtatInventaire() {
 	}
 
-	public EtatInventaire(String libEtatInventaire, Set<Point> points) {
+	public EtatInventaire(String libEtatInventaire, String codeTypeInventaitre, Set<Point> points) {
 		this.libEtatInventaire = libEtatInventaire;
+		this.codeTypeInventaitre = codeTypeInventaitre;
 		this.points = points;
 	}
 
@@ -41,6 +43,15 @@ public class EtatInventaire implements java.io.Serializable {
 
 	public void setIdEtatInventaire(Integer idEtatInventaire) {
 		this.idEtatInventaire = idEtatInventaire;
+	}
+	
+	@Column(name = "CODE_MATERIEL", length = 10)
+	public String getCodeTypeInventaitre() {
+		return codeTypeInventaitre;
+	}
+
+	public void setCodeTypeInventaitre(String codeTypeInventaitre) {
+		this.codeTypeInventaitre = codeTypeInventaitre;
 	}
 
 	@Column(name = "LIB_ETAT_INVENTAIRE", length = 100)

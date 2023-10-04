@@ -1,193 +1,198 @@
 package com.sati.controllers;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.component.calendar.Calendar;
 import org.primefaces.component.commandbutton.CommandButton;
 import org.primefaces.component.inputtext.InputText;
-import org.primefaces.component.selectoneradio.SelectOneRadio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.sati.model.Famille;
 import com.sati.model.Inventaire;
+import com.sati.model.Nature;
 import com.sati.requetes.RequeteInventaire;
 import com.sati.service.Iservice;
 
 @Component
 @Scope("session")
 public class InventaireController {
-
-	
 	@Autowired
 	Iservice service;
 	@Autowired
 	RequeteInventaire requeteInventaire;
+	
 	private Inventaire inventaire = new Inventaire();
-	private Inventaire lastInventaire = new Inventaire();
-	private List<Inventaire> listInventaire = new ArrayList<Inventaire>();
-	private Inventaire selectedInventaire;
-	private String codeInventaire;
-	private String libInventaire;
-	private Date dateDebutInventaire;
-	private String etat;
+	private List<Inventaire> listTable = new ArrayList<Inventaire>();
+	private Inventaire selectedObject = new Inventaire();
 	
 	private CommandButton btnEnregistrer = new CommandButton();
-	private CommandButton btnModifier = new CommandButton();
 	private CommandButton btnAnnuler = new CommandButton();
+	private CommandButton btnModifier = new CommandButton();
 	private CommandButton btnCloturer = new CommandButton();
 	private InputText input_code = new InputText();
 	private InputText input_lib = new InputText();
-	private org.primefaces.component.calendar.Calendar date_debut = new org.primefaces.component.calendar.Calendar();
-	
+	private Calendar date_debut = new org.primefaces.component.calendar.Calendar();
+	private Calendar date_fin = new Calendar();
+
 	@PostConstruct
 	public void initialiser() {
 		this.btnModifier.setDisabled(true);
-		setCodeInventaire(genererCodeInventaire());
-		inventaire = requeteInventaire.lastInventaire();
-		if (inventaire.getEtatCloture() != null) {
-			inventaire = new Inventaire();
-			inventaire.setCodeInventaire(genererCodeInventaire());
+		Inventaire unInventaire = requeteInventaire.lastInventaire();
+		// Pas d'existence d'inventaire
+		if (unInventaire == null) {
+		genererCode();
+		this.date_fin.setDisabled(true);
+		this.btnCloturer.setDisabled(true);
 			
-		}else {
-			// Desactiver les champs
-			input_code.setDisabled(true);
-			input_lib.setDisabled(true);
-			date_debut.setDisabled(true);
+		}else if (unInventaire.getEtatCloture()== true) { //I'inventaire existe mais pas cloturé ou
+		// Activer les champs
+			genererCode();
+			this.input_code.setDisabled(false);
+			this.input_lib.setDisabled(false);
+			this.date_debut.setDisabled(false);
+			this.btnEnregistrer.setDisabled(false);
+			this.date_fin.setDisabled(true);
+			this.btnCloturer.setDisabled(true);
+		}else { 
+			inventaire = unInventaire;
+			this.input_code.setDisabled(true);
+			this.input_lib.setDisabled(true);
+			this.date_debut.setDisabled(true);
+			this.btnEnregistrer.setDisabled(true);
+			this.date_fin.setDisabled(false);
+			this.btnCloturer.setDisabled(false);
 		}
-
 	}
-	
-	public String genererCodeInventaire() {
+
+	public void genererCode() {
 		String prefix="";
 		int nbEnregistrement = this.service.getObjects("Inventaire").size();
 		if(nbEnregistrement < 10)
-			prefix = "CI00" ;
+			prefix = "IV00" ;
 		if ((nbEnregistrement >= 10) && (nbEnregistrement < 100)) 
-			prefix = "CI0" ;
+			prefix = "IV0" ;
 		if (nbEnregistrement > 100) 
-			prefix = "CI" ;
-		return new String(prefix+(nbEnregistrement+1));
+			prefix = "IV" ;
+		this.inventaire.setCodeInventaire(prefix+(nbEnregistrement+1));
 	}
 	
 	public void enregistrer() {
+		this.inventaire.setEtatCloture(false);
 		service.addObject(inventaire);
 		this.info("Enregistrement effectué avec succès!");
+ 
+		this.input_code.setDisabled(true);
+		this.input_lib.setDisabled(true);
+		this.date_debut.setDisabled(true);
+		this.btnEnregistrer.setDisabled(true);
+		this.date_fin.setDisabled(false);
+		this.btnCloturer.setDisabled(false);
 		
-		
+		annuler();
+		genererCode();
 	}
 	
 	public void cloturerInventaire() {
 		inventaire.setEtatCloture(true);
 		service.updateObject(inventaire);
-		this.info("Cloture effectuée avec succès!");
 		annuler();
 		input_code.setDisabled(false);
 		input_lib.setDisabled(false);
 		date_debut.setDisabled(false);
+		this.date_fin.setDisabled(true);
+		this.btnCloturer.setDisabled(true);
+		this.info("Cloture effectuée avec succès!");
+		
 	}
-	
+
+	public void selectionnerLigne() {
+		this.inventaire = this.selectedObject;
+		this.btnModifier.setDisabled(true);
+		this.btnEnregistrer.setDisabled(true);
+		this.btnModifier.setDisabled(false);
+	}
+
 	public void info(String monMessage) {
 		FacesContext.getCurrentInstance().addMessage((String) null,
-				new FacesMessage(FacesMessage.SEVERITY_INFO, monMessage, null));
+				new FacesMessage(FacesMessage.SEVERITY_INFO, monMessage,null));
 	}
-	public void selectionnerLigne() {
-		
-		this.inventaire = this.selectedInventaire;
+
+	public void error() {
+		FacesContext.getCurrentInstance().addMessage((String) null,
+				new FacesMessage(FacesMessage.SEVERITY_ERROR,null, "Contact admin."));
 	}
-	
-	public void modifier() {
-		
-		service.updateObject(inventaire);
-		this.info("Modification effectuée avec succès!");
-		
-	}
-	
+
 	public void annuler() {
-		inventaire.setCodeInventaire(genererCodeInventaire());
-		inventaire.setLibInventaire(null);
-		inventaire.setDateDebutInventaire(null);
-		inventaire.setDateFinInventaire(null);
+		this.inventaire.setCodeInventaire(null);
+		this.inventaire.setLibInventaire(null);
+		this.inventaire.setDateDebutInventaire(null);
+		this.inventaire.setDateFinInventaire(null);
+		initialiser();
+		
+		this.btnModifier.setDisabled(true);
+		this.btnEnregistrer.setDisabled(false);
 		
 	}
-	public Inventaire getInventaire() {
-		return inventaire;
-	}
-	public void setInventaire(Inventaire inventaire) {
-		this.inventaire = inventaire;
-	}
+
+	public void modifier() {
+		this.service.updateObject(this.inventaire);
+		this.info("Modification effectué avec succès!");
+		this.annuler();
 	
-	@SuppressWarnings("unchecked")
-	public List<Inventaire> getListInventaire() {
-		listInventaire = service.getObjects("Inventaire");
-		System.out.println("========Taille de la liste:"+listInventaire.size());
-		return listInventaire;
-	}
-	public void setListInventaire(List<Inventaire> listInventaire) {
-		this.listInventaire = listInventaire;
-	}
-	public Inventaire getSelectedInventaire() {
-		return selectedInventaire;
-	}
-	public void setSelectedInventaire(Inventaire selectedInventaire) {
-		this.selectedInventaire = selectedInventaire;
 	}
 	public CommandButton getBtnEnregistrer() {
-		return btnEnregistrer;
+		return this.btnEnregistrer;
 	}
+
 	public void setBtnEnregistrer(CommandButton btnEnregistrer) {
 		this.btnEnregistrer = btnEnregistrer;
 	}
-	public CommandButton getBtnModifier() {
-		return btnModifier;
-	}
-	public void setBtnModifier(CommandButton btnModifier) {
-		this.btnModifier = btnModifier;
-	}
+
 	public CommandButton getBtnAnnuler() {
-		return btnAnnuler;
+		return this.btnAnnuler;
 	}
+
 	public void setBtnAnnuler(CommandButton btnAnnuler) {
 		this.btnAnnuler = btnAnnuler;
 	}
 
-	public String getLibInventaire() {
-		return libInventaire;
+	public CommandButton getBtnModifier() {
+		return this.btnModifier;
 	}
 
-	public void setLibInventaire(String libInventaire) {
-		this.libInventaire = libInventaire;
+	public void setBtnModifier(CommandButton btnModifier) {
+		this.btnModifier = btnModifier;
 	}
 
-	public Date getDateDebutInventaire() {
-		return dateDebutInventaire;
+	public Inventaire getInventaire() {
+		return inventaire;
 	}
 
-	public void setDateDebutInventaire(Date dateDebutInventaire) {
-		this.dateDebutInventaire = dateDebutInventaire;
+	public void setInventaire(Inventaire inventaire) {
+		this.inventaire = inventaire;
 	}
 
-	public String getCodeInventaire() {
-		return codeInventaire;
+	public List<Inventaire> getListTable() {
+		return listTable = service.getObjects("Inventaire");
 	}
 
-	public void setCodeInventaire(String codeInventaire) {
-		this.codeInventaire = codeInventaire;
+	public void setListTable(List<Inventaire> listTable) {
+		this.listTable = listTable;
 	}
 
-	public Inventaire getLastInventaire() {
-		return lastInventaire;
+	public Inventaire getSelectedObject() {
+		return selectedObject;
 	}
 
-	public void setLastInventaire(Inventaire lastInventaire) {
-		this.lastInventaire = lastInventaire;
+	public void setSelectedObject(Inventaire selectedObject) {
+		this.selectedObject = selectedObject;
 	}
 
 	public CommandButton getBtnCloturer() {
@@ -214,12 +219,21 @@ public class InventaireController {
 		this.input_lib = input_lib;
 	}
 
-	public org.primefaces.component.calendar.Calendar getDate_debut() {
+	public Calendar getDate_debut() {
 		return date_debut;
 	}
 
-	public void setDate_debut(org.primefaces.component.calendar.Calendar date_debut) {
+	public void setDate_debut(Calendar date_debut) {
 		this.date_debut = date_debut;
 	}
 
+	public Calendar getDate_fin() {
+		return date_fin;
+	}
+
+	public void setDate_fin(Calendar date_fin) {
+		this.date_fin = date_fin;
+	}
+	
+	
 }
