@@ -32,12 +32,9 @@ public class PointController {
 	@Autowired
 	RequeteInventaire requeteInventaire;
 	
-	//@Autowired
-	//RequeteMateriel requeteMateriel;
 	private Point point = new Point();
 	private List<Point> listPoint = new ArrayList<>();
 	private Point selectedPoint;
-	private EtatInventaire etatInventaire = new EtatInventaire();
 	private List<EtatInventaire> listEtatInventaire = new ArrayList<>();
 	private int idEtatInventaire;
 	
@@ -60,11 +57,9 @@ public class PointController {
 	}
 
 	public void enregistrer() {
-		etatInventaire = (EtatInventaire) service.getObjectById(idEtatInventaire, "EtatInventaire");
-		point.setEtatInventaire(etatInventaire);
-		inventaire = (Inventaire) service.getObjectById(idInventaire, "Inventaire");
+		point.setEtatInventaire((EtatInventaire) service.getObjectById(idEtatInventaire, "EtatInventaire"));
 		point.setInventaire(inventaire);
-		point.setMateriel(materiel);
+		point.setMateriel(selectedMateriel);
 		point.setDateEnregPoint(new Date());
 		service.addObject(point);
 		this.info("Enregistrement effectué avec succès!");
@@ -105,17 +100,10 @@ public class PointController {
 	@SuppressWarnings("unchecked")
 	public List<Point> getListPoint() {
 		listPoint = service.getObjects("Point");
-		System.out.println("========Taille de la liste:"+listPoint.size());
 		return listPoint;
 	}
 	public void setListPoint(List<Point> listPoint) {
 		this.listPoint = listPoint;
-	}
-	public EtatInventaire getEtatInventaire() {
-		return etatInventaire;
-	}
-	public void setEtatInventaire(EtatInventaire etatInventaire) {
-		this.etatInventaire = etatInventaire;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -170,7 +158,7 @@ public class PointController {
 	}
 
 	public Inventaire getInventaire() {
-		return inventaire;
+		return inventaire = requeteInventaire.recupInventaireOuverte();
 	}
 
 	public void setInventaire(Inventaire inventaire) {

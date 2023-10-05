@@ -30,6 +30,13 @@ public class RequeteInventaire {
 		Inventaire inventaire = (Inventaire) getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Inventaire.class).uniqueResult();
 		return inventaire;
 	}
+	
+	public Inventaire recupInventaireOuverte() {
+		String query = "SELECT `inventaire`.*, `inventaire`.`ETAT_CLOTURE` FROM `inventaire`WHERE `inventaire`.`ETAT_CLOTURE` = '0'";
+		Inventaire inventaire = (Inventaire) getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Inventaire.class).uniqueResult();
+		return inventaire;
+	}
+	
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}

@@ -24,7 +24,7 @@
 								                    </span>
 								                </div>
 								            </f:facet>
-								     		<p:ajax event="rowSelect" process="@this"  update="form" listener="#{pointController.choisirLigneMateriel}"></p:ajax>
+								     	<p:ajax event="rowSelect" process="@this"  update="form" listener="#{pointController.choisirLigneMateriel}"></p:ajax>
 								   		<p:column selectionMode="single" style="width:16px;text-align:center"/>
 								   		
 								   		<p:column headerText="Réf" style="width:30%" filterBy="#{var.codeMateriel}" filterable="false">
@@ -39,27 +39,64 @@
 							</td>
 							
 							<td>
-									<h:panelGrid columns="4" cellpadding="10">
-										
-										<p:outputLabel for="input_lib" value="Observation point:"></p:outputLabel>
-										<p:inputText id="input_lib" value="#{pointController.point.observationPoint}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
-									     
-									     <p:outputLabel for="input_nbStock" value="Nombre de stock manquant:"></p:outputLabel>
-										 <p:inputText id="input_nbStock" value="#{pointController.point.manquantStock}"></p:inputText>
-									    
-									     <p:outputLabel for="cb_etatInventaire" value="Etat inventaire:"/>
-										 <p:selectOneMenu id="cb_etatInventaire" required="true" value="#{pointController.idEtatInventaire}">
-										 <f:selectItem itemLabel="Selectionnez" itemValue="" />
-										 <f:selectItems value="#{pointController.listEtatInventaire}" var="tata" itemLabel="#{tata.libEtatInventaire}" itemValue="#{tata.idEtatInventaire}"></f:selectItems>
-										</p:selectOneMenu>
-									     
-									      <p:outputLabel for="cb_Inventaire" value="Inventaire:"/>
-										 <p:selectOneMenu id="cb_Inventaire" required="true" value="#{pointController.idInventaire}">
-										 <f:selectItems value="#{pointController.listInventaire}" var="tata" itemLabel="#{tata.libInventaire}" itemValue="#{tata.idInventaire}"></f:selectItems>
-										</p:selectOneMenu>
-										
-									</h:panelGrid>
-									
+				<fieldset>
+				<legend>Référence inventaire</legend>		
+						<h:panelGrid columns="6" cellpadding="10">
+						
+					<p:outputLabel for="inp_code"  value="Code:"></p:outputLabel>
+					<p:inputText id="inp_code" value="#{pointController.inventaire.codeInventaire}" readonly="true" style="width:50px"></p:inputText>	
+				     
+					<p:outputLabel for="inp_lib" value="Libéllé"></p:outputLabel>
+					<p:inputText id="inp_lib" value="#{pointController.inventaire.libInventaire}" readonly="true"></p:inputText>	
+				     
+				     <p:outputLabel for="date_debut" value="Date:"></p:outputLabel>
+					<p:inputText id="date_debut" value="#{pointController.inventaire.dateDebutInventaire}" style="width:90px" locale="fr" pattern="dd/MM/yyyy" readonly="true">
+					<f:convertDateTime pattern="dd/MM/YYYY" type="date"/>
+				    </p:inputText>
+				     
+				     
+				</h:panelGrid>
+				</fieldset>
+				
+				<fieldset>
+				<legend>Etat du matériel</legend>
+				<h:panelGrid columns="4" cellpadding="5">
+				
+					<p:outputLabel for="input_codemat" value="Code matériel:"></p:outputLabel>
+					<p:inputText id="input_codemat" value="#{pointController.selectedMateriel.codeMateriel}" readonly="true"></p:inputText>
+					
+					<p:outputLabel for="input_ref" value="Référence:"></p:outputLabel>
+					<p:inputText id="input_ref" value="#{pointController.selectedMateriel.referenceMateriel}" readonly="true"></p:inputText>
+					
+					<p:outputLabel for="input_desig" value="Désignation:"></p:outputLabel>
+					<p:inputText id="input_desig" value="#{pointController.selectedMateriel.nomMateriel}" readonly="true"></p:inputText>
+					
+					<p:outputLabel></p:outputLabel>
+					<p:outputLabel></p:outputLabel>	
+					</h:panelGrid>
+					<hr></hr>
+					
+					<h:panelGrid columns="6" cellpadding="6">	
+					<p:outputLabel for="cb_etatInventaire" value="Etat:"/>
+					 <p:selectOneMenu id="cb_etatInventaire" required="true" value="#{pointController.idEtatInventaire}">
+					 <f:selectItem itemLabel="Selectionnez" itemValue="" />
+					 <f:selectItems value="#{pointController.listEtatInventaire}" var="tata" itemLabel="#{tata.libEtatInventaire}" itemValue="#{tata.idEtatInventaire}"></f:selectItems>
+					</p:selectOneMenu>
+					
+				    <p:outputLabel for="input_nbStock" value="Stock manquant:"></p:outputLabel>
+					<p:inputText id="input_nbStock" value="#{pointController.point.manquantStock}" style="width:28px"></p:inputText>
+					
+					<p:outputLabel for="input_obs" value="Observation:"></p:outputLabel>
+					<p:inputTextarea id="input_obs" value="#{pointController.point.observationPoint}"  cols="20" rows="3"></p:inputTextarea>	
+				 
+						 
+				</h:panelGrid>
+				
+				<h:panelGrid columns="4" cellpadding="10">
+				
+				
+				 </h:panelGrid>
+				</fieldset>					
 	</td>
 						</tr>
 					
@@ -72,38 +109,44 @@
 							<f:facet name="left">
 								<p:commandButton value="Enregistrer" action="#{pointController.enregistrer}" update="form" binding="#{pointController.btnEnregistrer}"><p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
 								<p:commandButton value="Modifier"  action="#{pointController.modifier}" update="form" binding="#{pointController.btnModifier}"><p:confirm header="confirmation" message="confirmez-vous la modification?"></p:confirm></p:commandButton>
-								<p:commandButton value="Annuler" action="#{pointController.annuler}" update="form" binding="#{pointController.btnAnnuler}"><p:confirm header="confirmation" message="confirmez-vous l'annulation?"></p:confirm></p:commandButton>
+								<p:commandButton value="Annuler" action="#{pointController.annuler}" process="@this" update="form" binding="#{pointController.btnAnnuler}"><p:confirm header="confirmation" message="confirmez-vous l'annulation?"></p:confirm></p:commandButton>
 							</f:facet>
 						</p:toolbar>
 						<br/>
 						
-						<p:dataTable  var="var" value="#{pointController.listPoint}"  selectionMode="single" selection="#{pointController.selectedPoint}" rowKey="#{var.idPoint}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+		<p:dataTable  var="var" value="#{pointController.listPoint}"  selectionMode="single" selection="#{pointController.selectedPoint}" rowKey="#{var.idPoint}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
 				 
-						 <f:facet name="header"> LISTE DES INVENTAIRES </f:facet>
-				     <p:ajax event="rowSelect" process="@this"  update="form" listener="#{pointController.selectionnerLigne}"></p:ajax>
-				   		
-				   		<p:column headerText="Materiel">
-				        <h:outputText value="#{var.materiel.nomMateriel}"/>
-				        </p:column>
-				        
-				   		<p:column headerText="Observation point">
-				        <h:outputText value="#{var.observationPoint}"/>
-				        </p:column>
-				        
-				        <p:column headerText="Stock manquant" >
-				        <h:outputText value="#{var.manquantStock}"/>
-				        </p:column>
-				        
-				        <p:column headerText="Etat inventaire" >
-				        <h:outputText value="#{var.etatInventaire.libEtatInventaire}"/>
-				        </p:column>
-				        
-				   		<p:column headerText="Inventaire" >
-				        <h:outputText value="#{var.inventaire.libInventaire}"/>
-				        </p:column>
-				        
-				        
-				        </p:dataTable>
+			<f:facet name="header"> LISTE DES INVENTAIRES </f:facet>
+				<p:ajax event="rowSelect" process="@this"  update="form" listener="#{pointController.selectionnerLigne}"></p:ajax>
+				 
+				<p:column headerText="Inventaire" >
+		        <h:outputText value="#{var.inventaire.codeInventaire}"/>
+		        </p:column>
+				 
+				<p:column headerText="Code matériel:">
+		        <h:outputText value="#{var.materiel.codeMateriel}"/>
+		        </p:column>
+		          		
+		   		<p:column headerText="Désignation materiel">
+		        <h:outputText value="#{var.materiel.nomMateriel}"/>
+		        </p:column>
+		        
+		        <p:column headerText="Etat inventaire" >
+		        <h:outputText value="#{var.etatInventaire.libEtatInventaire}"/>
+		        </p:column>
+		        
+		   		<p:column headerText="Observation point">
+		        <h:outputText value="#{var.observationPoint}"/>
+		        </p:column>
+		        
+		        <p:column headerText="Stock manquant" >
+		        <h:outputText value="#{var.manquantStock}"/>
+		        </p:column>
+		        
+		        
+		        
+		   		
+		 </p:dataTable>
 						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 					   <p:commandButton value="Oui" type="button"
 					   styleClass="ui-confirmdialog-yes" icon="ui-icon-check" >
