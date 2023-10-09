@@ -191,6 +191,7 @@ public class MaterielWithQRController {
 			this.Nonfongible.setCodeMateriel(materiel.getCodeMateriel());
 			this.Nonfongible.setRetrait(materiel.getRetrait());
 			this.Nonfongible.setDescriptionMateriel(materiel.getDescriptionMateriel());
+			this.Nonfongible.setReferenceMateriel(materiel.getReferenceMateriel());
 			this.Nonfongible.setMateriel(materiel);
 			this.service.addObject(this.Nonfongible);
 			
@@ -253,6 +254,7 @@ public class MaterielWithQRController {
 
 	public void annuler() {
 		this.materiel.setCodeMateriel(null);
+		this.materiel.setReferenceMateriel(null);
 		this.materiel.setDescriptionMateriel(null);
 	//	this.materiel.setFamille(null);
 		this.materiel.setNature(null);
