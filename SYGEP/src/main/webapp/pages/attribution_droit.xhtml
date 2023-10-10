@@ -13,8 +13,10 @@
 			<ui:define name="body">
 				<h:form id="form">
 				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+				<p:panel header="ENREGISTREMENT DES ETATS DE MATERIEL">
+			
 		<fieldset>
- 	<legend>ENREGISTREMENT DES ETATS DE MATERIEL</legend>		
+ 	<legend>Informations sur l'etat du materiel</legend>		
 <h:panelGrid columns="6" cellpadding="10">
 	<p:outputLabel for="input_code" value="Code:"></p:outputLabel>
 	<p:inputText id="input_code" value="#{etatController.etat.codeEtat}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
@@ -24,6 +26,7 @@
 </h:panelGrid>
 
 </fieldset>
+	</p:panel>
 <br/>
 <p:toolbar >
 			<f:facet name="left">

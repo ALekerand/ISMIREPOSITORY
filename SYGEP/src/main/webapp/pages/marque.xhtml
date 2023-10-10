@@ -11,8 +11,9 @@
 		<h:form id="form">
 		<p:messages autoUpdate="true" closable="true" showDetail="false"/>
 		
+		<p:panel header="ENREGISTREMENT DES MARQUES" >
 				<fieldset>
- 	<legend>ENREGISTREMENT DES MARQUES</legend>		
+ 	<legend>Informations sur la marque</legend>		
 		<h:panelGrid columns="6" cellpadding="10">
 	<p:outputLabel for="input_code" value="Code marque"></p:outputLabel>
 	<p:inputText id="input_code" value="#{marqueController.marque.codeMarque}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
@@ -22,6 +23,7 @@
 
 </h:panelGrid>
 </fieldset>
+</p:panel>
 <br />
 
 <p:toolbar >

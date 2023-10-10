@@ -14,6 +14,8 @@
 				<h:form id="form">
 				
 				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+				
+				<p:panel header="ENREGISTREMENT DES ENTREES">
 		<fieldset>
  	<legend>Choix du materiel</legend>
  	<h:panelGrid columns="3" cellpadding="10">
@@ -45,7 +47,7 @@
 
 
 <fieldset>
- 	<legend>Enregistrement de stock</legend>
+ 	<legend>Informations sur le stock</legend>
  	
  	<h:panelGrid columns="6" cellpadding="10" >
 	<p:outputLabel for="cb_sfinance" value="Source Financement: "/>
@@ -65,7 +67,7 @@
 	requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>
  	</h:panelGrid>
  	</fieldset>
- 	
+ 	</p:panel>
 
 	<br/>
 	<p:toolbar >

@@ -8,10 +8,12 @@
 	<ui:composition template="/templates/template.xhtml">
 			<ui:define name="body">
 				<h:form id="form">
-				
 				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+				
+				<p:panel header="ENREGISTREMENT DES MATERIELS SANS QR_CODE" >
 	<fieldset>
- 	<legend>ENREGISTREMENT DES MATERIELS</legend>	
+	
+ 	<legend>Informations sur le materiel sans qr_code</legend>	
  	
  	<table>
  		<tr>
@@ -96,6 +98,7 @@
  	</table>
  	
 </fieldset>
+</p:panel>
 <br/>
 <p:toolbar>
 	<f:facet name="left">

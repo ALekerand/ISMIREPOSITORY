@@ -12,16 +12,18 @@
 		<h:form id="form">
 		<p:messages autoUpdate="true" closable="true" showDetail="false"/>
 		
+		<p:panel header="ENREGISTREMENT DES ETATS D'INVENTAIRE">
 		
 					<fieldset>
- 	<legend>ENREGISTREMENT DES ETATS D'INVENTAIRE</legend>		
+ 	<legend>Informations sur les etats de l'inventaire </legend>	
+ 		
 		<h:panelGrid columns="6" cellpadding="10">
 	<p:outputLabel for="input_lib" value="Libelle etat inventaire"></p:outputLabel>
 	<p:inputText id="input_lib" value="#{etatInventaireController.etatInventaire.libEtatInventaire}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
 
 </h:panelGrid>
 </fieldset>
-
+</p:panel>
 <br />
 
 <p:toolbar >

@@ -14,8 +14,10 @@
 				<h:form id="form">
 				
 				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+				
+				<p:panel header="ENREGISTREMENT DES FONCTIONS" >
 		<fieldset>
- 	<legend>ENREGISTREMENT DES FONCTIONS </legend>		
+ 	<legend>Informations sur les fonctions </legend>		
 <h:panelGrid columns="6" cellpadding="10">
 	<p:outputLabel for="input_code" value="Code"></p:outputLabel>
 	<p:inputText id="input_code" value="#{fonctionController.fonction.codeFonction}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
@@ -25,6 +27,7 @@
 </h:panelGrid>
 
 </fieldset>
+</p:panel>
 <br/>
 <p:toolbar >
 			<f:facet name="left">

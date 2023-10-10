@@ -12,8 +12,10 @@
 			<ui:define name="body">
 			<h:form id="form">
 			<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+			<p:panel header="ENREGISTREMENT DES BONS DE COMMANDE">
+			
 			<fieldset>
- 				<legend>ENREGISTREMENT DES BONS DE COMMANDE</legend>	
+ 				<legend>Informations sur le bon de commande</legend>	
 			<table >
 			<tr>
 			<td style="width: 50%">
@@ -58,6 +60,7 @@
 			</tr>
 		</table>
 		</fieldset>
+		</p:panel>
 			<p:toolbar >
 				<f:facet name="left">
 					<p:commandButton  binding="#{bonCommandeController.btnAjouter}" value="Ajouter" action="#{bonCommandeController.ajouter}" update="form" ><p:confirm header="confirmation" message="voulez-vous l'ajout?"></p:confirm></p:commandButton>

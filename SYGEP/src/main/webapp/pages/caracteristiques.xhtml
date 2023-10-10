@@ -13,8 +13,10 @@
 			<ui:define name="body">
 				<h:form id="form">
 				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+				
+				<p:panel header="ENREGISTREMENT DES CARACTERISTIQUES">
 				<fieldset>
- 	<legend>ENREGISTREMENT DES CARACTERISTIQUES</legend>	
+ 	<legend>Informations sur les caracteristiques</legend>	
 			
 		<h:panelGrid columns="6" cellpadding="5">
 	<p:outputLabel for="input_code" value="Code:"></p:outputLabel>
@@ -27,6 +29,7 @@
 	<p:inputTextarea id="input_descrip" value="#{caracteristiqueController.caracteristique.descriptionCaracteristique}" rows="5" cols="56" ></p:inputTextarea>
 </h:panelGrid>
 </fieldset>
+</p:panel>
 <br/>
 <p:toolbar >
 			<f:facet name="left">

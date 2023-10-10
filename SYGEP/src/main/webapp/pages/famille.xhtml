@@ -14,8 +14,11 @@
 				<h:form id="form">
 				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
 				
+				<p:panel header="ENREGISTREMENT DES FAMILLES DES PRODUITS" >
+				
 		<fieldset>
- 	<legend>ENREGISTREMENT DES FAMILLES DE PRODUITS</legend>		
+ 	<legend>Informations sur la famille des produits</legend>
+ 			
 	<h:panelGrid columns="4" cellpadding="10">
 		<p:outputLabel for="input_code" value="Code"></p:outputLabel>
 		<p:inputText id="input_code" value="#{familleController.famille.codeFamille}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
@@ -30,6 +33,7 @@
 	</h:panelGrid>
 
 </fieldset>
+</p:panel>
 <br/>
 <p:toolbar >
 			<f:facet name="left">
