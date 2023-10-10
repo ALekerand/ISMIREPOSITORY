@@ -20,7 +20,8 @@
 			<p:commandButton value="Rechercher" actionListener="#{consulterBonCommandeController.ChargerLigneCommane}" update="form"></p:commandButton>
 			</h:panelGrid>
 			</fieldset>
-
+		<br />
+		 <br />
 			<p:dataTable id="table" var="variable" value="#{consulterBonCommandeController.listLigneCommande}"  paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
 			
 			<p:column headerText="Materiel">

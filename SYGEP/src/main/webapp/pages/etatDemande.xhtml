@@ -12,10 +12,9 @@
 	<ui:composition template="/templates/template.xhtml">
 			<ui:define name="body">
 				<h:form id="form">
-				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
-				
-	<p:panel header="Enregistrement des droits"> 		
-	
+				<p:messages autoUpdate="true" closable="true" showDetail="false"/>		
+	<fieldset>
+ 	<legend>ENREGISTREMENT DES ETATS DE DEMANDES</legend>	
 	<h:panelGrid columns="6" cellpadding="10">
 	<p:outputLabel for="input_code" value="Code:"></p:outputLabel>
 	<p:inputText id="input_code" value="#{etatDemandeController.etatDemande.codeEtatDemande}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
@@ -24,7 +23,7 @@
 	<p:inputText id="input_qte" value="#{etatDemandeController.etatDemande.libEtatDemande}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>
 
 	</h:panelGrid>
-</p:panel>
+</fieldset>
 <br/>
 <p:toolbar >
 			<f:facet name="left">

@@ -11,7 +11,7 @@
 	 -->
 	<ui:composition template="/templates/template.xhtml">
 			<ui:define name="body">
-			<div style="font-size: 15px ;  padding-left: 20px; padding-right: 20px">
+	
 				<h:form id="form">
 				
 				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
@@ -35,7 +35,7 @@
 			</f:facet>
 		</p:toolbar>
 		<br/>
-<div style="font-size: 15px ; padding-top: 15px; padding-left: 35px; padding-right: 35px">
+
 	<p:dataTable  var="var" value="#{etatController.listEtat}"  selectionMode="single" selection="#{etatController.selectedObject}" rowKey="#{var.idEtat}">
  
  <f:facet name="header"> LISTE DES ETATS DE MATERIEL </f:facet>
@@ -50,7 +50,7 @@
         </p:column>
         
         </p:dataTable>
-				</div>
+			
 		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 	   <p:commandButton value="Oui" type="button"
 	   styleClass="ui-confirmdialog-yes" icon="ui-icon-check" >
@@ -61,7 +61,7 @@
 	   </p:confirmDialog>
 	  
 				</h:form>
-				</div>
+		
 			</ui:define>
 	</ui:composition>
 

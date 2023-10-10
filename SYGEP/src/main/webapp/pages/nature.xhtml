@@ -14,8 +14,8 @@
 				<h:form id="form">
 				
 				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
-				
-	<p:panel header="Enregistrement des natures de materiel"> 		
+				<fieldset>
+ 	<legend>ENREGISTREMENT DES NATURES DE MATERIEL</legend>	 		
 		<h:panelGrid columns="6" cellpadding="10">
 			<p:outputLabel for="input_code" value="Code"></p:outputLabel>
 			<p:inputText id="input_code" value="#{natureController.nature.codeNature}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
@@ -34,7 +34,7 @@
 		<p:outputLabel for="input_descrip" value="Description"></p:outputLabel>
 		<p:inputTextarea id="input_descrip" value="#{natureController.nature.descriptionNature}" rows="5" cols="56" ></p:inputTextarea>
 	</h:panelGrid>	
-</p:panel>
+</fieldset>
 <br/>
 <p:toolbar >
 	<f:facet name="left">

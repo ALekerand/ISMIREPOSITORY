@@ -13,9 +13,10 @@
 			<ui:define name="body">
 				<h:form id="form">
 				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
-				
-	<p:panel header="Enregistrement des caractéristiques"> 		
-		<h:panelGrid columns="6" cellpadding="10">
+				<fieldset>
+ 	<legend>ENREGISTREMENT DES CARACTERISTIQUES</legend>	
+			
+		<h:panelGrid columns="6" cellpadding="5">
 	<p:outputLabel for="input_code" value="Code:"></p:outputLabel>
 	<p:inputText id="input_code" value="#{caracteristiqueController.caracteristique.codeCaracteristique}" readonly="true"></p:inputText>	
 
@@ -23,9 +24,9 @@
 	<p:inputText id="input_lib" value="#{caracteristiqueController.caracteristique.libCaracteristique}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
 
 <p:outputLabel for="input_descrip" value="Description :"></p:outputLabel>
-	<p:inputTextarea id="input_descrip" value="#{caracteristiqueController.caracteristique.descriptionCaracteristique}" rows="5" cols="55" ></p:inputTextarea>
+	<p:inputTextarea id="input_descrip" value="#{caracteristiqueController.caracteristique.descriptionCaracteristique}" rows="5" cols="56" ></p:inputTextarea>
 </h:panelGrid>
-</p:panel>
+</fieldset>
 <br/>
 <p:toolbar >
 			<f:facet name="left">

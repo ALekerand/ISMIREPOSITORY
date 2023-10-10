@@ -10,7 +10,8 @@
 				<h:form id="form">
 				
 				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
-	<p:panel header="ENREGISTREMENT DE MATERIELS AVEC QR CODE">
+				<fieldset>
+ 	<legend>ENREGISTREMENT DE MATERIELS AVEC QR CODE</legend>	
  	<table>
  		<tr>
  			<td>
@@ -70,6 +71,7 @@
  	       </h:panelGrid>
  			</td>
  			<td>
+ 			
 <p:dataTable  var="var" value="#{materielWithQRController.listCaracteristiqueValeur}" editable="true" scrollable="true" scrollHeight="200">
  
  <f:facet name="header">EDITION DES CARACTERISTIQUES</f:facet>
@@ -96,7 +98,7 @@
 
  		</tr>
  	</table>
-</p:panel>
+</fieldset>
 <br/>
 <p:toolbar>
 	<f:facet name="left">

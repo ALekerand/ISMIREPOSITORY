@@ -23,7 +23,8 @@
 				<p:commandButton value="Rechercher" actionListener="#{consulterDemandeController_Admin.traiterDemande}" update="form"></p:commandButton>
 				</h:panelGrid>
 				</fieldset>
-
+				<br />
+					 <br />
 						<p:dataTable id="table" var="var" value="#{consulterDemandeController_Admin.listeDemande }"  paginator="true" paginatorPosition="bottom" rows="5"  rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  							<f:facet name="header">LISTE DES DEMANDES</f:facet>
   								  <!--   <p:ajax event="rowSelect" process="@this"  update="form" listener="#{traitementDemandeController.selectionnerLigne}"></p:ajax>-->
