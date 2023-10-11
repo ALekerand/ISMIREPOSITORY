@@ -11,7 +11,7 @@
 			<ui:define name="body">
 				<h:form id="form">
 			<p:messages autoUpdate="true" closable="true" showDetail="false"/>
-		
+			<p:panel header="EFFECTUER UN RETRAIT DE MATERIEL" >
 		<p:dataTable widgetVar="dtMateriel"  var="var" value="#{retraitMaterielController.listMateriel}"  selectionMode="single" selection="#{retraitMaterielController.selectedMateriel}" rowKey="#{var.idMateriel}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
   			<f:facet name="header">
                 <div class="materiel-table-header">
@@ -37,6 +37,7 @@
         </p:column>
         
         </p:dataTable>	
+        </p:panel>
         <br/>
 		<p:toolbar >
 			<f:facet name="left">

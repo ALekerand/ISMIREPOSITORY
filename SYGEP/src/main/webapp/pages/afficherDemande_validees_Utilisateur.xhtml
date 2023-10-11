@@ -8,6 +8,9 @@
 	<ui:composition template="/templates/template.xhtml">
 			<ui:define name="body">
 				<h:form id="form">
+				
+				<p:panel header="LIESTES DES DEMANDES VALIDEES" >
+				
 						<p:dataTable id="table" var="var" value="#{afficherDemandeAccepterController.listDemandeAccepter }"  selectionMode="single" selection="#{afficherDemandeAccepterController.selectedObject}" rowKey="{#{var.idDemande}"  paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  							<f:facet name="header">DEMANDES EN ENTENTE DE RECEPTION</f:facet>
   								   <p:ajax event="rowSelect" process="@this"  update="form" listener="#{afficherDemandeAccepterController.selectionnerLigne}"></p:ajax>
@@ -47,6 +50,7 @@
                 </h:panelGrid>
                                        </p:column>
                        </p:dataTable>
+                       </p:panel>
            </h:form>
          </ui:define>
        </ui:composition>

@@ -8,6 +8,8 @@
       <ui:composition template="/templates/template.xhtml">
 			<ui:define name="body">
 				<h:form id="form">
+				<p:panel header="LISTE DES ETATS DU MATERIEL APRES DIAGNOSTIQUE" >
+				
 						<p:dataTable var="variable" value="#{consulterListDiagnosticController.listeDiagnostique}" >
  							<f:facet name="header">ETAT DES DIAGNOSTIQUES</f:facet>
   					
@@ -26,6 +28,7 @@
 					</h:outputText>
 				</p:column>
                        </p:dataTable>
+                       </p:panel>
            </h:form>
          </ui:define>
        </ui:composition>

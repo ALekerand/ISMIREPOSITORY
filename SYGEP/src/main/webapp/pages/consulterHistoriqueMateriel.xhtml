@@ -10,7 +10,8 @@
 			<ui:define name="body">
 				<h:form id="form">
 			<p:messages autoUpdate="true" closable="true" showDetail="false"/>
-			
+			<p:panel header="CONSULTATION DES HISTORIQUES DU MATERIEL" >
+				
 			<p:dataTable var="variable" value="#{consulterMaterielController.listMateriel}" selectionMode="single" selection="#{consulterMaterielController.selectedObject}" rowKey="#{variable.idMateriel}">
 				<f:facet name="header">LISTE MATERIEL</f:facet>
 			<p:ajax event="rowSelect" process="@this" update="form" listener="#{consulterMaterielController.selectionnerLigne}"></p:ajax>
@@ -44,6 +45,7 @@
 				<h:outputText value="#{var.materiel.nature.libNature}" />
 			</p:column>
 			 </p:dataTable>
+			 </p:panel>
 			</h:form>
 			</ui:define>
 			</ui:composition>

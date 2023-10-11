@@ -11,6 +11,9 @@
 			<ui:define name="body">
 		<h:form id="form">
 		<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+		
+		<p:panel header="EFFECTUER UNE AUTORISATION DE SORTIE" >
+				
 <p:dataTable  var="var" value="#{autoriserSortieController.listObject}" selectionMode="single" selection="#{autoriserSortieController.selectedDemande}" rowKey="#{var.idDemande}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
 		<f:facet name="header">LISTE DES DEMANDES</f:facet>
 			 <p:ajax event="rowSelect" process="@this"   listener="#{autoriserSortieController.selectionnerLigne}"></p:ajax>
@@ -59,7 +62,7 @@
            </p:commandButton>	
              </p:column>
           </p:dataTable>
-
+</p:panel>
 			
         <p:dialog header="validation de sortie" showEffect="fade"  widgetVar="sortieDemandeDialog"
             responsive="true">

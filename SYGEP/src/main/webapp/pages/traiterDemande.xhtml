@@ -17,6 +17,8 @@
 				<h:form id="form">
 				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
 				
+				<p:panel header="TRAITEMENT DES LISTES DES DEMANDES EN ATTENTE" >
+				
 	<p:dataTable  var="var" value="#{traitementDemandeController_Admin.listTable}"  selection="#{traitementDemandeController_Admin.selectedObject}" rowKey="#{var.idDemande}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  	h<f:facet name="header">LISTE DES DEMANDES EN ATTENTE</f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{traitementDemandeController_Admin.selectionnerLigne}"></p:ajax>
@@ -60,6 +62,7 @@
             
    		
         </p:dataTable>
+        </p:panel>
          <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 	   <p:commandButton value="Oui" type="button"
 	   styleClass="ui-confirmdialog-yes" icon="ui-icon-check" >

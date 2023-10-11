@@ -11,7 +11,8 @@
       	<ui:define name="body">
       	
       		<h:form id="form">
-      		
+      		<p:panel header="LISTE DES MATERIELS AVEC LEURS STOCK_ACTUEL" >
+				
       <p:dataTable  var="var" value="#{materielController.listFongible}" selectionMode="single" selection="#{materielController.selectedObject}" rowKey="#{var.idMateriel}" 
       				paginator="true" paginatorPosition="bottom"  rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  
@@ -32,6 +33,7 @@
         
       
 </p:dataTable>
+</p:panel>
       		</h:form>
       	</ui:define>
       </ui:composition>

@@ -67,12 +67,12 @@
 </p:panel>
 <br/>
 <p:toolbar >
-			<f:facet name="left">
-				<p:commandButton value="Enregistrer" action="#{personneController.enregistrer}" update="form" binding="#{personneController.btnEnregistrer}"><p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
-				<p:commandButton value="Annuler"  action="#{personneController.annuler}" process="@this" update="form" binding="#{personneController.btnAnnuler}"><p:confirm header="confirmation" message="voulez-vous annuler?"></p:confirm></p:commandButton>
-				<p:commandButton value="Modifier"  action="#{personneController.modifier}" update="form" binding="#{personneController.btnModifier}"><p:confirm header="confirmation" message="confirmez-vous la modification?"></p:confirm></p:commandButton>
-			</f:facet>
-		</p:toolbar>
+	<f:facet name="left">
+		<p:commandButton value="Enregistrer" action="#{personneController.enregistrer}" update="form" binding="#{personneController.btnEnregistrer}"><p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
+		<p:commandButton value="Annuler"  action="#{personneController.annuler}" process="@this" update="form" binding="#{personneController.btnAnnuler}"><p:confirm header="confirmation" message="voulez-vous annuler?"></p:confirm></p:commandButton>
+		<p:commandButton value="Modifier"  action="#{personneController.modifier}" update="form" binding="#{personneController.btnModifier}"><p:confirm header="confirmation" message="confirmez-vous la modification?"></p:confirm></p:commandButton>
+	</f:facet>
+</p:toolbar>
 		<br/>
 		
 	<p:dataTable  var="var" value="#{personneController.listTable}"  selectionMode="single" selection="#{personneController.selectedObject}" rowKey="#{var.idEntite}" paginator="true" paginatorPosition="bottom"  rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">

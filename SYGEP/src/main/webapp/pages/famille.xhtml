@@ -14,10 +14,10 @@
 				<h:form id="form">
 				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
 				
-				<p:panel header="ENREGISTREMENT DES FAMILLES DES PRODUITS" >
+				<p:panel header="ENREGISTREMENT DES FAMILLES DU PRODUITS" >
 				
 		<fieldset>
- 	<legend>Informations sur la famille des produits</legend>
+ 	<legend>Informations sur le produits</legend>
  			
 	<h:panelGrid columns="4" cellpadding="10">
 		<p:outputLabel for="input_code" value="Code"></p:outputLabel>
@@ -46,7 +46,7 @@
 	<p:dataTable  var="var" value="#{familleController.listFamille}"  selectionMode="single" paginator="true"  paginatorPosition="bottom" selection="#{familleController.selectedFamille}" rows="5"  rowsPerPageTemplate="5,10,15,{ShowAll|'All'}"
 	rowKey="#{var.idFamille}">
  
- <f:facet name="header"> LISTE DES FAMILLES DE MATERIEL </f:facet>
+ <f:facet name="header"> LISTE DES FAMILLES DE PRODUIT </f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{familleController.selectionnerLigne}"></p:ajax>
    		
    		<p:column headerText="Code" style="width:30%">
