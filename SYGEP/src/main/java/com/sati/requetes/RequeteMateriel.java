@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sati.model.Demande;
+import com.sati.model.Fongible;
 import com.sati.model.Materiel;
 import com.sati.model.Nature;
 import com.sati.model.Parcours;
@@ -55,6 +56,12 @@ public class RequeteMateriel {
 	
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
+	}
+	
+	public Fongible materielFongibleConsulte(int id_materiel) {
+		String query = "SELECT `fongible`.* FROM `fongible` WHERE `fongible`.ID_MATERIEL = '"+id_materiel+"'";
+		Fongible fongible = (Fongible) getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Fongible.class).uniqueResult();
+		return fongible;
 	}
 
 }

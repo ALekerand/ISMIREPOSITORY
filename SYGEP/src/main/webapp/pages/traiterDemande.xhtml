@@ -20,7 +20,7 @@
 				<p:panel header="TRAITEMENT DES LISTES DES DEMANDES EN ATTENTE" >
 				
 	<p:dataTable  var="var" value="#{traitementDemandeController_Admin.listTable}"  selection="#{traitementDemandeController_Admin.selectedObject}" rowKey="#{var.idDemande}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
- 	h<f:facet name="header">LISTE DES DEMANDES EN ATTENTE</f:facet>
+ 	<f:facet name="header">LISTE DES DEMANDES EN ATTENTE</f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{traitementDemandeController_Admin.selectionnerLigne}"></p:ajax>
    		
    		<p:column selectionMode="single" style="width:16px;text-align:center"/>
@@ -44,8 +44,9 @@
         <h:outputText value="#{var.motifDemande}"/>
         </p:column>
         
-        <p:column headerText="Motif" >
-        <p:commandButton value="Consulter stock" />
+        <p:column headerText="Consulter produit" >
+        <p:commandButton value="Consulter detail produit" actionListener="#{traitementDemandeController_Admin.selectionnerLigne}"
+         oncomplete="PF('verificationProduitDialog').show()" update="form"></p:commandButton>
         </p:column>
         
           <p:column headerText="Etat" style="width:22%">
@@ -59,10 +60,42 @@
    		         </h:commandButton> 
                     </h:panelGrid>
             </p:column>
-            
-   		
+        
         </p:dataTable>
         </p:panel>
+        
+         <p:dialog var="variable" header="Detail sur le produit" showEffect="fade"  widgetVar="verificationProduitDialog"
+            responsive="true" minHeight="100" width="400" >
+            <h:panelGrid columns="2" cellpadding="10">
+                
+               <p:outputLabel value="Code materiel"></p:outputLabel>
+   				<p:inputText value="#{traitementDemandeController_Admin.materielSelectionne.codeMateriel}" readonly="true" ></p:inputText>
+            	  
+            	  <p:outputLabel value="Référence materiel"></p:outputLabel>
+   				<p:inputText value="#{traitementDemandeController_Admin.materielSelectionne.referenceMateriel}" readonly="true" binding="#{traitementDemandeController_Admin.input_reference}"></p:inputText>
+
+              	<p:outputLabel value="Nom materiel"></p:outputLabel>
+        		 <p:inputText value="#{traitementDemandeController_Admin.materielSelectionne.nomMateriel}" readonly="true"></p:inputText>
+ 				
+ 				 <p:outputLabel value="Description materiel"></p:outputLabel>
+              	<p:inputText value="#{traitementDemandeController_Admin.materielSelectionne.descriptionMateriel}" readonly="true"></p:inputText>
+              	
+              	<p:outputLabel value="Stock alert"></p:outputLabel>
+              	<p:inputText value="#{traitementDemandeController_Admin.materielFongible.stockAlerte} " readonly="true" binding="#{traitementDemandeController_Admin.input_stockAlert}"></p:inputText>
+              	
+              	            	 
+        		 <p:outputLabel value="Stock actuel"></p:outputLabel>
+              	 <p:inputText value="#{traitementDemandeController_Admin.materielFongible.stockActuel}" readonly="true" binding="#{traitementDemandeController_Admin.input_stockActuel}"></p:inputText>
+ 
+              </h:panelGrid>
+          
+          	<p:toolbar >
+							<f:facet name="left">
+								<p:commandButton value="OK" action="#{traitementDemandeController_Admin.ok}" update="form" ></p:commandButton>
+								</f:facet>
+						</p:toolbar>
+        </p:dialog>
+        
          <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 	   <p:commandButton value="Oui" type="button"
 	   styleClass="ui-confirmdialog-yes" icon="ui-icon-check" >
