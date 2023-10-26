@@ -46,7 +46,6 @@ public class Reparation implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
 	@Column(name = "ID_REPARATION", unique = true, nullable = false)
 	public Integer getIdReparation() {
 		return this.idReparation;

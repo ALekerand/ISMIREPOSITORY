@@ -37,7 +37,7 @@ public class RequeteDiagnostique {
 	}
 	
 	public List materielDefaillant() {
-		String query = "SELECT * FROM `diagnostique` WHERE diagnostique.ID_ETAT = '2' ORDER BY `diagnostique`.`ID_DIAGNOSTIQUE`DESC";
+		String query = "SELECT * FROM `diagnostique` WHERE diagnostique.ID_ETAT = '2' ORDER BY `diagnostique`.`ID_DIAGNOSTIQUE`DESC LIMIT 1";
 		List list = getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Diagnostique.class).list();
 		return list;
 	}
