@@ -47,9 +47,15 @@
 					</p:selectOneMenu>
 					
 					<p:outputLabel for="cb_marque" value="Marque:"/>
-						<p:selectOneMenu id="cb_marque" required="true" value="#{materielController.idMarque}">
+						<p:selectOneMenu id="cb_marque" required="true" value="#{materielWithQRController.idMarque}">
 						<f:selectItem itemLabel="Selectionnez" itemValue="" />
-						<f:selectItems value="#{materielController.listMarque}" var="tata" itemLabel="#{tata.libelleMarque}" itemValue="#{tata.idMarque}"></f:selectItems>
+						<f:selectItems value="#{materielWithQRController.listMarque}" var="tata" itemLabel="#{tata.libelleMarque}" itemValue="#{tata.idMarque}"></f:selectItems>
+					</p:selectOneMenu>
+					
+					<p:outputLabel for="cb_etat" value="Etat:"/>
+						<p:selectOneMenu id="cb_etat" required="true" value="#{materielWithQRController.idEtat}">
+						<f:selectItem itemLabel="Selectionnez" itemValue="" />
+						<f:selectItems value="#{materielWithQRController.listEtat}" var="tata" itemLabel="#{tata.libEtat}" itemValue="#{tata.idEtat}"></f:selectItems>
 					</p:selectOneMenu>
 					
 					<p:outputLabel for="input_descrip" value="Description:"></p:outputLabel>

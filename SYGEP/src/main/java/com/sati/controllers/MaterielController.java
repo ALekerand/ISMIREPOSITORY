@@ -24,6 +24,7 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.sati.dto.CaracteristiqueValeur;
 import com.sati.model.Caracteristique;
+import com.sati.model.Etat;
 import com.sati.model.Famille;
 import com.sati.model.Fongible;
 import com.sati.model.Magasin;
@@ -443,7 +444,6 @@ public class MaterielController {
 	@SuppressWarnings("unchecked")
 	public List<Marque> getListMarque() {
 		listMarque = service.getObjects("Marque");
-		System.out.println("========Taille de la liste:"+listMarque.size());
 		return listMarque;
 	}
 
@@ -454,12 +454,10 @@ public class MaterielController {
 	@SuppressWarnings("unchecked")
 	public List<Fongible> getListFongible() {
 		listFongible = service.getObjects("Fongible");
-		System.out.println("========Taille de la liste:"+listFongible.size());
 		return listFongible;
 	}
 
 	public void setListFongible(List<Fongible> listFongible) {
 		this.listFongible = listFongible;
 	}
-
 }

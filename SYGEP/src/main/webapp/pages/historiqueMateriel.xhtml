@@ -28,7 +28,7 @@
                     </span>
                 </div>
             </f:facet>
-     <p:ajax event="rowSelect" process="@this"  update="form" listener="#{consulterMaterielController.selectionnerLigne}"></p:ajax>
+     <p:ajax event="rowSelect" process="@this"  update=":form" listener="#{consulterMaterielController.selectionnerLigne}"></p:ajax>
    		<p:column selectionMode="single" style="width:16px;text-align:center"/>
    		
    		<p:column headerText="Réf" style="width:30%" filterBy="#{var.codeMateriel}" filterable="false">

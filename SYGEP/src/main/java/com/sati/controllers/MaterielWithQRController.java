@@ -25,7 +25,9 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.sati.dto.CaracteristiqueValeur;
 import com.sati.model.Caracteristique;
+import com.sati.model.Diagnostique;
 import com.sati.model.Entree;
+import com.sati.model.Etat;
 import com.sati.model.Famille;
 import com.sati.model.Fongible;
 import com.sati.model.Fournisseur;
@@ -55,6 +57,7 @@ public class MaterielWithQRController {
 	@SuppressWarnings("unused")
 	private List<Materiel> listTable = new ArrayList<Materiel>();
 	private Materiel selectedObject = new Materiel();
+	private Diagnostique diagnostique = new Diagnostique();
 	private int idFamille;
 	private int idNature;
 	private int idMagasin;
@@ -63,6 +66,7 @@ public class MaterielWithQRController {
 	private int idMarque;
 	private int stockActuel;
 	private int stockAlerte;
+	private int idEtat;
 	private String etatFongible;
 	private List<Famille> listFamille = new ArrayList<Famille>();
 	private List<Nature> listNature = new ArrayList<Nature>();
@@ -71,6 +75,7 @@ public class MaterielWithQRController {
 	private List<SourceFinancement> listSourceFinance = new ArrayList<SourceFinancement>();
 	private List<CaracteristiqueValeur> listCaracteristiqueValeur = new ArrayList<CaracteristiqueValeur>();
 	private List<Fournisseur> listFournisseur = new ArrayList<Fournisseur>();
+	private List<Etat> listEtat = new ArrayList<Etat>();
 	private String typeMateriel="";
 	
 	//Pour le QR code
@@ -179,6 +184,13 @@ public class MaterielWithQRController {
 		this.materiel.setMarque(marque);
 		this.materiel.setRetrait(false);
 		this.service.addObject(this.materiel);
+		
+		//Donner le diqgnostique
+		diagnostique.setMateriel(materiel);
+		diagnostique.setEtat((Etat) service.getObjectById(idEtat, "Etat"));
+		diagnostique.setDateDiagnostique(new Date());
+		diagnostique.setCommentaire("Etat du materiel lors de l'acquisition");
+		service.addObject(diagnostique);
 		
 		//Enregistrement dans fongible et non fongible
 		
@@ -528,5 +540,21 @@ public class MaterielWithQRController {
 
 	public void setIdMarque(int idMarque) {
 		this.idMarque = idMarque;
+	}
+
+	public int getIdEtat() {
+		return idEtat;
+	}
+
+	public void setIdEtat(int idEtat) {
+		this.idEtat = idEtat;
+	}
+
+	public List<Etat> getListEtat() {
+		return listEtat = service.getObjects("Etat");
+	}
+
+	public void setListEtat(List<Etat> listEtat) {
+		this.listEtat = listEtat;
 	}
 }

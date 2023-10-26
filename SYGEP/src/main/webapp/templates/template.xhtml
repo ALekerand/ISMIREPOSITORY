@@ -26,7 +26,6 @@
 		<p:panelMenu style="width:300px">
             <p:submenu label="Paramétrage">
               <p:menuitem value="Enregistrer les familles" outcome="/pages/famille.xhtml" icon="pi pi-upload"/>
-              <p:menuitem value="Materiels sans QR code" outcome="/pages/materiel.xhtml" icon="pi pi-upload"/>
               <p:menuitem value="Enregistrer les natures" outcome="/pages/nature.xhtml" icon="pi pi-upload"/>
               <p:menuitem value="Enregistrer les Fournisseurs" outcome="/pages/fournisseur.xhtml" icon="pi pi-upload"/>
          	  <p:menuitem value="Enregistrer les Services" outcome="/pages/service.xhtml" icon="pi pi-upload"/>
@@ -38,8 +37,14 @@
           	  <p:menuitem value="Enregistrer les etats" outcome="/pages/etat.xhtml" icon="pi pi-upload"/>
           	  <p:menuitem value="Enregistrer les marques" outcome="/pages/marque.xhtml" icon="pi pi-upload"/>
           	  <p:menuitem value="Enregistrer les etats inventaire" outcome="/pages/etatInventaire.xhtml" icon="pi pi-upload"/>
-          	  <p:menuitem value="Enregistrer les inventaires" outcome="/pages/inventaire.xhtml" icon="pi pi-upload"/>
 			</p:submenu>
+            
+             <p:submenu label="Materiel">
+              <p:menuitem value="Materiels sans QR code" outcome="/pages/materiel.xhtml" icon="pi pi-upload"/>
+              <p:menuitem value="Materiels avec QR code" outcome="/pages/materiel_with_QR_code.xhtml" icon="pi pi-upload"/>
+           	  <p:menuitem value="Retirer materiel" outcome="/pages/retrait_materiel.xhtml" icon="pi pi-upload"/>
+              <p:menuitem value="Reparer materiel" outcome="/pages/reparerMateriel.xhtml" icon="pi pi-upload"/>
+            </p:submenu>
             
             <p:submenu label="Demande">
             	<p:menuitem value="Emmettre demande" outcome="/pages/demande.xhtml" icon="pi pi-upload"/>
@@ -50,14 +55,10 @@
             
             <p:submenu label="Activité">
                 <p:menuitem value="Approvisionnent" outcome="/pages/entree.xhtml" icon="pi pi-upload"/>
-                <p:menuitem value="Materiels avec QR code" outcome="/pages/materiel_with_QR_code.xhtml" icon="pi pi-upload"/>
                 <p:menuitem value="Affecter matériel" outcome="/pages/parcours.xhtml" icon="pi pi-upload"/>
                 <p:menuitem value="Sortie" outcome="/pages/sortie.xhtml" icon="pi pi-upload"/>
                 <p:menuitem value="Traiter demande" outcome="/pages/traiterDemande.xhtml" icon="pi pi-upload"/>
                	<p:menuitem value="Autoriser sortie" outcome="/pages/autoriserSortie.xhtml" icon="pi pi-upload"/>
-                <p:menuitem value="Retirer materiel" outcome="/pages/retrait_materiel.xhtml" icon="pi pi-upload"/>
-                <p:menuitem value="Point inventaire" outcome="/pages/point.xhtml" icon="pi pi-upload"/>
-                <p:menuitem value="Reparer materiel" outcome="/pages/reparerMateriel.xhtml" icon="pi pi-upload"/>
             </p:submenu>
             
             <p:submenu label="Editions">
@@ -65,7 +66,12 @@
             	<p:menuitem value="Créer bon de livraison" outcome="/pages/bonLivraison.xhtml" icon="pi pi-upload"/>
             </p:submenu>
             
-            <p:submenu label="Consulter">
+            <p:submenu label="Inventaire">
+               	<p:menuitem value="Point inventaire" outcome="/pages/point.xhtml" icon="pi pi-upload"/>
+           	    <p:menuitem value="Enregistrer les inventaires" outcome="/pages/inventaire.xhtml" icon="pi pi-upload"/>
+            </p:submenu>
+            
+            <p:submenu label="Consultation">
    			<p:menuitem value="Bon Commande" outcome="/pages/consulterBonCommande.xhtml" icon="pi pi-upload"/>
    			<p:menuitem value="Demande_Admin" outcome="/pages/consulterDemande_Admin.xhtml" icon="pi pi-upload"/>
    			<p:menuitem value="Historique de Parcours" outcome="/pages/historiqueMateriel.xhtml" icon="pi pi-upload"/>
