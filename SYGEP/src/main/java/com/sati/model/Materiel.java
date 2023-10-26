@@ -1,5 +1,5 @@
 package com.sati.model;
-// Generated 25 sept. 2023, 20:35:19 by Hibernate Tools 4.3.6.Final
+// Generated 25 oct. 2023, 22:30:48 by Hibernate Tools 4.3.6.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -30,7 +30,9 @@ public class Materiel implements java.io.Serializable {
 	private String nomMateriel;
 	private String descriptionMateriel;
 	private String referenceMateriel;
+	private Boolean enReparation;
 	private Boolean retrait;
+	private Set<Reparation> reparations = new HashSet<Reparation>(0);
 	private Set<Valeur> valeurs = new HashSet<Valeur>(0);
 	private NonFongible nonFongible;
 	private Fongible fongible;
@@ -50,9 +52,10 @@ public class Materiel implements java.io.Serializable {
 	}
 
 	public Materiel(Magasin magasin, Marque marque, Nature nature, String codeMateriel, String nomMateriel,
-			String descriptionMateriel, String referenceMateriel, Boolean retrait, Set<Valeur> valeurs,
-			NonFongible nonFongible, Fongible fongible, Set<LigneCommande> ligneCommandes, Set<Point> points,
-			Set<Demande> demandes, Set<Entree> entrees, Set<Parcours> parcourses, Set<Diagnostique> diagnostiques) {
+			String descriptionMateriel, String referenceMateriel, Boolean enReparation, Boolean retrait,
+			Set<Reparation> reparations, Set<Valeur> valeurs, NonFongible nonFongible, Fongible fongible,
+			Set<LigneCommande> ligneCommandes, Set<Point> points, Set<Demande> demandes, Set<Entree> entrees,
+			Set<Parcours> parcourses, Set<Diagnostique> diagnostiques) {
 		this.magasin = magasin;
 		this.marque = marque;
 		this.nature = nature;
@@ -60,7 +63,9 @@ public class Materiel implements java.io.Serializable {
 		this.nomMateriel = nomMateriel;
 		this.descriptionMateriel = descriptionMateriel;
 		this.referenceMateriel = referenceMateriel;
+		this.enReparation = enReparation;
 		this.retrait = retrait;
+		this.reparations = reparations;
 		this.valeurs = valeurs;
 		this.nonFongible = nonFongible;
 		this.fongible = fongible;
@@ -84,7 +89,7 @@ public class Materiel implements java.io.Serializable {
 		this.idMateriel = idMateriel;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_MAGASIN", nullable = false)
 	public Magasin getMagasin() {
 		return this.magasin;
@@ -150,6 +155,15 @@ public class Materiel implements java.io.Serializable {
 		this.referenceMateriel = referenceMateriel;
 	}
 
+	@Column(name = "EN_REPARATION")
+	public Boolean getEnReparation() {
+		return this.enReparation;
+	}
+
+	public void setEnReparation(Boolean enReparation) {
+		this.enReparation = enReparation;
+	}
+
 	@Column(name = "RETRAIT")
 	public Boolean getRetrait() {
 		return this.retrait;
@@ -157,6 +171,15 @@ public class Materiel implements java.io.Serializable {
 
 	public void setRetrait(Boolean retrait) {
 		this.retrait = retrait;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "materiel")
+	public Set<Reparation> getReparations() {
+		return this.reparations;
+	}
+
+	public void setReparations(Set<Reparation> reparations) {
+		this.reparations = reparations;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "materiel")

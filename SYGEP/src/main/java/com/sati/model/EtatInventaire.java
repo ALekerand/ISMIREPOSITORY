@@ -1,5 +1,5 @@
 package com.sati.model;
-// Generated 25 sept. 2023, 20:35:19 by Hibernate Tools 4.3.6.Final
+// Generated 25 oct. 2023, 22:30:48 by Hibernate Tools 4.3.6.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,16 +20,16 @@ import javax.persistence.Table;
 public class EtatInventaire implements java.io.Serializable {
 
 	private Integer idEtatInventaire;
+	private String codeTypeInventaire;
 	private String libEtatInventaire;
-	private String codeTypeInventaitre;
 	private Set<Point> points = new HashSet<Point>(0);
 
 	public EtatInventaire() {
 	}
 
-	public EtatInventaire(String libEtatInventaire, String codeTypeInventaitre, Set<Point> points) {
+	public EtatInventaire(String codeTypeInventaire, String libEtatInventaire, Set<Point> points) {
+		this.codeTypeInventaire = codeTypeInventaire;
 		this.libEtatInventaire = libEtatInventaire;
-		this.codeTypeInventaitre = codeTypeInventaitre;
 		this.points = points;
 	}
 
@@ -44,17 +44,17 @@ public class EtatInventaire implements java.io.Serializable {
 	public void setIdEtatInventaire(Integer idEtatInventaire) {
 		this.idEtatInventaire = idEtatInventaire;
 	}
-	
-	@Column(name = "CODE_MATERIEL", length = 10)
-	public String getCodeTypeInventaitre() {
-		return codeTypeInventaitre;
+
+	@Column(name = "CODE_TYPE_INVENTAIRE", length = 10)
+	public String getCodeTypeInventaire() {
+		return this.codeTypeInventaire;
 	}
 
-	public void setCodeTypeInventaitre(String codeTypeInventaitre) {
-		this.codeTypeInventaitre = codeTypeInventaitre;
+	public void setCodeTypeInventaire(String codeTypeInventaire) {
+		this.codeTypeInventaire = codeTypeInventaire;
 	}
 
-	@Column(name = "LIB_ETAT_INVENTAIRE", length = 100)
+	@Column(name = "LIB_ETAT_INVENTAIRE", length = 20)
 	public String getLibEtatInventaire() {
 		return this.libEtatInventaire;
 	}

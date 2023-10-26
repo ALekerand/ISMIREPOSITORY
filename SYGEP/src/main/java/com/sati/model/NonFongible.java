@@ -1,5 +1,5 @@
 package com.sati.model;
-// Generated 25 sept. 2023, 20:35:19 by Hibernate Tools 4.3.6.Final
+// Generated 25 oct. 2023, 22:30:48 by Hibernate Tools 4.3.6.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -31,6 +31,7 @@ public class NonFongible implements java.io.Serializable {
 	private String nomMateriel;
 	private String descriptionMateriel;
 	private String referenceMateriel;
+	private Boolean enReparation;
 	private Boolean retrait;
 	private String qrCode;
 	private Boolean retraitMateriel;
@@ -44,8 +45,8 @@ public class NonFongible implements java.io.Serializable {
 	}
 
 	public NonFongible(Materiel materiel, Integer idNature, Integer idMagasin, Integer idMarque, String codeMateriel,
-			String nomMateriel, String descriptionMateriel, String referenceMateriel, Boolean retrait, String qrCode,
-			Boolean retraitMateriel, Date dateRetrait) {
+			String nomMateriel, String descriptionMateriel, String referenceMateriel, Boolean enReparation,
+			Boolean retrait, String qrCode, Boolean retraitMateriel, Date dateRetrait) {
 		this.materiel = materiel;
 		this.idNature = idNature;
 		this.idMagasin = idMagasin;
@@ -54,6 +55,7 @@ public class NonFongible implements java.io.Serializable {
 		this.nomMateriel = nomMateriel;
 		this.descriptionMateriel = descriptionMateriel;
 		this.referenceMateriel = referenceMateriel;
+		this.enReparation = enReparation;
 		this.retrait = retrait;
 		this.qrCode = qrCode;
 		this.retraitMateriel = retraitMateriel;
@@ -144,6 +146,15 @@ public class NonFongible implements java.io.Serializable {
 
 	public void setReferenceMateriel(String referenceMateriel) {
 		this.referenceMateriel = referenceMateriel;
+	}
+
+	@Column(name = "EN_REPARATION")
+	public Boolean getEnReparation() {
+		return this.enReparation;
+	}
+
+	public void setEnReparation(Boolean enReparation) {
+		this.enReparation = enReparation;
 	}
 
 	@Column(name = "RETRAIT")

@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+
+
+<ui:composition template="/templates/template.xhtml">
+			<ui:define name="body">
+				<h:form id="form">
+				<p:panel header="LISTE DES MATERIEL DEFAILLANT" >
+				
+				
+						<p:dataTable var="variable" value="#{materielDefaillant.listMaterielDefaillant}" >
+ 							<f:facet name="header">LISTES DES MATERIELS DEFAILLANT</f:facet>
+  					
+		   							<p:column headerText="Materiel">
+									<h:outputText value="#{variable.materiel.codeMateriel}" />
+									</p:column>
+									
+		   							<p:column headerText="Materiel">
+									<h:outputText value="#{variable.materiel.nomMateriel}" />
+									</p:column>
+									
+									<p:column headerText="Materiel">
+									<h:outputText value="#{variable.materiel.descriptionMateriel}" />
+									</p:column>
+									
+									<p:column headerText="Etat materiel">
+									<h:outputText value="#{variable.etat.libEtat}" />
+									</p:column>
+									
+									<p:column headerText="Reparer materiel">
+									<p:linkButton outcome="reparerMateriel" value="Reparer materiel" style="margin-right:20px;">
+   									 </p:linkButton>
+									</p:column>
+									 
+                       </p:dataTable>
+                       </p:panel>
+           </h:form>
+         </ui:define>
+       </ui:composition>
+</html>

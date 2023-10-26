@@ -43,7 +43,7 @@
             
             <p:submenu label="Demande">
             	<p:menuitem value="Emmettre demande" outcome="/pages/demande.xhtml" icon="pi pi-upload"/>
-            	<p:menuitem value="Mes demandes" outcome="/pages/cunsulteur_demande_user.xhtml" icon="pi pi-upload"/>
+            	<p:menuitem value="Mes demandes" outcome="/pages/consulteur_demande_user.xhtml" icon="pi pi-upload"/>
             	<p:menuitem value="Reception de materiel" outcome="/pages/afficherDemande_validees_Utilisateur.xhtml" icon="pi pi-upload"/>
             	<p:menuitem value="Emprunt de materiel" outcome="/pages/emprunt_materiel.xhtml" icon="pi pi-upload"/>
             </p:submenu>
@@ -57,6 +57,7 @@
                	<p:menuitem value="Autoriser sortie" outcome="/pages/autoriserSortie.xhtml" icon="pi pi-upload"/>
                 <p:menuitem value="Retirer materiel" outcome="/pages/retrait_materiel.xhtml" icon="pi pi-upload"/>
                 <p:menuitem value="Point inventaire" outcome="/pages/point.xhtml" icon="pi pi-upload"/>
+                <p:menuitem value="Reparer materiel" outcome="/pages/reparerMateriel.xhtml" icon="pi pi-upload"/>
             </p:submenu>
             
             <p:submenu label="Editions">
@@ -68,9 +69,10 @@
    			<p:menuitem value="Bon Commande" outcome="/pages/consulterBonCommande.xhtml" icon="pi pi-upload"/>
    			<p:menuitem value="Demande_Admin" outcome="/pages/consulterDemande_Admin.xhtml" icon="pi pi-upload"/>
    			<p:menuitem value="Historique de Parcours" outcome="/pages/historiqueMateriel.xhtml" icon="pi pi-upload"/>
-   			<p:menuitem value="Etat Materiel" outcome="/pages/afficherEtatMateriel.xhtml" icon="pi pi-upload"/>
+   			<p:menuitem value="Etat Materiel Apres Diagnostique" outcome="/pages/afficherEtatMaterielApresDiagnostique.xhtml" icon="pi pi-upload"/>
    			<p:menuitem value="Materiel et Stock_Actuel" outcome="/pages/afficherMateriel_StockActuel.xhtml" icon="pi pi-upload"/>
    			<p:menuitem value="Materiel dont stock alert atteint" outcome="/pages/materielStockAlert_Atteint.xhtml" icon="pi pi-upload"/>
+   			<p:menuitem value="Materiel défaillant" outcome="/pages/materielDefaillant.xhtml" icon="pi pi-upload"/>
    			</p:submenu>
    			
             <p:submenu label="Gestion des Utilisateurs">
@@ -84,7 +86,7 @@
 <p:layoutUnit position="center">
 <div id="content">
   <ui:insert name="body">  
- <ui:include  src="/pages/tableauDeBord.xhtml"></ui:include> 	
+ <ui:include  src="/pages/tableauDeBord.xhtml"></ui:include> 
   </ui:insert>
 </div>
 </p:layoutUnit>

@@ -35,6 +35,12 @@ public class RequeteDiagnostique {
 		return list;
 		
 	}
+	
+	public List materielDefaillant() {
+		String query = "SELECT * FROM `diagnostique` WHERE diagnostique.ID_ETAT = '2' ORDER BY `diagnostique`.`ID_DIAGNOSTIQUE`DESC";
+		List list = getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Diagnostique.class).list();
+		return list;
+	}
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}

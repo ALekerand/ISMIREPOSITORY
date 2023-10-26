@@ -8,3 +8,9 @@ Table ETATDEMANDE
  
  =============== DOSSIER DES QR CODE =====================
  
+ 
+ ETAT MATERIEL APRES DIAGNOSTIQUE
+ 
+ 1 : Bon etat
+ 2 : defaillant
+ 
