@@ -41,6 +41,7 @@ public class RequeteDiagnostique {
 		List list = getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Diagnostique.class).list();
 		return list;
 	}
+	
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}

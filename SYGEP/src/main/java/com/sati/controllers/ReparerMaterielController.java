@@ -68,11 +68,20 @@ public class ReparerMaterielController {
 	}
 	
 	public void enregistrer() {
+		
 		reparation.setMateriel(diagnostique.getMateriel());
 		this.service.addObject(reparation);
+		
+		Materiel materiel = diagnostique.getMateriel();
+		materiel.setEnReparation(true);
+		materiel.getNonFongible().setEnReparation(true);
+		this.service.updateObject(materiel);
+		this.service.updateObject(materiel.getNonFongible());
+		
 		this.info("Enregistrement effectué avec succès!");
 		this.reparation.setCode(genererCodeReparation());
 		annuler();
+		
 	}
 	public void choisirLigneMateriel() {
 		this.diagnostique = this.selectedMateriel;
@@ -166,6 +175,7 @@ public class ReparerMaterielController {
 	public List<Diagnostique> getListMaterielDefaillant() {
 		
 		listMaterielDefaillant = requeteDiagnostique.materielDefaillant();
+		
 		return listMaterielDefaillant;
 	}
 

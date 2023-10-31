@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+
+	<ui:composition template="/templates/template.xhtml">
+			<ui:define name="body">
+				<h:form id="form">
+			<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+			
+			<p:panel header="ENREGISTREMENT DES INFORMATIONS SUR LE RETOUR EN SERVICE DU MATERIEL">
+	<fieldset>
+ 	<legend>Informations sur le retour en service du materiel</legend>	
+	
+	<table >
+	<tr>
+	<td >
+	
+	<p:dataTable  var="var" widgetVar="dtMateriel" value="#{retourEnServiceController.listMaterielEnReparation}"  selectionMode="single" selection="#{retourEnServiceController.selectedMateriel}" rowKey="#{var.idReparation}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+ 
+ 	 <f:facet name="header">
+                <div class="materiel-table-header">
+                    <span style="font-weight: bold">Liste des materiels</span>
+                    <span class="filter-container ui-input-icon-left"> <i class="pi pi-search"></i>
+                        <p:inputText id="globalFilter" onkeyup="PF('dtMateriel').filter()" placeholder="Search" />
+                    </span>
+                </div>
+            </f:facet>
+     <p:ajax event="rowSelect" process="@this"  update="form" listener="#{retourEnServiceController.choisirLigneMateriel}"></p:ajax>
+   		<p:column selectionMode="single" style="width:16px;text-align:center"/>
+   		
+   		<p:column headerText="Code materiel" style="width:30%" filterBy="#{var.materiel.codeMateriel}" filterable="false">
+        <h:outputText value="#{var.materiel.codeMateriel}"/>
+        </p:column>
+        
+        <p:column headerText="Désignation" filterBy="#{var.materiel.nomMateriel}" filterable="false">
+        <h:outputText value="#{var.materiel.nomMateriel}"/>
+        </p:column>
+        
+        </p:dataTable>	
+			
+		</td>
+		<td>	
+	
+	<h:panelGrid columns="4" cellpadding="5">
+	<p:outputLabel for="input_code" value="Code materiel:"></p:outputLabel>
+	<p:inputText id="input_code" value="#{retourEnServiceController.reparation.materiel.codeMateriel}" readonly="true"></p:inputText>	
+
+	<p:outputLabel for="input_nom" value="Nom materiel:"></p:outputLabel>
+	<p:inputText id="input_nom" value="#{retourEnServiceController.reparation.materiel.nomMateriel}" readonly="true"></p:inputText>
+
+	<p:outputLabel for="input_codeRep" value="Code repation:"></p:outputLabel>
+	<p:inputText id="input_codeRep" value="#{retourEnServiceController.reparation.code}" readonly="true"></p:inputText>
+	
+	<p:outputLabel for="input_descriptionPan" value="Description panne:"></p:outputLabel>
+	<p:inputText id="input_descriptionPan" value="#{retourEnServiceController.reparation.descriptionPanne}" readonly="true"></p:inputText>
+	
+	<p:outputLabel value="Date mise reparation"></p:outputLabel>
+    <p:calendar id="date_mise" value="#{retourEnServiceController.reparation.dateMiseReparation}" pattern="dd/MM/yyyy" locale="fr" navigator="true" readonly="true"></p:calendar>
+    
+    <p:outputLabel value="date fin reparation"></p:outputLabel>
+    <p:calendar id="date_fin" value="#{retourEnServiceController.reparation.dateRetourService}" pattern="dd/MM/yyyy" locale="fr" navigator="true"></p:calendar>
+            
+	</h:panelGrid>
+	
+	</td>
+	</tr>
+	</table>
+</fieldset>
+</p:panel>
+					
+	   <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+	   <p:commandButton value="Oui" type="button"
+	   styleClass="ui-confirmdialog-yes" icon="ui-icon-check" >
+	   </p:commandButton>
+	   <p:commandButton value="Non" type="button"
+	   styleClass="ui-confirmdialog-no" icon="ui-icon-close" >
+	   </p:commandButton>
+	   </p:confirmDialog>
+	   
+</h:form>
+</ui:define>
+</ui:composition>
+</html>
