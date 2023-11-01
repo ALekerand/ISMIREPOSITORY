@@ -63,5 +63,7 @@ public class RequeteMateriel {
 		Fongible fongible = (Fongible) getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Fongible.class).uniqueResult();
 		return fongible;
 	}
+	
+
 
 }

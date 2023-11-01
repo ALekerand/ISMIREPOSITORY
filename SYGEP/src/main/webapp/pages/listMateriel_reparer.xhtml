@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+      
+      
+      <ui:composition template="/templates/template.xhtml">
+			<ui:define name="body">
+				<h:form id="form">
+      <p:panel header="LISTE DES MATERIELS REPARES">
+      	<p:dataTable widgetVar="dtReparation"  var="variable" value="#{retourEnServiceController.listReparation}"  rowKey="#{variable.idReparation}">
+ 		
+ 		 <f:facet name="header">
+                <div class="materiel-table-header">
+                    <span style="font-weight: bold">LISTE DES MATERIELS REPARES</span>
+                    <span class="filter-container ui-input-icon-left"> <i class="pi pi-search"></i>
+                        <p:inputText id="globalFilter" onkeyup="PF('dtReparation').filter()" placeholder="Search" />
+                    </span>
+                </div>
+            </f:facet>
+		
+   		<p:column headerText="Code reparation" filterBy="#{variable.code}" filterable="false">
+        <h:outputText value="#{variable.code} "/>
+        </p:column>
+   		
+   		<p:column headerText="Description panne" filterBy="#{variable.descriptionPanne}" filterable="false">
+        <h:outputText value="#{variable.descriptionPanne}"/>
+        </p:column>
+        
+       <p:column headerText="Code materiel" filterBy="#{variable.materiel.codeMateriel}" filterable="false">
+		<h:outputText value="#{variable.materiel.codeMateriel}" />
+		</p:column>
+									
+		<p:column headerText="Nom maeriel" filterBy="#{variable.materiel.nomMateriel}" filterable="false">
+		<h:outputText value="#{variable.materiel.nomMateriel}" />
+		</p:column>
+									
+		<p:column headerText="Description materiel" filterBy="#{variable.materiel.descriptionMateriel}" filterable="false">
+		<h:outputText value="#{variable.materiel.descriptionMateriel}" />
+		</p:column>
+        
+        <p:column headerText="Date mise en reparation" filterBy="#{variable.dateMiseReparation}" filterable="false">
+        <h:outputText value="#{variable.dateMiseReparation}"/>
+        </p:column>
+        
+        <p:column headerText="Date fin reparation" filterBy="#{variable.dateRetourService}" filterable="false">
+        <h:outputText value="#{variable.dateRetourService}"/>
+        </p:column>
+
+        </p:dataTable>
+		</p:panel>		
+					
+
+	   
+</h:form>
+</ui:define>
+</ui:composition>
+
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<ui:composition template="/templates/template.xhtml">
+			<ui:define name="body">
+				<h:form id="form">
+				<p:panel header="LISTES DES MATERIELS EN REPARATION" >
+				
+				
+						<p:dataTable var="variable" value="#{materielEnReparationController.listMaterielEnReparation}" selectionMode="single" selection="#{materielEnReparationController.selectedReparation}" rowKey="#{variable.idReparation}">
+ 							<f:facet name="header">LISTES DES MATERIELS EN REPARATION</f:facet>
+  							     <p:ajax event="rowSelect" process="@this"  update="form" listener="#{materielEnReparationController.selectionnerLigne}"></p:ajax>
+		   							<p:column headerText="Materiel">
+									<h:outputText value="#{variable.materiel.codeMateriel}" />
+									</p:column>
+									
+		   							<p:column headerText="Materiel">
+									<h:outputText value="#{variable.materiel.nomMateriel}" />
+									</p:column>
+									
+									<p:column headerText="Materiel">
+									<h:outputText value="#{variable.materiel.descriptionMateriel}" />
+									</p:column>
+									
+									<p:column headerText="Materiel en reparation">
+									<h:outputText value="#{variable.materiel.enReparation}" />
+									</p:column>
+									
+									<p:column headerText="Retour en service">
+									<p:linkButton outcome="retourEnService" value="Retour en service" style="margin-right:20px;">
+   									 </p:linkButton>
+									</p:column>
+									 
+                       </p:dataTable>
+                       </p:panel>
+           </h:form>
+         </ui:define>
+       </ui:composition>
+        
+</html>
