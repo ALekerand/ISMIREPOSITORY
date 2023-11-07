@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+       xmlns:p="http://primefaces.org/ui"> 
+
+
+
+		
+			<ui:composition template="/templates/template.xhtml">
+			<ui:define name="body">
+			<h:form>
+			
+			<p:panel header="Detail du qr_code">
+			<table>
+				<tr>
+					<td>
+						<h:panelGrid columns="2" cellpadding="40" >
+						<p:outputLabel  value="Code materiel"></p:outputLabel>
+						<h:outputText value="#{detailDuQrCodeController.parcours.materiel.codeMateriel}" />
+		
+						<p:outputLabel  value="Désignation"></p:outputLabel>
+						<h:outputText value="#{detailDuQrCodeController.parcours.materiel.nomMateriel}" />
+						</h:panelGrid>
+					</td>
+					<td>
+						<h:panelGrid columns="2" cellpadding="40" >
+			
+						<p:outputLabel  value="Magasin d'origine"></p:outputLabel>
+						<h:outputText value="#{detailDuQrCodeController.parcours.materiel.magasin.nomMagasin}" />	
+					
+						<p:outputLabel  value="Position actuel"></p:outputLabel>
+						<h:outputText value="#{detailDuQrCodeController.parcours.service.nomService}" />
+						</h:panelGrid>
+						
+					</td>
+				</tr>
+			</table>
+	
+		</p:panel>
+			</h:form>
+			
+			</ui:define>
+			</ui:composition>
+</html>

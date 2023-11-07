@@ -34,6 +34,7 @@ import net.sf.jasperreports.view.JasperViewer;
 @Component
 @Scope("session")
 public class QRCodeReportBean {
+	
 	@Autowired
 	private Iservice service;
 	
