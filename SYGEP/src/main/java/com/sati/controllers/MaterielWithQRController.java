@@ -80,7 +80,7 @@ public class MaterielWithQRController {
 	
 	//Pour le QR code
 	private String data;
-	String path = "C:\\SYGEP\\QR_CODE";
+	String path = "C:/SYGEP/QR_CODE";
 	
 //	private Famille choosedFamille = new Famille();
 	private CommandButton btnEnregistrer = new CommandButton();
@@ -160,12 +160,12 @@ public class MaterielWithQRController {
 		data = "Code: "+materiel.getCodeMateriel()+"\n"+
 				"Désignation: " +materiel.getNomMateriel()+"\n"+
 				"Magasin d'origine: " +materiel.getMagasin().getNomMagasin()+"\n"+
-				"Position actuelle:";
-		BitMatrix matrix = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, 500, 500);
+				"Position actuelle: non affecté";
+		BitMatrix matrix = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, 200, 200);
 		MatrixToImageWriter.writeToPath(matrix, "jpg", Paths.get(path));
 		
 		//Reactualiser le chemin
-		path = "C:\\SYGEP\\QR_CODE";
+		path = "C:/SYGEP/QR_CODE";
 	}
 	
 	public void chargerNature() {
@@ -527,7 +527,7 @@ public class MaterielWithQRController {
 	}
 
 	public List<Marque> getListMarque() {
-		return listMarque;
+		return listMarque = service.getObjects("Marque");
 	}
 
 	public void setListMarque(List<Marque> listMarque) {

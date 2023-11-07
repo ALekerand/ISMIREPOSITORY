@@ -1,5 +1,7 @@
 package com.sati.controllers;
 
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,6 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
 import com.sati.model.Diagnostique;
 import com.sati.model.Etat;
 import com.sati.model.Materiel;
@@ -44,10 +51,15 @@ public class ParcoursController {
 	private List<Service> listService = new ArrayList<Service>();
 	private List<Etat> listEtat = new ArrayList<Etat>();
 	
+	//Pour le QR code
+		private String data;
+		String path = "C:/SYGEP/QR_CODE";
+	
 	
 	private CommandButton btnEnregistrer = new CommandButton();
 	private CommandButton btnAnnuler = new CommandButton();
 	private CommandButton btnModifier = new CommandButton();
+	
 	
 	@Autowired
 	private RequeteMateriel requeteMateriel;
@@ -89,7 +101,7 @@ public class ParcoursController {
 		this.diagnostique.setCodeDiagnostique(prefix+(nbEnregistrement+1));	
 	}
 	
-	public void selectionnerLigne() {                     
+	public void selectionnerLigne() throws IndexOutOfBoundsException{                     
 		this.materiel = this.selectedObject;
 		//Charger la position du matériel
 		parcours = requetePacours.recupererLastParcoursParMateriel(materiel.getIdMateriel());
@@ -98,7 +110,7 @@ public class ParcoursController {
 		this.btnEnregistrer.setDisabled(false);
 	}
 	
-	public void affecterMateriel() {
+	public void affecterMateriel() throws WriterException, IOException {
 		//Enregistrer dans parcours
 		leService = (Service) service.getObjectById(idEntite, "Service");
 		parcours.setService(leService);
@@ -114,6 +126,9 @@ public class ParcoursController {
 		diagnostique.setDateDiagnostique(parcours.getDateParcours());
 		service.addObject(diagnostique);
 		
+		//Actualiser le QR code
+		genererQRCode();
+		
 		annuler();
 		info("Affectation de matériel effectuée!");
 		listMateriel.clear();
@@ -122,6 +137,23 @@ public class ParcoursController {
 		genererCodeParcours();
 		genererCodeDiagnostique();
 	}
+	
+	
+	public void genererQRCode() throws WriterException, IOException {
+		path += "_"+materiel.getCodeMateriel();
+		data = "Code: "+materiel.getCodeMateriel()+"\n"+
+				"Désignation: " +materiel.getNomMateriel()+"\n"+
+				"Magasin d'origine: " +materiel.getMagasin().getNomMagasin()+"\n"+
+				"Position actuelle:"+leService.getNomService();
+		BitMatrix matrix = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, 200, 200);
+		MatrixToImageWriter.writeToPath(matrix, "jpg", Paths.get(path));
+		
+		//Reactualiser le chemin
+		path = "C:/SYGEP/QR_CODE";
+	}
+	
+	
+	
 	
 	public void annuler() {
 		this.materiel.setCodeMateriel(null);

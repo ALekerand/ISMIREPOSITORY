@@ -89,7 +89,7 @@ public class Materiel implements java.io.Serializable {
 		this.idMateriel = idMateriel;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_MAGASIN", nullable = false)
 	public Magasin getMagasin() {
 		return this.magasin;
