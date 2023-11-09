@@ -11,7 +11,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.component.commandbutton.CommandButton;
-import org.primefaces.component.radiobutton.RadioButton;
 import org.primefaces.component.selectonemenu.SelectOneMenu;
 import org.primefaces.event.RowEditEvent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +18,10 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.google.zxing.BarcodeFormat;
-import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 import com.sati.dto.CaracteristiqueValeur;
 import com.sati.model.Caracteristique;
 import com.sati.model.Diagnostique;
@@ -39,6 +38,7 @@ import com.sati.model.NonFongible;
 import com.sati.model.SourceFinancement;
 import com.sati.model.UserAuthentication;
 import com.sati.model.Valeur;
+import com.sati.reportBean.QRCodeReportBean;
 import com.sati.requetes.RequeteNature;
 import com.sati.requetes.RequeteUtilisateur;
 import com.sati.service.Iservice;
@@ -80,7 +80,8 @@ public class MaterielWithQRController {
 	
 	//Pour le QR code
 	private String data;
-	String path = "C:/SYGEP/QR_CODE";
+	private String path = "C:\\SYGEP\\QR_CODE";
+	private String extension;
 	
 //	private Famille choosedFamille = new Famille();
 	private CommandButton btnEnregistrer = new CommandButton();
@@ -94,6 +95,8 @@ public class MaterielWithQRController {
 	private RequeteNature requeteNature;
 	@Autowired
 	RequeteUtilisateur requeteUtilisateur;
+	@Autowired
+	QRCodeReportBean qrCodeReportBean;
 
 	@PostConstruct
 	public void initialiser() {
@@ -156,16 +159,22 @@ public class MaterielWithQRController {
 	
 	
 	public void genererQRCode() throws WriterException, IOException {
-		path += "_"+materiel.getCodeMateriel();
-		data = "Code: "+materiel.getCodeMateriel()+"\n"+
+		path += "_"+materiel.getCodeMateriel()+".png";
+		data =  "===== INFORMATION MATERIEL ====="+"\n"+
+				" " +"\n"+
+				"Code: "+materiel.getCodeMateriel()+"\n"+
 				"Désignation: " +materiel.getNomMateriel()+"\n"+
 				"Magasin d'origine: " +materiel.getMagasin().getNomMagasin()+"\n"+
-				"Position actuelle: non affecté";
-		BitMatrix matrix = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, 200, 200);
-		MatrixToImageWriter.writeToPath(matrix, "jpg", Paths.get(path));
+				"Position actuelle: non affecté" +"\n"+
+				" "+"\n"+
+				" " +"\n"+
+				"================================";
+		QRCodeWriter qr = new QRCodeWriter();
+		BitMatrix matrix = qr.encode(data, BarcodeFormat.QR_CODE, 200, 200);
+		MatrixToImageWriter.writeToPath(matrix, "png", Paths.get(path));
 		
-		//Reactualiser le chemin
 		path = "C:/SYGEP/QR_CODE";
+	//	qrCodeReportBean.genererEtatQRCode();
 	}
 	
 	public void chargerNature() {

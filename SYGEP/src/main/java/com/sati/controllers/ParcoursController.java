@@ -20,6 +20,7 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 import com.sati.model.Diagnostique;
 import com.sati.model.Etat;
 import com.sati.model.Materiel;
@@ -140,19 +141,23 @@ public class ParcoursController {
 	
 	
 	public void genererQRCode() throws WriterException, IOException {
-		path += "_"+materiel.getCodeMateriel();
-		data = "Code: "+materiel.getCodeMateriel()+"\n"+
+		path += "_"+materiel.getCodeMateriel()+".png";
+		data =  "===== INFORMATION MATERIEL ====="+"\n"+
+				" " +"\n"+
+				"Code: "+materiel.getCodeMateriel()+"\n"+
 				"Désignation: " +materiel.getNomMateriel()+"\n"+
 				"Magasin d'origine: " +materiel.getMagasin().getNomMagasin()+"\n"+
-				"Position actuelle:"+leService.getNomService();
-		BitMatrix matrix = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, 200, 200);
-		MatrixToImageWriter.writeToPath(matrix, "jpg", Paths.get(path));
+				"Position actuelle: non affecté" +"\n"+
+				" "+"\n"+
+				" " +"\n"+
+				"================================";
+		QRCodeWriter qr = new QRCodeWriter();
+		BitMatrix matrix = qr.encode(data, BarcodeFormat.QR_CODE, 200, 200);
+		MatrixToImageWriter.writeToPath(matrix, "png", Paths.get(path));
 		
-		//Reactualiser le chemin
 		path = "C:/SYGEP/QR_CODE";
+	
 	}
-	
-	
 	
 	
 	public void annuler() {
