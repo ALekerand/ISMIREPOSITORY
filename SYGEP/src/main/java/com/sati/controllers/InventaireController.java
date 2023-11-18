@@ -47,13 +47,13 @@ public class InventaireController {
 		Inventaire unInventaire = requeteInventaire.lastInventaire();
 		// Pas d'existence d'inventaire
 		if (unInventaire == null) {
-		genererCode();
+		this.inventaire.setCodeInventaire(genererCodeInventaire());
 		this.date_fin.setDisabled(true);
 		this.btnCloturer.setDisabled(true);
 			
 		}else if (unInventaire.getEtatCloture()== true) { //I'inventaire existe mais pas cloturé ou
 		// Activer les champs
-			genererCode();
+			this.inventaire.setCodeInventaire(genererCodeInventaire());
 			this.input_code.setDisabled(false);
 			this.input_lib.setDisabled(false);
 			this.date_debut.setDisabled(false);
@@ -71,7 +71,7 @@ public class InventaireController {
 		}
 	}
 
-	public void genererCode() {
+	public String genererCodeInventaire() {
 		String prefix="";
 		int nbEnregistrement = this.service.getObjects("Inventaire").size();
 		if(nbEnregistrement < 10)
@@ -80,7 +80,7 @@ public class InventaireController {
 			prefix = "IV0" ;
 		if (nbEnregistrement > 100) 
 			prefix = "IV" ;
-		this.inventaire.setCodeInventaire(prefix+(nbEnregistrement+1));
+		return new String(prefix+(nbEnregistrement+1));
 	}
 	
 	public void enregistrer() {
@@ -96,7 +96,7 @@ public class InventaireController {
 		this.btnCloturer.setDisabled(false);
 		
 		annuler();
-		genererCode();
+		this.inventaire.setCodeInventaire(genererCodeInventaire());
 	}
 	
 	public void cloturerInventaire() {

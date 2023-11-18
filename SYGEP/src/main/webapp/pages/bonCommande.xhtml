@@ -18,7 +18,7 @@
  				<legend>Informations sur le bon de commande</legend>	
 			<table >
 			<tr>
-			<td style="width: 50%">
+			<td >
 		
 			<p:dataTable id="materiel" widgetVar="dtMateriel" var="variable" value="#{bonCommandeController.listMateriel}"  selectionMode="single"  selection="#{bonCommandeController.selectedObject}" rowKey="#{variable.idMateriel}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
 			 <f:facet name="header">
@@ -32,11 +32,11 @@
 			<p:ajax event="rowSelect" listener="#{bonCommandeController.choisirLigne}" update="form"></p:ajax>
 			
 			<p:column headerText="Materiel" filterable="false" filterBy="#{variable.nomMateriel}">
-			<h:outputText value="#{variable.nomMateriel}"  style="width:10%"/>
+			<h:outputText value="#{variable.nomMateriel}"  />
 			</p:column>
 			
 			<p:column headerText="Code" filterable="false" filterBy="#{variable.codeMateriel}">
-			<h:outputText value="#{variable.codeMateriel}" style="width:10%"/>
+			<h:outputText value="#{variable.codeMateriel}" />
 			</p:column>
 			
 			</p:dataTable >
@@ -44,7 +44,7 @@
 			</td>
 			<td>
 					
-			<h:panelGrid columns="4" cellpadding="20" >
+			<h:panelGrid columns="4" cellpadding="10" >
 			<p:outputLabel value="Code "></p:outputLabel>
 			<p:inputText value="#{bonCommandeController.materiel.codeMateriel}" readonly="true"></p:inputText>
 			

@@ -231,6 +231,9 @@ public class MaterielController {
 		this.setIdFamille(0);
 		this.setIdMagasin(0);
 		this.setIdNature(0);
+		this.setIdMarque(0);
+		this.setStockActuel(0);
+		this.setStockAlerte(0);
 		this.rdbFondible.setItemIndex(2);
 		
 		

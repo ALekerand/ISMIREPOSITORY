@@ -79,11 +79,10 @@ public class EmpruntController {
 		
 		//Charger les elements de la demande
 		this.demande.setEntite(entite);
+		materiel = (Materiel) service.getObjectById(idMatereiel, "Materiel");
 		this.demande.setMateriel(materiel);
 		this.demande.setEtatDemande((EtatDemande) service.getObjectById(1, "EtatDemande"));
 		this.demande.setDateDemande(new Date());
-		
-		//Enregister en base
 		this.service.addObject(this.demande);
 		
 		info("Enregistrement effectué avec succès!");
@@ -108,6 +107,8 @@ public class EmpruntController {
 		demande.setDateDemande(null);
 		this.btnModifier.setDisabled(true);
 		this.btnEnregistrer.setDisabled(false);
+		materiel.setCodeMateriel(null);
+		materiel.setNomMateriel(null);
 		genererCode();
 	}
 	
@@ -212,6 +213,14 @@ public class EmpruntController {
 
 	public void setSelecteMareriel(Materiel selecteMareriel) {
 		this.selecteMareriel = selecteMareriel;
+	}
+
+	public Materiel getMateriel() {
+		return materiel;
+	}
+
+	public void setMateriel(Materiel materiel) {
+		this.materiel = materiel;
 	}
 
 

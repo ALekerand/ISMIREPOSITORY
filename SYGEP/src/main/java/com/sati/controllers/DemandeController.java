@@ -94,13 +94,13 @@ public class DemandeController {
 		personne = userAuthentication.getPersonne();
 		entite = (Entite) service.getObjectById(personne.getIdEntite(), "Entite");
 		
+	
 		//Charger les elements de la demande
 		this.demande.setEntite(entite);
+		materiel = (Materiel) service.getObjectById(idMatereiel, "Materiel");
 		this.demande.setMateriel(materiel);
 		this.demande.setEtatDemande((EtatDemande) service.getObjectById(1, "EtatDemande"));
 		this.demande.setDateDemande(new Date());
-		
-		//Enregister en base
 		service.addObject(demande);
 		
 		info("Enregistrement effectué avec succès!");
@@ -126,6 +126,8 @@ public class DemandeController {
 		demande.setDateRetourPrevue(null);
 		this.btnModifier.setDisabled(true);
 		this.btnEnregistrer.setDisabled(false);
+		materiel.setCodeMateriel(null);
+		materiel.setNomMateriel(null);
 		genererCode();
 	}
 	
@@ -256,6 +258,14 @@ public class DemandeController {
 
 	public void setInput_date_retour(org.primefaces.component.calendar.Calendar input_date_retour) {
 		this.input_date_retour = input_date_retour;
+	}
+
+	public Materiel getMateriel() {
+		return materiel;
+	}
+
+	public void setMateriel(Materiel materiel) {
+		this.materiel = materiel;
 	}
 
 }

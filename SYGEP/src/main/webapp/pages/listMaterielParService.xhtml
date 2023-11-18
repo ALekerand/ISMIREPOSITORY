@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+       xmlns:p="http://primefaces.org/ui"> 
+
+
+
+		
+	<ui:composition template="/templates/template.xhtml">
+			<ui:define name="body">
+				<h:form id="form">
+				<p:panel header="CONSULTATION DE LA LISTE DES MATERIELS PAR SERVICE" >
+				
+				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+				<fieldset>
+				 <h:panelGrid columns="4" cellpadding="15"  style="margin: 15px;" >
+					<p:outputLabel  value="Libelle service:"/>
+						<p:selectOneMenu  value="#{listMaterielParServiceController.idEntite}">
+						<f:selectItem itemLabel="Selectionnez" itemValue="" />
+						<f:selectItems value="#{listMaterielParServiceController.listService}" var="tata" itemLabel="#{tata.nomService}" itemValue="#{tata.idEntite}"></f:selectItems>
+					</p:selectOneMenu>	
+				<p:commandButton value="Rechercher" actionListener="#{listMaterielParServiceController.rechercher}" update="form"></p:commandButton>
+				</h:panelGrid>
+				</fieldset>
+				<br />
+					 <br />
+						<p:dataTable id="table" var="var" value="#{listMaterielParServiceController.listMaterielParService}" rowKey="#{var.idPacours}" paginator="true" paginatorPosition="bottom" rows="5"  rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+ 							<f:facet name="header">LISTE DES MATERIELS</f:facet>
+  								  <!--   <p:ajax event="rowSelect" process="@this"  update="form" listener="#{traitementDemandeController.selectionnerLigne}"></p:ajax>-->
+   		
+   						
+   										<p:column headerText="Code materiel" >
+      								    <h:outputText value="#{var.materiel.codeMateriel}"/>
+     								    </p:column>
+        
+      								    <p:column headerText="Nom materiel">
+      								    <h:outputText value="#{var.materiel.nomMateriel}"/>
+     								    </p:column>
+        
+       								   <p:column headerText="Description materiel">
+                                       <h:outputText value="#{var.materiel.descriptionMateriel}"/>
+                                       </p:column>
+                                       
+                                         <p:column headerText="Nature materiel">
+                                       <h:outputText value="#{var.materiel.nature.libNature}"/>
+                                       </p:column>
+                                       
+                                        <p:column headerText="Marque materiel">
+                                       <h:outputText value="#{var.materiel.marque.libelleMarque}"/>
+                                       </p:column>
+                                      
+                       </p:dataTable>
+                  </p:panel>
+				</h:form>
+			</ui:define>
+	</ui:composition>
+</html>

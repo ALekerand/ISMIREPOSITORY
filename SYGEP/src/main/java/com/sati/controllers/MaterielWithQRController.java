@@ -177,6 +177,7 @@ public class MaterielWithQRController {
 	//	qrCodeReportBean.genererEtatQRCode();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void chargerNature() {
 		listNature = requeteNature.listerNatureParFamille(idFamille);
 		this.cbNature.setDisabled(false);
@@ -207,7 +208,7 @@ public class MaterielWithQRController {
 			//Enregistrer dans non fongible
 			this.Nonfongible.setIdNature(idNature);
 			this.Nonfongible.setIdMagasin(idMagasin);
-			this.Nonfongible.setIdMarque(null);
+			this.Nonfongible.setIdMarque(idMarque);
 			this.Nonfongible.setNomMateriel(materiel.getNomMateriel());
 			this.Nonfongible.setCodeMateriel(materiel.getCodeMateriel());
 			this.Nonfongible.setRetrait(materiel.getRetrait());
@@ -285,6 +286,9 @@ public class MaterielWithQRController {
 		this.setIdFamille(0);
 		this.setIdMagasin(0);
 		this.setIdNature(0);
+		this.setIdMarque(0);
+		this.setIdSource(0);
+		this.setIdFournisseur(0);
 		//this.rdbFondible.setItemIndex(2);
 		
 		

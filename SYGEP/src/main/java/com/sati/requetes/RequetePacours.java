@@ -41,7 +41,12 @@ public class RequetePacours {
 	}
 	
 	
-	
+	public List materielParService(int id_entite) {
+		String query = "SELECT * FROM materiel, parcours, service WHERE materiel.ID_MATERIEL = parcours.ID_MATERIEL AND parcours.ID_ENTITE = service.ID_ENTITE AND service.ID_ENTITE = '"+id_entite+"'";
+		List list = getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Parcours.class).list();
+		return list;
+	}
+
 	
 	
 	public SessionFactory getSessionFactory() {

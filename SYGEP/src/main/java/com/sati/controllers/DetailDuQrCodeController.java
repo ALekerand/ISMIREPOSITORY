@@ -34,6 +34,26 @@ public class DetailDuQrCodeController {
 	
 	
 	
+	//Pour le QR code
+	private String data;
+	
+	@PostConstruct
+	public void initialiser() {
+		
+		parcours = requetePacours.recupererLastParcoursParMateriel(parcours.getMateriel().getIdMateriel());
+		
+		System.out.println("Code: "+parcours.getMateriel().getCodeMateriel());
+		System.out.println("Désignation: " +parcours.getMateriel().getNomMateriel());
+		System.out.println("Magasin d'origine: " +parcours.getMateriel().getMagasin().getNomMagasin());
+		System.out.println("Position actuelle:"+parcours.getService());
+	/*	data = "Code: "+parcours.getMateriel().getCodeMateriel()+"\n"+
+				"Désignation: " +parcours.getMateriel().getNomMateriel()+"\n"+
+				"Magasin d'origine: " +parcours.getMateriel().getMagasin().getNomMagasin()+"\n"+
+				"Position actuelle:"+parcours.getService();
+				*/
+		
+	}
+
 	public Parcours getParcours() {
 		return parcours;
 	}

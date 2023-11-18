@@ -32,10 +32,10 @@ public class CaracteristiqueController {
 	@PostConstruct
 	public void initialiser() {
 		this.btnModifier.setDisabled(true);
-		genererCode();
+		this.caracteristique.setCodeCaracteristique(genererCodeCaracteristique());
 	}
 	
-	public void genererCode() {
+	public String genererCodeCaracteristique() {
 		String prefix="";
 		int nbEnregistrement = this.service.getObjects("Caracteristique").size();
 		if(nbEnregistrement < 10)
@@ -44,12 +44,12 @@ public class CaracteristiqueController {
 			prefix = "CC0" ;
 		if (nbEnregistrement > 100) 
 			prefix = "CC" ;
-		caracteristique.setCodeCaracteristique(prefix+(nbEnregistrement+1));
+		return new String(prefix+(nbEnregistrement+1));
 	}
 
 	public void enregistrer() {
 		this.service.addObject(this.caracteristique);
-		genererCode();
+		this.caracteristique.setCodeCaracteristique(genererCodeCaracteristique());
 		this.info("Eneregistrement effectué avec succès!");
 		this.annuler();
 	}
@@ -81,7 +81,7 @@ public class CaracteristiqueController {
 	public void modifier() {
 		this.service.updateObject(this.caracteristique);
 		this.annuler();
-		genererCode();
+		caracteristique.setCodeCaracteristique(genererCodeCaracteristique());
 		this.info("Modification effectué avec succès!");
 	}
 

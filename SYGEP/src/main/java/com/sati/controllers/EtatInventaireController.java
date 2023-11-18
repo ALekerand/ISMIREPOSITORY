@@ -33,13 +33,27 @@ public class EtatInventaireController {
 	@PostConstruct
 	public void initialiser() {
 		this.btnModifier.setDisabled(true);
+		this.etatInventaire.setCodeTypeInventaire(genererCodeEtatInventaire());
 		
 	}
 	
+	public String genererCodeEtatInventaire() {
+		String prefix="";
+		int nbEnregistrement = this.service.getObjects("EtatInventaire").size();
+		if(nbEnregistrement < 10)
+			prefix = "EID00" ;
+		if ((nbEnregistrement >= 10) && (nbEnregistrement < 100)) 
+			prefix = "EID0" ;
+		if (nbEnregistrement > 100) 
+			prefix = "EI" ;
+		return new String(prefix+(nbEnregistrement+1));
+	}
+
 	public void enregistrer() {
 		service.addObject(etatInventaire);
 		this.info("Enregistrement effectué avec succès!");
 		annuler();
+		this.etatInventaire.setCodeTypeInventaire(genererCodeEtatInventaire());
 	}
 	public void modifier() {
 		service.updateObject(etatInventaire);

@@ -32,26 +32,27 @@ public class EtatController {
 	@PostConstruct
 	public void initialiser() {
 		this.btnModifier.setDisabled(true);
-		genererCode();
+		this.etat.setCodeEtat(genererCodeEtat());
 	}
 	
 	
-	public void genererCode() {
+	public String genererCodeEtat() {
 		String prefix="";
 		int nbEnregistrement = this.service.getObjects("Etat").size();
 		if(nbEnregistrement < 10)
-			prefix = "ET00" ;
+			prefix = "ETD00" ;
 		if ((nbEnregistrement >= 10) && (nbEnregistrement < 100)) 
-			prefix = "ET0" ;
+			prefix = "ETD0" ;
 		if (nbEnregistrement > 100) 
-			prefix = "ET" ;
-		this.etat.setCodeEtat(prefix+(nbEnregistrement+1));
+			prefix = "ETD" ;
+		return new String(prefix+(nbEnregistrement+1));
 	}
 
 	public void enregistrer() {
 		this.service.addObject(this.etat);
 		this.info("Eneregistrement effectué avec succès!");
 		this.annuler();
+		this.etat.setCodeEtat(genererCodeEtat());
 	
 	}
 
@@ -109,7 +110,7 @@ public class EtatController {
 	}
 
 	public Etat getEtat() {
-		genererCode();
+		this.etat.setCodeEtat(genererCodeEtat());
 		return etat;
 	}
 

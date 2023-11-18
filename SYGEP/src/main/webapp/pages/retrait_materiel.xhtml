@@ -22,7 +22,7 @@
                 </div>
             </f:facet>
      <p:ajax event="rowSelect" process="@this"  listener="#{retraitMaterielController.choisirLigne}"></p:ajax>
-   		<p:column selectionMode="single" style="width:16px;text-align:center"/>
+   		
    		
    		<p:column headerText="Réf" style="width:30%" filterBy="#{var.codeMateriel}" filterable="false">
         <h:outputText value="#{var.codeMateriel}"/>

@@ -30,7 +30,7 @@
                 </div>
             </f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{reparerMaterielController.choisirLigneMateriel}"></p:ajax>
-   		<p:column selectionMode="single" style="width:16px;text-align:center"/>
+   		
    		
    		<p:column headerText="Code materiel" style="width:30%" filterBy="#{var.codeMateriel}" filterable="false">
         <h:outputText value="#{var.materiel.codeMateriel}"/>

@@ -49,6 +49,13 @@
 		<td>	
 	
 	<h:panelGrid columns="4" cellpadding="8">
+	
+	<p:outputLabel for="input_code_mat" value="Code materiel:"></p:outputLabel>
+	<p:inputText id="input_code_mat" value="#{demandeController.materiel.codeMateriel}" readonly="true" ></p:inputText>	
+
+	<p:outputLabel for="input_nom" value="Nom materiel:"></p:outputLabel>
+	<p:inputText id="input_nom" value="#{demandeController.materiel.nomMateriel}" readonly="true" ></p:inputText>
+	
 	<p:outputLabel for="input_code" value="Code:"></p:outputLabel>
 	<p:inputText id="input_code" value="#{demandeController.demande.codeDemande}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
 

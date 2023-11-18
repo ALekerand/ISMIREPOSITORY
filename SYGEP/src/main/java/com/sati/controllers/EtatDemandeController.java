@@ -53,7 +53,7 @@ public class EtatDemandeController {
 		this.service.addObject(this.etatDemande);
 		this.info("Eneregistrement effectué avec succès!");
 		this.annuler();
-		this.genererCodeEtatDemande();
+		this.etatDemande.setCodeEtatDemande(genererCodeEtatDemande());
 	}
 
 	public void selectionnerLigne() {
