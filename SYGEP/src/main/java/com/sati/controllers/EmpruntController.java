@@ -79,7 +79,6 @@ public class EmpruntController {
 		
 		//Charger les elements de la demande
 		this.demande.setEntite(entite);
-		materiel = (Materiel) service.getObjectById(idMatereiel, "Materiel");
 		this.demande.setMateriel(materiel);
 		this.demande.setEtatDemande((EtatDemande) service.getObjectById(1, "EtatDemande"));
 		this.demande.setDateDemande(new Date());
@@ -115,7 +114,7 @@ public class EmpruntController {
 	
 	public void choisirLigneMateriel() {
 		genererCode();
-		materiel = selecteMareriel;
+		this.materiel = this.selecteMareriel;
 		}
 	
 	public void modifier() {

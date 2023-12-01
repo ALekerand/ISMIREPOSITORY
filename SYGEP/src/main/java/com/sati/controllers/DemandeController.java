@@ -60,14 +60,14 @@ public class DemandeController {
 		this.input_date_retour.setDisabled(true);
 		this.radio_emptunt.setValue("non");
 		chagerUtilisateur();
-		genererCode();
+		this.demande.setCodeDemande(genererCodeDemande());
 	}
 	
 	public UserAuthentication chagerUtilisateur() {
 		return userAuthentication = requeteUtilisateur.recuperUser();
 	}
 	
-	public void genererCode() {
+	public String genererCodeDemande() {
 		String prefix="";
 		int nbEnregistrement = this.service.getObjects("Demande").size();
 		if(nbEnregistrement < 10)
@@ -76,7 +76,7 @@ public class DemandeController {
 			prefix = "CD0" ;
 		if (nbEnregistrement > 100) 
 			prefix = "CD" ;
-		demande.setCodeDemande(prefix+(nbEnregistrement+1));
+		return new String(prefix+(nbEnregistrement+1));
 	}
 	
 	
@@ -97,11 +97,10 @@ public class DemandeController {
 	
 		//Charger les elements de la demande
 		this.demande.setEntite(entite);
-		materiel = (Materiel) service.getObjectById(idMatereiel, "Materiel");
 		this.demande.setMateriel(materiel);
 		this.demande.setEtatDemande((EtatDemande) service.getObjectById(1, "EtatDemande"));
 		this.demande.setDateDemande(new Date());
-		service.addObject(demande);
+		service.addObject(this.demande);
 		
 		info("Enregistrement effectué avec succès!");
 		annuler();
@@ -128,13 +127,13 @@ public class DemandeController {
 		this.btnEnregistrer.setDisabled(false);
 		materiel.setCodeMateriel(null);
 		materiel.setNomMateriel(null);
-		genererCode();
+		this.demande.setCodeDemande(genererCodeDemande());
 	}
 	
 	
 	public void choisirLigneMateriel() {
-		genererCode();
-		materiel = selecteMareriel;
+		this.demande.setCodeDemande(genererCodeDemande());
+		this.materiel = this.selecteMareriel;
 		}
 	
 	public void modifier() {
