@@ -1,6 +1,8 @@
 package com.sati.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -147,6 +149,17 @@ public class NatureController {
 
 	public List<Famille> getListFamille() {
 		listFamille = service.getObjects("Famille");
+		
+		//=======Pour le rangement par ordre alphabétique======
+		Collections.sort(listFamille, new Comparator<Famille>() {
+	        @Override
+	        public int compare(Famille ob1, Famille ob2)
+	        {
+	 
+	            return  ob1.getLibFamille().compareTo(ob2.getLibFamille());
+	        }
+	    });
+		//========================  Fin  =======================
 		return listFamille;
 	}
 

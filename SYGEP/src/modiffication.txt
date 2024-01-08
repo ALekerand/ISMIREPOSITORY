@@ -1,5 +1,9 @@
 	* Le champs date_retour a été retiré de la table RETOUR puis remise dans celle de DEMANDE 
+
+30/11/2023
+	Mettre une date d'aprovisionnement pour prendre en compte ceux anterieurs au demarrage du logiciel	
 	
+- l'attibut série à été ajoutée au logiciel, il faut une actualisation
 	
 	
 	

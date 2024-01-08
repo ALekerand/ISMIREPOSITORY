@@ -43,7 +43,7 @@ public class EntreeController {
 	//private int stockMateriel;
 	private int idSource;
 	private int stockActuel;
-	private String typeMateriel="";
+	//private String typeMateriel="";
 	
 	@Autowired
 	private RequeteMateriel requeteMateriel;
@@ -79,7 +79,6 @@ public class EntreeController {
 	public void enregistrer() {
 		entree.setMateriel(materiel);
 		this.entree.setCodeEntre(genererCodeEntree());
-		this.entree.setDateEntree(new Date());
 		this.entree.setDateEnregistrement(new Date());
 		this.entree.setSourceFinancement((SourceFinancement)service.getObjectById(idSource, "SourceFinancement"));
 		this.entree.setPersonne(userAuthentication.getPersonne());
@@ -90,10 +89,10 @@ public class EntreeController {
 		
 		this.service.addObject(this.entree);
 		
-		if (typeMateriel.equals("MATERIEL FONGIBLE")) {
+	//	if (typeMateriel.equals("MATERIEL FONGIBLE")) {
 			fongible.setStockActuel(this.fongible.getStockActuel()+ this.entree.getQteEntree());
 			service.updateObject(materiel);
-		}
+	//	}
 		
 		this.info("Eneregistrement effectué avec succès!");
 		this.annuler();
@@ -104,14 +103,15 @@ public class EntreeController {
 		materiel = (Materiel) service.getObjectById(idMateriel, "Materiel");
 		//Rechercher dans les fongible
 		//Fongible fongible = new Fongible();
-		if ((fongible = (Fongible) service.getObjectById(materiel.getIdMateriel(), "Fongible"))==null){
-			setStockActuel(1);
-			setTypeMateriel("MATERIEL NON FONGIBLE");
-		}else {
+		//if ((fongible = (Fongible) service.getObjectById(materiel.getIdMateriel(), "Fongible"))==null){
+	//		setStockActuel(1);
+	//		setTypeMateriel("MATERIEL NON FONGIBLE");
+	//	}else {
+		fongible = (Fongible) service.getObjectById(materiel.getIdMateriel(), "Fongible");
 			setStockActuel(fongible.getStockActuel());
-			setTypeMateriel("MATERIEL FONGIBLE");
+	//		setTypeMateriel("MATERIEL FONGIBLE");
 		}
-	}
+	//}
 	
 	public void info(String monMessage) {
 		FacesContext.getCurrentInstance().addMessage((String) null,
@@ -130,8 +130,9 @@ public class EntreeController {
 		setIdSource(0);
 		setIdFournisseur(0);
 		setStockActuel(0);
-		setTypeMateriel("");
+	//	setTypeMateriel("");
 		this.entree.setQteEntree(null);
+		this.entree.setDateEntree(null);
 		this.btnModifier.setDisabled(true);
 		this.btnEnregistrer.setDisabled(false);
 	}
@@ -257,11 +258,10 @@ public class EntreeController {
 		this.stockActuel = stockActuel;
 	}
 
-	public String getTypeMateriel() {
-		return typeMateriel;
-	}
-
-	public void setTypeMateriel(String typeMateriel) {
-		this.typeMateriel = typeMateriel;
-	}
+	/*
+	 * public String getTypeMateriel() { return typeMateriel; }
+	 * 
+	 * public void setTypeMateriel(String typeMateriel) { this.typeMateriel =
+	 * typeMateriel; }
+	 */
 }

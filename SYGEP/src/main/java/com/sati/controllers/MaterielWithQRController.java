@@ -243,7 +243,6 @@ public class MaterielWithQRController {
 		this.entree.setMateriel(materiel);
 		this.entree.setQteEntree(1);
 		this.entree.setCodeEntre(genererCodeEntree());
-		this.entree.setDateEntree(new Date());
 		this.entree.setDateEnregistrement(new Date());
 		this.entree.setSourceFinancement((SourceFinancement)service.getObjectById(idSource, "SourceFinancement"));
 		this.entree.setPersonne(userAuthentication.getPersonne());

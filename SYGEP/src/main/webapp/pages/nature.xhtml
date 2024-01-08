@@ -25,11 +25,12 @@
 <p:outputLabel for="input_lib" value="Désignation"></p:outputLabel>
 	<p:inputText id="input_lib" value="#{natureController.nature.libNature}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
 		<p:outputLabel for="cb_famille" value="Famille:"/>
-		<p:selectOneMenu id="cb_famille" value="#{natureController.idFamille}">
-		<p:ajax listener="#{natureController.chargerFamille}" event="change" process="@this"></p:ajax>
-		<f:selectItem itemLabel="Selectionnez" itemValue="" />
-		<f:selectItems value="#{natureController.listFamille}" var="tata" itemLabel="#{tata.libFamille}" itemValue="#{tata.idFamille}"></f:selectItems>
-		</p:selectOneMenu>
+		
+	<p:selectOneMenu id="cb_famille" value="#{natureController.idFamille}">
+	<p:ajax listener="#{natureController.chargerFamille}" event="change" process="@this"></p:ajax>
+	<f:selectItem itemLabel="Selectionnez" itemValue="" />
+	<f:selectItems value="#{natureController.listFamille}" var="tata" itemLabel="#{tata.libFamille}" itemValue="#{tata.idFamille}"></f:selectItems>
+	</p:selectOneMenu>
 </h:panelGrid>
 
 	<h:panelGrid columns="2" cellpadding="10">

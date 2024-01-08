@@ -76,6 +76,10 @@
 				<f:selectItem itemLabel="Selectionnez" itemValue=""/>
 				<f:selectItems value="#{materielWithQRController.listFournisseur}" var="tata" itemLabel="#{tata.nomFournisseur}" itemValue="#{tata.idFournisseur}"></f:selectItems>
 			</p:selectOneMenu>
+			
+			<p:outputLabel for="date_appro" value="Date approvisionnement:"></p:outputLabel>
+			<p:calendar id="date_appro" value="#{materielWithQRController.entree.dateEntree}" required="true" locale="fr" navigator="true" pattern="dd/MM/yyyy" requiredMessage="Veuillez resseigner ce champ SVP"/>
+		
  	       </h:panelGrid>
  			</td>
  			<td>

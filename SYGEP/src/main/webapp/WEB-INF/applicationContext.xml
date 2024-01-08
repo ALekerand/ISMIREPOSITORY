@@ -20,6 +20,7 @@
 		<property name="url" value="jdbc:mysql://127.0.0.1/ismistock_bd?zeroDateTimeBehavior=convertToNull"/>
 		<property name="username" value="root" />
 		<property name="password" value="" />
+		<!--<property name="password" value="@dminarstm2023" />-->
 	</bean>
  
    <!-- configuration de la sessionfactory d'hibernate -->

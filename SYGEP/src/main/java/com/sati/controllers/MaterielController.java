@@ -54,7 +54,7 @@ public class MaterielController {
 	private int idMarque;
 	private int stockActuel;
 	private int stockAlerte;
-	private String etatFongible;
+//	private String etatFongible;
 	private List<Fongible> listFongible = new ArrayList<Fongible>();
 	private List<Famille> listFamille = new ArrayList<Famille>();
 	private List<Nature> listNature = new ArrayList<Nature>();
@@ -70,7 +70,7 @@ public class MaterielController {
 	private CommandButton btnEnregistrer = new CommandButton();
 	private CommandButton btnAnnuler = new CommandButton();
 	private CommandButton btnModifier = new CommandButton();
-	private RadioButton rdbFondible = new  RadioButton();
+	//private RadioButton rdbFondible = new  RadioButton();
 	private SelectOneMenu cbNature = new SelectOneMenu();
 	
 	//Injection de controle
@@ -150,9 +150,6 @@ public class MaterielController {
 		this.materiel.setRetrait(false);
 		service.addObject(materiel);
 		
-		//Enregistrement dans fongible et non fongible
-		switch (etatFongible){
-		case "FONGIBLE": {
 			//Enregistrer dans fongible
 			//this.fongible.setIdFamille(idFamille);
 			this.fongible.setIdNature(idNature);
@@ -162,32 +159,16 @@ public class MaterielController {
 			this.fongible.setStockAlerte(stockAlerte);
 			this.fongible.setNomMateriel(materiel.getNomMateriel());
 			this.fongible.setCodeMateriel(materiel.getCodeMateriel());
+			this.fongible.setStockActuel(0);
 			this.fongible.setRetrait(materiel.getRetrait());
 			this.fongible.setDescriptionMateriel(materiel.getDescriptionMateriel());
 			this.fongible.setMateriel(materiel);
 			service.addObject(fongible);
 			
-			break;
-			
-		}
-		case "NONFONGIBLE": {
-			//Enregistrer dans non fongible
-	//		this.Nonfongible.setIdFamille(idFamille);
-			this.Nonfongible.setIdNature(idNature);
-			this.Nonfongible.setIdMagasin(idMagasin);
-			this.Nonfongible.setIdMarque(idMarque);
-			this.Nonfongible.setNomMateriel(materiel.getNomMateriel());
-			this.Nonfongible.setCodeMateriel(materiel.getCodeMateriel());
-			this.Nonfongible.setRetrait(materiel.getRetrait());
-			this.Nonfongible.setDescriptionMateriel(materiel.getDescriptionMateriel());
-			this.Nonfongible.setMateriel(materiel);
-			service.addObject(Nonfongible);
-			
+
 			//Générer le QR code
 			genererQRCode();
-			break;
-		}
-				}
+		
 		
 		//Enregistrement dans la table Valeur 
 		for (CaracteristiqueValeur caracteristiqueValeur : listCaracteristiqueValeur) {
@@ -234,7 +215,7 @@ public class MaterielController {
 		this.setIdMarque(0);
 		this.setStockActuel(0);
 		this.setStockAlerte(0);
-		this.rdbFondible.setItemIndex(2);
+	//	this.rdbFondible.setItemIndex(2);
 		
 		
 		
@@ -404,13 +385,12 @@ public class MaterielController {
 		this.stockAlerte = stockAlerte;
 	}
 
-	public String getEtatFongible() {
-		return etatFongible;
-	}
-
-	public void setEtatFongible(String etatFongible) {
-		this.etatFongible = etatFongible;
-	}
+	/*
+	 * public String getEtatFongible() { return etatFongible; }
+	 * 
+	 * public void setEtatFongible(String etatFongible) { this.etatFongible =
+	 * etatFongible; }
+	 */
 
 	public NonFongible getNonfongible() {
 		return Nonfongible;
@@ -420,13 +400,12 @@ public class MaterielController {
 		Nonfongible = nonfongible;
 	}
 
-	public RadioButton getRdbFondible() {
-		return rdbFondible;
-	}
-
-	public void setRdbFondible(RadioButton rdbFondible) {
-		this.rdbFondible = rdbFondible;
-	}
+	/*
+	 * public RadioButton getRdbFondible() { return rdbFondible; }
+	 * 
+	 * public void setRdbFondible(RadioButton rdbFondible) { this.rdbFondible =
+	 * rdbFondible; }
+	 */
 
 	public SelectOneMenu getCbNature() {
 		return cbNature;

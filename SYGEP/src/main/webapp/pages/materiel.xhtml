@@ -10,10 +10,10 @@
 				<h:form id="form">
 				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
 				
-				<p:panel header="ENREGISTREMENT DES MATERIELS SANS QR_CODE" >
+				<p:panel header="ENREGISTREMENT DES MATERIELS SANS QR CODE" >
 	<fieldset>
 	
- 	<legend>Informations sur le materiel sans qr_code</legend>	
+ 	<legend>Informations sur le materiel sans QR code</legend>	
  	
  	<table>
  		<tr>
@@ -38,12 +38,6 @@
 						<f:selectItems value="#{materielController.listNature}" var="tata" itemLabel="#{tata.libNature}" itemValue="#{tata.idNature}"></f:selectItems>
 					</p:selectOneMenu>
 					
-					<p:outputLabel for="fong" value="Fongible:"></p:outputLabel>
-					<p:selectOneRadio id="fong" value="#{materielController.etatFongible}" action="#{materielController.rdbFondible}">
-			            <f:selectItem itemLabel="Oui" itemValue="FONGIBLE"/>
-			            <f:selectItem itemLabel="Non" itemValue="NONFONGIBLE"/>
-			        </p:selectOneRadio>
-					
 					<p:outputLabel for="cb_magasin" value="Magasin:"/>
 						<p:selectOneMenu id="cb_magasin" required="true" value="#{materielController.idMagasin}">
 						<f:selectItem itemLabel="Selectionnez" itemValue="" />
@@ -59,14 +53,10 @@
 					
 					<p:outputLabel for="input_stockArl" value="Stock arlerte:"></p:outputLabel>
 					<p:inputText id="input_stockArl" value="#{materielController.stockAlerte}" style="width:60px" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
-					
-					<p:outputLabel for="input_stockInitial" value="Stock initial:"></p:outputLabel>
-					<p:inputText id="input_stockInitial" value="#{materielController.stockActuel}" style="width:60px" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
-			
-			
-					<p:outputLabel for="input_descrip" value="Description:"></p:outputLabel>
+				 
+	  				<p:outputLabel for="input_descrip" value="Description:"></p:outputLabel>
 					<p:inputTextarea id="input_descrip" value="#{materielController.materiel.descriptionMateriel}" cols="30"></p:inputTextarea>
-					
+		
 			</h:panelGrid>
  			</td>
  			<td>
