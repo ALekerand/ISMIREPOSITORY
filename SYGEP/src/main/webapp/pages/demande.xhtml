@@ -60,7 +60,7 @@
 	<p:inputText id="input_code" value="#{demandeController.demande.codeDemande}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
 
 	<p:outputLabel for="radio_emprunt" value="Emprunt:"></p:outputLabel>
-	<p:selectOneRadio id="radio_emprunt" value="#{demandeController.value_emprunt}" binding="#{demandeController.radio_emptunt}">
+	<p:selectOneRadio id="radio_emprunt" value="#{demandeController.value_emprunt}" binding="#{demandeController.radio_emptunt}" required="true">
 		 <p:ajax process="@this"  update="form" listener="#{demandeController.gererDateRetour}"/> 
 	     <f:selectItem itemLabel="Non" itemValue="non"/>
 	     <f:selectItem itemLabel="Oui" itemValue="oui"/>
@@ -71,9 +71,11 @@
 
 	<p:outputLabel for="date_retour" value="Date retour:"></p:outputLabel>
 	<p:calendar id="date_retour" value="#{demandeController.demande.dateRetourPrevue}"  binding="#{demandeController.input_date_retour}" locale="fr" navigator="true" pattern="dd/MM/yyyy" required="true"/>
-     
+	</h:panelGrid>
+	
+	<h:panelGrid columns="2" cellpadding="8" cellspacing="10">
 	<p:outputLabel for="input_motif" value="Motif:"></p:outputLabel>
-	<p:inputTextarea id="input_motif" value="#{demandeController.demande.motifDemande}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputTextarea>
+	<p:inputTextarea id="input_motif" cols="50" value="#{demandeController.demande.motifDemande}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputTextarea>
 	</h:panelGrid>
 	
 	</td>

@@ -12,14 +12,14 @@
 	<ui:composition template="/templates/template.xhtml">
 		<ui:define name="body">
 			<h:form id="form">
-				<div class="ui-fluid">
+				
 				
 				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
 				
 				<p:panel header="ENREGISTREMENT DES UTILISATEURS">
 				
-		<fieldset><legend>INFORMATION SUR L'UTILISATEUR</legend>		
-<h:panelGrid columns="6" cellpadding="10">
+	<fieldset><legend>INFORMATION SUR L'UTILISATEUR</legend>		
+	<h:panelGrid columns="6" cellpadding="10">
 	<p:outputLabel for="input_code" value="Code:"></p:outputLabel>
 	<p:inputText id="input_code" value="#{personneController.codeEntite}" readonly="true"></p:inputText>	
 
@@ -57,8 +57,7 @@
 	
 	
 	<p:outputLabel value="Profile utilisateur:"/>					
-	<p:selectOneRadio 
-		id="rd1" value="#{personneController.userRole}" layout="grid" columns="4" unselectable="false" >
+	<p:selectOneRadio id="rd1" value="#{personneController.userRole}" layout="grid" columns="4" unselectable="false" >
 		<f:selectItem itemLabel="Adminitrateur" itemValue="ROLE_ADMIN"></f:selectItem>
 		<f:selectItem itemLabel="Utilistaeur standard" itemValue="ROLE_UTILISATAEUR"></f:selectItem>
 	</p:selectOneRadio>
@@ -113,7 +112,7 @@
 	   <p:commandButton value="Non" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" >
 	   </p:commandButton>
 	   </p:confirmDialog>
-	   		</div>
+	   		
 		</h:form>
 		</ui:define>
 	</ui:composition>

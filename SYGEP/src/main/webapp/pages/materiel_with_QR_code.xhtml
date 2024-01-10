@@ -64,8 +64,8 @@
 			</h:panelGrid>
 			<Hr/>
 			
-			<h:panelGrid columns="4" cellpadding="10" >
-			<p:outputLabel for="cb_sfinance" value="Source Financement: "/>
+			<h:panelGrid columns="4" cellpadding="8" >
+			<p:outputLabel for="cb_sfinance" value="Source Financem: "/>
 				<p:selectOneMenu id="cb_sfinance" required="true" value="#{materielWithQRController.idSource}">
 				<f:selectItem itemLabel="Selectionnez" itemValue=""/>
 				<f:selectItems value="#{materielWithQRController.listSourceFinance}" var="tata" itemLabel="#{tata.libSource}" itemValue="#{tata.idSource}"></f:selectItems>
@@ -77,7 +77,7 @@
 				<f:selectItems value="#{materielWithQRController.listFournisseur}" var="tata" itemLabel="#{tata.nomFournisseur}" itemValue="#{tata.idFournisseur}"></f:selectItems>
 			</p:selectOneMenu>
 			
-			<p:outputLabel for="date_appro" value="Date approvisionnement:"></p:outputLabel>
+			<p:outputLabel for="date_appro" value="Date approvisionnem:"></p:outputLabel>
 			<p:calendar id="date_appro" value="#{materielWithQRController.entree.dateEntree}" required="true" locale="fr" navigator="true" pattern="dd/MM/yyyy" requiredMessage="Veuillez resseigner ce champ SVP"/>
 		
  	       </h:panelGrid>
