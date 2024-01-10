@@ -3,9 +3,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"> 
-
-
+       xmlns:p="http://primefaces.org/ui"> 
 
 	<ui:composition template="/templates/template.xhtml">
 			<ui:define name="body">
@@ -24,7 +22,7 @@
      <p:ajax event="rowSelect" process="@this"  listener="#{retraitMaterielController.choisirLigne}"></p:ajax>
    		
    		
-   		<p:column headerText="Réf" style="width:30%" filterBy="#{var.codeMateriel}" filterable="false">
+   		<p:column headerText="Réf"  filterBy="#{var.codeMateriel}" filterable="false">
         <h:outputText value="#{var.codeMateriel}"/>
         </p:column>
         
@@ -51,7 +49,7 @@
        <br/>
       
       
-       <p:dataTable widgetVar="dtMateriel"  var="var" value="#{retraitMaterielController.listRetraitMateriel}"  selectionMode="single" selection="#{retraitMaterielController.selectedMateriel}" rowKey="#{var.idMateriel}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+       <p:dataTable widgetVar="dtMateriel"  var="var" value="#{retraitMaterielController.listRetraitMateriel}" rowKey="#{var.idMateriel}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
   <f:facet name="header">LISTES DES MATERIELS RETIRE </f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" ></p:ajax>
    		
@@ -80,6 +78,5 @@
        </h:form>
       </ui:define>
      </ui:composition>
-     
-     
+
 </html>

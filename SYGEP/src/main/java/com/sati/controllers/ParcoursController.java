@@ -166,7 +166,7 @@ public class ParcoursController {
 		parcours.setService(null);
 		diagnostique.setCommentaire(null);
 		setDateAffectation(null);
-		etat.setLibEtat(null);
+		this.setIdEtat(0);
 		this.setIdEntite(0);
 	}
 	
