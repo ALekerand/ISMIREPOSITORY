@@ -25,18 +25,18 @@
 	<h:form>
 		<p:panelMenu style="width:300px">
             <p:submenu label="Paramétrage">
-              <p:menuitem value="Enregistrer les familles" outcome="/pages/famille.xhtml" icon="pi pi-upload"/>
-              <p:menuitem value="Enregistrer les natures" outcome="/pages/nature.xhtml" icon="pi pi-upload"/>
-              <p:menuitem value="Enregistrer les Fournisseurs" outcome="/pages/fournisseur.xhtml" icon="pi pi-upload"/>
-         	  <p:menuitem value="Enregistrer les Services" outcome="/pages/service.xhtml" icon="pi pi-upload"/>
-         	  <p:menuitem value="Source de financement" outcome="/pages/source_financement.xhtml" icon="pi pi-upload"/>
-        	  <p:menuitem value="Enregistrer Fonction" outcome="/pages/fonction.xhtml" icon="pi pi-upload"/>
-         	  <p:menuitem value="Enregistrer les magasins" outcome="/pages/magasin.xhtml" icon="pi pi-upload"/>
-         	  <p:menuitem value="Enregistrer les Caracteristiques" outcome="/pages/caracteristiques.xhtml" icon="pi pi-upload"/>
-         	  <p:menuitem value="Enregistrer les etats de demande" outcome="/pages/etatDemande.xhtml" icon="pi pi-upload"/>
-          	  <p:menuitem value="Enregistrer les etats" outcome="/pages/etat.xhtml" icon="pi pi-upload"/>
-          	  <p:menuitem value="Enregistrer les marques" outcome="/pages/marque.xhtml" icon="pi pi-upload"/>
-          	  <p:menuitem value="Enregistrer les etats inventaire" outcome="/pages/etatInventaire.xhtml" icon="pi pi-upload"/>
+              <p:menuitem value="Créer les familles" outcome="/pages/famille.xhtml" icon="pi pi-upload"/>
+              <p:menuitem value="Créer les natures" outcome="/pages/nature.xhtml" icon="pi pi-upload"/>
+              <p:menuitem value="Créer les Services" outcome="/pages/service.xhtml" icon="pi pi-upload"/>
+              <p:menuitem value="Créer les Fournisseurs" outcome="/pages/fournisseur.xhtml" icon="pi pi-upload"/>
+        	  <p:menuitem value="Créer Fonction" outcome="/pages/fonction.xhtml" icon="pi pi-upload"/>
+         	  <p:menuitem value="Créer les magasins" outcome="/pages/magasin.xhtml" icon="pi pi-upload"/>
+         	  <p:menuitem value="Créer les Caracteristiques" outcome="/pages/caracteristiques.xhtml" icon="pi pi-upload"/>
+         	  <p:menuitem value="Créer les etats de demande" outcome="/pages/etatDemande.xhtml" icon="pi pi-upload"/>
+          	  <p:menuitem value="Créer les etats" outcome="/pages/etat.xhtml" icon="pi pi-upload"/>
+          	  <p:menuitem value="Créer les marques" outcome="/pages/marque.xhtml" icon="pi pi-upload"/>
+          	  <p:menuitem value="Source de financement" outcome="/pages/source_financement.xhtml" icon="pi pi-upload"/>
+          	  <p:menuitem value="Créer les etats inventaire" outcome="/pages/etatInventaire.xhtml" icon="pi pi-upload"/>
 			</p:submenu>
             
              <p:submenu label="Materiel">
@@ -58,7 +58,7 @@
                 <p:menuitem value="Affecter matériel" outcome="/pages/parcours.xhtml" icon="pi pi-upload"/>
                 <p:menuitem value="Traiter demande" outcome="/pages/traiterDemande.xhtml" icon="pi pi-upload"/>
                	<p:menuitem value="Autoriser sortie" outcome="/pages/autoriserSortie.xhtml" icon="pi pi-upload"/>
-				 <p:menuitem value="Enregistrer le retour en service du materiel" outcome="/pages/retourEnService.xhtml" icon="pi pi-upload"/>
+                <p:menuitem value="Enregistrer le retour en service du materiel" outcome="/pages/retourEnService.xhtml" icon="pi pi-upload"/>
 	            </p:submenu>
             
             <p:submenu label="Editions">
@@ -67,12 +67,13 @@
             </p:submenu>
             
             <p:submenu label="Inventaire">
-               	<p:menuitem value="Point inventaire" outcome="/pages/point.xhtml" icon="pi pi-upload"/>
-           	    <p:menuitem value="Enregistrer les inventaires" outcome="/pages/inventaire.xhtml" icon="pi pi-upload"/>
+            	<p:menuitem value="Créer / Cloturer un inventaire" outcome="/pages/inventaire.xhtml" icon="pi pi-upload"/>
+               	<p:menuitem value="effectuer un inventaire" outcome="/pages/point.xhtml" icon="pi pi-upload"/>
             </p:submenu>
             
             <p:submenu label="Consultation">
    			<p:menuitem value="Bon Commande" outcome="/pages/consulterBonCommande.xhtml" icon="pi pi-upload"/>
+   			<p:menuitem value="Demande_Admin" outcome="/pages/consulterDemande_Admin.xhtml" icon="pi pi-upload"/>
    			<p:menuitem value="Historique de Parcours" outcome="/pages/historiqueMateriel.xhtml" icon="pi pi-upload"/>
    			<p:menuitem value="Etat Materiel Apres Diagnostique" outcome="/pages/afficherEtatMaterielApresDiagnostique.xhtml" icon="pi pi-upload"/>
    			<p:menuitem value="Materiel et Stock_Actuel" outcome="/pages/afficherMateriel_StockActuel.xhtml" icon="pi pi-upload"/>
