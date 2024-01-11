@@ -1,12 +1,15 @@
 package com.sati.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.sati.model.Etat;
 import com.sati.model.Materiel;
 import com.sati.model.Parcours;
 import com.sati.model.Personne;
@@ -83,6 +86,15 @@ public class ListMaterielParServiceController {
 	@SuppressWarnings("unchecked")
 	public List<Service> getListService() {
 		listService = service.getObjects("Service");
+		
+		Collections.sort(listService, new Comparator<Service>() {
+	        @Override
+	        public int compare(Service ob1, Service ob2)
+	        {
+	 
+	            return  ob1.getNomService().compareTo(ob2.getNomService());
+	        }
+	    });
 		return listService;
 	}
 

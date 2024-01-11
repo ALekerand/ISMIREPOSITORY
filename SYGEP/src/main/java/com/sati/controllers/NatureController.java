@@ -18,6 +18,7 @@ import com.sati.model.Famille;
 import com.sati.model.Nature;
 import com.sati.service.Iservice;
 
+@SuppressWarnings({ "unchecked", "unchecked" })
 @Component
 @Scope("session")
 public class NatureController {
@@ -147,7 +148,9 @@ public class NatureController {
 		this.selectedObject = selectedObject;
 	}
 
+
 	public List<Famille> getListFamille() {
+		
 		listFamille = service.getObjects("Famille");
 		
 		//=======Pour le rangement par ordre alphabétique======

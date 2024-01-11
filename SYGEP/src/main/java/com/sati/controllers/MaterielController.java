@@ -3,6 +3,8 @@ package com.sati.controllers;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -284,6 +286,15 @@ public class MaterielController {
 	@SuppressWarnings("unchecked")
 	public List<Famille> getListFamille() {
 		listFamille = service.getObjects("Famille");
+		
+		Collections.sort(listFamille, new Comparator<Famille>() {
+	        @Override
+	        public int compare(Famille ob1, Famille ob2)
+	        {
+	 
+	            return  ob1.getLibFamille().compareTo(ob2.getLibFamille());
+	        }
+	    });
 		return listFamille;
 	}
 
@@ -338,6 +349,15 @@ public class MaterielController {
 	@SuppressWarnings("unchecked")
 	public List<Magasin> getListMagasin() {
 		 listMagasin = service.getObjects("Magasin");
+		 
+		 Collections.sort(listMagasin, new Comparator<Magasin>() {
+		        @Override
+		        public int compare(Magasin ob1, Magasin ob2)
+		        {
+		 
+		            return  ob1.getNomMagasin().compareTo(ob2.getNomMagasin());
+		        }
+		    });
 		 return listMagasin;
 	}
 
@@ -426,6 +446,15 @@ public class MaterielController {
 	@SuppressWarnings("unchecked")
 	public List<Marque> getListMarque() {
 		listMarque = service.getObjects("Marque");
+		
+		Collections.sort(listMarque, new Comparator<Marque>() {
+	        @Override
+	        public int compare(Marque ob1, Marque ob2)
+	        {
+	 
+	            return  ob1.getLibelleMarque().compareTo(ob2.getLibelleMarque());
+	        }
+	    });
 		return listMarque;
 	}
 

@@ -1,6 +1,8 @@
 package com.sati.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.sati.model.Etat;
 import com.sati.model.EtatInventaire;
 import com.sati.model.Inventaire;
 import com.sati.model.Materiel;
@@ -109,6 +112,15 @@ public class PointController {
 	@SuppressWarnings("unchecked")
 	public List<EtatInventaire> getListEtatInventaire() {
 		listEtatInventaire = service.getObjects("EtatInventaire");
+		
+		Collections.sort(listEtatInventaire, new Comparator<EtatInventaire>() {
+	        @Override
+	        public int compare(EtatInventaire ob1, EtatInventaire ob2)
+	        {
+	 
+	            return  ob1.getLibEtatInventaire().compareTo(ob2.getLibEtatInventaire());
+	        }
+	    });
 		return listEtatInventaire;
 	}
 	public void setListEtatInventaire(List<EtatInventaire> listEtatInventaire) {

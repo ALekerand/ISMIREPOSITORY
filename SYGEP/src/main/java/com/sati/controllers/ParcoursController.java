@@ -3,6 +3,8 @@ package com.sati.controllers;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +25,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.sati.model.Diagnostique;
 import com.sati.model.Etat;
+import com.sati.model.Fournisseur;
 import com.sati.model.Materiel;
 import com.sati.model.Parcours;
 import com.sati.model.Service;
@@ -280,6 +283,15 @@ public class ParcoursController {
 
 	public List<Service> getListService() {
 		listService = service.getObjects("Service");
+		
+		Collections.sort(listService, new Comparator<Service>() {
+	        @Override
+	        public int compare(Service ob1, Service ob2)
+	        {
+	 
+	            return  ob1.getNomService().compareTo(ob2.getNomService());
+	        }
+	    });
 		return listService;
 	}
 
@@ -290,6 +302,15 @@ public class ParcoursController {
 
 	public List<Etat> getListEtat() {
 		listEtat = service.getObjects("Etat");
+		
+		Collections.sort(listEtat, new Comparator<Etat>() {
+	        @Override
+	        public int compare(Etat ob1, Etat ob2)
+	        {
+	 
+	            return  ob1.getLibEtat().compareTo(ob2.getLibEtat());
+	        }
+	    });
 		return listEtat;
 	}
 

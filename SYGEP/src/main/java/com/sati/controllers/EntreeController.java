@@ -1,6 +1,8 @@
 package com.sati.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +16,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.sati.model.Entree;
+import com.sati.model.Etat;
 import com.sati.model.Fongible;
 import com.sati.model.Fournisseur;
 import com.sati.model.Materiel;
@@ -180,6 +183,14 @@ public class EntreeController {
 	@SuppressWarnings("unchecked")
 	public List<Fournisseur> getListFournisseur() {
 		 listFournisseur = service.getObjects("Fournisseur");
+			Collections.sort(listFournisseur, new Comparator<Fournisseur>() {
+		        @Override
+		        public int compare(Fournisseur ob1, Fournisseur ob2)
+		        {
+		 
+		            return  ob1.getNomFournisseur().compareTo(ob2.getNomFournisseur());
+		        }
+		    });
 		 return listFournisseur;
 	}
 
@@ -190,6 +201,7 @@ public class EntreeController {
 	@SuppressWarnings("unchecked")
 	public List<Materiel> getListMateriel() {
 		listMateriel = requeteMateriel.listerMaterielSansQRCODE();
+		
 		 return listMateriel;
 	}
 
@@ -209,6 +221,15 @@ public class EntreeController {
 	@SuppressWarnings("unchecked")
 	public List<SourceFinancement> getListSourceFinance() {
 		 listSourceFinance = service.getObjects("SourceFinancement");
+		 
+		 Collections.sort(listSourceFinance, new Comparator<SourceFinancement>() {
+		        @Override
+		        public int compare(SourceFinancement ob1, SourceFinancement ob2)
+		        {
+		 
+		            return  ob1.getLibSource().compareTo(ob2.getLibSource());
+		        }
+		    });
 		 return listSourceFinance;
 	}
 

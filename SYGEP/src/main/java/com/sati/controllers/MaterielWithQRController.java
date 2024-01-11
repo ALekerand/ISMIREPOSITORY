@@ -3,6 +3,8 @@ package com.sati.controllers;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -43,6 +45,7 @@ import com.sati.requetes.RequeteNature;
 import com.sati.requetes.RequeteUtilisateur;
 import com.sati.service.Iservice;
 
+@SuppressWarnings({ "unchecked", "unchecked" })
 @Component
 @Scope("session")
 public class MaterielWithQRController {
@@ -356,6 +359,15 @@ public class MaterielWithQRController {
 	@SuppressWarnings("unchecked")
 	public List<Famille> getListFamille() {
 		listFamille = service.getObjects("Famille");
+		
+		Collections.sort(listFamille, new Comparator<Famille>() {
+	        @Override
+	        public int compare(Famille ob1, Famille ob2)
+	        {
+	 
+	            return  ob1.getLibFamille().compareTo(ob2.getLibFamille());
+	        }
+	    });
 		return listFamille;
 	}
 
@@ -410,6 +422,15 @@ public class MaterielWithQRController {
 	@SuppressWarnings("unchecked")
 	public List<Magasin> getListMagasin() {
 		 listMagasin = service.getObjects("Magasin");
+		 
+		 Collections.sort(listMagasin, new Comparator<Magasin>() {
+		        @Override
+		        public int compare(Magasin ob1, Magasin ob2)
+		        {
+		 
+		            return  ob1.getNomMagasin().compareTo(ob2.getNomMagasin());
+		        }
+		    });
 		 return listMagasin;
 	}
 
@@ -506,6 +527,15 @@ public class MaterielWithQRController {
 
 	public List<SourceFinancement> getListSourceFinance() {
 		listSourceFinance = service.getObjects("SourceFinancement");
+		
+		Collections.sort(listSourceFinance, new Comparator<SourceFinancement>() {
+	        @Override
+	        public int compare(SourceFinancement ob1, SourceFinancement ob2)
+	        {
+	 
+	            return  ob1.getLibSource().compareTo(ob2.getLibSource());
+	        }
+	    });
 		return listSourceFinance;
 	}
 
@@ -515,6 +545,15 @@ public class MaterielWithQRController {
 
 	public List<Fournisseur> getListFournisseur() {
 		listFournisseur = service.getObjects("Fournisseur");
+		
+		Collections.sort(listFournisseur, new Comparator<Fournisseur>() {
+	        @Override
+	        public int compare(Fournisseur ob1, Fournisseur ob2)
+	        {
+	 
+	            return  ob1.getNomFournisseur().compareTo(ob2.getNomFournisseur());
+	        }
+	    });
 		return listFournisseur;
 	}
 
@@ -538,8 +577,19 @@ public class MaterielWithQRController {
 		this.typeMateriel = typeMateriel;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Marque> getListMarque() {
-		return listMarque = service.getObjects("Marque");
+		 listMarque = service.getObjects("Marque");
+		
+		Collections.sort(listMarque, new Comparator<Marque>() {
+	        @Override
+	        public int compare(Marque ob1, Marque ob2)
+	        {
+	 
+	            return  ob1.getLibelleMarque().compareTo(ob2.getLibelleMarque());
+	        }
+	    });
+		return listMarque;
 	}
 
 	public void setListMarque(List<Marque> listMarque) {
@@ -563,7 +613,17 @@ public class MaterielWithQRController {
 	}
 
 	public List<Etat> getListEtat() {
-		return listEtat = service.getObjects("Etat");
+		 listEtat = service.getObjects("Etat");
+		
+		Collections.sort(listEtat, new Comparator<Etat>() {
+	        @Override
+	        public int compare(Etat ob1, Etat ob2)
+	        {
+	 
+	            return  ob1.getLibEtat().compareTo(ob2.getLibEtat());
+	        }
+	    });
+		return listEtat;
 	}
 
 	public void setListEtat(List<Etat> listEtat) {

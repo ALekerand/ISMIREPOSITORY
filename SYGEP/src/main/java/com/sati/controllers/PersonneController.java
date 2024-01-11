@@ -1,6 +1,8 @@
 package com.sati.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -13,6 +15,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.sati.model.Entite;
+import com.sati.model.Etat;
 import com.sati.model.Fonction;
 import com.sati.model.Personne;
 import com.sati.model.UserAuthentication;
@@ -198,6 +201,15 @@ public class PersonneController {
 	@SuppressWarnings("unchecked")
 	public List<Fonction> getListFonction() {
 	       listFonction = this.service.getObjects("Fonction");
+	       
+	       Collections.sort(listFonction, new Comparator<Fonction>() {
+		        @Override
+		        public int compare(Fonction ob1, Fonction ob2)
+		        {
+		 
+		            return  ob1.getLibFonction().compareTo(ob2.getLibFonction());
+		        }
+		    });
 	       return listFonction;
 	}
 
