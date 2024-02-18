@@ -1,6 +1,8 @@
 package com.sati.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -78,6 +80,14 @@ public class MarqueController {
 	@SuppressWarnings("unchecked")
 	public List<Marque> getListObject() {
 		listObject = service.getObjects("Marque");
+		Collections.sort(listObject, new Comparator<Marque>() {
+	        @Override
+	        public int compare(Marque ob1, Marque ob2)
+	        {
+	 
+	            return  ob1.getLibelleMarque().compareTo(ob2.getLibelleMarque());
+	        }
+	    });
 		System.out.println("=========Taille de la liste:"+listObject.size());
 		return listObject;
 	}

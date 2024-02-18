@@ -45,12 +45,13 @@
  <f:facet name="header"> LISTE DES CARACTERISTIQUES </f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{caracteristiqueController.selectionnerLigne}"></p:ajax>
    		
-   		<p:column headerText="Code" style="width:30%">
-        <h:outputText value="#{var.codeCaracteristique}"/>
-        </p:column>
-        
+   		        
         <p:column headerText="Libellé">
         <h:outputText value="#{var.libCaracteristique}"/>
+        </p:column>
+        
+   		<p:column headerText="Code" style="width:30%">
+        <h:outputText value="#{var.codeCaracteristique}"/>
         </p:column>
         
         <p:column headerText="Description">

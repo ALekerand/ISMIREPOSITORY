@@ -10,7 +10,7 @@
 			<ui:define name="body">
 				<h:form id="form">
       <p:panel header="LISTE DES MATERIELS REPARES">
-      	<p:dataTable widgetVar="dtReparation"  var="variable" value="#{retourEnServiceController.listReparation}"  rowKey="#{variable.idReparation}">
+      	<p:dataTable widgetVar="dtReparation"  var="variable" value="#{retourEnServiceController.listReparation}"  rowKey="#{variable.idReparation}"  paginator="true" paginatorPosition="bottom" rows="10" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  		
  		 <f:facet name="header">
                 <div class="materiel-table-header">
@@ -21,25 +21,26 @@
                 </div>
             </f:facet>
 		
-   		<p:column headerText="Code reparation" filterBy="#{variable.code}" filterable="false">
-        <h:outputText value="#{variable.code} "/>
-        </p:column>
+        				
+		<p:column headerText="Nom maeriel" filterBy="#{variable.materiel.nomMateriel}" filterable="false">
+		<h:outputText value="#{variable.materiel.nomMateriel}" />
+		</p:column>
+							
+		<p:column headerText="Description materiel" filterBy="#{variable.materiel.descriptionMateriel}" filterable="false">
+		<h:outputText value="#{variable.materiel.descriptionMateriel}" />
+		</p:column>
+		
+		<p:column headerText="Code materiel" filterBy="#{variable.materiel.codeMateriel}" filterable="false">
+		<h:outputText value="#{variable.materiel.codeMateriel}" />
+		</p:column>	
    		
    		<p:column headerText="Description panne" filterBy="#{variable.descriptionPanne}" filterable="false">
         <h:outputText value="#{variable.descriptionPanne}"/>
         </p:column>
         
-       <p:column headerText="Code materiel" filterBy="#{variable.materiel.codeMateriel}" filterable="false">
-		<h:outputText value="#{variable.materiel.codeMateriel}" />
-		</p:column>
-									
-		<p:column headerText="Nom maeriel" filterBy="#{variable.materiel.nomMateriel}" filterable="false">
-		<h:outputText value="#{variable.materiel.nomMateriel}" />
-		</p:column>
-									
-		<p:column headerText="Description materiel" filterBy="#{variable.materiel.descriptionMateriel}" filterable="false">
-		<h:outputText value="#{variable.materiel.descriptionMateriel}" />
-		</p:column>
+        <p:column headerText="Code reparation" filterBy="#{variable.code}" filterable="false">
+        <h:outputText value="#{variable.code} "/>
+        </p:column>
         
         <p:column headerText="Date mise en reparation" filterBy="#{variable.dateMiseReparation}" filterable="false">
         <h:outputText value="#{variable.dateMiseReparation}"/>

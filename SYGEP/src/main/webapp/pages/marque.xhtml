@@ -40,14 +40,15 @@
  <f:facet name="header"> LISTE DES MARQUES </f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{marqueController.selectionnerLigne}"></p:ajax>
    		
-   		<p:column headerText="Code marque" style="width:30%">
-        <h:outputText value="#{var.codeMarque}"/>
-        </p:column>
-        
-        <p:column headerText="Libellé marque">
+   		  
+        <p:column headerText="Libellé marque" style="width:50%">
         <h:outputText value="#{var.libelleMarque}"/>
         </p:column>
         
+   		<p:column headerText="Code marque" style="width:50%">
+        <h:outputText value="#{var.codeMarque}"/>
+        </p:column>
+      
         </p:dataTable>
 		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 	   <p:commandButton value="Oui" type="button"

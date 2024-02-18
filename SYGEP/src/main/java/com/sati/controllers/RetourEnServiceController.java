@@ -1,6 +1,8 @@
 package com.sati.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -81,6 +83,15 @@ public class RetourEnServiceController {
 	@SuppressWarnings("unchecked")
 	public List<Reparation> getListReparation() {
 		listReparation = requeteReparation.materielDejaReparer();
+		
+		  Collections.sort(listReparation, new Comparator<Reparation>() {
+		        @Override
+		        public int compare(Reparation ob1, Reparation ob2)
+		        {
+		 
+		            return  ob1.getMateriel().getNomMateriel().compareTo(ob2.getMateriel().getNomMateriel());
+		        }
+		    });
 		System.out.println("========Taille de la liste:"+listReparation.size());
 		return listReparation;
 	}

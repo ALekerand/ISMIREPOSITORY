@@ -43,12 +43,12 @@
  <f:facet name="header">LISTE DES ETATS DE DEMANDE</f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{etatDemandeController.selectionnerLigne}"></p:ajax>
    		
+   	    <p:column headerText="Libellé">
+        <h:outputText value="#{var.libEtatDemande}"/>
+        </p:column>
+       
    		<p:column headerText="Code" style="width:30%">
         <h:outputText value="#{var.codeEtatDemande}"/>
-        </p:column>
-        
-        <p:column headerText="Libellé">
-        <h:outputText value="#{var.libEtatDemande}"/>
         </p:column>
 
         </p:dataTable>

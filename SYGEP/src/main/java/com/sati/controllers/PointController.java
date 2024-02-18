@@ -113,14 +113,6 @@ public class PointController {
 	public List<EtatInventaire> getListEtatInventaire() {
 		listEtatInventaire = service.getObjects("EtatInventaire");
 		
-		Collections.sort(listEtatInventaire, new Comparator<EtatInventaire>() {
-	        @Override
-	        public int compare(EtatInventaire ob1, EtatInventaire ob2)
-	        {
-	 
-	            return  ob1.getLibEtatInventaire().compareTo(ob2.getLibEtatInventaire());
-	        }
-	    });
 		return listEtatInventaire;
 	}
 	public void setListEtatInventaire(List<EtatInventaire> listEtatInventaire) {
@@ -180,6 +172,15 @@ public class PointController {
 	@SuppressWarnings("unchecked")
 	public List<Materiel> getListMateriel() {
 		listMateriel = service.getObjects("Materiel");
+		
+		Collections.sort(listMateriel, new Comparator<Materiel>() {
+	        @Override
+	        public int compare(Materiel ob1, Materiel ob2)
+	        {
+	 
+	            return  ob1.getNomMateriel().compareTo(ob2.getNomMateriel());
+	        }
+	    });
 		return listMateriel;
 	}
 

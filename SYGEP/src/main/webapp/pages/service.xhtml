@@ -49,13 +49,14 @@
  <f:facet name="header">LISTE DES SERVICES</f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{serviceController.selectionnerLigne}"></p:ajax>
    		
-   		<p:column headerText="Code" style="width:30%">
-        <h:outputText value="#{var.codeEntite}"/>
-        </p:column>
-        
+   		        
         <p:column headerText="Nom">
         <h:outputText value="#{var.nomService}"/>
          </p:column>
+         
+   		<p:column headerText="Code" style="width:30%">
+        <h:outputText value="#{var.codeEntite}"/>
+        </p:column>
          
         <p:column headerText="Téléphone">
         <h:outputText value="#{var.telephone}"/>

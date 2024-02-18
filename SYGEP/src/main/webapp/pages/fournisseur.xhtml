@@ -54,16 +54,16 @@
  <f:facet name="header"> LISTE DES FOURNISSEURS </f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{fournisseurController.selectionnerLigne}"></p:ajax>
    		
-   		<p:column headerText="Code" style="width:30%">
-        <h:outputText value="#{var.codeFournisseur}"/>
+   		   <p:column headerText="Nom">
+        <h:outputText value="#{var.nomFournisseur}"/>
         </p:column>
         
-        <p:column headerText="Compte contribuable">
+         <p:column headerText="Compte contribuable">
         <h:outputText value="#{var.nccFournisseur}"/>
         </p:column>
         
-        <p:column headerText="Nom">
-        <h:outputText value="#{var.nomFournisseur}"/>
+   		<p:column headerText="Code" style="width:30%">
+        <h:outputText value="#{var.codeFournisseur}"/>
         </p:column>
         
         <p:column headerText="Adresse">

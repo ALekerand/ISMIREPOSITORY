@@ -1,6 +1,8 @@
 package com.sati.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.sati.model.Diagnostique;
+import com.sati.model.Famille;
 import com.sati.model.Materiel;
 import com.sati.requetes.RequeteDiagnostique;
 import com.sati.requetes.RequeteMateriel;
@@ -38,6 +41,8 @@ public class ConsulterListDiagnosticController {
 
 	@SuppressWarnings("unchecked")
 	public List<Diagnostique> getListeDiagnostique() {
+		
+		
 		   System.out.println(" \n\n ######################################### \n\n");
 		    System.out.println("  LISTE DES MATÉRIELS AVEC LEURS ÉTATS ");
 		    System.out.println(" \n\n ######################################### \n\n");
@@ -47,6 +52,15 @@ public class ConsulterListDiagnosticController {
 		    listeMateriels = requeteMateriel.listerMaterielAvecQRCODE();
 		    
 		    System.out.println("==================="+listeMateriels.size());
+		    
+		    Collections.sort(listeMateriels, new Comparator<Materiel>() {
+		        @Override
+		        public int compare(Materiel ob1, Materiel ob2)
+		        {
+		 
+		            return  ob1.getNomMateriel().compareTo(ob2.getNomMateriel());
+		        }
+		    });
 		    
 		    listeDiagnostique.clear();
 		    
@@ -64,6 +78,7 @@ public class ConsulterListDiagnosticController {
 		    System.out.println(" === AFFICHAGE DE LA LISTE DU DIAGNOSTIQUE  === \n\n");
 		    
 		    System.out.println(listeDiagnostique);
+		    
 		return listeDiagnostique;
 	}
 

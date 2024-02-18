@@ -29,11 +29,6 @@
 						<p:dataTable id="table" var="var" value="#{listMaterielParServiceController.listMaterielParService}" rowKey="#{var.idPacours}" paginator="true" paginatorPosition="bottom" rows="5"  rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  							<f:facet name="header">LISTE DES MATERIELS</f:facet>
   								  <!--   <p:ajax event="rowSelect" process="@this"  update="form" listener="#{traitementDemandeController.selectionnerLigne}"></p:ajax>-->
-   		
-   						
-   										<p:column headerText="Code materiel" >
-      								    <h:outputText value="#{var.materiel.codeMateriel}"/>
-     								    </p:column>
         
       								    <p:column headerText="Nom materiel">
       								    <h:outputText value="#{var.materiel.nomMateriel}"/>
@@ -42,6 +37,10 @@
        								   <p:column headerText="Description materiel">
                                        <h:outputText value="#{var.materiel.descriptionMateriel}"/>
                                        </p:column>
+                                       	
+   										<p:column headerText="Code materiel" >
+      								    <h:outputText value="#{var.materiel.codeMateriel}"/>
+     								    </p:column>
                                        
                                          <p:column headerText="Nature materiel">
                                        <h:outputText value="#{var.materiel.nature.libNature}"/>

@@ -1,6 +1,8 @@
 package com.sati.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -61,20 +63,56 @@ public class ConsulterDemandeController_User {
 		this.demande = demande;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Demande> getListeDemandesAttente() {
-		return listeDemandesAttente = requeteDemande.afficherDemande_Utilisateur(1,chagerUtilisateur().getPersonne().getIdEntite());
+		 listeDemandesAttente = requeteDemande.afficherDemande_Utilisateur(1,chagerUtilisateur().getPersonne().getIdEntite());
+		
+		  Collections.sort(listeDemandesAttente, new Comparator<Demande>() {
+		        @Override
+		        public int compare(Demande ob1, Demande ob2)
+		        {
+		 
+		            return  ob1.getEntite().getPersonne().getNomPersonne().compareTo(ob2.getEntite().getPersonne().getNomPersonne());
+		        }
+		    });
+		  
+		  return listeDemandesAttente;
 	}
 	public void setListeDemandesAttente(List<Demande> listeDemandesAttente) {
 		this.listeDemandesAttente = listeDemandesAttente;
 	}
+	@SuppressWarnings("unchecked")
 	public List<Demande> getListeDemandesTraitees() {
-		return listeDemandesTraitees = requeteDemande.afficherDemande_Utilisateur(2,chagerUtilisateur().getPersonne().getIdEntite());
+		 listeDemandesTraitees = requeteDemande.afficherDemande_Utilisateur(2,chagerUtilisateur().getPersonne().getIdEntite());
+		 
+		  Collections.sort(listeDemandesTraitees, new Comparator<Demande>() {
+		        @Override
+		        public int compare(Demande ob1, Demande ob2)
+		        {
+		 
+		            return  ob1.getEntite().getPersonne().getNomPersonne().compareTo(ob2.getEntite().getPersonne().getNomPersonne());
+		        }
+		    });
+		 
+		 return listeDemandesTraitees;
 	}
 	public void setListeDemandesTraitees(List<Demande> listeDemandesTraitees) {
 		this.listeDemandesTraitees = listeDemandesTraitees;
 	}
+	@SuppressWarnings("unchecked")
 	public List<Demande> getListeDemandesRejetees() {
-		return listeDemandesRejetees = requeteDemande.afficherDemande_Utilisateur(3,chagerUtilisateur().getPersonne().getIdEntite());
+		listeDemandesRejetees = requeteDemande.afficherDemande_Utilisateur(3,chagerUtilisateur().getPersonne().getIdEntite());
+		
+		  Collections.sort(listeDemandesRejetees, new Comparator<Demande>() {
+		        @Override
+		        public int compare(Demande ob1, Demande ob2)
+		        {
+		 
+		            return  ob1.getEntite().getPersonne().getNomPersonne().compareTo(ob2.getEntite().getPersonne().getNomPersonne());
+		        }
+		    });
+		  
+		  return listeDemandesRejetees;
 	}
 	public void setListeDemandesRejetees(List<Demande> listeDemandesRejetees) {
 		this.listeDemandesRejetees = listeDemandesRejetees;

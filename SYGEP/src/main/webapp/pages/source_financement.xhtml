@@ -47,12 +47,13 @@
  <f:facet name="header"> LISTE DES SOURCES DE FINANCEMENT </f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{sourceFinancementController.selectionnerLigne}"></p:ajax>
    		
-   		<p:column headerText="Code" style="width:30%">
-        <h:outputText value="#{var.codeSource}"/>
-        </p:column>
-        
+   		        
         <p:column headerText="Libellé">
         <h:outputText value="#{var.libSource}"/>
+        </p:column>
+        
+   		<p:column headerText="Code" style="width:30%">
+        <h:outputText value="#{var.codeSource}"/>
         </p:column>
         
         <p:column headerText="Description">

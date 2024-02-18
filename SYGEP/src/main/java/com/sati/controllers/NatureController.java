@@ -133,6 +133,15 @@ public class NatureController {
 	@SuppressWarnings("unchecked")
 	public List<Nature> getListTable() {
 		 listTable = service.getObjects("Nature");
+		 
+		 Collections.sort(listTable, new Comparator<Nature>() {
+		        @Override
+		        public int compare(Nature ob1, Nature ob2)
+		        {
+		 
+		            return  ob1.getLibNature().compareTo(ob2.getLibNature());
+		        }
+		    });
 		 return listTable;
 	}
 

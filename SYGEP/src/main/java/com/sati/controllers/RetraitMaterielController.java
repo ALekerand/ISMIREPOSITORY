@@ -2,6 +2,8 @@ package com.sati.controllers;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.sati.model.Bonlivraison;
 import com.sati.model.Materiel;
 import com.sati.requetes.RequeteMateriel;
 import com.sati.service.Iservice;
@@ -55,6 +58,15 @@ public class RetraitMaterielController {
 		@SuppressWarnings("unchecked")
 		public List<Materiel> getListMateriel() {
 			listMateriel = requeteMateriel.listerMateriel();
+			
+			 Collections.sort(listMateriel, new Comparator<Materiel>() {
+			        @Override
+			        public int compare(Materiel ob1, Materiel ob2)
+			        {
+			 
+			            return  ob1.getNomMateriel().compareTo(ob2.getNomMateriel());
+			        }
+			    });
 			return listMateriel;
 		}
 

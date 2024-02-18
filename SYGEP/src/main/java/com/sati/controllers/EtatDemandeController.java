@@ -1,6 +1,8 @@
 package com.sati.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import com.sati.model.EtatDemande;
 import com.sati.model.Famille;
+import com.sati.model.Magasin;
 import com.sati.model.Nature;
 import com.sati.service.Iservice;
 
@@ -130,6 +133,15 @@ public class EtatDemandeController {
 	@SuppressWarnings("unchecked")
 	public List<EtatDemande> getListTable() {
 	 listTable = service.getObjects("EtatDemande");
+	 
+	 Collections.sort(listTable, new Comparator<EtatDemande>() {
+	        @Override
+	        public int compare(EtatDemande ob1, EtatDemande ob2)
+	        {
+	 
+	            return  ob1.getLibEtatDemande().compareTo(ob2.getLibEtatDemande());
+	        }
+	    });
 	 return listTable;
 	}
 
