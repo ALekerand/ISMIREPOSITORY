@@ -42,12 +42,13 @@
  <f:facet name="header"> LISTE DES FONCTIONS </f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{fonctionController.selectionnerLigne}"></p:ajax>
    		
-   		<p:column headerText="Code" style="width:30%">
-        <h:outputText value="#{var.codeFonction}"/>
-        </p:column>
-        
+   		        
         <p:column headerText="Libellé">
         <h:outputText value="#{var.libFonction}"/>
+        </p:column>
+        
+   		<p:column headerText="Code" >
+        <h:outputText value="#{var.codeFonction}"/>
         </p:column>
         
         </p:dataTable>

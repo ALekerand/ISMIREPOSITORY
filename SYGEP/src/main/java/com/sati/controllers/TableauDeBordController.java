@@ -1,6 +1,8 @@
 package com.sati.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -141,6 +143,15 @@ public class TableauDeBordController {
 	@SuppressWarnings("unchecked")
 	public List<Materiel> getListStockAlerteMateriel() {
 		listStockAlerteMateriel = requeteMateriel.stockAlertMateriel();
+		
+		  Collections.sort(listStockAlerteMateriel, new Comparator<Materiel>() {
+		        @Override
+		        public int compare(Materiel ob1, Materiel ob2)
+		        {
+		 
+		            return  ob1.getNomMateriel().compareTo(ob2.getNomMateriel());
+		        }
+		    });
 		
 		return listStockAlerteMateriel;
 	}

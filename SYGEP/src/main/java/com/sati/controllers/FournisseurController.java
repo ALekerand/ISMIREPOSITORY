@@ -1,6 +1,8 @@
 package com.sati.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Component;
 import com.sati.model.Famille;
 import com.sati.model.Fournisseur;
 import com.sati.model.Nature;
+import com.sati.model.Service;
 import com.sati.service.Iservice;
 
 @Component
@@ -134,6 +137,15 @@ public class FournisseurController {
 	@SuppressWarnings("unchecked")
 	public List<Fournisseur> getListTable() {
 		listTable = service.getObjects("Fournisseur");
+		
+		 Collections.sort(listTable, new Comparator<Fournisseur>() {
+		        @Override
+		        public int compare(Fournisseur ob1, Fournisseur ob2)
+		        {
+		 
+		            return  ob1.getNomFournisseur().compareTo(ob2.getNomFournisseur());
+		        }
+		    });
 		System.out.println("=================Taille de laliste: "+listTable.size());
 		return listTable;
 	}

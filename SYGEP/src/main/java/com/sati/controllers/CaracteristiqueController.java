@@ -1,6 +1,8 @@
 package com.sati.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -13,6 +15,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.sati.model.Caracteristique;
+import com.sati.model.Marque;
 import com.sati.service.Iservice;
 
 @Component
@@ -120,6 +123,15 @@ public class CaracteristiqueController {
 	@SuppressWarnings("unchecked")
 	public List<Caracteristique> getListTable() {
 		listTable = service.getObjects("Caracteristique");
+		
+		Collections.sort(listTable, new Comparator<Caracteristique>() {
+	        @Override
+	        public int compare(Caracteristique ob1, Caracteristique ob2)
+	        {
+	 
+	            return  ob1.getLibCaracteristique().compareTo(ob2.getLibCaracteristique());
+	        }
+	    });
 		return listTable;
 	}
 

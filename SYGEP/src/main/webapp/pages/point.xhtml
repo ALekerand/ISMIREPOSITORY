@@ -122,16 +122,17 @@
 			<f:facet name="header"> LISTE DES INVENTAIRES </f:facet>
 				<p:ajax event="rowSelect" process="@this"  update="form" listener="#{pointController.selectionnerLigne}"></p:ajax>
 				 
-				<p:column headerText="Inventaire" >
-		        <h:outputText value="#{var.inventaire.codeInventaire}"/>
+				     		
+		   		<p:column headerText="Désignation materiel">
+		        <h:outputText value="#{var.materiel.nomMateriel}"/>
 		        </p:column>
 				 
 				<p:column headerText="Code matériel:">
 		        <h:outputText value="#{var.materiel.codeMateriel}"/>
 		        </p:column>
-		          		
-		   		<p:column headerText="Désignation materiel">
-		        <h:outputText value="#{var.materiel.nomMateriel}"/>
+		      
+		      	<p:column headerText="Inventaire" >
+		        <h:outputText value="#{var.inventaire.codeInventaire}"/>
 		        </p:column>
 		        
 		        <p:column headerText="Etat inventaire" >

@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.sati.model.Demande;
 import com.sati.model.Entree;
 import com.sati.model.Etat;
 import com.sati.model.Fongible;
@@ -256,6 +257,15 @@ public class EntreeController {
 	@SuppressWarnings("unchecked")
 	public List<Entree> getListEntree() {
 		 listEntree = service.getObjects("Entree");
+		 
+		 Collections.sort(listEntree, new Comparator<Entree>() {
+		        @Override
+		        public int compare(Entree ob1, Entree ob2)
+		        {
+		 
+		            return  ob1.getMateriel().getNomMateriel().compareTo(ob2.getMateriel().getNomMateriel());
+		        }
+		    });
 		 return listEntree;
 	}
 

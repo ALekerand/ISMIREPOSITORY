@@ -1,12 +1,15 @@
 package com.sati.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.sati.model.Diagnostique;
 import com.sati.model.Materiel;
 import com.sati.model.Reparation;
 import com.sati.requetes.RequeteMateriel;
@@ -41,6 +44,15 @@ public class MaterielEnReparationController {
 
 		listMaterielEnReparation = requeteReparation.materielEnReparation();
 		System.out.println("======Taille de la liste:"+listMaterielEnReparation.size());
+		
+		  Collections.sort(listMaterielEnReparation, new Comparator<Reparation>() {
+		        @Override
+		        public int compare(Reparation ob1, Reparation ob2)
+		        {
+		 
+		            return  ob1.getMateriel().getNomMateriel().compareTo(ob2.getMateriel().getNomMateriel());
+		        }
+		    });
 		return listMaterielEnReparation;
 	}
 

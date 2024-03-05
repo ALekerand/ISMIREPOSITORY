@@ -1,6 +1,8 @@
 package com.sati.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.sati.model.Bonlivraison;
 import com.sati.model.Famille;
 import com.sati.model.Inventaire;
 import com.sati.model.Nature;
@@ -179,8 +182,19 @@ public class InventaireController {
 		this.inventaire = inventaire;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Inventaire> getListTable() {
-		return listTable = service.getObjects("Inventaire");
+		 listTable = service.getObjects("Inventaire");
+		 
+		 Collections.sort(listTable, new Comparator<Inventaire>() {
+		        @Override
+		        public int compare(Inventaire ob1, Inventaire ob2)
+		        {
+		 
+		            return  ob1.getLibInventaire().compareTo(ob2.getLibInventaire());
+		        }
+		    });
+		 return listTable;
 	}
 
 	public void setListTable(List<Inventaire> listTable) {

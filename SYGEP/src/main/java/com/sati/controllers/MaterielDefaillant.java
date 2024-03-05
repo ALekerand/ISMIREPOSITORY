@@ -1,6 +1,8 @@
 package com.sati.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +50,15 @@ public class MaterielDefaillant {
 		
 		listMaterielDefaillant = requeteDiagnostique.materielDefaillant();
 		System.out.println("========Taille de liste est"+listMaterielDefaillant.size());
+		
+		  Collections.sort(listMaterielDefaillant, new Comparator<Diagnostique>() {
+		        @Override
+		        public int compare(Diagnostique ob1, Diagnostique ob2)
+		        {
+		 
+		            return  ob1.getMateriel().getNomMateriel().compareTo(ob2.getMateriel().getNomMateriel());
+		        }
+		    });
 		return listMaterielDefaillant;
 	}
 

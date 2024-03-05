@@ -1,6 +1,12 @@
 package com.sati.controllers;
 
 import java.util.ArrayList;
+<<<<<<< HEAD
+=======
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+>>>>>>> branch 'master' of https://github.com/ALekerand/ISMIREPOSITORY2.git
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +25,11 @@ import com.sati.model.Entite;
 import com.sati.model.EtatDemande;
 import com.sati.model.Materiel;
 import com.sati.model.Personne;
+<<<<<<< HEAD
+=======
+import com.sati.model.Reparation;
+import com.sati.model.SourceFinancement;
+>>>>>>> branch 'master' of https://github.com/ALekerand/ISMIREPOSITORY2.git
 import com.sati.model.UserAuthentication;
 import com.sati.requetes.RequeteUtilisateur;
 import com.sati.service.Iservice;
@@ -187,6 +198,15 @@ public class DemandeController {
 	@SuppressWarnings("unchecked")
 	public List<Demande> getListTable() {
 		listTable = service.getObjects("Demande");
+		
+		  Collections.sort(listTable, new Comparator<Demande>() {
+		        @Override
+		        public int compare(Demande ob1, Demande ob2)
+		        {
+		 
+		            return  ob1.getEntite().getPersonne().getNomPersonne().compareTo(ob2.getEntite().getPersonne().getNomPersonne());
+		        }
+		    });
 		return listTable;
 	}
 

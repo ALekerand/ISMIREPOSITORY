@@ -1,6 +1,8 @@
 package com.sati.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -111,6 +113,14 @@ public class MagasinController {
 	@SuppressWarnings("unchecked")
 	public List<Magasin> getListTable() {
 		listTable = service.getObjects("Magasin");
+		 Collections.sort(listTable, new Comparator<Magasin>() {
+		        @Override
+		        public int compare(Magasin ob1, Magasin ob2)
+		        {
+		 
+		            return  ob1.getNomMagasin().compareTo(ob2.getNomMagasin());
+		        }
+		    });
 		System.out.println("=================Taille de laliste: "+listTable.size());
 		return listTable;
 	}

@@ -86,26 +86,26 @@
  
  <f:facet name="header">LISTE DES MATERIELS REPARES</f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{reparerMaterielController.selectionnerLigne}"></p:ajax>
-   		
-   		<p:column headerText="Code reparation">
-        <h:outputText value="#{var.code} "/>
-        </p:column>
-   		
-   		<p:column headerText="Description panne">
-        <h:outputText value="#{var.descriptionPanne}"/>
-        </p:column>
-        
-       <p:column headerText="Materiel">
-		<h:outputText value="#{var.materiel.codeMateriel}" />
-		</p:column>
-									
+					
 		<p:column headerText="Materiel">
 		<h:outputText value="#{var.materiel.nomMateriel}" />
 		</p:column>
 									
-		<p:column headerText="Materiel">
+		<p:column headerText="Description Materiel">
 		<h:outputText value="#{var.materiel.descriptionMateriel}" />
 		</p:column>
+        
+       <p:column headerText=" Code Materiel">
+		<h:outputText value="#{var.materiel.codeMateriel}" />
+		</p:column>
+			
+   		<p:column headerText="Description panne">
+        <h:outputText value="#{var.descriptionPanne}"/>
+        </p:column>
+        	
+   		<p:column headerText="Code reparation">
+        <h:outputText value="#{var.code} "/>
+        </p:column>
         
         <p:column headerText="Date mise en reparation">
         <h:outputText value="#{var.dateMiseReparation}"/>

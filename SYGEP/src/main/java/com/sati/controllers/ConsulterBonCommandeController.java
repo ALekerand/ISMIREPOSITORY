@@ -1,6 +1,8 @@
 package com.sati.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.sati.model.LigneCommande;
+import com.sati.model.Reparation;
 import com.sati.requetes.RequeteBonCommande;
 
 @Component
@@ -23,6 +26,15 @@ public class ConsulterBonCommandeController {
 	@SuppressWarnings("unchecked")
 	public void ChargerLigneCommane() {
 		listLigneCommande = requeteBonCommande.consulterBonCommande(codeBonCommande);
+		
+		Collections.sort(listLigneCommande, new Comparator<LigneCommande>() {
+	        @Override
+	        public int compare(LigneCommande ob1, LigneCommande ob2)
+	        {
+	 
+	            return  ob1.getMateriel().getNomMateriel().compareTo(ob2.getMateriel().getNomMateriel());
+	        }
+	    });
 		
 	}
 	

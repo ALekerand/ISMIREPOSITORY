@@ -1,6 +1,8 @@
 package com.sati.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -131,6 +133,15 @@ public class ReparerMaterielController {
 	public List<Reparation> getListMaterielRepare() {
 		
 		listMaterielRepare = service.getObjects("Reparation");
+		
+		 Collections.sort(listMaterielRepare, new Comparator<Reparation>() {
+		        @Override
+		        public int compare(Reparation ob1, Reparation ob2)
+		        {
+		 
+		            return  ob1.getMateriel().getNomMateriel().compareTo(ob2.getMateriel().getNomMateriel());
+		        }
+		    });
 		System.out.println("==========Taille dela liste est:"+listMaterielRepare.size());
 		return listMaterielRepare;
 	}

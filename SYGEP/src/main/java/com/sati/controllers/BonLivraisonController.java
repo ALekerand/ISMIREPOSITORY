@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +24,7 @@ import org.springframework.stereotype.Component;
 
 import com.sati.model.Boncommande;
 import com.sati.model.Bonlivraison;
+import com.sati.model.Demande;
 import com.sati.model.UserAuthentication;
 import com.sati.requetes.RequeteBonCommande;
 import com.sati.requetes.RequeteUtilisateur;
@@ -155,6 +158,15 @@ public class BonLivraisonController {
 	@SuppressWarnings("unchecked")
 	public List<Bonlivraison> getListObject() {
 		listObject = service.getObjects("Bonlivraison");
+		
+		 Collections.sort(listObject, new Comparator<Bonlivraison>() {
+		        @Override
+		        public int compare(Bonlivraison ob1, Bonlivraison ob2)
+		        {
+		 
+		            return  ob1.getPersonne().getNomPersonne().compareTo(ob2.getPersonne().getNomPersonne());
+		        }
+		    });
 		System.out.println("=========Taille de la liste:"+listObject.size());
 		return listObject;
 	}

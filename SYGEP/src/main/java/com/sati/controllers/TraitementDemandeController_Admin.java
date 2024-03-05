@@ -1,6 +1,8 @@
 package com.sati.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -15,6 +17,7 @@ import com.sati.model.Demande;
 import com.sati.model.EtatDemande;
 import com.sati.model.Fongible;
 import com.sati.model.Materiel;
+import com.sati.model.SourceFinancement;
 import com.sati.requetes.RequeteDemande;
 import com.sati.requetes.RequeteMateriel;
 import com.sati.service.Iservice;
@@ -121,6 +124,15 @@ public class TraitementDemandeController_Admin {
 	@SuppressWarnings("unchecked")
 	public List<Demande> getListTable() {
 		listTable = requeteDemande.traiterEtatDemande();
+		
+		 Collections.sort(listTable, new Comparator<Demande>() {
+		        @Override
+		        public int compare(Demande ob1, Demande ob2)
+		        {
+		 
+		            return  ob1.getEntite().getPersonne().getNomPersonne().compareTo(ob2.getEntite().getPersonne().getNomPersonne());
+		        }
+		    });
 		return listTable;
 	}
 	public void setListTable(List<Demande> listTable) {

@@ -54,22 +54,22 @@
  <f:facet name="header"> LISTE DES NATURES DE MATERIEL </f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{natureController.selectionnerLigne}"></p:ajax>
    		
+   		 <p:column headerText="Libellé">
+        <h:outputText value="#{var.libNature}"/>
+        </p:column>
+                
    		<p:column headerText="Code" style="width:30%">
         <h:outputText value="#{var.codeNature}"/>
         </p:column>
-        
-        <p:column headerText="Libellé">
-        <h:outputText value="#{var.libNature}"/>
+           
+        <p:column headerText="Description">
+        <h:outputText value="#{var.descriptionNature}"/>
         </p:column>
         
         <p:column headerText="Famille">
         <h:outputText value="#{var.famille.libFamille}"/>
         </p:column>
-        
-        <p:column headerText="Description">
-        <h:outputText value="#{var.descriptionNature}"/>
-        </p:column>
-        
+     
         </p:dataTable>
 							
 	   <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">

@@ -121,6 +121,7 @@ public class FamilleController {
 	@SuppressWarnings("unchecked")
 	public List<Famille> getListFamille() {
 		listFamille = service.getObjects("Famille");
+<<<<<<< HEAD
 		//=======Pour le rangement par ordre alphabétique======
 				Collections.sort(listFamille, new Comparator<Famille>() {
 			        @Override
@@ -131,6 +132,17 @@ public class FamilleController {
 			        }
 			    });
 				//========================  Fin  =======================
+=======
+		
+		Collections.sort(listFamille, new Comparator<Famille>() {
+	        @Override
+	        public int compare(Famille ob1, Famille ob2)
+	        {
+	 
+	            return  ob1.getLibFamille().compareTo(ob2.getLibFamille());
+	        }
+	    });
+>>>>>>> branch 'master' of https://github.com/ALekerand/ISMIREPOSITORY2.git
 		return listFamille;
 	}
 

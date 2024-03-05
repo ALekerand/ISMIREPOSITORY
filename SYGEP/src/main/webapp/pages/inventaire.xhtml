@@ -53,12 +53,13 @@
 						 <f:facet name="header"> LISTE DES INVENTAIRES </f:facet>
 				     <p:ajax event="rowSelect" process="@this"  update="form" listener="#{inventaireController.selectionnerLigne}"></p:ajax>
 				   		
-				   		<p:column headerText="Code inventaire">
-				        <h:outputText value="#{var.codeInventaire}"/>
-				        </p:column>
-				        
+				   		 
 				        <p:column headerText="Libelle inventaire" >
 				        <h:outputText value="#{var.libInventaire}"/>
+				        </p:column>
+				        
+				   		<p:column headerText="Code inventaire">
+				        <h:outputText value="#{var.codeInventaire}"/>
 				        </p:column>
 				        
 				        <p:column headerText="Date debut" >

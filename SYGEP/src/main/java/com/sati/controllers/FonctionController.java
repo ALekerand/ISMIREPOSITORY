@@ -1,6 +1,8 @@
 package com.sati.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Component;
 import com.sati.model.Famille;
 import com.sati.model.Fonction;
 import com.sati.model.Nature;
+import com.sati.model.Service;
 import com.sati.service.Iservice;
 
 @Component
@@ -123,6 +126,15 @@ public class FonctionController {
 	@SuppressWarnings("unchecked")
 	public List<Fonction> getListTable() {
 		listTable = service.getObjects("Fonction");
+		
+		 Collections.sort(listTable, new Comparator<Fonction>() {
+		        @Override
+		        public int compare(Fonction ob1, Fonction ob2)
+		        {
+		 
+		            return  ob1.getLibFonction().compareTo(ob2.getLibFonction());
+		        }
+		    });
 		return listTable;
 	}
 	public void setListTable(List<Fonction> listTable) {

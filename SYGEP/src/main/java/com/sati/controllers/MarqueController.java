@@ -84,6 +84,7 @@ public class MarqueController {
 	@SuppressWarnings("unchecked")
 	public List<Marque> getListObject() {
 		listObject = service.getObjects("Marque");
+<<<<<<< HEAD
 		//=======Pour le rangement par ordre alphabétique======
 				Collections.sort(listObject, new Comparator<Marque>() {
 			        @Override
@@ -93,6 +94,17 @@ public class MarqueController {
 			        }
 			    });
 		//========================  Fin  =======================
+=======
+		Collections.sort(listObject, new Comparator<Marque>() {
+	        @Override
+	        public int compare(Marque ob1, Marque ob2)
+	        {
+	 
+	            return  ob1.getLibelleMarque().compareTo(ob2.getLibelleMarque());
+	        }
+	    });
+		System.out.println("=========Taille de la liste:"+listObject.size());
+>>>>>>> branch 'master' of https://github.com/ALekerand/ISMIREPOSITORY2.git
 		return listObject;
 	}
 	public void setListObject(List<Marque> listObject) {

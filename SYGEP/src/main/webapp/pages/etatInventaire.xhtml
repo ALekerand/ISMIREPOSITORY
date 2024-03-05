@@ -39,9 +39,14 @@
  
  <f:facet name="header"> LISTE DES ETATS D'INVENTAIRE </f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{etatInventaireController.selectionnerLigne}"></p:ajax>
-   		
-   		<p:column headerText="Libelle etat inventaire" style="width:30%">
+     
+     
+   		<p:column headerText="Libelle etat inventaire" >
         <h:outputText value="#{var.libEtatInventaire}"/>
+        </p:column>
+        
+   		<p:column headerText="Code etat inventaire">
+        <h:outputText value="#{var.codeTypeInventaire}"/>
         </p:column>
         
         

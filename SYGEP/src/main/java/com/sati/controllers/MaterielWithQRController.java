@@ -387,6 +387,15 @@ public class MaterielWithQRController {
 	@SuppressWarnings("unchecked")
 	public List<Materiel> getListTable() {
 		 listTable = service.getObjects("Materiel");
+		 
+		 Collections.sort(listTable, new Comparator<Materiel>() {
+		        @Override
+		        public int compare(Materiel ob1, Materiel ob2)
+		        {
+		 
+		            return  ob1.getNomMateriel().compareTo(ob2.getNomMateriel());
+		        }
+		    });
 		 return listTable;
 	}
 

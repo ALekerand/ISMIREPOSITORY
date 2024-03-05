@@ -14,15 +14,16 @@
 						<p:dataTable var="variable" value="#{materielEnReparationController.listMaterielEnReparation}" selectionMode="single" selection="#{materielEnReparationController.selectedReparation}" rowKey="#{variable.idReparation}">
  							<f:facet name="header">LISTES DES MATERIELS EN REPARATION</f:facet>
   							     <p:ajax event="rowSelect" process="@this"  update="form" listener="#{materielEnReparationController.selectionnerLigne}"></p:ajax>
+  							     
+  							     	<p:column headerText="Nom materiel">
+									<h:outputText value="#{variable.materiel.nomMateriel}" />
+									</p:column>
+									
 		   							<p:column headerText="Materiel">
 									<h:outputText value="#{variable.materiel.codeMateriel}" />
 									</p:column>
 									
-		   							<p:column headerText="Materiel">
-									<h:outputText value="#{variable.materiel.nomMateriel}" />
-									</p:column>
-									
-									<p:column headerText="Materiel">
+									<p:column headerText="Description meteriel">
 									<h:outputText value="#{variable.materiel.descriptionMateriel}" />
 									</p:column>
 									

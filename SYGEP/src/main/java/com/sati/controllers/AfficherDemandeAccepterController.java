@@ -1,6 +1,8 @@
 package com.sati.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -78,6 +80,15 @@ public class AfficherDemandeAccepterController {
 		entite = (Entite) service.getObjectById(personne.getIdEntite(), "Entite");
 		setIdEntite(entite.getIdEntite());
 		listDemandeAccepter = requeteDemande.afficherDemandeAccepte(idEntite);
+		
+		  Collections.sort(listDemandeAccepter, new Comparator<Demande>() {
+		        @Override
+		        public int compare(Demande ob1, Demande ob2)
+		        {
+		 
+		            return  ob1.getEntite().getPersonne().getNomPersonne().compareTo(ob2.getEntite().getPersonne().getNomPersonne());
+		        }
+		    });
 		return listDemandeAccepter;
 		
 	}

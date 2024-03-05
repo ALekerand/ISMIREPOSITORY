@@ -26,6 +26,7 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.sati.dto.CaracteristiqueValeur;
 import com.sati.model.Caracteristique;
+import com.sati.model.Diagnostique;
 import com.sati.model.Etat;
 import com.sati.model.Famille;
 import com.sati.model.Fongible;
@@ -314,6 +315,15 @@ public class MaterielController {
 	@SuppressWarnings("unchecked")
 	public List<Materiel> getListTable() {
 		 listTable = service.getObjects("Materiel");
+		 
+		 Collections.sort(listTable, new Comparator<Materiel>() {
+		        @Override
+		        public int compare(Materiel ob1, Materiel ob2)
+		        {
+		 
+		            return  ob1.getNomMateriel().compareTo(ob2.getNomMateriel());
+		        }
+		    });
 		 return listTable;
 	}
 
@@ -465,6 +475,15 @@ public class MaterielController {
 	@SuppressWarnings("unchecked")
 	public List<Fongible> getListFongible() {
 		listFongible = service.getObjects("Fongible");
+		
+		  Collections.sort(listFongible, new Comparator<Fongible>() {
+		        @Override
+		        public int compare(Fongible ob1, Fongible ob2)
+		        {
+		 
+		            return  ob1.getMateriel().getNomMateriel().compareTo(ob2.getMateriel().getNomMateriel());
+		        }
+		    });
 		return listFongible;
 	}
 

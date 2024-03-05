@@ -49,15 +49,16 @@
  <f:facet name="header"> LISTE DES FAMILLES DE PRODUIT </f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{familleController.selectionnerLigne}"></p:ajax>
    		
+   		        
+        <p:column headerText="Libellé">
+        <h:outputText value="#{var.libFamille}"/>
+        </p:column>
+               
    		<p:column headerText="Code" style="width:30%">
         <h:outputText value="#{var.codeFamille}"/>
         </p:column>
         
-        <p:column headerText="Libellé">
-        <h:outputText value="#{var.libFamille}"/>
-        </p:column>
-        
-        <p:column headerText="Description">
+          <p:column headerText="Description">
         <h:outputText value="#{var.descriptionFamille}"/>
         </p:column>
         

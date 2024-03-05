@@ -2,6 +2,8 @@ package com.sati.controllers;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -103,6 +105,15 @@ public class AutoriserSortieController {
 	@SuppressWarnings("unchecked")
 	public List<Demande> getListObject() {
 		listObject = requeteDemande.afficherDemandeReceptionner();
+		
+		 Collections.sort(listObject, new Comparator<Demande>() {
+		        @Override
+		        public int compare(Demande ob1, Demande ob2)
+		        {
+		 
+		            return  ob1.getEntite().getPersonne().getNomPersonne().compareTo(ob2.getEntite().getPersonne().getNomPersonne());
+		        }
+		    });
 		return listObject;
 	}
 	public void setListObject(List<Demande> listObject) {

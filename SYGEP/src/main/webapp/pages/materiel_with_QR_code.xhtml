@@ -127,12 +127,12 @@
  <f:facet name="header">LISTE DES MATERIELS</f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{materielWithQRController.selectionnerLigne}"></p:ajax>
    		
-   		<p:column headerText="Référence" style="width:30%">
-        <h:outputText value="#{var.codeMateriel}"/>
+   		 <p:column headerText="Désignation">
+        <h:outputText value="#{var.nomMateriel}"/>
         </p:column>
         
-        <p:column headerText="Désignation">
-        <h:outputText value="#{var.nomMateriel}"/>
+   		<p:column headerText="Référence" >
+        <h:outputText value="#{var.codeMateriel}"/>
         </p:column>
         
         <p:column headerText="Description">

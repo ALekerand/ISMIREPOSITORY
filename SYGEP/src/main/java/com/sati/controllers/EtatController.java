@@ -1,6 +1,8 @@
 package com.sati.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -13,6 +15,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.sati.model.Etat;
+import com.sati.model.EtatDemande;
 import com.sati.model.Famille;
 import com.sati.service.Iservice;
 
@@ -121,6 +124,14 @@ public class EtatController {
 	@SuppressWarnings("unchecked")
 	public List<Etat> getListEtat() {
 		 listEtat = service.getObjects("Etat");
+		 Collections.sort(listEtat, new Comparator<Etat>() {
+		        @Override
+		        public int compare(Etat ob1, Etat ob2)
+		        {
+		 
+		            return  ob1.getLibEtat().compareTo(ob2.getLibEtat());
+		        }
+		    });
 		return listEtat;
 	}
 

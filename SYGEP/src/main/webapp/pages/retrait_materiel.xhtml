@@ -21,10 +21,6 @@
             </f:facet>
      <p:ajax event="rowSelect" process="@this"  listener="#{retraitMaterielController.choisirLigne}"></p:ajax>
    		
-   		
-   		<p:column headerText="Réf"  filterBy="#{var.codeMateriel}" filterable="false">
-        <h:outputText value="#{var.codeMateriel}"/>
-        </p:column>
         
         <p:column headerText="Désignation" filterBy="#{var.nomMateriel}" filterable="false">
         <h:outputText value="#{var.nomMateriel}"/>
@@ -32,6 +28,10 @@
         
         <p:column headerText="Description" filterBy="#{var.descriptionMateriel}" filterable="false">
         <h:outputText value="#{var.descriptionMateriel}"/>
+        </p:column>
+        	
+   		<p:column headerText="Réf"  filterBy="#{var.codeMateriel}" filterable="false">
+        <h:outputText value="#{var.codeMateriel}"/>
         </p:column>
         
         </p:dataTable>	

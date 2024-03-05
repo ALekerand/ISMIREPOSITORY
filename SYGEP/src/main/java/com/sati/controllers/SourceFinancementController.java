@@ -1,6 +1,8 @@
 package com.sati.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -122,6 +124,15 @@ public class SourceFinancementController {
 	@SuppressWarnings("unchecked")
 	public List<SourceFinancement> getListTable() {
 		listTable = service.getObjects("SourceFinancement");
+		
+		Collections.sort(listTable, new Comparator<SourceFinancement>() {
+	        @Override
+	        public int compare(SourceFinancement ob1, SourceFinancement ob2)
+	        {
+	 
+	            return  ob1.getLibSource().compareTo(ob2.getLibSource());
+	        }
+	    });
 		return listTable;
 	}
 

@@ -85,13 +85,13 @@
 <p:dataTable  var="var" value="#{entreeController.listEntree}"  rowKey="#{var.idProduit}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  
  <f:facet name="header">List des entrées</f:facet>
- 	
-   		<p:column headerText="Code" style="width:10%">
-        <h:outputText value="#{var.codeEntre}"/>
-        </p:column>
         
         <p:column headerText="Materiel">
         <h:outputText value="#{var.materiel.nomMateriel}"/>
+        </p:column>
+        
+        <p:column headerText="Code" style="width:10%">
+        <h:outputText value="#{var.codeEntre}"/>
         </p:column>
         
         <p:column headerText="Fournisseur">
