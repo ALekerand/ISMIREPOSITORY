@@ -1,12 +1,8 @@
 package com.sati.controllers;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
-=======
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
->>>>>>> branch 'master' of https://github.com/ALekerand/ISMIREPOSITORY2.git
 import java.util.Date;
 import java.util.List;
 
@@ -25,11 +21,6 @@ import com.sati.model.Entite;
 import com.sati.model.EtatDemande;
 import com.sati.model.Materiel;
 import com.sati.model.Personne;
-<<<<<<< HEAD
-=======
-import com.sati.model.Reparation;
-import com.sati.model.SourceFinancement;
->>>>>>> branch 'master' of https://github.com/ALekerand/ISMIREPOSITORY2.git
 import com.sati.model.UserAuthentication;
 import com.sati.requetes.RequeteUtilisateur;
 import com.sati.service.Iservice;
