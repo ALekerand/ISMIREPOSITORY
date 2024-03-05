@@ -16,9 +16,7 @@
 						<fieldset>
  				<legend>Informations sur les points d'inventaire</legend>	
 		
-					<table>
-						<tr>
-							<td>
+					
 									<p:dataTable widgetVar="dtMateriel"  var="var" value="#{pointController.listMateriel}"  selectionMode="single" selection="#{pointController.selectedMateriel}" rowKey="#{var.idMateriel}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
 								  		<f:facet name="header">
 								                <div class="materiel-table-header">

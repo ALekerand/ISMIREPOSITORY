@@ -4,6 +4,12 @@
 	Mettre une date d'aprovisionnement pour prendre en compte ceux anterieurs au demarrage du logiciel	
 	
 - l'attibut série à été ajoutée au logiciel, il faut une actualisation
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	- Modification de la taille des lib de Materiel, Nature, Famille
+	- Nouvelle Table : MATERIEL_MARQUE
+	- ùodification table: reparation, valeur
 	
 	
 	

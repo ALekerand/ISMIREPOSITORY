@@ -1,6 +1,8 @@
 package com.sati.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -70,7 +72,6 @@ public class FamilleController {
 
 	public void annuler() {
 		this.famille.setDescriptionFamille(null);
-	//	this.famille.setCodeFamille(null);
 		this.famille.setLibFamille(null);
 		this.btnModifier.setDisabled(true);
 		this.btnEnregistrer.setDisabled(false);
@@ -120,6 +121,16 @@ public class FamilleController {
 	@SuppressWarnings("unchecked")
 	public List<Famille> getListFamille() {
 		listFamille = service.getObjects("Famille");
+		//=======Pour le rangement par ordre alphabétique======
+				Collections.sort(listFamille, new Comparator<Famille>() {
+			        @Override
+			        public int compare(Famille ob1, Famille ob2)
+			        {
+			 
+			            return  ob1.getLibFamille().compareTo(ob2.getLibFamille());
+			        }
+			    });
+				//========================  Fin  =======================
 		return listFamille;
 	}
 

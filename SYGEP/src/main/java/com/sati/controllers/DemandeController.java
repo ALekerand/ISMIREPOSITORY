@@ -1,7 +1,6 @@
 package com.sati.controllers;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +9,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.component.commandbutton.CommandButton;
-import org.primefaces.component.radiobutton.RadioButton;
 import org.primefaces.component.selectoneradio.SelectOneRadio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -18,12 +16,9 @@ import org.springframework.stereotype.Component;
 
 import com.sati.model.Demande;
 import com.sati.model.Entite;
-import com.sati.model.Entree;
 import com.sati.model.EtatDemande;
-import com.sati.model.Fournisseur;
 import com.sati.model.Materiel;
 import com.sati.model.Personne;
-import com.sati.model.SourceFinancement;
 import com.sati.model.UserAuthentication;
 import com.sati.requetes.RequeteUtilisateur;
 import com.sati.service.Iservice;

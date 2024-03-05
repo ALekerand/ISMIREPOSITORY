@@ -62,12 +62,13 @@ public class NatureController {
 	}
 
 	public void chargerFamille() {
-		System.out.println("=====ID FAMILLE ======="+idFamille);
-		famille = (Famille) service.getObjectById(idFamille, "Famille");//A terminer
+		famille = (Famille) service.getObjectById(idFamille, "Famille");
+		System.out.println(famille.getLibFamille());
 	}
 	
 	public void selectionnerLigne() {
 		this.nature = this.selectedObject;
+		this.idFamille = nature.getFamille().getIdFamille();
 		this.btnEnregistrer.setDisabled(true);
 		this.btnModifier.setDisabled(false);
 	}
@@ -86,17 +87,19 @@ public class NatureController {
 		this.nature.setCodeNature(null);
 		this.nature.setLibNature(null);
 		this.nature.setDescriptionNature(null);
+		this.idFamille = 0;
 		this.btnModifier.setDisabled(true);
 		this.btnEnregistrer.setDisabled(false);
 		
 	}
 
 	public void modifier() {
+		nature.setFamille(famille);
 		this.service.updateObject(this.nature);
 		this.info("Modification effectué avec succès!");
 		this.annuler();
-	
 	}
+	
 	public CommandButton getBtnEnregistrer() {
 		return this.btnEnregistrer;
 	}
