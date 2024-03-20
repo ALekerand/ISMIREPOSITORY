@@ -15,9 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.sati.model.Demande;
 import com.sati.model.Entree;
-import com.sati.model.Etat;
 import com.sati.model.Fongible;
 import com.sati.model.Fournisseur;
 import com.sati.model.Materiel;
@@ -93,10 +91,10 @@ public class EntreeController {
 		
 		this.service.addObject(this.entree);
 		
-	//	if (typeMateriel.equals("MATERIEL FONGIBLE")) {
-			fongible.setStockActuel(this.fongible.getStockActuel()+ this.entree.getQteEntree());
-			service.updateObject(materiel);
-	//	}
+		//Ajout sur le Stock
+		this.fongible.setStockActuel(this.fongible.getStockActuel()+ this.entree.getQteEntree());
+		service.updateObject(materiel);
+		service.updateObject(fongible);
 		
 		this.info("Eneregistrement effectué avec succès!");
 		this.annuler();
@@ -105,17 +103,10 @@ public class EntreeController {
 	public void chargerMateriel() {
 		materiel = new Materiel();
 		materiel = (Materiel) service.getObjectById(idMateriel, "Materiel");
-		//Rechercher dans les fongible
-		//Fongible fongible = new Fongible();
-		//if ((fongible = (Fongible) service.getObjectById(materiel.getIdMateriel(), "Fongible"))==null){
-	//		setStockActuel(1);
-	//		setTypeMateriel("MATERIEL NON FONGIBLE");
-	//	}else {
+		
 		fongible = (Fongible) service.getObjectById(materiel.getIdMateriel(), "Fongible");
 			setStockActuel(fongible.getStockActuel());
-	//		setTypeMateriel("MATERIEL FONGIBLE");
 		}
-	//}
 	
 	public void info(String monMessage) {
 		FacesContext.getCurrentInstance().addMessage((String) null,
@@ -202,6 +193,17 @@ public class EntreeController {
 	@SuppressWarnings("unchecked")
 	public List<Materiel> getListMateriel() {
 		listMateriel = requeteMateriel.listerMaterielSansQRCODE();
+		
+		//=======Pour le rangement par ordre alphabétique======
+				Collections.sort(listMateriel, new Comparator<Materiel>() {
+			        @Override
+			        public int compare(Materiel ob1, Materiel ob2)
+			        {
+			 
+			            return  ob1.getNomMateriel().compareTo(ob2.getNomMateriel());
+			        }
+			    });
+				//========================  Fin  =======================
 		
 		 return listMateriel;
 	}

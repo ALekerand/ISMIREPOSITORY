@@ -123,15 +123,15 @@ public class MaterielController {
 	}
 	
 	
-	public void genererQRCode() throws WriterException, IOException {
-		path += "_"+materiel.getCodeMateriel();
-		data = "Code: "+materiel.getCodeMateriel()+"\n"+
-				"Désignation: " +materiel.getNomMateriel()+"\n"+
-				"Magasin d'origine: " +materiel.getMagasin().getNomMagasin()+"\n"+
-				"Localisation:";
-		BitMatrix matrix = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, 500, 500);
-		MatrixToImageWriter.writeToPath(matrix, "jpg", Paths.get(path));
-	}
+	/*
+	 * public void genererQRCode() throws WriterException, IOException { path +=
+	 * "_"+materiel.getCodeMateriel(); data =
+	 * "Code: "+materiel.getCodeMateriel()+"\n"+ "Désignation: "
+	 * +materiel.getNomMateriel()+"\n"+ "Magasin d'origine: "
+	 * +materiel.getMagasin().getNomMagasin()+"\n"+ "Localisation:"; BitMatrix
+	 * matrix = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, 500,
+	 * 500); MatrixToImageWriter.writeToPath(matrix, "jpg", Paths.get(path)); }
+	 */
 	
 	
 	@SuppressWarnings("unchecked")
@@ -167,15 +167,13 @@ public class MaterielController {
 			this.fongible.setDescriptionMateriel(materiel.getDescriptionMateriel());
 			this.fongible.setMateriel(materiel);
 			service.addObject(fongible);
-			
 
-			//Générer le QR code
-			genererQRCode();
-		
-		
 		//Enregistrement dans la table Valeur 
+			
+		System.out.println("============Taille de la liste des caractéristiques =========="+listCaracteristiqueValeur.size());	
+			
 		for (CaracteristiqueValeur caracteristiqueValeur : listCaracteristiqueValeur) {
-			if(caracteristiqueValeur.getValeurCaracteristique()!="") {
+			if(!(caracteristiqueValeur.getValeurCaracteristique().equals(""))) {
 				Valeur valeur = new Valeur();
 				valeur.setCode(genererCodeValeur());
 				valeur.setValeurCaracteristique(caracteristiqueValeur.getValeurCaracteristique());

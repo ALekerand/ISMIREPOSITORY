@@ -3,8 +3,8 @@ package com.sati.dto;
 import com.sati.model.Caracteristique;
 
 public class CaracteristiqueValeur {
-	private Caracteristique caracteristique;
-	private String valeurCaracteristique;
+	private Caracteristique caracteristique = new Caracteristique();
+	private String valeurCaracteristique ="";
 	
 	
 	//Accesseur Muttateurs
