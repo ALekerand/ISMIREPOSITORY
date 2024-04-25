@@ -6,7 +6,7 @@
 		<![CDATA[]]>
 	</queryString>
 	<background>
-		<band splitType="Stretch"/>
+		<band height="141" splitType="Stretch"/>
 	</background>
 	<detail>
 		<band height="278" splitType="Stretch">
@@ -27,7 +27,7 @@
 				<text><![CDATA[www.ismi.org]]></text>
 			</staticText>
 			<componentElement>
-				<reportElement x="200" y="10" width="330" height="240" uuid="5710ac19-ed3a-4025-9720-317536cd0b7a"/>
+				<reportElement x="270" y="90" width="256" height="181" uuid="5710ac19-ed3a-4025-9720-317536cd0b7a"/>
 				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<jr:codeExpression><![CDATA["123456789"]]></jr:codeExpression>
 				</jr:QRCode>
