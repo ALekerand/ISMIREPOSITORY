@@ -86,7 +86,7 @@
  
  <f:facet name="header">List des entrées</f:facet>
         
-        <p:column headerText="Materiel">
+        <p:column headerText="Materiel"  sortBy="#{var.materiel.nomMateriel}" filterBy="#{var.materiel.nomMateriel}"> 
         <h:outputText value="#{var.materiel.nomMateriel}"/>
         </p:column>
         
