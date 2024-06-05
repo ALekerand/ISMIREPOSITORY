@@ -1,20 +1,28 @@
 package com.sati.controllers;
 
+import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.imageio.ImageIO;
 
 import org.primefaces.component.commandbutton.CommandButton;
 import org.primefaces.component.selectonemenu.SelectOneMenu;
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -45,6 +53,16 @@ import com.sati.requetes.RequeteNature;
 import com.sati.requetes.RequeteUtilisateur;
 import com.sati.service.Iservice;
 
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+
 @SuppressWarnings({ "unchecked", "unchecked" })
 @Component
 @Scope("session")
@@ -52,6 +70,16 @@ public class MaterielWithQRController {
 	
 	@Autowired
 	Iservice service;
+	
+	//Injection de controle
+	@Autowired
+	private RequeteNature requeteNature;
+	@Autowired
+	RequeteUtilisateur requeteUtilisateur;
+	@Autowired
+	QRCodeReportBean qrCodeReportBean;
+	
+	
 	private Materiel materiel = new Materiel();
 	private Fongible fongible= new Fongible();
 	private NonFongible Nonfongible= new NonFongible();
@@ -83,8 +111,8 @@ public class MaterielWithQRController {
 	
 	//Pour le QR code
 	private String data;
-	private String path = "C:\\SYGEP\\QR_CODE";
-	private String extension;
+	private String path = "C:\\SYGEP\\";
+	//private String extension;
 	
 //	private Famille choosedFamille = new Famille();
 	private CommandButton btnEnregistrer = new CommandButton();
@@ -93,13 +121,7 @@ public class MaterielWithQRController {
 //	private RadioButton rdbFondible = new  RadioButton();
 	private SelectOneMenu cbNature = new SelectOneMenu();
 	
-	//Injection de controle
-	@Autowired
-	private RequeteNature requeteNature;
-	@Autowired
-	RequeteUtilisateur requeteUtilisateur;
-	@Autowired
-	QRCodeReportBean qrCodeReportBean;
+	
 
 	@PostConstruct
 	public void initialiser() {
@@ -114,7 +136,7 @@ public class MaterielWithQRController {
 		return userAuthentication = requeteUtilisateur.recuperUser();
 	}
 	
-	public void genererCode() {
+	public void genererCode(){
 		String prefix="";
 		int nbEnregistrement = this.service.getObjects("Materiel").size();
 		if(nbEnregistrement < 10)
@@ -161,23 +183,51 @@ public class MaterielWithQRController {
 	}
 	
 	
-	public void genererQRCode() throws WriterException, IOException {
-		path += "_"+materiel.getCodeMateriel()+".png";
+	public void genererQRCode() throws WriterException, IOException, JRException {
+		String nom_fichier = materiel.getCodeMateriel()+".png";
 		data =  "===== INFORMATION MATERIEL ====="+"\n"+
 				" " +"\n"+
-				"Code: "+materiel.getCodeMateriel()+"\n"+
+				"Code: "+nom_fichier+"\n"+
 				"Désignation: " +materiel.getNomMateriel()+"\n"+
 				"Magasin d'origine: " +materiel.getMagasin().getNomMagasin()+"\n"+
 				"Position actuelle: non affecté" +"\n"+
 				" "+"\n"+
 				" " +"\n"+
 				"================================";
-		QRCodeWriter qr = new QRCodeWriter();
-		BitMatrix matrix = qr.encode(data, BarcodeFormat.QR_CODE, 200, 200);
-		MatrixToImageWriter.writeToPath(matrix, "png", Paths.get(path));
 		
-		path = "C:/SYGEP/QR_CODE";
-	//	qrCodeReportBean.genererEtatQRCode();
+		QRCodeWriter qr = new QRCodeWriter();
+		BitMatrix matrix = qr.encode(data, BarcodeFormat.QR_CODE, 150, 150);
+		System.out.println("=========="+path+nom_fichier);
+		MatrixToImageWriter.writeToPath(matrix, "PNG", Paths.get(path+nom_fichier));
+		
+		System.out.println("========PATH: "+path);
+		System.out.println("========NOM FICHIER : "+materiel.getCodeMateriel());
+		
+		
+		//Génération du QR CODE		
+		JasperDesign jasperDesign = JRXmlLoader.load("C:/SYGEP/qr_code_repport.jrxml");
+		
+		//Compilation du fichier
+		JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+		
+		InputStream is = new FileInputStream("C:/SYGEP/"+nom_fichier);
+		//StreamedContent content = new DefaultStreamedContent();
+			//content	= new DefaultStreamedContent(is);
+	
+		//BufferedImage image = ImageIO.read(getClass().getResource("C:\\SYGEP\\"+nom_fichier+".png"));
+		
+		Map<String,Object> parameters = new HashMap<String,Object>();
+		parameters.put("image_QR", is);
+			
+		// Remplissage du rapport compilé
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameters, new JREmptyDataSource());
+		
+		// Visualisation, exportation ou impression 
+	    JasperExportManager.exportReportToPdfFile(jasperPrint, "C:/SYGEP/"+materiel.getCodeMateriel()+".pdf");
+		
+		System.out.println("======== Toust est exécuté");//Clean after
+			
+		//qrCodeReportBean.genererEtatQRCode("C:/SYGEP/", materiel.getCodeMateriel());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -186,7 +236,7 @@ public class MaterielWithQRController {
 		this.cbNature.setDisabled(false);
 	}
 
-	public void enregistrer() throws WriterException, IOException {
+	public void enregistrer() throws WriterException, IOException, JRException {
 		//Enregistrement dans la table Caracteristique
 		Famille familleProduit = (Famille) service.getObjectById(idFamille, "Famille");
 		Nature natureProduit = (Nature) service.getObjectById(idNature, "Nature");

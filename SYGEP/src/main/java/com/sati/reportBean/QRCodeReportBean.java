@@ -21,33 +21,27 @@ import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 
 @Component
-@Scope("session")
 public class QRCodeReportBean {
 
 	
-	public void genererEtatQRCode() throws IOException {
+	public void genererEtatQRCode(String chenin_QR, String nom_fichier) throws IOException {
 		
 		try { 
 			
-			JasperDesign jasperDesign = JRXmlLoader.load("C:/SYGEP/REPORTS/qr_code_repport.jrxml");
+			JasperDesign jasperDesign = JRXmlLoader.load(chenin_QR+"/qr_code_repport.jrxml");
 			//Compilation du fichier
 			JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 		
-			BufferedImage image = ImageIO.read(getClass().getResource("C:/SYGEP/QR_CODE_MTQR024.png"));
+			BufferedImage image = ImageIO.read(getClass().getResource(chenin_QR));
 			
 			Map<String,Object> parameters = new HashMap<String,Object>();
 			parameters.put("image_QR", image);
-			
-			
-			System.out.println("======== Parametre setter=======");//Clean after
 				// Remplissage du rapport compil�
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameters, new JREmptyDataSource());
-			System.out.println("======== Remplissage =======");//Clean after
-			
 			// Visualisation, exportation ou impression 
-		    JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\SYGEP\\ETATS\\ETAT_QR"+".pdf");
+		    JasperExportManager.exportReportToPdfFile(jasperPrint, "C:/SYGEP/"+nom_fichier+".pdf");
 			
-			System.out.println("======== Toust est ex�cut�");//Clean after
+			System.out.println("======== Toust est exécuté");//Clean after
 		} catch (JRException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
