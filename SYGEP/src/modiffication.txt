@@ -9,7 +9,13 @@
 
 	- Modification de la taille des lib de Materiel, Nature, Famille
 	- Nouvelle Table : MATERIEL_MARQUE
-	- ùodification table: reparation, valeur
+	- modification table: reparation, valeur
+	
+	
+	- Page Matériel sans QR code: 
+		*champs stock actuel en read only
+		*Griser la combo nature après un enregistrement
+		
 	
 	
 	

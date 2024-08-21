@@ -116,7 +116,7 @@ public class Fongible implements java.io.Serializable {
 		this.codeMateriel = codeMateriel;
 	}
 
-	@Column(name = "NOM_MATERIEL", length = 25)
+	@Column(name = "NOM_MATERIEL", length = 100)
 	public String getNomMateriel() {
 		return this.nomMateriel;
 	}

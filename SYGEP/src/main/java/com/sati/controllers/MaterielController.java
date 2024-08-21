@@ -120,20 +120,19 @@ public class MaterielController {
 			 caracteristiqueValeur.setCaracteristique(caracteristique);
 			 listCaracteristiqueValeur.add(caracteristiqueValeur);
 		}
+		 
+		 //Trie de la liste
+		 Collections.sort(listCaracteristiqueValeur, new Comparator<CaracteristiqueValeur>() {
+		        @Override
+		        public int compare(CaracteristiqueValeur ob1, CaracteristiqueValeur ob2)
+		        {
+		 
+		            return  ob1.getCaracteristique().getLibCaracteristique().compareTo(ob2.getCaracteristique().getLibCaracteristique());
+		        }
+		    });
 	}
 	
-	
-	/*
-	 * public void genererQRCode() throws WriterException, IOException { path +=
-	 * "_"+materiel.getCodeMateriel(); data =
-	 * "Code: "+materiel.getCodeMateriel()+"\n"+ "Désignation: "
-	 * +materiel.getNomMateriel()+"\n"+ "Magasin d'origine: "
-	 * +materiel.getMagasin().getNomMagasin()+"\n"+ "Localisation:"; BitMatrix
-	 * matrix = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, 500,
-	 * 500); MatrixToImageWriter.writeToPath(matrix, "jpg", Paths.get(path)); }
-	 */
-	
-	
+
 	@SuppressWarnings("unchecked")
 	public void chargerNature() {
 		listNature = requeteNature.listerNatureParFamille(idFamille);
@@ -427,13 +426,6 @@ public class MaterielController {
 	public void setNonfongible(NonFongible nonfongible) {
 		Nonfongible = nonfongible;
 	}
-
-	/*
-	 * public RadioButton getRdbFondible() { return rdbFondible; }
-	 * 
-	 * public void setRdbFondible(RadioButton rdbFondible) { this.rdbFondible =
-	 * rdbFondible; }
-	 */
 
 	public SelectOneMenu getCbNature() {
 		return cbNature;

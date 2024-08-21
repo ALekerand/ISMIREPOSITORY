@@ -14,7 +14,7 @@
       		<p:panel header="LISTE DES MATERIELS AVEC LEURS STOCK_ACTUEL" >
 				
       <p:dataTable  var="var" value="#{materielController.listFongible}" selectionMode="single" selection="#{materielController.selectedObject}" rowKey="#{var.idMateriel}" 
-      				paginator="true" paginatorPosition="bottom"  rows="13" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+      				paginator="true" paginatorPosition="bottom"  rows="15" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  
  		<f:facet name="header">LISTE DES MATERIELS</f:facet>
      	<p:ajax event="rowSelect" process="@this"  update="form" listener="#{materielController.selectionnerLigne}"></p:ajax>
@@ -23,13 +23,10 @@
         	<h:outputText value="#{var.codeMateriel}"/>
         </p:column>
         
-        <p:column headerText="Désignation">
+        <p:column headerText="Désignation" sortBy="#{var.nomMateriel}" filterBy="#{var.nomMateriel}">
         	<h:outputText value="#{var.nomMateriel}"/>
         </p:column>
         
-        <p:column headerText="Stock Actuel">
-        	<h:outputText value="#{var.stockActuel}"/>
-
         <p:column headerText="Stock Actuel" sortBy="#{var.stockActuel}" filterBy="#{var.stockActuel}">
         <h:outputText value="#{var.stockActuel}"/>
 
