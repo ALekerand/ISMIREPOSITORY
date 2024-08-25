@@ -10,6 +10,10 @@
     <http auto-config="true">
         <intercept-url pattern="/pages/**" access="ROLE_ADMIN"/>
         <intercept-url pattern="/templates/template.xhtml" access="ROLE_ADMIN" />
+        
+        
+        <intercept-url pattern="/profil_user/**" access="ROLE_USER"/>
+        <intercept-url pattern="/templates/templateUser.xhtml" access="ROLE_USER" />
        
         <form-login 
         			login-page="/login.jsp" 

@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+<link rel="stylesheet" type="text/css" href="../resource/css/lekerand.css"></link>
+  <title><ui:insert name="title">SYGEP</ui:insert></title>
+</h:head>
+
+<h:body>
+<p:layout fullPage="true">
+<p:layoutUnit position="north">
+<div id="header">
+    <ui:insert name="header">
+    	<ui:include  src="/templates/header.xhtml"></ui:include>
+    </ui:insert>
+</div>
+</p:layoutUnit>
+
+<p:layoutUnit position="west" size="250" header="Menu" collapsible="true">
+
+	<h:form>
+		<p:panelMenu style="width:300px">
+            <p:submenu label="Demande">
+	           	<p:menuitem value="Emmettre demande" outcome="/profil_user/demande.xhtml" icon="pi pi-upload"/>
+	           	<p:menuitem value="Mes demandes" outcome="/profil_user/consulteur_demande_user.xhtml" icon="pi pi-upload"/>
+	           	<p:menuitem value="Reception de materiel" outcome="/profil_user/afficherDemande_validees_Utilisateur.xhtml" icon="pi pi-upload"/>
+	           	<p:menuitem value="Emprunt de materiel" outcome="/profil_user/emprunt_materiel.xhtml" icon="pi pi-upload"/>
+            </p:submenu>
+
+        </p:panelMenu>
+	
+	</h:form>
+</p:layoutUnit>
+
+<p:layoutUnit position="center">
+<div id="content">
+  	<ui:insert name="body">  
+ 	<ui:include  src="/profil_user/tableauDeBord.xhtml"></ui:include> 
+  </ui:insert>
+</div>
+</p:layoutUnit>
+
+<p:layoutUnit position="south">
+<div id="footer">
+  <ui:insert name="footer">
+		<ui:include src="/templates/footer.xhtml"></ui:include>
+  </ui:insert>
+</div>
+</p:layoutUnit>
+</p:layout>
+</h:body>
+
+</html>

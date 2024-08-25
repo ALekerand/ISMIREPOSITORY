@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<!-- 
+		Replace path to template, title, header and body
+		with actual data.
+	 -->
+	<ui:composition template="/templates/templateUser.xhtml">
+			<ui:define name="body">
+				<h:form id="form">
+			<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+			
+			<p:panel header="ENREGISTREMENT DES EMPRUNTS DE MATERIEL">
+	<fieldset>
+ 	<legend>Informations sur l'emprunt de materiel</legend>	
+	
+	<table >
+	<tr>
+	<td >
+	
+	<p:dataTable  var="var" widgetVar="dtMateriel" value="#{empruntController.listMateriel}"  selectionMode="single" selection="#{empruntController.selecteMareriel}" rowKey="#{var.idMateriel}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+ 
+ 	 <f:facet name="header">
+                <div class="materiel-table-header">
+                    <span style="font-weight: bold">Liste des materiels</span>
+                    <span class="filter-container ui-input-icon-left"> <i class="pi pi-search"></i>
+                        <p:inputText id="globalFilter" onkeyup="PF('dtMateriel').filter()" placeholder="Search" />
+                    </span>
+                </div>
+            </f:facet>
+     <p:ajax event="rowSelect" process="@this"  update="form" listener="#{empruntController.choisirLigneMateriel}"></p:ajax>
+   		<p:column selectionMode="single" style="width:16px;text-align:center"/>
+   		<p:column headerText="Référence" style="width:30%" filterBy="#{var.codeMateriel}" filterable="false">
+        <h:outputText value="#{var.codeMateriel}"/>
+        </p:column>
+        
+        <p:column headerText="Désignation" filterBy="#{var.nomMateriel}" filterable="false">
+        <h:outputText value="#{var.nomMateriel}"/>
+        </p:column>
+        
+        </p:dataTable>	
+			
+		</td>
+		<td>	
+	
+	<h:panelGrid columns="4" cellpadding="5">
+	<p:outputLabel for="input_code_mat" value="Code materiel:"></p:outputLabel>
+	<p:inputText id="input_code_mat" value="#{empruntController.materiel.codeMateriel}" readonly="true" ></p:inputText>	
+
+	<p:outputLabel for="input_nom" value="Nom materiel:"></p:outputLabel>
+	<p:inputText id="input_nom" value="#{empruntController.materiel.nomMateriel}" readonly="true" ></p:inputText>
+	
+	<p:outputLabel for="input_code" value="Code:"></p:outputLabel>
+	<p:inputText id="input_code" value="#{empruntController.demande.codeDemande}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
+
+	<p:outputLabel for="input_qte" value="Quantité:"></p:outputLabel>
+	<p:inputText id="input_qte" value="#{empruntController.demande.qteDemande}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>
+
+	<p:outputLabel for="input_motif" value="Motif:"></p:outputLabel>
+	<p:inputTextarea id="input_motif" value="#{empruntController.demande.motifDemande}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputTextarea>
+
+	<p:outputLabel value="date retour"></p:outputLabel>
+    <p:datePicker id="date" value="#{empruntController.demande.dateDemande}" pattern="dd/MM/yyyy" locale="fr" navigator="true"></p:datePicker>
+             
+	</h:panelGrid>
+	
+	</td>
+	</tr>
+	</table>
+</fieldset>
+</p:panel>
+<br/>
+<p:toolbar >
+			<f:facet name="left">
+				<p:commandButton value="Enregistrer" action="#{empruntController.enregistrer}" update="form" binding="#{empruntController.btnEnregistrer}"><p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
+				<p:commandButton value="Annuler"  action="#{empruntController.annuler}" process="@this" update="form" binding="#{empruntController.btnAnnuler}"><p:confirm header="confirmation" message="voulez-vous annuler?"></p:confirm></p:commandButton>
+				<p:commandButton value="Modifier"  action="#{empruntController.modifier}" update="form" binding="#{empruntController.btnModifier}"><p:confirm header="confirmation" message="confirmez-vous la modification?"></p:confirm></p:commandButton>
+			</f:facet>
+		</p:toolbar>
+		<br/>
+		
+	<p:dataTable  var="var" value="#{empruntController.listTable}"  selectionMode="single" selection="#{empruntController.selectedObject}" rowKey="#{var.idDemande}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+ 
+ <f:facet name="header">LISTE DES DEMANDES</f:facet>
+     <p:ajax event="rowSelect" process="@this"  update="form" listener="#{empruntController.selectionnerLigne}"></p:ajax>
+   		
+   		<p:column headerText="Demandeur">
+        <h:outputText value="#{var.entite.personne.nomPersonne} "/>
+        </p:column>
+   		
+   		<p:column headerText="Code">
+        <h:outputText value="#{var.codeDemande}"/>
+        </p:column>
+        
+        <p:column headerText="Materiel">
+        <h:outputText value="#{var.materiel.nomMateriel}"/>
+        </p:column>
+        
+        <p:column headerText="Quantité">
+        <h:outputText value="#{var.qteDemande}"/>
+        </p:column>
+        
+        <p:column headerText="Motif">
+        <h:outputText value="#{var.motifDemande}"/>
+        </p:column>
+        
+        <p:column headerText="Etat">
+        <h:outputText value="#{var.etatDemande.libEtatDemande}"/>
+        </p:column>
+        
+
+        
+        </p:dataTable>
+				
+					
+	   <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+	   <p:commandButton value="Oui" type="button"
+	   styleClass="ui-confirmdialog-yes" icon="ui-icon-check" >
+	   </p:commandButton>
+	   <p:commandButton value="Non" type="button"
+	   styleClass="ui-confirmdialog-no" icon="ui-icon-close" >
+	   </p:commandButton>
+	   </p:confirmDialog>
+	   
+				</h:form>
+			</ui:define>
+	</ui:composition>
+
+</html>

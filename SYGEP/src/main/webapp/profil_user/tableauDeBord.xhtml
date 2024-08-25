@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+       >
+      
+     
+      <ui:composition template="/templates/templateUser.xhtml">
+			<ui:define name="body">
+			
+
+        	<style>
+        	 
+        	 *{
+	        	 margin: 0;
+	        	 padding: 0;
+	        	 /* font-family: cursive; */
+	        	 box-sizing: border-box;
+        	 }	
+        	 .flex-container{
+	        	 width: 100%;
+	        	 height: auto;
+	        	 display: flex;
+	        	 flex-direction: row;
+	        	 flex-wrap: wrap;
+	        	 justify-content: center;
+	        	 
+        	 }
+        	 .flex-box{
+        	 	width: 450px;
+        	 	height: 230px;
+        	 	color: white;
+        	 	font-size: 40px;
+        	 	text-align: center;
+        	 	border-radius: 10px;
+        	 	margin: 12px;
+        	 	
+        	 }
+        	 .nombre {
+        	 
+        		margin: 70px;
+        		font-size: 50px;
+        	 }
+        	
+			</style>
+			<h:form>
+			
+			<div class="flex-container"> 
+				<div class="flex-box" style="background: linear-gradient(45deg,#4099ff,#73b4ff);">
+					<h5>Demande en attente</h5>
+					<h3 class="nombre"> <h:outputText value="#{tableauDeBordController.nbreDemandeAttente}"  /></h3>
+				</div>
+				
+				<div class="flex-box" style="background: linear-gradient(45deg,#2ed8b6,#59e0c5);">
+					 <h5 >Demande traité et validé</h5>
+            		 <h3 class="nombre"><h:outputText  value="#{tableauDeBordController.nbreDemandeValider}" /></h3>
+				</div>
+			
+				<div class="flex-box" style=" background: linear-gradient(45deg,#FFB64D,#ffcb80);">
+					<h5>Materiel mauvais etat</h5>
+                 	<h3 class="nombre"> <h:outputText value="#{tableauDeBordController.nbreMaterielMauvaisEtat}" /></h3>
+				</div>
+				
+				<div class="flex-box" style="background: linear-gradient(45deg,#FF5370,#ff869a);">
+					 <h5>Stock alerte atteint</h5>
+                     <h3 class="nombre"> <h:outputText value="#{tableauDeBordController.nbreMaterielStockAlertAtteint}" /></h3>
+				</div>
+				
+				
+			</div>
+			
+		   </h:form>
+	</ui:define>
+</ui:composition>
+</html>

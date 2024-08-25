@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<!-- 
+		Replace path to template, title, header and body
+		with actual data.
+	 -->
+	<ui:composition template="/templates/templateUser.xhtml">
+			<ui:define name="body">
+			<div style="font-size: 15px ;  padding-left: 20px; padding-right: 20px">
+				<h:form id="form">
+				<p:panel header="LISTE DES DEMANDES" >
+				
+		<p:tabView>
+            <f:facet name="actions">
+                LISTE DES DEMANDES
+            </f:facet>
+            <p:tab title="EN ATTENTE">
+                <f:facet name="actions">
+                    Options I
+                </f:facet>
+                <p:dataTable id="table" var="var" value="#{consulterDemandeController_User.listeDemandesAttente}" paginator="true" paginatorPosition="bottom" rows="10"  rowsPerPageTemplate="5,10,15,{ShowAll|'All'}" >
+				 <f:facet name="header">LISTE DES DEMANDES</f:facet>
+						 
+					<p:column headerText="Demandeur">
+					    <h:outputText value="#{var.entite.personne.nomPersonne} "/>
+				    </p:column>
+	
+					<p:column headerText="Code" >
+						    	<h:outputText value="#{var.codeDemande}"/>
+					</p:column>
+    
+				    <p:column headerText="Materiel">
+				    	<h:outputText value="#{var.materiel.nomMateriel}"/>
+			    	</p:column>
+    
+				    <p:column headerText="Quantité">
+                   		<h:outputText value="#{var.qteDemande}"/>
+                    </p:column>
+                                   
+                    <p:column headerText="Etat Demande">
+                    		<h:outputText value="#{var.etatDemande.libEtatDemande}"/>
+                    </p:column>
+                                   
+                    <p:column headerText="Date Demande">
+                    	 <h:outputText value="#{var.dateDemande}">
+                    	 <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    	 </h:outputText>
+                    </p:column>
+                       </p:dataTable>
+                
+            </p:tab>
+            <p:tab title="TRAITEES">
+                <f:facet name="actions">
+                    Options II
+                </f:facet>
+                
+                <p:dataTable id="table1" var="var" value="#{consulterDemandeController_User.listeDemandesTraitees}" paginator="true" paginatorPosition="bottom" rows="10"  rowsPerPageTemplate="5,10,15,{ShowAll|'All'}" >
+				 <f:facet name="header">LISTE DES DEMANDES</f:facet>
+						 
+					<p:column headerText="Demandeur">
+					    <h:outputText value="#{var.entite.personne.nomPersonne} "/>
+				    </p:column>
+	
+					<p:column headerText="Code" >
+						    	<h:outputText value="#{var.codeDemande}"/>
+					</p:column>
+    
+				    <p:column headerText="Materiel">
+				    	<h:outputText value="#{var.materiel.nomMateriel}"/>
+			    	</p:column>
+    
+				    <p:column headerText="Quantité">
+                   		<h:outputText value="#{var.qteDemande}"/>
+                    </p:column>
+                                   
+                    <p:column headerText="Etat Demande">
+                    		<h:outputText value="#{var.etatDemande.libEtatDemande}"/>
+                    </p:column>
+                                   
+                    <p:column headerText="Date Demande">
+                    	 <h:outputText value="#{var.dateDemande}">
+                    	 <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    	 </h:outputText>
+                    </p:column>
+                       </p:dataTable>
+                
+            </p:tab>
+            
+            <p:tab title="REJETEES">
+                <p:dataTable id="table2" var="var" value="#{consulterDemandeController_User.listeDemandesRejetees}" paginator="true" paginatorPosition="bottom" rows="10"  rowsPerPageTemplate="5,10,15,{ShowAll|'All'}" >
+				 <f:facet name="header">LISTE DES DEMANDES</f:facet>
+						 
+					<p:column headerText="Demandeur">
+					    <h:outputText value="#{var.entite.personne.nomPersonne} "/>
+				    </p:column>
+	
+					<p:column headerText="Code" >
+						    	<h:outputText value="#{var.codeDemande}"/>
+					</p:column>
+    
+				    <p:column headerText="Materiel">
+				    	<h:outputText value="#{var.materiel.nomMateriel}"/>
+			    	</p:column>
+    
+				    <p:column headerText="Quantité">
+                   		<h:outputText value="#{var.qteDemande}"/>
+                    </p:column>
+                                   
+                    <p:column headerText="Etat Demande">
+                    		<h:outputText value="#{var.etatDemande.libEtatDemande}"/>
+                    </p:column>
+                                   
+                    <p:column headerText="Date Demande">
+                    	 <h:outputText value="#{var.dateDemande}">
+                    	 <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    	 </h:outputText>
+                    </p:column>
+                       </p:dataTable>
+            </p:tab>
+        </p:tabView>
+
+		</p:panel>
+				</h:form>
+				</div>
+			</ui:define>
+	</ui:composition>
+
+</html>

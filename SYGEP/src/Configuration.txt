@@ -14,3 +14,7 @@ Table ETATDEMANDE
  1 : Bon etat
  2 : defaillant
  
+ ======================= PROFILS UTILISATEUR ===================
+ Administrateur: ROLE_ADMIN
+ utilisateur simple: ROLE_USER
+ 
