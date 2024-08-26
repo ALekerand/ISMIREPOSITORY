@@ -46,7 +46,7 @@
 
 		<fieldset>
  	<legend>DETAILS DES DROITS</legend>		
-<p:panelGrid columns="6" cellpadding="10" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-4,ui-g-12 ui-md-2,ui-g-12 ui-md-4" layout="grid" styleClass="ui-panelgrid-blank ui-fluid">
+<h:panelGrid columns="4" cellpadding="10" >
 
 	<p:outputLabel for="input_login" value="Login:"></p:outputLabel>
 	<p:inputText id="input_login" value="#{personneController.userAuthentication.username}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>
@@ -61,7 +61,7 @@
 		<f:selectItem itemLabel="Adminitrateur" itemValue="ROLE_ADMIN"></f:selectItem>
 		<f:selectItem itemLabel="Utilistaeur standard" itemValue="ROLE_USER"></f:selectItem>
 	</p:selectOneRadio>
-</p:panelGrid>
+</h:panelGrid>
 </fieldset>
 </p:panel>
 <br/>

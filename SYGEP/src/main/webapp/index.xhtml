@@ -22,21 +22,16 @@
     <h:form id="form" onsubmit="return initialize();">
      <div style="position: absolute; width: 400px; height: 300px; top:0; bottom:0; left:0; right: 0; margin: auto;" align="center">
      <img src="resource/images/logo_ismi.png" style="margin:0px;" alt="lolo" align="center"/>
-     	
-      <h:panelGrid columns="3" cellspacing="10" style="top:50px; position:relative;" align="center">
-      <h:link style="color:red" value="DEMARRER"  outcome="/templates/template.xhtml"/>
-     </h:panelGrid>
      
      	<h:panelGrid columns="3" cellspacing="10" style="top:50px; position:relative;" align="center">
          <p:outputLabel for="cb_profil" value="Profil:" />
-            <p:selectOneMenu id="cb_profil" value="#{profilController.profil}">
-            <p:ajax partialSubmit="true" process="@this"  update="form" listener="#{profilController.router}"/> 
-            <f:selectItem itemLabel="Selctionnez" itemValue=""/>
- 
-            <f:selectItem itemLabel="Utilisateur standar" itemValue="utilisateur_simple"/>
-            <f:selectItem itemLabel="Administrateur" itemValue="adminstrateur"/>
-			</p:selectOneMenu>
-			
+           <p:selectOneMenu id="cb_profil" value="#{profilController.profil}">
+           <p:ajax partialSubmit="true" process="@this"  update="form" listener="#{profilController.router}"/> 
+           <f:selectItem itemLabel="Selctionnez" itemValue=""/>
+
+           <f:selectItem itemLabel="Utilisateur standar" itemValue="utilisateur_simple"/>
+           <f:selectItem itemLabel="Administrateur" itemValue="adminstrateur"/>
+		   </p:selectOneMenu>
 			<p:linkButton value="Demarrer" style="margin-right:20px;" binding="#{profilController.linkButton}" >
     		</p:linkButton>
      	</h:panelGrid>
