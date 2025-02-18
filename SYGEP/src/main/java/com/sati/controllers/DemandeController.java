@@ -57,7 +57,6 @@ public class DemandeController {
 		this.input_date_retour.setDisabled(true);
 		this.radio_emptunt.setValue("non");
 		chagerUtilisateur();
-		this.demande.setCodeDemande(genererCodeDemande());
 	}
 	
 	public UserAuthentication chagerUtilisateur() {
@@ -90,9 +89,9 @@ public class DemandeController {
 		Entite entite = new Entite();
 		personne = userAuthentication.getPersonne();
 		entite = (Entite) service.getObjectById(personne.getIdEntite(), "Entite");
-		
 	
 		//Charger les elements de la demande
+		this.demande.setCodeDemande(genererCodeDemande());
 		this.demande.setEntite(entite);
 		this.demande.setMateriel(materiel);
 		this.demande.setEtatDemande((EtatDemande) service.getObjectById(1, "EtatDemande"));
@@ -189,15 +188,6 @@ public class DemandeController {
 	@SuppressWarnings("unchecked")
 	public List<Demande> getListTable() {
 		listTable = service.getObjects("Demande");
-		
-		  Collections.sort(listTable, new Comparator<Demande>() {
-		        @Override
-		        public int compare(Demande ob1, Demande ob2)
-		        {
-		 
-		            return  ob1.getEntite().getPersonne().getNomPersonne().compareTo(ob2.getEntite().getPersonne().getNomPersonne());
-		        }
-		    });
 		return listTable;
 	}
 

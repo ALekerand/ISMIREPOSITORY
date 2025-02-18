@@ -1,6 +1,5 @@
 package com.sati.controllers;
 
-import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,13 +15,10 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.imageio.ImageIO;
 
 import org.primefaces.component.commandbutton.CommandButton;
 import org.primefaces.component.selectonemenu.SelectOneMenu;
 import org.primefaces.event.RowEditEvent;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -51,6 +47,7 @@ import com.sati.model.Valeur;
 import com.sati.reportBean.QRCodeReportBean;
 import com.sati.requetes.RequeteNature;
 import com.sati.requetes.RequeteUtilisateur;
+import com.sati.requetes.RequeteUtilitaire;
 import com.sati.service.Iservice;
 
 import net.sf.jasperreports.engine.JREmptyDataSource;
@@ -78,11 +75,13 @@ public class MaterielWithQRController {
 	RequeteUtilisateur requeteUtilisateur;
 	@Autowired
 	QRCodeReportBean qrCodeReportBean;
+	@Autowired
+	RequeteUtilitaire requeteUtilitaire;
 	
 	
 	private Materiel materiel = new Materiel();
 	private Fongible fongible= new Fongible();
-	private NonFongible Nonfongible= new NonFongible();
+	private NonFongible nonfongible= new NonFongible();
 	private Entree entree = new Entree();
 	private UserAuthentication userAuthentication = new UserAuthentication();
 	@SuppressWarnings("unused")
@@ -112,13 +111,9 @@ public class MaterielWithQRController {
 	//Pour le QR code
 	private String data;
 	private String path = "C:\\SYGEP\\";
-	//private String extension;
-	
-//	private Famille choosedFamille = new Famille();
 	private CommandButton btnEnregistrer = new CommandButton();
 	private CommandButton btnAnnuler = new CommandButton();
 	private CommandButton btnModifier = new CommandButton();
-//	private RadioButton rdbFondible = new  RadioButton();
 	private SelectOneMenu cbNature = new SelectOneMenu();
 	
 	
@@ -128,8 +123,8 @@ public class MaterielWithQRController {
 		this.btnModifier.setDisabled(true);
 		this.cbNature.setDisabled(true);
 		chargerListeCaracteristiqueValeur();
-		genererCodeEntree();
 		chagerUtilisateur();
+		System.out.println("===USER : "+userAuthentication.getPersonne().getNomPersonne());
 	}
 	
 	public UserAuthentication chagerUtilisateur() {
@@ -187,23 +182,17 @@ public class MaterielWithQRController {
 		String nom_fichier = materiel.getCodeMateriel()+".png";
 		data =  "===== INFORMATION MATERIEL ====="+"\n"+
 				" " +"\n"+
-				"Code: "+nom_fichier+"\n"+
+				"Code: "+materiel.getCodeMateriel()+"\n"+
 				"Désignation: " +materiel.getNomMateriel()+"\n"+
 				"Magasin d'origine: " +materiel.getMagasin().getNomMagasin()+"\n"+
-				"Position actuelle: non affecté" +"\n"+
+				"Position actuelle: lien en dessous" +"\n"+
 				" "+"\n"+
-				" " +"\n"+
+				"Localisation: "+ "http://154.0.30.233/SYGEP/localisation.xhtml"+"\n"+
 				"================================";
 		
 		QRCodeWriter qr = new QRCodeWriter();
 		BitMatrix matrix = qr.encode(data, BarcodeFormat.QR_CODE, 150, 150);
-		System.out.println("=========="+path+nom_fichier);
 		MatrixToImageWriter.writeToPath(matrix, "PNG", Paths.get(path+nom_fichier));
-		
-		System.out.println("========PATH: "+path);
-		System.out.println("========NOM FICHIER : "+materiel.getCodeMateriel());
-		
-		
 		//Génération du QR CODE		
 		JasperDesign jasperDesign = JRXmlLoader.load("C:/SYGEP/qr_code_repport.jrxml");
 		
@@ -211,11 +200,6 @@ public class MaterielWithQRController {
 		JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 		
 		InputStream is = new FileInputStream("C:/SYGEP/"+nom_fichier);
-		//StreamedContent content = new DefaultStreamedContent();
-			//content	= new DefaultStreamedContent(is);
-	
-		//BufferedImage image = ImageIO.read(getClass().getResource("C:\\SYGEP\\"+nom_fichier+".png"));
-		
 		Map<String,Object> parameters = new HashMap<String,Object>();
 		parameters.put("image_QR", is);
 			
@@ -224,10 +208,6 @@ public class MaterielWithQRController {
 		
 		// Visualisation, exportation ou impression 
 	    JasperExportManager.exportReportToPdfFile(jasperPrint, "C:/SYGEP/"+materiel.getCodeMateriel()+".pdf");
-		
-		System.out.println("======== Toust est exécuté");//Clean after
-			
-		//qrCodeReportBean.genererEtatQRCode("C:/SYGEP/", materiel.getCodeMateriel());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -259,16 +239,16 @@ public class MaterielWithQRController {
 		
 		
 			//Enregistrer dans non fongible
-			this.Nonfongible.setIdNature(idNature);
-			this.Nonfongible.setIdMagasin(idMagasin);
-			this.Nonfongible.setIdMarque(idMarque);
-			this.Nonfongible.setNomMateriel(materiel.getNomMateriel());
-			this.Nonfongible.setCodeMateriel(materiel.getCodeMateriel());
-			this.Nonfongible.setRetrait(materiel.getRetrait());
-			this.Nonfongible.setDescriptionMateriel(materiel.getDescriptionMateriel());
-			this.Nonfongible.setReferenceMateriel(materiel.getReferenceMateriel());
-			this.Nonfongible.setMateriel(materiel);
-			this.service.addObject(this.Nonfongible);
+			this.nonfongible.setIdNature(idNature);
+			this.nonfongible.setIdMagasin(idMagasin);
+			this.nonfongible.setIdMarque(idMarque);
+			this.nonfongible.setNomMateriel(materiel.getNomMateriel());
+			this.nonfongible.setCodeMateriel(materiel.getCodeMateriel());
+			this.nonfongible.setRetrait(materiel.getRetrait());
+			this.nonfongible.setDescriptionMateriel(materiel.getDescriptionMateriel());
+			this.nonfongible.setReferenceMateriel(materiel.getReferenceMateriel());
+			this.nonfongible.setMateriel(materiel);
+			this.service.addObject(this.nonfongible);
 			
 			//Générer le QR code
 			genererQRCode();
@@ -295,7 +275,7 @@ public class MaterielWithQRController {
 	public void enregistrerEtree() {
 		this.entree.setMateriel(materiel);
 		this.entree.setQteEntree(1);
-		this.entree.setCodeEntre(genererCodeEntree());
+		
 		this.entree.setDateEnregistrement(new Date());
 		this.entree.setSourceFinancement((SourceFinancement)service.getObjectById(idSource, "SourceFinancement"));
 		this.entree.setPersonne(userAuthentication.getPersonne());
@@ -304,6 +284,7 @@ public class MaterielWithQRController {
 		this.entree.setFournisseur((Fournisseur)service.getObjectById(idFournisseur, "Fournisseur"));
 		}
 		
+		this.entree.setCodeEntre(genererCodeEntree());
 		this.service.addObject(this.entree);
 		
 		if (typeMateriel.equals("MATERIEL FONGIBLE")) {
@@ -330,7 +311,6 @@ public class MaterielWithQRController {
 		this.materiel.setCodeMateriel(null);
 		this.materiel.setReferenceMateriel(null);
 		this.materiel.setDescriptionMateriel(null);
-	//	this.materiel.setFamille(null);
 		this.materiel.setNature(null);
 		this.materiel.setMagasin(null);
 		this.materiel.setNomMateriel(null);
@@ -545,21 +525,6 @@ public class MaterielWithQRController {
 		this.etatFongible = etatFongible;
 	}
 
-	public NonFongible getNonfongible() {
-		return Nonfongible;
-	}
-
-	public void setNonfongible(NonFongible nonfongible) {
-		Nonfongible = nonfongible;
-	}
-
-	/*
-	 * public RadioButton getRdbFondible() { return rdbFondible; }
-	 * 
-	 * public void setRdbFondible(RadioButton rdbFondible) { this.rdbFondible =
-	 * rdbFondible; }
-	 */
-
 	public SelectOneMenu getCbNature() {
 		return cbNature;
 	}
@@ -687,5 +652,13 @@ public class MaterielWithQRController {
 
 	public void setListEtat(List<Etat> listEtat) {
 		this.listEtat = listEtat;
+	}
+
+	public NonFongible getNonfongible() {
+		return nonfongible;
+	}
+
+	public void setNonfongible(NonFongible nonfongible) {
+		this.nonfongible = nonfongible;
 	}
 }

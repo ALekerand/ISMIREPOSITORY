@@ -19,7 +19,7 @@
         			login-page="/login.jsp" 
         			default-target-url="/index.xhtml"
                   	authentication-failure-url="/errordroit.xhtml" />
-         <logout logout-url="/logout.jsp" logout-success-url="/index.xhtml" />
+         <logout logout-url="/logout.jsp" logout-success-url="/index.xhtml"/>
         <csrf/>
   	 </http>
   	 

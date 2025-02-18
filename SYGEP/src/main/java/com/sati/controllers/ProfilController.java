@@ -11,23 +11,19 @@ import org.springframework.stereotype.Component;
 @Scope("session")
 public class ProfilController {
 	private String profil;
-	//private String lien;
 	private LinkButton linkButton = new LinkButton();
 	
 	public void router() {
-	//	lien ="";
 		
 		switch (profil) {
 		
 		case "utilisateur_simple": {
 			linkButton.setOutcome("/templates/templateUser.xhtml");
-			System.out.println("======== lien :"+ linkButton.getOutcome());
 			break;
 		}
 		
 	case "adminstrateur": {
 		linkButton.setOutcome("/templates/template.xhtml");
-		System.out.println("======== lien :"+ linkButton.getOutcome());
 		break;
 	}
 	

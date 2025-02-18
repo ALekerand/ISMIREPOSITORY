@@ -94,8 +94,7 @@
 		<br/>
 		
 	<p:dataTable  var="var" value="#{demandeController.listTable}"  selectionMode="single" selection="#{demandeController.selectedObject}" rowKey="#{var.idDemande}" paginator="true" paginatorPosition="bottom" rows="5"  rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
- 
- <f:facet name="header">LISTE DES DEMANDES</f:facet>
+ 	<f:facet name="header">LISTE DES DEMANDES</f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{demandeController.selectionnerLigne}"></p:ajax>
    		
    		<p:column headerText="Demandeur">
@@ -121,9 +120,6 @@
         <p:column headerText="Etat">
         <h:outputText value="#{var.etatDemande.libEtatDemande}"/>
         </p:column>
-        
-
-        
         </p:dataTable>
 				
 					

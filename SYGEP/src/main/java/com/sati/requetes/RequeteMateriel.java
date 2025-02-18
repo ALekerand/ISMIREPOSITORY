@@ -41,6 +41,12 @@ public class RequeteMateriel {
 		return list;
 	}
 	
+	public Materiel recupMateriel(String code_Materiel) {
+		String query = "SELECT `materiel`.* FROM `materiel` WHERE `materiel`.`CODE_MATERIEL` = '"+code_Materiel+"'";
+		Materiel materiel = (Materiel) getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Materiel.class).uniqueResult();
+	return materiel;
+		}
+	
 	public List listerMateriel() {
 		String query = "SELECT `materiel`.* FROM `materiel` WHERE  `materiel`.RETRAIT =0";
 		List list = getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Materiel.class).list();

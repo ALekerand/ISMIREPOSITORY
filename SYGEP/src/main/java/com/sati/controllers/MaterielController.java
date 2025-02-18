@@ -168,9 +168,6 @@ public class MaterielController {
 			service.addObject(fongible);
 
 		//Enregistrement dans la table Valeur 
-			
-		System.out.println("============Taille de la liste des caractéristiques =========="+listCaracteristiqueValeur.size());	
-			
 		for (CaracteristiqueValeur caracteristiqueValeur : listCaracteristiqueValeur) {
 			if(!(caracteristiqueValeur.getValeurCaracteristique().equals(""))) {
 				Valeur valeur = new Valeur();

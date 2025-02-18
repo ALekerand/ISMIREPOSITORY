@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -51,15 +53,33 @@ public class AfficherDemandeAccepterController {
 	}
 	
 	public void receptionner() {
-		selectedObject.setEtatReception(true);
-		selectedObject.setDateEtatReception(new Date());
-		service.updateObject(selectedObject);
-		annuler();
+		try {
+			selectedObject.setEtatReception(true);
+			selectedObject.setDateEtatReception(new Date());
+			service.updateObject(selectedObject);
+			annuler();
+		} catch (NullPointerException e) {
+			// TODO Auto-generated catch block
+			error("Veuillez au préalable selectionner la ligne concernée");
+		}
 	}
 	
 	public void annuler() {
 		setSelectedObject(null);
 	}
+	
+	public void info(String monMessage) {
+		FacesContext.getCurrentInstance().addMessage((String) null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, monMessage, null));
+	}
+
+	public void error(String monMessage) {
+		FacesContext.getCurrentInstance().addMessage((String) null,
+				new FacesMessage(FacesMessage.SEVERITY_ERROR, monMessage, null));
+	}
+	
+	
+	
 	public UserAuthentication getUserAuthentication() {
 		return userAuthentication;
 	}
