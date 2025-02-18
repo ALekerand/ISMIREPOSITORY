@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<!-- 
+		Replace path to template, title, header and body
+		with actual data.b
+	 -->
+	<ui:composition template="/templates/templateLocalisation.xhtml">
+			<ui:define name="body">
+				<h:form id="form">
+				
+				<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+				
+				<p:panel header="INFORMATIONS SUR LE MATERIEL" >
+				
+		<h:panelGrid columns="4" cellpadding="10">
+			<p:outputLabel for="input_code" value="Entrez le Code"/> 
+			<p:inputText id="input_code" value="#{localisationController.codeMateriel}"  required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
+			
+			<p:commandButton value="Rechercher" action="#{localisationController.rechercher}" update="form"></p:commandButton>
+				
+		</h:panelGrid>
+
+		<fieldset>
+ 		<legend>Localisation matériel</legend>	 		
+		<h:panelGrid columns="4" cellpadding="10">
+			<p:outputLabel value="Code:"></p:outputLabel>
+			<p:inputText value="#{localisationController.materiel.codeMateriel}" readonly="true"></p:inputText>
+							
+			<p:outputLabel value="Nom:"></p:outputLabel>
+			<p:inputText value="#{localisationController.materiel.nomMateriel}" readonly="true"></p:inputText>	
+		
+			<p:outputLabel value="Locaisation"></p:outputLabel>
+			<p:inputText value="#{localisationController.parcours.service.nomService}" readonly="true"></p:inputText>	
+		
+		</h:panelGrid>	
+</fieldset>
+</p:panel>
+<br/>
+<p:toolbar >
+	<f:facet name="left">
+		<p:commandButton value="Annuler"  action="#{localisationController.annuler}"></p:commandButton>
+	</f:facet>
+		</p:toolbar>
+		<br/>
+				</h:form>
+			</ui:define>
+	</ui:composition>
+
+</html>
