@@ -21,9 +21,9 @@
 				
 	<p:dataTable  var="var" value="#{traitementDemandeController_Admin.listTable}"  selection="#{traitementDemandeController_Admin.selectedObject}" rowKey="#{var.idDemande}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  	<f:facet name="header">LISTE DES DEMANDES EN ATTENTE</f:facet>
-     <p:ajax event="rowSelect" process="@this"  update="form" listener="#{traitementDemandeController_Admin.selectionnerLigne}"></p:ajax>
    		
-   		<p:column selectionMode="single" style="width:16px;text-align:center"/>
+   		<p:column selectionMode="single" style="width:20px;text-align:center"/>
+   		
    		<p:column headerText="Demandeur">
         <h:outputText value="#{var.entite.personne.nomPersonne} "/>
         </p:column>
@@ -51,14 +51,14 @@
         
           <p:column headerText="Etat" style="width:22%">
             <h:panelGrid columns="2"  >
-                <h:commandButton value="Valider" actionListener="#{traitementDemandeController_Admin.validerDemande}" update="form" >
+                <p:commandButton value="Valider" actionListener="#{traitementDemandeController_Admin.validerDemande}" update="form" >
                   <f:setPropertyActionListener value="#{variable}" target="#{traitementDemandeController_Admin.selectedObject}"/>
-                </h:commandButton>
+                </p:commandButton>
                 
-                <h:commandButton  value="Rejetter" actionListener="#{traitementDemandeController_Admin.rejeterDemande}" update="form" >
+                <p:commandButton  value="Rejetter" actionListener="#{traitementDemandeController_Admin.rejeterDemande}" update="form" >
    		         <f:setPropertyActionListener value="#{variable}" target="#{traitementDemandeController_Admin.selectedObject}"/>
-   		         </h:commandButton> 
-                    </h:panelGrid>
+   		         </p:commandButton> 
+           </h:panelGrid>
             </p:column>
         
         </p:dataTable>

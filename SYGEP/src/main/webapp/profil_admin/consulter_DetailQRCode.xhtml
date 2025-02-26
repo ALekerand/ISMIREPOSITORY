@@ -13,6 +13,12 @@
 			<h:form>
 			
 			<p:panel header="Detail du qr_code">
+			
+			
+			<p:outputLabel for="input_code" value="Code marque"></p:outputLabel>
+			<p:inputText id="input_code" value="#{detailDuQrCodeController.marque.codeMarque}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
+			
+			
 			<table>
 				<tr>
 					<td>

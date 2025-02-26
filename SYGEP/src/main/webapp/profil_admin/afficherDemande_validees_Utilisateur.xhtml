@@ -44,9 +44,9 @@
                                       
                                        <p:column headerText="Etat reception">
                                              <h:panelGrid columns="2"  >
-                <h:commandButton value="Receptionner" actionListener="#{afficherDemandeAccepterController.receptionner}" update="form" >
+                <p:commandButton value="Receptionner" actionListener="#{afficherDemandeAccepterController.receptionner}" update="form" >
                   <f:setPropertyActionListener value="#{variable}" target="#{afficherDemandeAccepterController.selectedObject}"/>
-                </h:commandButton>
+                </p:commandButton>
                 </h:panelGrid>
                                        </p:column>
                        </p:dataTable>

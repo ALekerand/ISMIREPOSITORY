@@ -1,5 +1,7 @@
 package com.sati.controllers;
 
+import java.io.File;
+import java.io.OutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,6 +17,10 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.primefaces.component.commandbutton.CommandButton;
 import org.primefaces.component.selectonemenu.SelectOneMenu;
@@ -124,7 +130,6 @@ public class MaterielWithQRController {
 		this.cbNature.setDisabled(true);
 		chargerListeCaracteristiqueValeur();
 		chagerUtilisateur();
-		System.out.println("===USER : "+userAuthentication.getPersonne().getNomPersonne());
 	}
 	
 	public UserAuthentication chagerUtilisateur() {
@@ -209,6 +214,27 @@ public class MaterielWithQRController {
 		// Visualisation, exportation ou impression 
 	    JasperExportManager.exportReportToPdfFile(jasperPrint, "C:/SYGEP/"+materiel.getCodeMateriel()+".pdf");
 	}
+	
+	
+	// Ouvrir un fichier PDF dans le navigateur
+	    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	        File pdfFile = new File("C:/chemin/vers/votre-fichier.pdf");
+	        response.setContentType("application/pdf");
+	        response.setHeader("Content-Disposition", "inline; filename=" + pdfFile.getName());
+	        
+	        try (FileInputStream fis = new FileInputStream(pdfFile);
+	             OutputStream os = response.getOutputStream()) {
+	            byte[] buffer = new byte[1024];
+	            int bytesRead;
+	            while ((bytesRead = fis.read(buffer)) != -1) {
+	                os.write(buffer, 0, bytesRead);
+	            }
+	        }
+	    }
+	
+	
+	
+	
 	
 	@SuppressWarnings("unchecked")
 	public void chargerNature() {

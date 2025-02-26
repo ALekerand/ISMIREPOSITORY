@@ -56,52 +56,46 @@ public class TraitementDemandeController_Admin {
 	}
 	*/
 	
-	public void selectionnerLigne() {
-		
-		this.demande = this.selectedObject;
-		materielSelectionne =  this.demande.getMateriel();
-		
-		System.out.println("\n\n ====================  ");
-		System.out.println("Famille : "+this.demande.getMateriel().getNature().getFamille().getIdFamille());
-		if ( this.demande.getMateriel().getNature().getFamille().getIdFamille() == 1) {
-			System.out.println("################# LE MATERIEL EST FONGIBLE ###################");
-			materielFongible = requeteMateriel.materielFongibleConsulte(this.demande.getMateriel().getIdMateriel());
-			System.out.println("Stock actuel materiel : "+materielFongible.getStockActuel());
-			this.input_stockAlert.setDisabled(false);
-			this.input_stockActuel.setDisabled(false);
-			this.input_reference.setDisabled(true);
-		}else {
-			System.out.println("################# LE MATERIEL EST NON FONGIBLE ###################");
-			setMaterielFongible(new Fongible());
-			this.input_stockAlert.setDisabled(true);
-			this.input_stockActuel.setDisabled(true);
-			this.input_reference.setDisabled(false);
-			
-			
-		}
-		
-		System.out.println("==================== \n \n  ");
-		
-		
-	}
+/*
+ * public void selectionnerLigne() { System.out.println("==== Selection ");
+ * this.demande = this.selectedObject; materielSelectionne =
+ * this.demande.getMateriel(); if (
+ * this.demande.getMateriel().getNature().getFamille().getIdFamille() == 1) {
+ * materielFongible =
+ * requeteMateriel.materielFongibleConsulte(this.demande.getMateriel().
+ * getIdMateriel()); this.input_stockAlert.setDisabled(false);
+ * this.input_stockActuel.setDisabled(false);
+ * this.input_reference.setDisabled(true); }else { setMaterielFongible(new
+ * Fongible()); this.input_stockAlert.setDisabled(true);
+ * this.input_stockActuel.setDisabled(true);
+ * this.input_reference.setDisabled(false); } }
+ */
 	
 	public void ok() {
 		
 	}
 	public void validerDemande() {
-		selectedObject.setEtatDemande((EtatDemande)service.getObjectById(2, "EtatDemande"));
-		service.updateObject(selectedObject);
-		info("Demande validée");
-		
-		annuler();
+		try {
+			selectedObject.setEtatDemande((EtatDemande)service.getObjectById(2, "EtatDemande"));
+			service.updateObject(selectedObject);
+			info("Demande validée");
+			annuler();
+		} catch (NullPointerException e) {
+			// TODO Auto-generated catch block
+			error("Veuillez au préalable selectionner la ligne concernée");
+		}
 	}
 
 	public void rejeterDemande() {
-		selectedObject.setEtatDemande((EtatDemande)service.getObjectById(3, "EtatDemande"));
-		service.updateObject(selectedObject);
-		info("Demande rejetée");
-        
-        annuler();
+		try {
+			selectedObject.setEtatDemande((EtatDemande)service.getObjectById(3, "EtatDemande"));
+			service.updateObject(selectedObject);
+			info("Demande rejetée");
+			annuler();
+		} catch (NullPointerException e) {
+			// TODO Auto-generated catch block
+			error("Veuillez au préalable selectionner la ligne concernée");
+		}
 	}
 	
 	public void annuler() {
@@ -114,6 +108,15 @@ public class TraitementDemandeController_Admin {
 				new FacesMessage(FacesMessage.SEVERITY_INFO, monMessage ,null ));
 		
 	}
+	
+	
+	public void error(String monMessage) {
+		FacesContext.getCurrentInstance().addMessage((String) null,
+				new FacesMessage(FacesMessage.SEVERITY_ERROR, monMessage, null));
+	}
+	
+	
+	
 	public Demande getDemande() {
 		return demande;
 	}

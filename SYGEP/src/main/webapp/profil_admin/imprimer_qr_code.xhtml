@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<!-- 
+		Replace path to template, title, header and body
+		with actual data.
+	 -->
+	<ui:composition template="/templates/template.xhtml">
+			<ui:define name="body">
+	
+				<h:form id="form">
+				
+				<p:messages autoUpdate="true" closable="true" showDetail="true"/>
+				
+				<p:panel header="IMPRESSION DES QR CODE">
+				
+		<fieldset>
+ 	<legend>Tableau des matériels</legend>	
+ 	
+ 	<p:dataTable  var="var" value="#{imprissionQRCodeController.listeNonFongible}"  selection="#{imprissionQRCodeController.selectedObject}" rowKey="#{var.idMateriel}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+ 	<p:ajax event="rowSelect" process="@this"  update=":form" listener="#{imprissionQRCodeController.selectionnerLigne}"></p:ajax>
+ 	
+ 	<f:facet name="header">LISTE DE MATERIELS</f:facet>
+     
+   		<p:column selectionMode="single" style="width:16px;text-align:center"/>       
+        
+        <p:column headerText="Code" style="width:10%">
+        	<h:outputText value="#{var.codeMateriel}"/>
+        </p:column>
+        
+        <p:column headerText="Reférence" style="width:10%">
+        	<h:outputText value="#{var.referenceMateriel}"/>
+        </p:column>
+        
+   		<p:column headerText="Désignation" >
+        	<h:outputText value="#{var.nomMateriel}"/>
+        </p:column>
+        
+        <p:column headerText="Qr code" style="width:10%">
+        <p:commandButton ajax="false" value="Imprimer" action="#{imprissionQRCodeController.doGet}" target="_blank" >
+        </p:commandButton>
+        </p:column>
+        
+        </p:dataTable>
+    
+</fieldset>
+</p:panel>
+			
+				</h:form>
+		
+			</ui:define>
+	</ui:composition>
+
+</html>

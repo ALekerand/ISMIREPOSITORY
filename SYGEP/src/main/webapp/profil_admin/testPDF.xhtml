@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	
+	<meta charset="UTF-8" />
+    <title>Génération de rapport PDF</title>
+    <script type="text/javascript">
+        function openPDF() {
+            // Remplacez l'URL par le chemin vers votre servlet ou contrôleur
+            window.open('rapport/pdf', '_blank');
+        }
+    </script>
+	 
+	<ui:composition template="/templates/template.xhtml">
+			<ui:define name="body">
+<h:form id="form">
+	<h1>Génération de rapport PDF avec JasperReports</h1>
+    <p>Cliquez sur le bouton ci-dessous pour générer et afficher le rapport PDF :</p>
+		
+			<p:commandButton onclick="onclick=ouvrirPDF()" value="Ouvrir" action="#{natureController.enregistrer}" update="form" binding="#{natureController.btnEnregistrer}"><p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
+
+		
+	</h:form>
+			</ui:define>
+	</ui:composition>
+
+</html>
