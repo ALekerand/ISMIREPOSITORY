@@ -86,14 +86,19 @@ public class TableauDeBordController {
 
 	@SuppressWarnings("unchecked")
 	public int getNbreDemandeValider() {
-		Personne personne = new Personne();
-		Entite entite = new Entite();
-		userAuthentication = requeteUtilisateur.recuperUser();
-		personne = userAuthentication.getPersonne();
-		entite = (Entite) service.getObjectById(personne.getIdEntite(), "Entite");
-		setIdEntite(entite.getIdEntite());
-		listDemandeValider = requeteDemande.afficherDemandeAccepte(idEntite);
-		nbreDemandeValider = listDemandeValider.size();
+		//Personne personne = new Personne();
+		//Entite entite = new Entite();
+		//userAuthentication = requeteUtilisateur.recuperUser();
+		//personne = userAuthentication.getPersonne();
+		//entite = (Entite) service.getObjectById(personne.getIdEntite(), "Entite");
+		//setIdEntite(entite.getIdEntite());
+		try {
+			listDemandeValider = requeteDemande.afficherDemandeAccepte(idEntite);
+			nbreDemandeValider = listDemandeValider.size();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			nbreDemandeValider = 0;
+		}
 		return nbreDemandeValider;
 	}
 	
