@@ -35,7 +35,7 @@ public class EtatController {
 	@PostConstruct
 	public void initialiser() {
 		this.btnModifier.setDisabled(true);
-		this.etat.setCodeEtat(genererCodeEtat());
+		//this.etat.setCodeEtat(genererCodeEtat());
 	}
 	
 	
@@ -52,10 +52,10 @@ public class EtatController {
 	}
 
 	public void enregistrer() {
+		this.etat.setCodeEtat(genererCodeEtat());
 		this.service.addObject(this.etat);
 		this.info("Eneregistrement effectué avec succès!");
 		this.annuler();
-		this.etat.setCodeEtat(genererCodeEtat());
 	
 	}
 
@@ -113,7 +113,7 @@ public class EtatController {
 	}
 
 	public Etat getEtat() {
-		this.etat.setCodeEtat(genererCodeEtat());
+		//this.etat.setCodeEtat(genererCodeEtat());
 		return etat;
 	}
 

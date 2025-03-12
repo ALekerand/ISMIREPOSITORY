@@ -40,7 +40,7 @@ public class ServiceController {
 	@PostConstruct
 	public void initialiser() {
 		this.btnModifier.setDisabled(true);
-		genererCodeEntite();
+		//genererCodeEntite();
 	}
 	
 	
@@ -54,17 +54,15 @@ public class ServiceController {
 		if (nbEnregistrement > 100) 
 			prefix = "ET" ;
 		codeEntite = prefix+(nbEnregistrement+1);
-		System.out.println("======="+codeEntite);
 	}
 
 	public void enregistrer() {
-		//Enregistrement de l'entit� et du service
+		genererCodeEntite();
 		this.entite.setCodeEntite(codeEntite);
 		this.entite.setEmail(serviceObj.getEmail());
 		this.entite.setTelephone(codeEntite);
 		this.entite.setTelephone(serviceObj.getTelephone());
 		this.service.addObject(entite);
-		
 		this.serviceObj.setEntite(entite);
 		this.serviceObj.setCodeEntite(codeEntite);
 		this.service.addObject(this.serviceObj);
@@ -175,7 +173,6 @@ public class ServiceController {
 
 
 	public String getCodeEntite() {
-		genererCodeEntite();
 		return codeEntite;
 	}
 

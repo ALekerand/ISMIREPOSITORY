@@ -37,7 +37,7 @@ public class FournisseurController {
 	@PostConstruct
 	public void initialiser() {
 		this.btnModifier.setDisabled(true);
-		fournisseur.setCodeFournisseur(genererCodeFournisseur());
+		//fournisseur.setCodeFournisseur(genererCodeFournisseur());
 	}
 	
 	public String genererCodeFournisseur() {

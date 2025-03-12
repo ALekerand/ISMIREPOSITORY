@@ -35,7 +35,7 @@ public class CaracteristiqueController {
 	@PostConstruct
 	public void initialiser() {
 		this.btnModifier.setDisabled(true);
-		this.caracteristique.setCodeCaracteristique(genererCodeCaracteristique());
+		//this.caracteristique.setCodeCaracteristique(genererCodeCaracteristique());
 	}
 	
 	public String genererCodeCaracteristique() {
@@ -51,8 +51,8 @@ public class CaracteristiqueController {
 	}
 
 	public void enregistrer() {
-		this.service.addObject(this.caracteristique);
 		this.caracteristique.setCodeCaracteristique(genererCodeCaracteristique());
+		this.service.addObject(this.caracteristique);
 		this.info("Eneregistrement effectué avec succès!");
 		this.annuler();
 	}
@@ -84,7 +84,7 @@ public class CaracteristiqueController {
 	public void modifier() {
 		this.service.updateObject(this.caracteristique);
 		this.annuler();
-		caracteristique.setCodeCaracteristique(genererCodeCaracteristique());
+		//caracteristique.setCodeCaracteristique(genererCodeCaracteristique());
 		this.info("Modification effectué avec succès!");
 	}
 

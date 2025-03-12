@@ -21,9 +21,6 @@
  	<legend>Informations sur le magasin </legend>		
 <h:panelGrid columns="6" cellpadding="10">
 
-	<p:outputLabel for="input_code" value="Code:"></p:outputLabel>
-	<p:inputText id="input_code" value="#{magasinController.magasin.codeMagasin}"  required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
-
 	<p:outputLabel for="input_lib" value="Nom:"></p:outputLabel>
 	<p:inputText id="input_lib" value="#{magasinController.magasin.nomMagasin}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>
 
@@ -47,13 +44,12 @@
  <f:facet name="header"> LISTE DES MAGASINS </f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{magasinController.selectionnerLigne}"></p:ajax>
    		
+   		<p:column headerText="Code" style="width:30%">
+        <h:outputText value="#{var.codeMagasin}"/>
+        </p:column>
    		        
         <p:column headerText="Nom magasin">
         <h:outputText value="#{var.nomMagasin}"/>
-        </p:column>
-        
-   		<p:column headerText="Code" style="width:30%">
-        <h:outputText value="#{var.codeMagasin}"/>
         </p:column>
         
         <p:column headerText="Téléphone">

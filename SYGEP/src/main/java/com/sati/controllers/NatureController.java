@@ -39,7 +39,7 @@ public class NatureController {
 	@PostConstruct
 	public void initialiser() {
 		this.btnModifier.setDisabled(true);
-		genererCode();
+		//genererCode();
 	}
 
 	public void genererCode() {
@@ -55,6 +55,7 @@ public class NatureController {
 	}
 	
 	public void enregistrer() {
+		genererCode();
 		nature.setFamille(famille);
 		this.service.addObject(nature);
 		this.info("Eneregistrement effectué avec succès!");

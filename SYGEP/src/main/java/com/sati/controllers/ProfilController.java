@@ -1,5 +1,7 @@
 package com.sati.controllers;
 
+import java.io.Serializable;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -9,7 +11,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Scope("session")
-public class ProfilController {
+public class ProfilController implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private String profil;
 	private LinkButton linkButton = new LinkButton();
 	
@@ -32,15 +35,11 @@ public class ProfilController {
 		
 	}
 	
-	
-	
 	public void info(String message){
 	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,message,null));	
 	}
 	
-	
-	
-	
+
 	// GETTERS AND SETTERS
 
 	public String getProfil() {
@@ -52,25 +51,9 @@ public class ProfilController {
 	}
 
 
-
-
-	/*
-	 * public String getLien() { return lien; }
-	 * 
-	 * 
-	 * 
-	 * 
-	 * public void setLien(String lien) { this.lien = lien; }
-	 */
-
-
-
 	public LinkButton getLinkButton() {
 		return linkButton;
 	}
-
-
-
 
 	public void setLinkButton(LinkButton linkButton) {
 		this.linkButton = linkButton;

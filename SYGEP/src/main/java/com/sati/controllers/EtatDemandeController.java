@@ -37,7 +37,7 @@ public class EtatDemandeController {
 	@PostConstruct
 	public void initialiser() {
 		this.btnModifier.setDisabled(true);
-		this.etatDemande.setCodeEtatDemande(genererCodeEtatDemande());
+		//this.etatDemande.setCodeEtatDemande(genererCodeEtatDemande());
 	}
 	
 	public String genererCodeEtatDemande() {
@@ -53,10 +53,11 @@ public class EtatDemandeController {
 	}
 
 	public void enregistrer() {
+		this.etatDemande.setCodeEtatDemande(genererCodeEtatDemande());
 		this.service.addObject(this.etatDemande);
 		this.info("Eneregistrement effectué avec succès!");
 		this.annuler();
-		this.etatDemande.setCodeEtatDemande(genererCodeEtatDemande());
+		
 	}
 
 	public void selectionnerLigne() {

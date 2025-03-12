@@ -19,14 +19,10 @@
  	<legend>Informations sur les sources de financement </legend>
  			
 <h:panelGrid columns="6" cellpadding="10">
-	<p:outputLabel for="input_code" value="Code:"></p:outputLabel>
-	<p:inputText id="input_code" value="#{sourceFinancementController.source.codeSource}" readonly="true"></p:inputText>	
-
+	
 <p:outputLabel for="input_lib" value="Libéllé:"></p:outputLabel>
 	<p:inputText id="input_lib" value="#{sourceFinancementController.source.libSource}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
-</h:panelGrid>
 
-<h:panelGrid columns="2" cellpadding="10">
 <p:outputLabel for="input_descrip" value="Description: "></p:outputLabel>
 	<p:inputTextarea id="input_descrip" value="#{sourceFinancementController.source.descriptionSource}" rows="5" cols="55"></p:inputTextarea>	
 </h:panelGrid>

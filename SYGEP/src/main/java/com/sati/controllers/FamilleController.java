@@ -48,6 +48,7 @@ public class FamilleController {
 	}
 
 	public void enregistrer() {
+		genererCode();
 		this.service.addObject(this.famille);
 		this.info("Eneregistrement effectué avec succès!");
 		this.annuler();
@@ -110,7 +111,7 @@ public class FamilleController {
 	}
 
 	public Famille getFamille() {
-		genererCode();
+		
 		return famille;
 	}
 

@@ -34,7 +34,7 @@ public class MagasinController {
 	@PostConstruct
 	public void initialiser() {
 		this.btnModifier.setDisabled(true);
-		this.magasin.setCodeMagasin(genererCodeMagasin());
+		//this.magasin.setCodeMagasin(genererCodeMagasin());
 	}
 
 	public String genererCodeMagasin() {
@@ -49,6 +49,7 @@ public class MagasinController {
 		return new String(prefix+(nbEnregistrement+1));
 	}
 	public void enregistrer() {
+		genererCodeMagasin();
 		this.service.addObject(this.magasin);
 		magasin.setCodeMagasin(genererCodeMagasin());
 		this.info("Eneregistrement effectué avec succès!");

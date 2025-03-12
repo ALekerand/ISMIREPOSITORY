@@ -37,7 +37,7 @@ public class SourceFinancementController {
 	@PostConstruct
 	public void initialiser() {
 		this.btnModifier.setDisabled(true);
-		source.setCodeSource(genererCodeSourceFin());
+		//source.setCodeSource(genererCodeSourceFin());
 	}
 	
 	public String genererCodeSourceFin() {
@@ -53,10 +53,10 @@ public class SourceFinancementController {
 	}
 
 	public void enregistrer() {
+		this.source.setCodeSource(genererCodeSourceFin());
 		this.service.addObject(this.source);
 		this.info("Eneregistrement effectué avec succès!");
 		this.annuler();
-		genererCodeSourceFin();
 	}
 
 	public void selectionnerLigne() {

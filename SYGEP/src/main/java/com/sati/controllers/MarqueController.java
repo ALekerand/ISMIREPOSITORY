@@ -34,7 +34,7 @@ public class MarqueController {
 	@PostConstruct
 	public void initialiser() {
 		this.btnModifier.setDisabled(true);
-		marque.setCodeMarque(genererCodeMarque());
+		//marque.setCodeMarque(genererCodeMarque());
 	}
 	
 	public String genererCodeMarque() {
@@ -50,10 +50,11 @@ public class MarqueController {
 	}
 	
 	public void enregistrer() {
+		marque.setCodeMarque(genererCodeMarque());
 		this.service.addObject(this.marque);
 		annuler();
 		this.info("Enregistrement effectué avec succès!");
-		marque.setCodeMarque(genererCodeMarque());
+		
 	}
 	
 	public void modifier() {
@@ -65,7 +66,7 @@ public class MarqueController {
 	public void annuler() {
 		marque.setCodeMarque(null);
 		marque.setLibelleMarque(null);
-		marque.setCodeMarque(genererCodeMarque());
+		//marque.setCodeMarque(genererCodeMarque());
 		this.btnModifier.setDisabled(true);
 		this.btnEnregistrer.setDisabled(false);
 	}

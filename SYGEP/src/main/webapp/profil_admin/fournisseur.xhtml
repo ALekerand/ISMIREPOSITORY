@@ -19,9 +19,7 @@
 		<fieldset>
  	<legend>Informations sur le fournisseur</legend>		
 <h:panelGrid columns="6" cellpadding="10">
-	<p:outputLabel for="input_code" value="Code"></p:outputLabel>
-	<p:inputText id="input_code" value="#{fournisseurController.fournisseur.codeFournisseur}" readonly="true"></p:inputText>	
-
+	
 <p:outputLabel for="input_cc" value="Compte contribuable"></p:outputLabel>
 	<p:inputText id="input_cc" value="#{fournisseurController.fournisseur.nccFournisseur}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>	
 
