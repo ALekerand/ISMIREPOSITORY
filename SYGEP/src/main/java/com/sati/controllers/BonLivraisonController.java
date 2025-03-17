@@ -68,6 +68,15 @@ public class BonLivraisonController {
 		bonlivraison.setCodeBonLivraison(genererCodeBonlivraison());
 	}
 	
+	/**
+	 * @author ALekerand
+	 * @since 2025
+	 * @param rien en parametre
+	 * 
+	 * Cette méthode nous permet de génerer le code d'un BL en cours d'enregistrement
+	 * 
+	 * @return String qui le code du nbon de commande enregistré
+	 */
 	public String genererCodeBonlivraison() {
 		String prefix="";
 		int nbEnregistrement = this.service.getObjects("Bonlivraison").size();
