@@ -50,25 +50,23 @@
 			<div class="flex-container"> 
 				<div class="flex-box" style="background: linear-gradient(45deg,#4099ff,#73b4ff);">
 					<h5>Demandes en attente</h5>
-					<h3 class="nombre"> <h:outputText value="#{tableauDeBordController.nbreDemandeAttente}"  /></h3>
+					<h3 class="nombre"> <h:outputText value="#{tableauDeBordController.nbreDemandeAttente}"/></h3>
 				</div>
 				
 				<div class="flex-box" style="background: linear-gradient(45deg,#2ed8b6,#59e0c5);">
 					 <h5 >Demandes traitées et validées</h5>
-            		 <h3 class="nombre"><h:outputText  value="#{tableauDeBordController.nbreDemandeValider}" /></h3>
+            		 <h3 class="nombre"><h:outputText  value="#{tableauDeBordController.nbreDemandeValider}"/></h3>
 				</div>
 			
 				<div class="flex-box" style=" background: linear-gradient(45deg,#FFB64D,#ffcb80);">
 					<h5>Materiel en mauvais état</h5>
-                 	<h3 class="nombre"> <h:outputText value="#{tableauDeBordController.nbreMaterielMauvaisEtat}" /></h3>
+                 	<h3 class="nombre"> <h:outputText value="#{tableauDeBordController.nbreMaterielMauvaisEtat}"/></h3>
 				</div>
 				
 				<div class="flex-box" style="background: linear-gradient(45deg,#FF5370,#ff869a);">
 					 <h5>Stocks d'alerte atteints</h5>
-                     <h3 class="nombre"> <h:outputText value="#{tableauDeBordController.nbreMaterielStockAlertAtteint}" /></h3>
+                     <h3 class="nombre"> <h:outputText value="#{tableauDeBordController.nbreMaterielStockAlertAtteint}"/></h3>
 				</div>
-				
-				
 			</div>
 			
 		   </h:form>

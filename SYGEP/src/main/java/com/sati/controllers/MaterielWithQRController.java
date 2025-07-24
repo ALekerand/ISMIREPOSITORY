@@ -18,7 +18,6 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -199,12 +198,12 @@ public class MaterielWithQRController {
 		BitMatrix matrix = qr.encode(data, BarcodeFormat.QR_CODE, 150, 150);
 		MatrixToImageWriter.writeToPath(matrix, "PNG", Paths.get(path+nom_fichier));
 		//Génération du QR CODE		
-		JasperDesign jasperDesign = JRXmlLoader.load("C:/SYGEP/qr_code_repport.jrxml");
+		JasperDesign jasperDesign = JRXmlLoader.load("C:/SYGEP/ETATS/qr_code_repport.jrxml");
 		
 		//Compilation du fichier
 		JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 		
-		InputStream is = new FileInputStream("C:/SYGEP/"+nom_fichier);
+		InputStream is = new FileInputStream("C:/SYGEP/ETATS/"+nom_fichier);
 		Map<String,Object> parameters = new HashMap<String,Object>();
 		parameters.put("image_QR", is);
 			
@@ -212,7 +211,7 @@ public class MaterielWithQRController {
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameters, new JREmptyDataSource());
 		
 		// Visualisation, exportation ou impression 
-	    JasperExportManager.exportReportToPdfFile(jasperPrint, "C:/SYGEP/"+materiel.getCodeMateriel()+".pdf");
+	    JasperExportManager.exportReportToPdfFile(jasperPrint, "C:/SYGEP/ETATS/"+materiel.getCodeMateriel()+".pdf");
 	}
 	
 	

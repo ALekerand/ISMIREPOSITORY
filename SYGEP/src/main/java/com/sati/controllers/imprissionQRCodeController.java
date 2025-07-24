@@ -2,30 +2,22 @@ package com.sati.controllers;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServletResponseWrapper;
 
-import org.primefaces.component.commandbutton.CommandButton;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.sati.model.Etat;
-import com.sati.model.EtatDemande;
-import com.sati.model.Famille;
-import com.sati.model.Fongible;
 import com.sati.model.NonFongible;
 import com.sati.service.Iservice;
 
@@ -38,6 +30,8 @@ public class imprissionQRCodeController {
 	private NonFongible nonFongible = new NonFongible();
 	private List<NonFongible> listeNonFongible = new ArrayList<NonFongible>();
 	
+	private String pdfUrl;
+	
 	
 	public void selectionnerLigne() {
 		System.out.println("==== Selecgtion OK");
@@ -45,35 +39,79 @@ public class imprissionQRCodeController {
 		}
 	
 	public void doGet()throws ServletException, IOException {
-        // Chemin du fichier PDF
-		
-		//if ((selectedObject == null) ||(selectedObject.getCodeMateriel().equals("")) ) {
-		//	error("Veuillez selectionner le matériel avnt l'impression du QR CODE");
-	//	}else {
+       
 			try {
-				String pdfFilePath = "C:\\SYGEP\\"+selectedObject.getCodeMateriel()+".pdf";
-				File pdfFile = new File(pdfFilePath);
+				//String pdfFilePath = ;
+				File pdfFile = new File("C:\\SYGEP\\ETATS\\"+selectedObject.getCodeMateriel()+".pdf");
+				
+				
+				if (!pdfFile.exists()) {
+		            error("Le fichier PDF n'existe pas.");
+		            return;
+		        }
+				
 				
 				// Configuration de la réponse
-				HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+				FacesContext context = FacesContext.getCurrentInstance();
+				HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
 				response.setContentType("application/pdf");
-				response.setContentLength((int) pdfFile.length());
 				response.setHeader("Content-Disposition", "inline; filename=\"" + pdfFile.getName() + "\"");
+				response.setContentLength((int) pdfFile.length());
+				
 
 				// Lecture et envoi du fichier PDF
+				
 				FileInputStream fis = new FileInputStream(pdfFile);
-				OutputStream os = response.getOutputStream(); 
-				byte[] buffer = new byte[1024];
-				int bytesRead;
-				while ((bytesRead = fis.read(buffer)) != -1) {
-				        os.write(buffer, 0, bytesRead);
-				    }
+	            OutputStream os = response.getOutputStream(); 
+
+	            byte[] buffer = new byte[4096];
+	            int length;
+
+	            while ((length = fis.read(buffer)) > 0) {
+	                os.write(buffer, 0, length);
+	            }
+	            fis.close();
+	            os.flush();
+	            os.close();
+	             
+	            context.responseComplete(); // 🔴 Très important : empêche JSF de continuer
 				vider();
 			} catch (NullPointerException e) {
 				// TODO Auto-generated catch block
 				error("Veuillez selectionner le matériel avnt l'impression du QR CODE");
 			} 
         }
+	
+	
+	public void copierPDF() {
+	    try {
+	        String code = selectedObject.getCodeMateriel();
+	        File source = new File("C:/SYGEP/ETATS/" + code + ".pdf");
+
+	        // On copie vers un dossier du projet web accessible via HTTP
+	        String contextPath = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
+	        File destDir = new File(contextPath + "resources/pdf/");
+	        if (!destDir.exists()) destDir.mkdirs();
+
+	        File destFile = new File(destDir, code + ".pdf");
+
+	        // Copie physique
+	        Files.copy(source.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+	     // Stocker l'URL pour l'ouvrir côté JSF
+	        String webPath = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
+	        pdfUrl = webPath + "/resources/pdf/" + code + ".pdf";
+
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur", "Impossible d'ouvrir le fichier PDF."));
+	    }
+	}
+	
+	
+	
+	
+	
 	
 	
 	public void vider() {
@@ -114,4 +152,10 @@ public class imprissionQRCodeController {
 	public void setListeNonFongible(List<NonFongible> listeNonFongible) {
 		this.listeNonFongible = listeNonFongible;
 	}
+
+	public String getPdfUrl() {
+		return pdfUrl;
+	}
+
+	
 }
