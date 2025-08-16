@@ -22,8 +22,8 @@
  	<legend>Tableau des matériels</legend>	
  	
  	<p:dataTable  var="var" value="#{imprissionQRCodeController.listeNonFongible}"  selection="#{imprissionQRCodeController.selectedObject}" rowKey="#{var.idMateriel}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
- 	<p:ajax event="rowSelect" process="@this"  update=":form" listener="#{imprissionQRCodeController.selectionnerLigne}"></p:ajax>
- 	
+ 	<p:ajax event="rowSelect" process="@this"  update="form" listener="#{imprissionQRCodeController.selectionnerLigne}"></p:ajax>
+
  	<f:facet name="header">LISTE DE MATERIELS</f:facet>
      
    		<p:column selectionMode="single" style="width:16px;text-align:center"/>       
@@ -40,15 +40,9 @@
         	<h:outputText value="#{var.nomMateriel}"/>
         </p:column>
         
-        <p:column headerText="Qr code" style="width:10%">
-        <p:commandButton ajax="false" value="Imprimer" actionListener="#{imprissionQRCodeController.doGet}" target="_blank" >
-        </p:commandButton>
-        </p:column>
-        
         <p:column>
-         <p:commandButton value="Ouvrir PDF" action="#{imprissionQRCodeController.copierPDF}" 
-                     update="@form" oncomplete="if (args &amp;&amp; !args.validationFailed) window.open('#{imprissionQRCodeController.pdfUrl}', '_blank');"
-                     ajax="true" />
+         <p:commandButton value="Afficher QR code" action="#{imprissionQRCodeController.afficherPDF}"/>
+                     
         </p:column>
              </p:dataTable>
     

@@ -37,7 +37,7 @@ public class FonctionController {
 	@PostConstruct
 	public void initialiser() {
 		this.btnModifier.setDisabled(true);
-		this.fonction.setCodeFonction(genererCodeFonction());
+		//this.fonction.setCodeFonction(genererCodeFonction());
 	}
 	
 	public String genererCodeFonction() {
@@ -53,6 +53,7 @@ public class FonctionController {
 	}
 
 	public void enregistrer() {
+		fonction.setCodeFonction(genererCodeFonction());
 		this.service.addObject(this.fonction);
 		this.info("Eneregistrement effectué avec succès!");
 		this.annuler();

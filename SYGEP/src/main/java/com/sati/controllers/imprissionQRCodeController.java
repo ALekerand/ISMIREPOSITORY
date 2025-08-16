@@ -26,6 +26,10 @@ import com.sati.service.Iservice;
 public class imprissionQRCodeController {
 	@Autowired
 	Iservice service;
+	
+	@Autowired
+	OuverturePDFController ouverturePDFController;
+	
 	private NonFongible selectedObject = new NonFongible();
 	private NonFongible nonFongible = new NonFongible();
 	private List<NonFongible> listeNonFongible = new ArrayList<NonFongible>();
@@ -83,34 +87,43 @@ public class imprissionQRCodeController {
         }
 	
 	
-	public void copierPDF() {
-	    try {
-	        String code = selectedObject.getCodeMateriel();
-	        File source = new File("C:/SYGEP/ETATS/" + code + ".pdf");
-
-	        // On copie vers un dossier du projet web accessible via HTTP
-	        String contextPath = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
-	        File destDir = new File(contextPath + "resources/pdf/");
-	        if (!destDir.exists()) destDir.mkdirs();
-
-	        File destFile = new File(destDir, code + ".pdf");
-
-	        // Copie physique
-	        Files.copy(source.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-
-	     // Stocker l'URL pour l'ouvrir côté JSF
-	        String webPath = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
-	        pdfUrl = webPath + "/resources/pdf/" + code + ".pdf";
-
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur", "Impossible d'ouvrir le fichier PDF."));
-	    }
+		/*
+		 * public void ouvrirPDF() { try { String code =
+		 * selectedObject.getCodeMateriel();
+		 * System.out.println("=============== Code materiel:"+
+		 * selectedObject.getCodeMateriel()); File source = new File("C:/SYGEP/ETATS/" +
+		 * code + ".pdf");
+		 * 
+		 * System.out.println("=============== Code materiel:"+
+		 * selectedObject.getCodeMateriel());
+		 * 
+		 * // On copie vers un dossier du projet web accessible via HTTP String
+		 * contextPath =
+		 * FacesContext.getCurrentInstance().getExternalContext().getRealPath("/"); File
+		 * destDir = new File(contextPath + "resources/pdf/"); if (!destDir.exists())
+		 * destDir.mkdirs();
+		 * 
+		 * File destFile = new File(destDir, code + ".pdf");
+		 * 
+		 * // Copie physique Files.copy(source.toPath(), destFile.toPath(),
+		 * StandardCopyOption.REPLACE_EXISTING);
+		 * 
+		 * // Stocker l'URL pour l'ouvrir côté JSF String webPath =
+		 * FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath(
+		 * ); pdfUrl = webPath + "/resources/pdf/" + code + ".pdf";
+		 * 
+		 * vider();
+		 * 
+		 * } catch (IOException e) { e.printStackTrace();
+		 * FacesContext.getCurrentInstance().addMessage(null, new
+		 * FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur",
+		 * "Impossible d'ouvrir le fichier PDF.")); } }
+		 */
+	
+	
+	public void afficherPDF() throws IOException{
+		ouverturePDFController.ouvrirPDF(selectedObject.getCodeMateriel()+".pdf");
 	}
-	
-	
-	
-	
 	
 	
 	

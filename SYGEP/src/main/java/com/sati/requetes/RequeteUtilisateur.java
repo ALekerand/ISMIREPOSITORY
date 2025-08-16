@@ -28,7 +28,7 @@ public class RequeteUtilisateur {
 	// private Utilisateur utilisateur = new Utilisateur();
 
 	/**
-	 * Méthode pour l'utilisateur de la session
+	 * Mï¿½thode pour l'utilisateur de la session
 	 * 
 	 * @return utilisateur
 	 * @throws HibernateException
@@ -41,31 +41,49 @@ public class RequeteUtilisateur {
 	 * 
 	 */
 	
-
-
 	
-	 public String recupererLogin() {
+	public String recupererLogin() {
 	      User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	      String name = user.getUsername(); //get logged in username
-	      System.out.println("Retour de la requete:"+name);
 	      return name;
 	  }
 	 
 	 
 	public UserAuthentication recuperUser() {
 		String query = "SELECT `user_authentication`.* FROM `user_authentication` WHERE (`user_authentication`.`USERNAME` ='"+ recupererLogin() +"')";
-		UserAuthentication user = (UserAuthentication) getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(UserAuthentication.class).uniqueResult();
+		UserAuthentication user = (UserAuthentication) sessionFactory.getCurrentSession().createSQLQuery(query).addEntity(UserAuthentication.class).uniqueResult();
 		 return user;
 	 }
-	 
-	 
-		public SessionFactory getSessionFactory() {
-			return sessionFactory;
-		}
+	
+	
+	
+	public UserAuthentication recupererUserParLogin(String user_name) {
+		String query = "SELECT * FROM `user_authentication` WHERE USERNAME = '"+user_name+"'";
+		UserAuthentication user = (UserAuthentication) sessionFactory.getCurrentSession().createSQLQuery(query).addEntity(UserAuthentication.class).uniqueResult();
+		 return user;
+	 }
 
-		public void setSessionFactory(SessionFactory sessionFactory) {
-			this.sessionFactory = sessionFactory;
-		}
+
+	
+	/*
+	 * public String recupererLogin() { User user =
+	 * (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	 * String name = user.getUsername(); //get logged in username
+	 * System.out.println("Retour de la requete:"+name); return name; }
+	 * 
+	 * 
+	 * public UserAuthentication recuperUser() { String query =
+	 * "SELECT `user_authentication`.* FROM `user_authentication` WHERE (`user_authentication`.`USERNAME` ='"
+	 * + recupererLogin() +"')"; UserAuthentication user = (UserAuthentication)
+	 * getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(
+	 * UserAuthentication.class).uniqueResult(); return user; }
+	 * 
+	 * 
+	 * public SessionFactory getSessionFactory() { return sessionFactory; }
+	 * 
+	 * public void setSessionFactory(SessionFactory sessionFactory) {
+	 * this.sessionFactory = sessionFactory; }
+	 */
 		
 
 }
