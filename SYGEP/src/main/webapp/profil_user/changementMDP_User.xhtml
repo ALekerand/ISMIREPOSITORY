@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/templates/template.xhtml">
+	<ui:define name="body">
+		<h:form id="form">
+		<p:messages autoUpdate="true" closable="true" showDetail="false"/>
+		
+		<p:panel header="Gestion de compte">
+		
+	    <fieldset>
+ 	<legend>Changement de mot de passe</legend>	
+	<h:panelGrid columns="4" cellpadding="10">
+	
+	<p:outputLabel for="input_mpd_old" value="Mot de passe:"></p:outputLabel>
+	<p:password id="input_mpd_old" value="#{changementMDPController.mdp_actuel}" required="true" requiredMessage="Veuillez resseigner ce champ SVP" />
+	
+	<p:outputLabel/>
+	<p:outputLabel/>
+
+	<p:outputLabel for="input_mpd_new" value="Nouveau MDP:"></p:outputLabel>
+	<p:inputText id="input_mpd_new" value="#{changementMDPController.nouveau_mdp}" required="true" requiredMessage="Veuillez resseigner ce champ SVP" ></p:inputText>
+	
+	<p:outputLabel for="input_mpd_conf" value="Password:"></p:outputLabel>
+	<p:inputText id="input_mpd_conf" value="#{changementMDPController.mdp_conf}" required="true" requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>
+	</h:panelGrid>
+	</fieldset>
+	    </p:panel>
+	    
+	    <br />
+	    <p:toolbar >
+			<f:facet name="left">
+				<p:commandButton value="Modifier" actionListener="#{changementMDPController.enregistrer}" update="form"><p:confirm header="Confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
+				<p:commandButton value="Annuler" process="@this" actionListener="#{changementMDPController.annuler}" update="form"></p:commandButton>
+			</f:facet>
+		</p:toolbar>
+	    
+	    <br />
+		<br/>
+	
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+	   <p:commandButton value="Oui" type="button"
+	   styleClass="ui-confirmdialog-yes" icon="ui-icon-check" >
+	   </p:commandButton>
+	   <p:commandButton value="Non" type="button"
+	   styleClass="ui-confirmdialog-no" icon="ui-icon-close" >
+	   </p:commandButton>
+	  </p:confirmDialog>
+	   
+		</h:form>
+	
+	</ui:define>
+	
+	</ui:composition>
+</html>

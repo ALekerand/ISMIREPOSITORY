@@ -18,8 +18,6 @@
  		<tr>
  			<td>
  				<h:panelGrid columns="4" cellpadding="10">
-					<p:outputLabel for="input_code" value="Code:"></p:outputLabel>
-					<p:inputText id="input_code" value="#{materielWithQRController.materiel.codeMateriel}" required="true" requiredMessage="Veuillez resseigner ce champ SVP" readonly="true"></p:inputText>	
 					
 					<p:outputLabel for="input_ref" value="Reference:"></p:outputLabel>
 					<p:inputText id="input_ref" value="#{materielWithQRController.materiel.referenceMateriel}" required="true" requiredMessage="Veuillez resseigner ce champ SVP" ></p:inputText>	
@@ -65,7 +63,7 @@
 			<Hr/>
 			
 			<h:panelGrid columns="4" cellpadding="8" >
-			<p:outputLabel for="cb_sfinance" value="Source Financem: "/>
+			<p:outputLabel for="cb_sfinance" value="Source Financement: "/>
 				<p:selectOneMenu id="cb_sfinance" required="true" value="#{materielWithQRController.idSource}">
 				<f:selectItem itemLabel="Selectionnez" itemValue=""/>
 				<f:selectItems value="#{materielWithQRController.listSourceFinance}" var="tata" itemLabel="#{tata.libSource}" itemValue="#{tata.idSource}"></f:selectItems>

@@ -150,6 +150,7 @@ public class MaterielController {
 		this.materiel.setMagasin(magasin);
 		this.materiel.setMarque(marque);
 		this.materiel.setRetrait(false);
+		genererCode();
 		service.addObject(materiel);
 		
 			//Enregistrer dans fongible
@@ -165,6 +166,7 @@ public class MaterielController {
 			this.fongible.setRetrait(materiel.getRetrait());
 			this.fongible.setDescriptionMateriel(materiel.getDescriptionMateriel());
 			this.fongible.setMateriel(materiel);
+			
 			service.addObject(fongible);
 
 		//Enregistrement dans la table Valeur 
@@ -298,7 +300,7 @@ public class MaterielController {
 	}
 
 	public Materiel getMateriel() {
-		genererCode();
+		//genererCode();
 		return materiel;
 	}
 

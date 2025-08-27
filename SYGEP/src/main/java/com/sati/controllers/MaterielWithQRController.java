@@ -115,7 +115,7 @@ public class MaterielWithQRController {
 	
 	//Pour le QR code
 	private String data;
-	private String path = "C:\\SYGEP\\";
+	private String path = "C:\\SYGEP\\ETATS\\";
 	private CommandButton btnEnregistrer = new CommandButton();
 	private CommandButton btnAnnuler = new CommandButton();
 	private CommandButton btnModifier = new CommandButton();
@@ -251,6 +251,7 @@ public class MaterielWithQRController {
 		this.materiel.setMagasin(magasin);
 		this.materiel.setMarque(marque);
 		this.materiel.setRetrait(false);
+		genererCode();
 		this.service.addObject(this.materiel);
 		
 		//Donner le diqgnostique
@@ -431,7 +432,7 @@ public class MaterielWithQRController {
 	}
 
 	public Materiel getMateriel() {
-		genererCode();
+	//	genererCode();
 		return materiel;
 	}
 
