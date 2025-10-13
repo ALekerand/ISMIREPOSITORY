@@ -64,7 +64,7 @@ public class NatureController {
 
 	public void chargerFamille() {
 		famille = (Famille) service.getObjectById(idFamille, "Famille");
-		System.out.println(famille.getLibFamille());
+		//System.out.println(famille.getLibFamille());
 	}
 	
 	public void selectionnerLigne() {
@@ -95,7 +95,7 @@ public class NatureController {
 	}
 
 	public void modifier() {
-		nature.setFamille(famille);
+		nature.setFamille((Famille) service.getObjectById(idFamille, "Famille"));
 		this.service.updateObject(this.nature);
 		this.info("Modification effectué avec succès!");
 		this.annuler();

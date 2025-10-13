@@ -10,19 +10,18 @@ import com.sati.model.UserAuthentication;
 import com.sati.requetes.RequeteUtilisateur;
 import com.sati.service.Iservice;
 
-
-
 @Component
 @Scope("session")
 public class InitialController {
-	@Autowired
-	private Iservice iservice;
+	//@Autowired
+	//private Iservice iservice;
 	@Autowired
 	private RequeteUtilisateur requeteUtilisateur;
 	
 	//private Responsable responsable = new Responsable();
 //	private ServiceResponsable serviceResponsable = new ServiceResponsable();
 	private UserAuthentication userAuthentication = new UserAuthentication();
+	
 	@PostConstruct
 	public void recupererUtilisateur() {
 		setUserAuthentication(requeteUtilisateur.recuperUser());

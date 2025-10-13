@@ -22,9 +22,6 @@ import com.sati.service.Iservice;
 @Scope("session")
 
 public class RetraitMaterielController {
-	
-
-
 		@Autowired
 		Iservice service;
 		

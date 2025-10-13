@@ -65,10 +65,11 @@
 	
 	<p:outputLabel for="input_qte" value="Quantité: "></p:outputLabel>
 	<p:inputText id="input_qte" value="#{entreeController.entree.qteEntree}" required="true" 
-	requiredMessage="Veuillez resseigner ce champ SVP"></p:inputText>
+	requiredMessage="Veuillez resseigner ce champ SVP" style="width:100px"></p:inputText>
 	
 	<p:outputLabel for="date_appro" value="Date approvisionnement:"></p:outputLabel>
-	<p:calendar id="date_appro" value="#{entreeController.entree.dateEntree}" locale="fr" navigator="true" pattern="dd/MM/yyyy" requiredMessage="Veuillez resseigner ce champ SVP"/>
+	<p:calendar id="date_appro" value="#{entreeController.entree.dateEntree}" locale="fr" navigator="true" pattern="dd/MM/yyyy" 
+		requiredMessage="Veuillez resseigner ce champ SVP"/>
 				    
 	
  	</h:panelGrid>
@@ -79,7 +80,7 @@
 	<p:toolbar >
 		<f:facet name="left">
 			<p:commandButton value="Enregistrer" action="#{entreeController.enregistrer}" update="form" binding="#{entreeController.btnEnregistrer}"><p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
-			<p:commandButton value="Annuler"  action="#{entreeController.annuler}" update="form" binding="#{entreeController.btnAnnuler}"><p:confirm header="confirmation" message="voulez-vous annuler?"></p:confirm></p:commandButton>
+			<p:commandButton value="Annuler" process="@this" action="#{entreeController.annuler}" update="form" binding="#{entreeController.btnAnnuler}"><p:confirm header="confirmation" message="voulez-vous annuler?"></p:confirm></p:commandButton>
 			<p:commandButton value="Modifier"  action="#{entreeController.modifier}" update="form" binding="#{entreeController.btnModifier}"><p:confirm header="confirmation" message="confirmez-vous la modification?"></p:confirm></p:commandButton>
 		</f:facet>
 	</p:toolbar>

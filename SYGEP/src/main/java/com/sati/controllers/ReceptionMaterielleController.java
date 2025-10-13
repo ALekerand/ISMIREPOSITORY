@@ -24,7 +24,7 @@ import com.sati.service.Iservice;
 
 @Component
 @Scope("session")
-public class AfficherDemandeAccepterController {
+public class ReceptionMaterielleController {
 	
 	@Autowired
 	RequeteDemande requeteDemande;

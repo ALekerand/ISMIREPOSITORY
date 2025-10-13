@@ -50,8 +50,9 @@ public class MagasinController {
 	}
 	public void enregistrer() {
 		genererCodeMagasin();
-		this.service.addObject(this.magasin);
 		magasin.setCodeMagasin(genererCodeMagasin());
+		this.service.addObject(this.magasin);
+		
 		this.info("Eneregistrement effectué avec succès!");
 		this.annuler();
 	}

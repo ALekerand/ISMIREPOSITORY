@@ -442,7 +442,7 @@ public class MaterielWithQRController {
 
 	@SuppressWarnings("unchecked")
 	public List<Materiel> getListTable() {
-		 listTable = service.getObjects("Materiel");
+		 listTable = service.getObjects("NonFongible");
 		 
 		 Collections.sort(listTable, new Comparator<Materiel>() {
 		        @Override

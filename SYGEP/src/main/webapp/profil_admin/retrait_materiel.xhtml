@@ -12,16 +12,16 @@
 			<p:panel header="EFFECTUER UN RETRAIT DE MATERIEL" >
 		
 		
-		<p:dataTable widgetVar="dtMateriel"  var="var" value="#{retraitMaterielController.listMateriel}"  selection="#{retraitMaterielController.selectedMateriel}" rowKey="#{var.idMateriel}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+		<p:dataTable widgetVar="dtMateriel"  var="var" value="#{retraitMaterielController.listMateriel}" selection="#{retraitMaterielController.selectedMateriel}" rowKey="#{var.idMateriel}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
   		<f:facet name="header">
                 <div class="materiel-table-header">
                     <span style="font-weight: bold">Liste des materiels</span>
                     <span class="filter-container ui-input-icon-left"> <i class="pi pi-search"></i>
-                        <p:inputText id="globalFilter" onkeyup="PF('dtMateriel').filter()" placeholder="Rechercher" />
+                        <p:inputText id="globalFilter" onkeyup="PF('dtMateriel').filter()" placeholder="  Rechercher" />
                     </span>
                 </div>
             </f:facet>
-     	<p:ajax event="rowSelect" process="@this"  update="form" listener="#{retraitMaterielController.choisirLigne}"></p:ajax>
+     	
    		<p:column selectionMode="single" style="width:16px;text-align:center"/>
         
         <p:column headerText="Désignation">
@@ -29,11 +29,11 @@
         </p:column>
         
         <p:column headerText="Description">
-        <h:outputText value="#{var.descriptionMateriel}"/>
+        	<h:outputText value="#{var.descriptionMateriel}"/>
         </p:column>
         	
    		<p:column headerText="CODE">
-        <h:outputText value="#{var.codeMateriel}"/>
+        	<h:outputText value="#{var.codeMateriel}"/>
         </p:column>
         
         </p:dataTable>
