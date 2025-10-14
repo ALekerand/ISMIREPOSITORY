@@ -43,13 +43,14 @@ public class TableauDeBordController {
 	@Autowired
 	RequeteMateriel requeteMateriel;
 	private List<EtatDemande> listEtatDemande = new ArrayList<EtatDemande>();
-	private List<Demande> listDemandeValider = new ArrayList<Demande>();
+	private List<Demande> listDemandeAttenteReception = new ArrayList<Demande>();
 	private List<Diagnostique> listeMaterielMauvaisEtat = new ArrayList<Diagnostique>();
 	private List<Materiel> listStockAlerteMateriel = new ArrayList<>();
 	private UserAuthentication userAuthentication = new UserAuthentication();
 
 	private int nbreDemandeAttente;
-	private int nbreDemandeValider;
+	private int nbreDemandeValideEnAttenteUser;
+	private int nbreDemandeValideEnAttenteAdmin;
 	private int nbreMaterielMauvaisEtat;
 	private int nbreMaterielStockAlertAtteint;
 	private int idEntite;
@@ -74,38 +75,6 @@ public class TableauDeBordController {
 
 	public void setNbreDemandeAttente(int nbreDemandeAttente) {
 		this.nbreDemandeAttente = nbreDemandeAttente;
-	}
-
-	public List<Demande> getListDemandeValider() {
-		return listDemandeValider;
-	}
-
-	public void setListDemandeValider(List<Demande> listDemandeValider) {
-		this.listDemandeValider = listDemandeValider;
-	}
-
-	@SuppressWarnings("unchecked")
-	public int getNbreDemandeValider() {
-		//Personne personne = new Personne();
-		//Entite entite = new Entite();
-		//userAuthentication = requeteUtilisateur.recuperUser();
-		//personne = userAuthentication.getPersonne();
-		//entite = (Entite) service.getObjectById(personne.getIdEntite(), "Entite");
-		//setIdEntite(entite.getIdEntite());
-		try {
-			listDemandeValider = requeteDemande.afficherDemandeAccepte(idEntite);
-			nbreDemandeValider = listDemandeValider.size();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			nbreDemandeValider = 0;
-		}
-		return nbreDemandeValider;
-	}
-	
-	
-
-	public void setNbreDemandeValider(int nbreDemandeValider) {
-		this.nbreDemandeValider = nbreDemandeValider;
 	}
 
 	public int getIdEntite() {
@@ -174,6 +143,40 @@ public class TableauDeBordController {
 
 	public void setNbreMaterielStockAlertAtteint(int nbreMaterielStockAlertAtteint) {
 		this.nbreMaterielStockAlertAtteint = nbreMaterielStockAlertAtteint;
+	}
+
+	public int getNbreDemandeValideEnAttenteUser() {
+		try {
+			nbreDemandeValideEnAttenteUser = requeteDemande.afficherDemandeAccepteAttenteUser(idEntite).size() ;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			setNbreDemandeValideEnAttenteUser(0);
+		}
+		
+		return nbreDemandeValideEnAttenteUser;
+	}
+
+	public void setNbreDemandeValideEnAttenteUser(int nbreDemandeValideEnAttenteUser) {
+		this.nbreDemandeValideEnAttenteUser = nbreDemandeValideEnAttenteUser;
+	}
+
+	public int getNbreDemandeValideEnAttenteAdmin() {
+		//try {
+			nbreDemandeValideEnAttenteUser = requeteDemande.recupererDemandeAccepteAttenteAdmin().size() ;
+	//	} catch (Exception e) {
+			// TODO Auto-generated catch block
+			//setNbreDemandeValideEnAttenteUser(0);
+			System.out.println("=====Je suis ici =====");
+		//}
+		
+		System.out.println("============="+nbreDemandeValideEnAttenteAdmin);
+		
+		
+		return nbreDemandeValideEnAttenteAdmin;
+	}
+
+	public void setNbreDemandeValideEnAttenteAdmin(int nbreDemandeValideEnAttenteAdmin) {
+		this.nbreDemandeValideEnAttenteAdmin = nbreDemandeValideEnAttenteAdmin;
 	}
 
 }
