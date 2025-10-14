@@ -99,7 +99,7 @@ public class ReceptionMaterielleController {
 		personne = userAuthentication.getPersonne();
 		entite = (Entite) service.getObjectById(personne.getIdEntite(), "Entite");
 		setIdEntite(entite.getIdEntite());
-		listDemandeAccepter = requeteDemande.afficherDemandeAccepte(idEntite);
+		listDemandeAccepter = requeteDemande.recupererDemandeAccepteAttenteUser(idEntite);
 		
 		  Collections.sort(listDemandeAccepter, new Comparator<Demande>() {
 		        @Override

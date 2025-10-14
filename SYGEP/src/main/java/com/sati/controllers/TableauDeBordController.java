@@ -147,7 +147,7 @@ public class TableauDeBordController {
 
 	public int getNbreDemandeValideEnAttenteUser() {
 		try {
-			nbreDemandeValideEnAttenteUser = requeteDemande.afficherDemandeAccepteAttenteUser(idEntite).size() ;
+			nbreDemandeValideEnAttenteUser = requeteDemande.recupererDemandeAccepteAttenteUser(idEntite).size() ;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			setNbreDemandeValideEnAttenteUser(0);
@@ -162,11 +162,11 @@ public class TableauDeBordController {
 
 	public int getNbreDemandeValideEnAttenteAdmin() {
 		//try {
-			nbreDemandeValideEnAttenteUser = requeteDemande.recupererDemandeAccepteAttenteAdmin().size() ;
+			nbreDemandeValideEnAttenteAdmin = requeteDemande.recupererDemandeAccepteAttenteAdmin().size() ;
 	//	} catch (Exception e) {
 			// TODO Auto-generated catch block
 			//setNbreDemandeValideEnAttenteUser(0);
-			System.out.println("=====Je suis ici =====");
+			//System.out.println("=====Je suis ici =====");
 		//}
 		
 		System.out.println("============="+nbreDemandeValideEnAttenteAdmin);
