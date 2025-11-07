@@ -65,7 +65,7 @@ public class ConsulterDemandeController_User {
 	
 	@SuppressWarnings("unchecked")
 	public List<Demande> getListeDemandesAttente() {
-		 listeDemandesAttente = requeteDemande.afficherDemande_Utilisateur(1,chagerUtilisateur().getPersonne().getIdEntite());
+		 listeDemandesAttente = requeteDemande.afficherDemande_UtilisateurParEtat(1,chagerUtilisateur().getPersonne().getIdEntite());
 		
 		  Collections.sort(listeDemandesAttente, new Comparator<Demande>() {
 		        @Override
@@ -83,7 +83,7 @@ public class ConsulterDemandeController_User {
 	}
 	@SuppressWarnings("unchecked")
 	public List<Demande> getListeDemandesTraitees() {
-		 listeDemandesTraitees = requeteDemande.afficherDemande_Utilisateur(2,chagerUtilisateur().getPersonne().getIdEntite());
+		 listeDemandesTraitees = requeteDemande.afficherDemande_UtilisateurParEtat(2,chagerUtilisateur().getPersonne().getIdEntite());
 		 
 		  Collections.sort(listeDemandesTraitees, new Comparator<Demande>() {
 		        @Override
@@ -101,7 +101,7 @@ public class ConsulterDemandeController_User {
 	}
 	@SuppressWarnings("unchecked")
 	public List<Demande> getListeDemandesRejetees() {
-		listeDemandesRejetees = requeteDemande.afficherDemande_Utilisateur(3,chagerUtilisateur().getPersonne().getIdEntite());
+		listeDemandesRejetees = requeteDemande.afficherDemande_UtilisateurParEtat(3,chagerUtilisateur().getPersonne().getIdEntite());
 		
 		  Collections.sort(listeDemandesRejetees, new Comparator<Demande>() {
 		        @Override

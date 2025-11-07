@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -22,6 +23,8 @@ import com.sati.model.EtatDemande;
 import com.sati.model.Materiel;
 import com.sati.model.Personne;
 import com.sati.model.UserAuthentication;
+import com.sati.model.UserAuthorization;
+import com.sati.requetes.RequeteDemande;
 import com.sati.requetes.RequeteUtilisateur;
 import com.sati.service.Iservice;
 
@@ -32,13 +35,16 @@ public class DemandeController {
 	Iservice service;
 	@Autowired
 	RequeteUtilisateur requeteUtilisateur;
+	@Autowired
+	RequeteDemande requeteDemande;
+	
 	private Demande demande = new Demande();
 	private Materiel materiel = new Materiel();
 	UserAuthentication userAuthentication = new UserAuthentication();
 	private List<Demande> listTable = new ArrayList<Demande>();
 	private List<Materiel> listMateriel = new ArrayList<Materiel>();
 	private int idMotif;
-	private Demande selectedObject = new Demande();
+	//private Demande selectedObject = new Demande();
 	private Materiel selecteMareriel = new Materiel();
 	private int idMatereiel;
 	private String value_emprunt;
@@ -47,13 +53,13 @@ public class DemandeController {
 //	Gestion des bouttons de commande
 	private CommandButton btnEnregistrer = new CommandButton();
 	private CommandButton btnAnnuler = new CommandButton();
-	private CommandButton btnModifier = new CommandButton();
+	//private CommandButton btnModifier = new CommandButton();
 	private org.primefaces.component.calendar.Calendar input_date_retour = new org.primefaces.component.calendar.Calendar();
 	private SelectOneRadio radio_emptunt = new SelectOneRadio();
 
 	@PostConstruct
 	public void initialiser() {
-		this.btnModifier.setDisabled(true);
+		//this.btnModifier.setDisabled(true);
 		this.input_date_retour.setDisabled(true);
 		this.radio_emptunt.setValue("non");
 		chagerUtilisateur();
@@ -119,7 +125,7 @@ public class DemandeController {
 		demande.setQteDemande(null);
 		demande.setDateDemande(null);
 		demande.setDateRetourPrevue(null);
-		this.btnModifier.setDisabled(true);
+		//this.btnModifier.setDisabled(true);
 		this.btnEnregistrer.setDisabled(false);
 		materiel.setCodeMateriel(null);
 		materiel.setNomMateriel(null);
@@ -136,11 +142,11 @@ public class DemandeController {
 		service.updateObject(demande);
 		info("Modification effectuée avec succès!");
 	}
-	public void selectionnerLigne() {
-		this.demande = this.selectedObject;
-		this.btnEnregistrer.setDisabled(true);
-		this.btnModifier.setDisabled(false);
-	}
+	//public void selectionnerLigne() {
+		//this.demande = this.selectedObject;
+		//this.btnEnregistrer.setDisabled(true);
+		//this.btnModifier.setDisabled(false);
+	//}
 
 	public CommandButton getBtnEnregistrer() {
 		return this.btnEnregistrer;
@@ -158,13 +164,12 @@ public class DemandeController {
 		this.btnAnnuler = btnAnnuler;
 	}
 
-	public CommandButton getBtnModifier() {
-		return this.btnModifier;
-	}
-
-	public void setBtnModifier(CommandButton btnModifier) {
-		this.btnModifier = btnModifier;
-	}
+	/*
+	 * public CommandButton getBtnModifier() { return this.btnModifier; }
+	 * 
+	 * public void setBtnModifier(CommandButton btnModifier) { this.btnModifier =
+	 * btnModifier; }
+	 */
 
 	
 	
@@ -187,7 +192,19 @@ public class DemandeController {
 
 	@SuppressWarnings("unchecked")
 	public List<Demande> getListTable() {
-		listTable = service.getObjects("Demande");
+		List<UserAuthorization> listAutorisation = new ArrayList<UserAuthorization>();
+		
+		for (UserAuthorization userAuthorization : userAuthentication.getUserAuthorizations()) {
+			listAutorisation.add(userAuthorization); 
+		}
+		
+	String role = listAutorisation.get(0).getRole();
+		System.out.println("========================ROLE: "+role);
+		if(role.equals("ROLE_ADMIN") ) {
+			listTable = service.getObjects("Demande");
+		}else {
+		listTable = requeteDemande.afficherDemande_Utilisateur(userAuthentication.getPersonne().getIdEntite() );
+		}
 		return listTable;
 	}
 
@@ -203,13 +220,12 @@ public class DemandeController {
 		this.idMotif = idMotif;
 	}
 
-	public Demande getSelectedObject() {
-		return selectedObject;
-	}
-
-	public void setSelectedObject(Demande selectedObject) {
-		this.selectedObject = selectedObject;
-	}
+	/*
+	 * public Demande getSelectedObject() { return selectedObject; }
+	 * 
+	 * public void setSelectedObject(Demande selectedObject) { this.selectedObject =
+	 * selectedObject; }
+	 */
 
 	@SuppressWarnings("unchecked")
 	public List<Materiel> getListMateriel() {

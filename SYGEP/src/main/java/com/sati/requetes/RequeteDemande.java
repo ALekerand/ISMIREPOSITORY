@@ -33,11 +33,20 @@ public class RequeteDemande {
 		return list;
 		}
 	
-	public List afficherDemande_Utilisateur(int idEtatDemande,int idEntite) {
+	public List afficherDemande_UtilisateurParEtat(int idEtatDemande,int idEntite) {
 		String query = "SELECT * FROM demande WHERE ID_ETAT_DEMANDE = '"+idEtatDemande+"' AND ID_ENTITE = '"+idEntite+"' ";
 		List list = getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Demande.class).list();
 		return list;
 		}
+	
+	public List afficherDemande_Utilisateur(int idEntite) {
+		String query = "SELECT * FROM demande WHERE ID_ENTITE = '"+idEntite+"' ";
+		List list = getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Demande.class).list();
+		return list;
+		}
+	
+	
+	
 	
 	public List recupererDemandeAccepteAttenteUser(int idEntite) {
 		String query = "SELECT * FROM `demande` WHERE ETAT_RECEPTION IS NULL AND`demande`.`ID_ETAT_DEMANDE` = '2' AND ID_ENTITE = '"+idEntite+"'";

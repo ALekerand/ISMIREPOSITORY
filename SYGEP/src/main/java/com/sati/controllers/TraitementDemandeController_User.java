@@ -44,6 +44,7 @@ public class TraitementDemandeController_User {
 	public void initialiser() {
 		chagerUtilisateur();
 	}
+	
 	@SuppressWarnings("unchecked")
 	public void traiterDemande() {
 		Personne personne = new Personne();
@@ -51,18 +52,17 @@ public class TraitementDemandeController_User {
 		personne = userAuthentication.getPersonne();
 		entite = (Entite) service.getObjectById(personne.getIdEntite(), "Entite");
 		idEntite = entite.getIdEntite();
-		listeDemande = requeteDemande.afficherDemande_Utilisateur(idEtatDemande,idEntite);
-
-
-		
+		listeDemande = requeteDemande.afficherDemande_UtilisateurParEtat(idEtatDemande,idEntite);
 	}
+	
 	
 	public UserAuthentication chagerUtilisateur() {
 		return userAuthentication = requeteUtilisateur.recuperUser();
 	}
+	
+	
 	public void selectionnerLigne() {
 		this.demande = this.selectedObject;
-		
 	}
 	
 	public void annuler() {

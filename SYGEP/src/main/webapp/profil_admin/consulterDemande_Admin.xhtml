@@ -18,20 +18,19 @@
 				 <h:panelGrid columns="4" cellpadding="15"  style="margin: 15px;" >
 					<p:outputLabel for="cb_etat_demande" value="Etat Demande:"/>
 						<p:selectOneMenu id="cb_etat_demande"  value="#{consulterDemandeController_Admin.idEtatDemande}">
-						<f:selectItem itemLabel="Selectionnez" itemValue="" />
+						<f:selectItem itemLabel="Tout" itemValue="0"/>
 						<f:selectItems value="#{consulterDemandeController_Admin.listEtatDemande}" var="tata" itemLabel="#{tata.libEtatDemande}" itemValue="#{tata.idEtatDemande}"></f:selectItems>
+					
 					</p:selectOneMenu>	
-				<p:commandButton value="Rechercher" actionListener="#{consulterDemandeController_Admin.traiterDemande}" update="form"></p:commandButton>
+				<p:commandButton value="Afficher" actionListener="#{consulterDemandeController_Admin.traiterDemande}" update="table"></p:commandButton>
 				</h:panelGrid>
 				</fieldset>
 				<br />
 					 <br />
-						<p:dataTable id="table" var="var" value="#{consulterDemandeController_Admin.listeDemande }"  paginator="true" paginatorPosition="bottom" rows="5"  rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+						<p:dataTable id="table" var="var" value="#{consulterDemandeController_Admin.listeDemande }"  paginator="true" paginatorPosition="bottom" rows="10"  rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  							<f:facet name="header">LISTE DES DEMANDES</f:facet>
-  								  <!--   <p:ajax event="rowSelect" process="@this"  update="form" listener="#{traitementDemandeController.selectionnerLigne}"></p:ajax>-->
-   		
    										<p:column headerText="Demandeur">
-     								    <h:outputText value="#{var.entite.personne.nomPersonne} "/>
+     								    <h:outputText value="#{var.entite.personne.nomPersonne} #{var.entite.personne.prenomsPersonne}"/>
     								    </p:column>
    		
    										<p:column headerText="Code" >
@@ -55,7 +54,7 @@
                       				<br/>
 										<p:toolbar >
 											<f:facet name="left">
-											<p:commandButton value="Annuler"  action="#{consulterDemandeController_Admin.annuler}" update="form" ></p:commandButton>
+											<p:commandButton value="Annuler"  action="#{consulterDemandeController_Admin.annuler}" update="table" ></p:commandButton>
 											<p:commandButton value="Imprimer" >
 											<p:printer target="table"></p:printer>
 											</p:commandButton>

@@ -9,22 +9,12 @@
 			<ui:define name="body">
 				<h:form id="form">
 			<p:messages autoUpdate="true" closable="true" showDetail="false"/>
-			<p:panel header="EFFECTUER UN RETRAIT DE MATERIEL" >
+		<p:panel header="EFFECTUER UN RETRAIT DE MATERIEL" >
 		
-		
-		<p:dataTable widgetVar="dtMateriel"  var="var" value="#{retraitMaterielController.listMateriel}" selection="#{retraitMaterielController.selectedMateriel}" rowKey="#{var.idMateriel}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
-  		<f:facet name="header">
-                <div class="materiel-table-header">
-                    <span style="font-weight: bold">Liste des materiels</span>
-                    <span class="filter-container ui-input-icon-left"> <i class="pi pi-search"></i>
-                        <p:inputText id="globalFilter" onkeyup="PF('dtMateriel').filter()" placeholder="  Rechercher" />
-                    </span>
-                </div>
-            </f:facet>
-     	
-   		<p:column selectionMode="single" style="width:16px;text-align:center"/>
-        
-        <p:column headerText="Désignation">
+		<p:dataTable id="dtMateriel" var="var" value="#{retraitMaterielController.listMateriel}" selection="#{retraitMaterielController.selectedMateriel}" rowKey="#{var.idMateriel}" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+            
+            <p:column selectionMode="single" selectionBox="true" style="width:16px;text-align:center"/>
+            <p:column headerText="Désignation">
         <h:outputText value="#{var.nomMateriel}"/>
         </p:column>
         
@@ -35,8 +25,9 @@
    		<p:column headerText="CODE">
         	<h:outputText value="#{var.codeMateriel}"/>
         </p:column>
-        
+            
         </p:dataTable>
+		
 		
         </p:panel>
         <br/>
@@ -53,7 +44,7 @@
       
       
        <p:dataTable widgetVar="dtMateriel"  var="var" value="#{retraitMaterielController.listRetraitMateriel}" rowKey="#{var.idMateriel}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
-  <f:facet name="header">LISTES DES MATERIELS RETIRES </f:facet>
+  		<f:facet name="header">LISTES DES MATERIELS RETIRES </f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" ></p:ajax>
    		
    		<p:column headerText="Réf" filterBy="#{var.codeMateriel}" filterable="false">
@@ -67,7 +58,6 @@
         <p:column headerText="Description" filterBy="#{var.descriptionMateriel}" filterable="false">
         <h:outputText value="#{var.descriptionMateriel}"/>
         </p:column>
-        
         </p:dataTable>
         
          <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">

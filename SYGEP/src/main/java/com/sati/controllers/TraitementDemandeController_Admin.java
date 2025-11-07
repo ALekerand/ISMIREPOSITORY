@@ -56,19 +56,33 @@ public class TraitementDemandeController_Admin {
 	}
 	*/
 	
+
+  public void selectionnerLigne() { 
+	  System.out.println("==== Selection ");
+	  this.demande = this.selectedObject; 
+	  materielSelectionne = this.demande.getMateriel();
+	  
+	  //Verifier si il est un fongible alors gerer son stock
+	  if(this.demande.getMateriel().getFongible()!= null) {
+		  System.out.println("==== ========== FONGIBLE ==============");
+		  materielFongible = requeteMateriel.materielFongibleConsulte(this.demande.getMateriel().getIdMateriel()); 
+		  this.input_stockAlert.setDisabled(false);
+		  this.input_stockActuel.setDisabled(false);
+		  this.input_reference.setDisabled(true); 
+	  }else{ 
+		  setMaterielFongible(new Fongible()); 
+		  this.input_stockAlert.setDisabled(true);
+		  this.input_stockActuel.setDisabled(true);
+		  this.input_reference.setDisabled(false); 
+		  } 
+	  }
+	  
+	
+	
 /*
- * public void selectionnerLigne() { System.out.println("==== Selection ");
- * this.demande = this.selectedObject; materielSelectionne =
- * this.demande.getMateriel(); if (
- * this.demande.getMateriel().getNature().getFamille().getIdFamille() == 1) {
- * materielFongible =
- * requeteMateriel.materielFongibleConsulte(this.demande.getMateriel().
- * getIdMateriel()); this.input_stockAlert.setDisabled(false);
- * this.input_stockActuel.setDisabled(false);
- * this.input_reference.setDisabled(true); }else { setMaterielFongible(new
- * Fongible()); this.input_stockAlert.setDisabled(true);
- * this.input_stockActuel.setDisabled(true);
- * this.input_reference.setDisabled(false); } }
+ * public void selectionnerLigne() {
+ * 
+ * }
  */
 	
 	public void ok() {

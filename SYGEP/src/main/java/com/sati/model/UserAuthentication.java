@@ -104,7 +104,7 @@ public class UserAuthentication implements java.io.Serializable {
 		this.personnes = personnes;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userAuthentication")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "userAuthentication")
 	public Set<UserAuthorization> getUserAuthorizations() {
 		return this.userAuthorizations;
 	}

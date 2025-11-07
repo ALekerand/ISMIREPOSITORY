@@ -51,10 +51,8 @@ public class TraitementDemandeController_Utilisateur {
 		personne = userAuthentication.getPersonne();
 		entite = (Entite) service.getObjectById(personne.getIdEntite(), "Entite");
 		idEntite = entite.getIdEntite();
-		listeDemande = requeteDemande.afficherDemande_Utilisateur(idEtatDemande,idEntite);
+		listeDemande = requeteDemande.afficherDemande_UtilisateurParEtat(idEtatDemande,idEntite);
 
-
-		
 	}
 	
 	public UserAuthentication chagerUtilisateur() {

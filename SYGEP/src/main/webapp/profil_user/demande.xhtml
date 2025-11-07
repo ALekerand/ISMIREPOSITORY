@@ -88,12 +88,12 @@
 			<f:facet name="right">
 				<p:commandButton value="Enregistrer" action="#{demandeController.enregistrer}" update="form" binding="#{demandeController.btnEnregistrer}"><p:confirm header="confirmation" message="confirmez-vous l'enregistrement?"></p:confirm></p:commandButton>
 				<p:commandButton value="Annuler"  action="#{demandeController.annuler}" process="@this" update="form" binding="#{demandeController.btnAnnuler}"><p:confirm header="confirmation" message="voulez-vous annuler?"></p:confirm></p:commandButton>
-				<p:commandButton value="Modifier"  action="#{demandeController.modifier}" update="form" binding="#{demandeController.btnModifier}"><p:confirm header="confirmation" message="confirmez-vous la modification?"></p:confirm></p:commandButton>
+				
 			</f:facet>
 		</p:toolbar>
 		<br/>
 		
-	<p:dataTable  var="var" value="#{demandeController.listTable}"  selectionMode="single" selection="#{demandeController.selectedObject}" rowKey="#{var.idDemande}" paginator="true" paginatorPosition="bottom" rows="5"  rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+	<p:dataTable  var="var" value="#{demandeController.listTable}"  paginator="true" paginatorPosition="bottom" rows="5"  rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  
  <f:facet name="header">LISTE DES DEMANDES</f:facet>
      <p:ajax event="rowSelect" process="@this"  update="form" listener="#{demandeController.selectionnerLigne}"></p:ajax>

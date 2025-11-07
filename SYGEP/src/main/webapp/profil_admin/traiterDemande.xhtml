@@ -65,7 +65,7 @@
         </p:panel>
         
          <p:dialog var="variable" header="Detail sur le produit" showEffect="fade"  widgetVar="verificationProduitDialog"
-            responsive="true" minHeight="100" width="400" >
+            responsive="true" minHeight="100" width="400">
             <h:panelGrid columns="2" cellpadding="10">
                 
                <p:outputLabel value="Code materiel"></p:outputLabel>
@@ -88,12 +88,6 @@
               	 <p:inputText value="#{traitementDemandeController_Admin.materielFongible.stockActuel}" readonly="true" binding="#{traitementDemandeController_Admin.input_stockActuel}"></p:inputText>
  
               </h:panelGrid>
-          
-          	<p:toolbar >
-							<f:facet name="left">
-								<p:commandButton value="OK" action="#{traitementDemandeController_Admin.ok}" update="form" ></p:commandButton>
-								</f:facet>
-						</p:toolbar>
         </p:dialog>
         
          <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
