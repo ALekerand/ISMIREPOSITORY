@@ -13,9 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.sati.model.Bonlivraison;
 import com.sati.model.Materiel;
-import com.sati.requetes.RequeteMateriel;
+import com.sati.model.NonFongible;
+import com.sati.requetes.RequeteNonFongible;
 import com.sati.service.Iservice;
 
 @Component
@@ -26,24 +26,35 @@ public class RetraitMaterielController {
 		Iservice service;
 		
 		@Autowired
-		RequeteMateriel requeteMateriel;
+		RequeteNonFongible requeteNonFongible;
+		//RequeteMateriel requeteMateriel;
 		
-		private List<Materiel> listMateriel = new ArrayList<Materiel>();
-		private List<Materiel> listRetraitMateriel = new ArrayList<Materiel>();
-		private Materiel selectedMateriel = new Materiel();
+		private List<NonFongible> listNonFongible = new ArrayList<NonFongible>();
+		private List<NonFongible> listNonfongibleRetires = new ArrayList<NonFongible>();
+		private NonFongible selectedNonFongible = new NonFongible();
+		private NonFongible nonFongible  = new NonFongible();
 		private Materiel materiel = new Materiel();
 
 		
 		
 		public void choisirLigne() {
-			this.materiel = this.selectedMateriel;
-		}
+			this.nonFongible = this.selectedNonFongible; 
+			System.out.println("Selection faite");
+			}
+		 
 		
 		public void retirer() {
-			selectedMateriel.setRetrait(true);
-			service.updateObject(selectedMateriel);
-			info("Retrait effectué avec succès!");
-		
+			try {
+				selectedNonFongible.setRetraitMateriel(true);
+				service.updateObject(selectedNonFongible);
+				//materiel = (Materiel) service.getObjectById(nonFongible.getIdMateriel(), "Materiel");
+				//materiel.setRetrait(true);
+				//service.updateObject(materiel);
+				info("Retrait effectué avec succès!");
+			} catch (java.lang.NullPointerException e) {
+				// TODO Auto-generated catch block
+				erreur("Vous devez au préalable selectioner le materiel concerné" );
+			}
 		}
 		
 		
@@ -52,48 +63,56 @@ public class RetraitMaterielController {
 			FacesContext.getCurrentInstance().addMessage((String) null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, monMessage,null ));
 		}
-		@SuppressWarnings("unchecked")
-		public List<Materiel> getListMateriel() {
-			listMateriel = requeteMateriel.listerMateriel();
+		
+		public void erreur(String monMessage) {
+			FacesContext.getCurrentInstance().addMessage((String) null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, monMessage,null ));
+		}
+		
+		
+		public List<NonFongible> getListNonFongible() {
 			
-			 Collections.sort(listMateriel, new Comparator<Materiel>() {
-			        @Override
-			        public int compare(Materiel ob1, Materiel ob2)
-			        {
-			 
-			            return  ob1.getNomMateriel().compareTo(ob2.getNomMateriel());
-			        }
-			    });
-			return listMateriel;
+			listNonFongible = requeteNonFongible.listerNonfongibleNonretires();
+			
+			Collections.sort(listNonFongible, new Comparator<NonFongible>() {
+		        @Override
+		        public int compare(NonFongible ob1, NonFongible ob2)
+		        {
+		 
+		            return  ob1.getNomMateriel().compareTo(ob2.getNomMateriel());
+		        }
+		    });
+			return listNonFongible;
 		}
 
-		public void setListMateriel(List<Materiel> listMateriel) {
-			this.listMateriel = listMateriel;
+
+
+		public void setListNonFongible(List<NonFongible> listNonFongible) {
+			this.listNonFongible = listNonFongible;
 		}
 
-		@SuppressWarnings("unchecked")
-		public List<Materiel> getListRetraitMateriel() {
-			listRetraitMateriel = requeteMateriel.listeRetraitMateriel();
-			return listRetraitMateriel;
+
+
+		public List<NonFongible> getListNonfongibleRetires() {
+			return listNonfongibleRetires = requeteNonFongible.listerNonFongibleRetires();
 		}
 
-		public void setListRetraitMateriel(List<Materiel> listRetraitMateriel) {
-			this.listRetraitMateriel = listRetraitMateriel;
+
+
+		public void setListNonfongibleRetires(List<NonFongible> listNonfongibleRetires) {
+			this.listNonfongibleRetires = listNonfongibleRetires;
 		}
 
-		public Materiel getMateriel() {
-			return materiel;
-		}
-		public void setMateriel(Materiel materiel) {
-			this.materiel = materiel;
+
+
+		public NonFongible getSelectedNonFongible() {
+			return selectedNonFongible;
 		}
 
-		public Materiel getSelectedMateriel() {
-			return selectedMateriel;
-		}
 
-		public void setSelectedMateriel(Materiel selectedMateriel) {
-			this.selectedMateriel = selectedMateriel;
+
+		public void setSelectedNonFongible(NonFongible selectedNonFongible) {
+			this.selectedNonFongible = selectedNonFongible;
 		}
 	}
 

@@ -35,6 +35,7 @@ public class ReceptionMaterielleController {
 	private Demande demande = new Demande();
 	UserAuthentication userAuthentication = new UserAuthentication();
 	private List<Demande> listDemandeAccepter = new ArrayList<Demande>();
+	private List<Demande> listDemandeAccepterAdmin = new ArrayList<Demande>();
 	private Demande selectedObject = new Demande();
 	private int idEntite;
 
@@ -128,6 +129,29 @@ public class ReceptionMaterielleController {
 
 	public void setSelectedObject(Demande selectedObject) {
 		this.selectedObject = selectedObject;
+	}
+
+	public List<Demande> getListDemandeAccepterAdmin() {
+		//Personne personne = new Personne();
+		//Entite entite = new Entite();
+		//personne = userAuthentication.getPersonne();
+		//entite = (Entite) service.getObjectById(personne.getIdEntite(), "Entite");
+		//setIdEntite(entite.getIdEntite());
+		listDemandeAccepterAdmin = requeteDemande.recupererDemandeAccepteAttenteAdmin();
+		
+		  Collections.sort(listDemandeAccepterAdmin, new Comparator<Demande>() {
+		        @Override
+		        public int compare(Demande ob1, Demande ob2)
+		        {
+		 
+		            return  ob1.getEntite().getPersonne().getNomPersonne().compareTo(ob2.getEntite().getPersonne().getNomPersonne());
+		        }
+		    });
+		return listDemandeAccepterAdmin;
+	}
+
+	public void setListDemandeAccepterAdmin(List<Demande> listDemandeAccepterAdmin) {
+		this.listDemandeAccepterAdmin = listDemandeAccepterAdmin;
 	}
 
 }

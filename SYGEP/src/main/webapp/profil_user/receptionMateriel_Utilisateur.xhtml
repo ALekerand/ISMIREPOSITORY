@@ -11,9 +11,9 @@
 				
 				<p:panel header="LIESTES DES DEMANDES VALIDEES" >
 				
-						<p:dataTable id="table" var="var" value="#{afficherDemandeAccepterController.listDemandeAccepter }"  selectionMode="single" selection="#{afficherDemandeAccepterController.selectedObject}" rowKey="{#{var.idDemande}"  paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+						<p:dataTable id="table" var="var" value="#{receptionMaterielleController.listDemandeAccepter }"  selectionMode="single" selection="#{receptionMaterielleController.selectedObject}" rowKey="{#{var.idDemande}"  paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
  							<f:facet name="header">DEMANDES EN ENTENTE DE RECEPTION</f:facet>
-  								   <p:ajax event="rowSelect" process="@this"  update="form" listener="#{afficherDemandeAccepterController.selectionnerLigne}"></p:ajax>
+  								   <p:ajax event="rowSelect" process="@this"  update="form" listener="#{ReceptionMaterielleController.selectionnerLigne}"></p:ajax>
    							
    							<p:column selectionMode="single" style="width:16px;text-align:center"/>
 							<p:column headerText="Demandeur">
@@ -44,8 +44,8 @@
                                       
                                        <p:column headerText="Etat reception">
                                              <h:panelGrid columns="2"  >
-                <h:commandButton value="Receptionner" actionListener="#{afficherDemandeAccepterController.receptionner}" update="form" >
-                  <f:setPropertyActionListener value="#{variable}" target="#{afficherDemandeAccepterController.selectedObject}"/>
+                <h:commandButton value="Receptionner" actionListener="#{receptionMaterielleController.receptionner}" update="form" >
+                  <f:setPropertyActionListener value="#{variable}" target="#{receptionMaterielleController.selectedObject}"/>
                 </h:commandButton>
                 </h:panelGrid>
                                        </p:column>

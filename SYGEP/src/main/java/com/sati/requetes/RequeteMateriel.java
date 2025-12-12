@@ -38,7 +38,7 @@ public class RequeteMateriel {
 	public List stockAlertMateriel() {
 		String query = "SELECT * FROM fongible WHERE STOCK_ACTUEL <= STOCK_ALERTE";
 		List list = getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Materiel.class).list();
-		return list;
+	return list;
 	}
 	
 	public Materiel recupMateriel(String code_Materiel) {
@@ -46,6 +46,7 @@ public class RequeteMateriel {
 		Materiel materiel = (Materiel) getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Materiel.class).uniqueResult();
 	return materiel;
 		}
+	
 	
 	public List listerMateriel() {
 		String query = "SELECT `materiel`.* FROM `materiel` WHERE  `materiel`.RETRAIT =0";
@@ -61,14 +62,13 @@ public class RequeteMateriel {
 		}
 	
 	public SessionFactory getSessionFactory() {
-		return sessionFactory;
+	return sessionFactory;
 	}
 	
 	public Fongible materielFongibleConsulte(int id_materiel) {
 		String query = "SELECT `fongible`.* FROM `fongible` WHERE `fongible`.ID_MATERIEL = '"+id_materiel+"'";
 		Fongible fongible = (Fongible) getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(Fongible.class).uniqueResult();
-		return fongible;
+	return fongible;
 	}
-	
-
+		
 }

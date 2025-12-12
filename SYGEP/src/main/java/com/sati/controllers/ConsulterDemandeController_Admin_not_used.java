@@ -18,7 +18,7 @@ import com.sati.service.Iservice;
 
 @Component
 @Scope("session")
-public class ConsulterDemandeController_Admin {
+public class ConsulterDemandeController_Admin_not_used {
 	
 	@Autowired
 	Iservice service;
@@ -31,11 +31,10 @@ public class ConsulterDemandeController_Admin {
 	private int idEtatDemande;
 	private List<Demande> listeDemande = new ArrayList<Demande>();
 	private List<EtatDemande> listEtatDemande = new ArrayList<EtatDemande>();
+	private List<Demande> listeDemandesAttente = new ArrayList<Demande>();
 	
-	private List<EtatDemande> listDemandesAttente = new ArrayList<EtatDemande>();
-	private List<EtatDemande> listDemandesValidees = new ArrayList<EtatDemande>();
-	private List<EtatDemande> listDemandesRejetes = new ArrayList<EtatDemande>();
-	private List<EtatDemande> listDemandesReceptionnees = new ArrayList<EtatDemande>();
+	
+	
 	
 	
 	public void traiterDemande() {
@@ -96,39 +95,12 @@ public class ConsulterDemandeController_Admin {
 		this.listeDemande = listeDemande;
 	}
 
-	
-
-	public List<EtatDemande> getListDemandesRejetes() {
-		return listDemandesRejetes = requeteDemande.afficherDemande_Admin(3);
+	public List<Demande> getListeDemandesAttente() {
+		return listeDemandesAttente;
 	}
 
-	public void setListDemandesRejetes(List<EtatDemande> listDemandesRejetes) {
-		this.listDemandesRejetes = listDemandesRejetes;
+	public void setListeDemandesAttente(List<Demande> listeDemandesAttente) {
+		this.listeDemandesAttente = listeDemandesAttente;
 	}
-
-	public List<EtatDemande> getListDemandesReceptionnees() {
-		return listDemandesReceptionnees;
-	}
-
-	public void setListDemandesReceptionnees(List<EtatDemande> listDemandesReceptionnees) {
-		this.listDemandesReceptionnees = listDemandesReceptionnees;
-	}
-
-	public List<EtatDemande> getListDemandesValidees() {
-		return listDemandesValidees = requeteDemande.afficherDemande_Admin(2);
-	}
-
-	public void setListDemandesValidees(List<EtatDemande> listDemandesValidees) {
-		this.listDemandesValidees = listDemandesValidees;
-	}
-
-	public List<EtatDemande> getListDemandesAttente() {
-		return listDemandesAttente = requeteDemande.afficherDemande_Admin(1);
-	}
-
-	public void setListDemandesAttente(List<EtatDemande> listDemandesAttente) {
-		this.listDemandesAttente = listDemandesAttente;
-	}
-
 
 }

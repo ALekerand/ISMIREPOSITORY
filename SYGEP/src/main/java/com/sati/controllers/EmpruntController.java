@@ -78,7 +78,6 @@ public class EmpruntController {
 		personne = userAuthentication.getPersonne();
 		entite = (Entite) service.getObjectById(personne.getIdEntite(), "Entite");
 		
-		
 		//Charger les elements de la demande
 		this.demande.setEntite(entite);
 		this.demande.setMateriel(materiel);

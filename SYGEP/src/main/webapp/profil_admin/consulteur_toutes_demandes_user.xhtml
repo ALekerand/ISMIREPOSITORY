@@ -23,7 +23,7 @@
                 <f:facet name="actions">
                     Options I
                 </f:facet>
-                <p:dataTable id="table" var="var" value="#{consulterDemandeController_User.listeDemandesAttente}" paginator="true" paginatorPosition="bottom" rows="10"  rowsPerPageTemplate="5,10,15,{ShowAll|'All'}" >
+                <p:dataTable id="table" var="var" value="#{consulterDemandeController_Admin.listDemandesAttente}" paginator="true" paginatorPosition="bottom" rows="10"  rowsPerPageTemplate="5,10,15,{ShowAll|'All'}" >
 				 <f:facet name="header">LISTE DES DEMANDES</f:facet>
 						 
 					<p:column headerText="Demandeur">
@@ -59,7 +59,7 @@
                     Options II
                 </f:facet>
                 
-                <p:dataTable id="table1" var="var" value="#{consulterDemandeController_User.listeDemandesTraitees}" paginator="true" paginatorPosition="bottom" rows="10"  rowsPerPageTemplate="5,10,15,{ShowAll|'All'}" >
+                <p:dataTable id="table1" var="var" value="#{consulterDemandeController_Admin.listDemandesValidees}" paginator="true" paginatorPosition="bottom" rows="10"  rowsPerPageTemplate="5,10,15,{ShowAll|'All'}" >
 				 <f:facet name="header">LISTE DES DEMANDES</f:facet>
 						 
 					<p:column headerText="Demandeur">
@@ -92,7 +92,7 @@
             </p:tab>
             
             <p:tab title="REJETEES">
-                <p:dataTable id="table2" var="var" value="#{consulterDemandeController_User.listeDemandesRejetees}" paginator="true" paginatorPosition="bottom" rows="10"  rowsPerPageTemplate="5,10,15,{ShowAll|'All'}" >
+                <p:dataTable id="table2" var="var" value="#{consulterDemandeController_Admin.listDemandesRejetes}" paginator="true" paginatorPosition="bottom" rows="10"  rowsPerPageTemplate="5,10,15,{ShowAll|'All'}" >
 				 <f:facet name="header">LISTE DES DEMANDES</f:facet>
 						 
 					<p:column headerText="Demandeur">

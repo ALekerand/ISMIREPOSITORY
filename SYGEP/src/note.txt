@@ -26,8 +26,8 @@
 ===================================POUR LES ETATS ===========================================
 Le QR code taille: H:7,5 L:10,5
 
-
-==================  
+================== 08 / 11 /2025 ===================================
+- Après un retrait de matériel, il doit ne plus existé pour la selection dans les demandes (A corriger).
 	
 	
 	

@@ -11,19 +11,21 @@
 			<p:messages autoUpdate="true" closable="true" showDetail="false"/>
 		<p:panel header="EFFECTUER UN RETRAIT DE MATERIEL" >
 		
-		<p:dataTable id="dtMateriel" var="var" value="#{retraitMaterielController.listMateriel}" selection="#{retraitMaterielController.selectedMateriel}" rowKey="#{var.idMateriel}" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
-            
+		<p:dataTable id="dtMateriel" var="var" value="#{retraitMaterielController.listNonFongible}" selection="#{retraitMaterielController.selectedNonFongible}" rowKey="#{var.idMateriel}" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
             <p:column selectionMode="single" selectionBox="true" style="width:16px;text-align:center"/>
-            <p:column headerText="Désignation">
+         
+        <p:column headerText="Code">
+        	<h:outputText value="#{var.codeMateriel}"/>
+        </p:column>
+        
+        
+        
+        <p:column headerText="Désignation">
         <h:outputText value="#{var.nomMateriel}"/>
         </p:column>
         
         <p:column headerText="Description">
         	<h:outputText value="#{var.descriptionMateriel}"/>
-        </p:column>
-        	
-   		<p:column headerText="CODE">
-        	<h:outputText value="#{var.codeMateriel}"/>
         </p:column>
             
         </p:dataTable>
@@ -34,7 +36,7 @@
 		<p:toolbar >
 			<f:facet name="left">
         <p:commandButton value="Retirer" actionListener="#{retraitMaterielController.retirer}" update="form">
-        	<f:setPropertyActionListener value="#{variable}" target="#{retraitMaterielController.selectedMateriel}"/>
+        	<f:setPropertyActionListener value="#{variable}" target="#{retraitMaterielController.selectedNonFongible}"/>
         	<p:confirm header="confirmation" message="voulez-vous retirer ce materiel?"></p:confirm>
         </p:commandButton>
         </f:facet>
@@ -42,22 +44,21 @@
        <br/>
        <br/>
       
-      
-       <p:dataTable widgetVar="dtMateriel"  var="var" value="#{retraitMaterielController.listRetraitMateriel}" rowKey="#{var.idMateriel}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
-  		<f:facet name="header">LISTES DES MATERIELS RETIRES </f:facet>
-     <p:ajax event="rowSelect" process="@this"  update="form" ></p:ajax>
-   		
-   		<p:column headerText="Réf" filterBy="#{var.codeMateriel}" filterable="false">
-        <h:outputText value="#{var.codeMateriel}"/>
-        </p:column>
-        
-        <p:column headerText="Désignation" filterBy="#{var.nomMateriel}" filterable="false">
-        <h:outputText value="#{var.nomMateriel}"/>
-        </p:column>
-        
-        <p:column headerText="Description" filterBy="#{var.descriptionMateriel}" filterable="false">
-        <h:outputText value="#{var.descriptionMateriel}"/>
-        </p:column>
+       <p:dataTable widgetVar="dtMateriel"  var="var" value="#{retraitMaterielController.listNonfongibleRetires}" rowKey="#{var.idMateriel}" paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,{ShowAll|'All'}">
+	  		<f:facet name="header">LISTES DES MATERIELS RETIRES </f:facet>
+	     	<p:ajax event="rowSelect" process="@this"  update="form" ></p:ajax>
+	   		
+	   		<p:column headerText="Code" filterBy="#{var.codeMateriel}" filterable="false">
+	        <h:outputText value="#{var.codeMateriel}"/>
+	        </p:column>
+	        
+	        <p:column headerText="Désignation" filterBy="#{var.nomMateriel}" filterable="false">
+	        <h:outputText value="#{var.nomMateriel}"/>
+	        </p:column>
+	        
+	        <p:column headerText="Description" filterBy="#{var.descriptionMateriel}" filterable="false">
+	        <h:outputText value="#{var.descriptionMateriel}"/>
+	        </p:column>
         </p:dataTable>
         
          <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
